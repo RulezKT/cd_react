@@ -4,42 +4,9 @@ import { drawNumerology } from "./numerology.ts";
 
 import { environment, motivation, nutrition } from "./phs.ts";
 
-// const verText = `Zero Design, ver.: 0.21, created by R.R.`;
-
-//массив с названиями планет в том порядке, в котором они находятся в файле de430.bsp
-//+после 11 номера идут дополнительные планеты
-// const planets_arr = [
-//   "ssb",
-//   "mercury",
-//   "venus",
-//   "earth",
-//   "mars",
-//   "jupiter",
-//   "saturn",
-//   "uranus",
-//   "neptune",
-//   "pluto",
-//   "sun",
-//   "moon",
-//   "north_node",
-//   "south_node",
-//   "hiron",
-// ];
-
-let formula = NaN; ///!!!
-// let transits = NaN;
-// let for_data = NaN;
+let formula = NaN;
 
 let for_name = "";
-
-// let full_width;
-// let full_height;
-
-/*
-const svg = d3.select("#formula_chart").append("svg")
-    .attr('width', width)
-    .attr('height', height);
-*/
 
 let width;
 let height;
@@ -47,13 +14,19 @@ let height;
 let svg;
 
 export function DrawFormulaClass(data_formula, view_width, view_height) {
+  formula = data_formula;
+
   width = view_width;
   height = view_height;
 
-  //   this.full_width = view_full_width;
-  //   this.full_height = view_full_height;
+  //x - посередине
+  this.x = view_width / 2;
+  //делаем сверху отступ на 10%
+  this.y = (view_height / 100) * 10;
 
-  formula = data_formula;
+  //   //координаты для текста
+  //   this.pers_x = this.x - width / 2;
+  //   this.pers_y = 0;
 
   //удаляем старый график before drawing a new one
   svg = d3.select("#svg_formula_chart").remove();
@@ -67,27 +40,7 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
 
   svg.append("g").attr("transform", "translate(" + 0 + "," + 0 + ")");
 
-  //окантовка, чтобы видеть полный квадрат формулы
-  //   svg
-  //     .append("rect")
-  //     .attr("height", this.full_width)
-  //     .attr("width", this.full_height)
-  //     .attr("x", 0)
-  //     .attr("y", 0)
-  //     .attr("fill", "#D3D3D3")
-  //     .attr("stroke", "red");
-
-  //окантовка, чтобы видеть квадрат общей формулы
-  //   svg
-  //     .append("rect")
-  //     .attr("height", `${height}`)
-  //     .attr("width", `${width}`)
-  //     .attr("x", width)
-  //     .attr("y", 0)
-  //     .attr("fill", "#D3D3D3")
-  //     .attr("stroke", "#5367d3");
-
-  //окантовка, чтобы видеть квадрат черного
+  //окантовка
   svg
     .append("rect")
     .attr("height", `${height}`)
@@ -97,39 +50,12 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
     .attr("fill", "#D3D3D3")
     .attr("stroke", "#000000");
 
-  //окантовка, чтобы видеть квадрат красного
-  //   svg
-  //     .append("rect")
-  //     .attr("height", `${height}`)
-  //     .attr("width", `${width}`)
-  //     .attr("x", width * 2)
-  //     .attr("y", 0)
-  //     .attr("fill", "#D3D3D3")
-  //     .attr("stroke", "red");
-
-  //   svg
-  //     .append("text")
-  //     .attr("x", `${this.full_width - 300}`)
-  //     .attr("y", `${this.full_height - 10}`)
-  //     .text(verText)
-  //     .attr("font-family", "futura, sans-serif")
-  //     .attr("font-size", 14)
-  //     .attr("font-weight", 700)
-  //     .attr("fill", "black")
-  //     .attr("text-anchor", "start");
-
   this.lineFunction = d3
     .line()
     .x((d) => d.x)
     .y((d) => d.y);
 
   this.radius = 25;
-
-  //x - посередине
-  this.x = width / 2;
-
-  //делаем сверху отступ на 10%
-  this.y = (height / 100) * 10;
 
   this.styles = {
     family: "futura, sans-serif",
@@ -156,10 +82,6 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
   this.egoCentreCoord = {};
   this.spleenCentreCoord = {};
   this.emoCentreCoord = {};
-
-  //координаты для текста
-  this.pers_x = this.x - width / 2;
-  this.pers_y = 0;
 
   //название как ключ,
   // координаты планеты на графике + флаг нарисовали мы ее или еще нет
