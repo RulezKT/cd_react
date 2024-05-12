@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 // import { create } from "zustand";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { MainScene } from "./components/MainScene/MainScene";
 
@@ -1595,6 +1597,16 @@ function App() {
     // console.log(data);
   };
 
+  // State for storing the selected option. Default is "Male"
+  const [selectedRadioButt, setSelectedRadioButt] = useState("bodygraph");
+
+  // Function to handle the change in radio button selection
+  function onRadioButtValueChange(value: string) {
+    // Updating the state with the selected radio button's value
+    setSelectedRadioButt(value);
+    // console.log("inside onRadioButtValueChange");
+  }
+
   return (
     <>
       {/* <div className="flex flex-row justify-center h-96 items-center">
@@ -1605,8 +1617,42 @@ function App() {
       <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
       </div>
+      <RadioGroup
+        className="flex flex-row gap-5 m-10"
+        onValueChange={onRadioButtValueChange}
+        defaultValue="bodygraph"
+      >
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="bodygraph" id="option-one" />
+          <Label htmlFor="option-one">Body</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="design" id="option-two" />
+          <Label htmlFor="option-two">Design</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="personality" id="option-three" />
+          <Label htmlFor="option-three">Personality</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="transits" id="option-four" disabled />
+          <Label htmlFor="option-four">Transits</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="bodytransits" id="option-five" disabled />
+          <Label htmlFor="option-five">Body+Transits</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="mandala" id="option-six" disabled />
+          <Label htmlFor="option-six">Mandala</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="composite" id="option-seven" disabled />
+          <Label htmlFor="option-seven">Composite</Label>
+        </div>
+      </RadioGroup>
 
-      <MainScene data={cd_data} />
+      <MainScene radiobutt={selectedRadioButt} data={cd_data} />
     </>
   );
 }

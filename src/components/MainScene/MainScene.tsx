@@ -3,7 +3,6 @@ import { PersDesNumbers } from "./PersDesNumbers";
 // import type { CD } from "../../types/cd_types_ts/cd_types";
 
 export const MainScene = (props) => {
-  //   console.log(props.data);
   let data = {};
   if (props.data == null) {
     data.Design = "";
@@ -15,7 +14,7 @@ export const MainScene = (props) => {
   return (
     <div className="flex flex-row justify-between gap-5 m-10">
       <PersDesNumbers calc_type="Design" data={data.Design} />
-      <BodyGraph data={props.data} />
+      <BodyGraph data={props} />
       <PersDesNumbers calc_type="Personality" data={data.Personality} />
     </div>
   );

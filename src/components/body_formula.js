@@ -22,16 +22,16 @@ const planets_arr = [
   "hiron",
 ];
 
-let formula = NaN;
+let formula = NaN; ///!!!
 let transits = NaN;
 // let for_data = NaN;
 let for_name = "";
 
-const full_width = 3 * 800;
-const full_height = 2 * 750;
+let full_width;
+let full_height;
 
-const width = 800;
-const height = 750;
+let width;
+let height;
 
 /*
 const svg = d3.select("#formula_chart").append("svg")
@@ -39,66 +39,81 @@ const svg = d3.select("#formula_chart").append("svg")
     .attr('height', height);
 */
 
-const svg = d3
-  .select("#formula_chart")
-  .append("svg")
-  .attr("width", full_width)
-  .attr("height", full_height);
+let svg;
 
-const g = svg.append("g").attr("transform", "translate(" + 0 + "," + 0 + ")");
+export function DrawFormulaClass(
+  data_formula,
+  view_width,
+  view_height,
+  view_full_width,
+  view_full_height
+) {
+  width = view_width;
+  height = view_height;
+  full_width = view_full_width;
+  full_height = view_full_height;
 
-//окантовка, чтобы видеть полный квадрат формулы
-svg
-  .append("rect")
-  .attr("height", `${svg.attr("height")}`)
-  .attr("width", `${svg.attr("width")}`)
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("fill", "#D3D3D3")
-  .attr("stroke", "red");
+  formula = data_formula;
 
-//окантовка, чтобы видеть квадрат общей формулы
-svg
-  .append("rect")
-  .attr("height", `${height}`)
-  .attr("width", `${width}`)
-  .attr("x", width)
-  .attr("y", 0)
-  .attr("fill", "#D3D3D3")
-  .attr("stroke", "#5367d3");
+  svg = d3
+    .select("#formula_chart")
+    .append("svg")
+    .attr("width", full_width)
+    .attr("height", full_height);
 
-//окантовка, чтобы видеть квадрат черного
-svg
-  .append("rect")
-  .attr("height", `${height}`)
-  .attr("width", `${width}`)
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("fill", "#D3D3D3")
-  .attr("stroke", "#000000");
+  svg.append("g").attr("transform", "translate(" + 0 + "," + 0 + ")");
 
-//окантовка, чтобы видеть квадрат красного
-svg
-  .append("rect")
-  .attr("height", `${height}`)
-  .attr("width", `${width}`)
-  .attr("x", width * 2)
-  .attr("y", 0)
-  .attr("fill", "#D3D3D3")
-  .attr("stroke", "red");
+  //окантовка, чтобы видеть полный квадрат формулы
+  svg
+    .append("rect")
+    .attr("height", `${full_width}`)
+    .attr("width", `${full_height}`)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", "#D3D3D3")
+    .attr("stroke", "red");
 
-svg
-  .append("text")
-  .attr("x", `${svg.attr("width") - 300}`)
-  .attr("y", `${svg.attr("height") - 10}`)
-  .text(verText)
-  .attr("font-family", "futura, sans-serif")
-  .attr("font-size", 14)
-  .attr("font-weight", 700)
-  .attr("fill", "black")
-  .attr("text-anchor", "start");
+  //окантовка, чтобы видеть квадрат общей формулы
+  svg
+    .append("rect")
+    .attr("height", `${height}`)
+    .attr("width", `${width}`)
+    .attr("x", width)
+    .attr("y", 0)
+    .attr("fill", "#D3D3D3")
+    .attr("stroke", "#5367d3");
 
-function DrawFormulaClass() {
+  //окантовка, чтобы видеть квадрат черного
+  svg
+    .append("rect")
+    .attr("height", `${height}`)
+    .attr("width", `${width}`)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", "#D3D3D3")
+    .attr("stroke", "#000000");
+
+  //окантовка, чтобы видеть квадрат красного
+  svg
+    .append("rect")
+    .attr("height", `${height}`)
+    .attr("width", `${width}`)
+    .attr("x", width * 2)
+    .attr("y", 0)
+    .attr("fill", "#D3D3D3")
+    .attr("stroke", "red");
+
+  svg
+    .append("text")
+    .attr("x", `${full_width - 300}`)
+    .attr("y", `${full_height - 10}`)
+    .text(verText)
+    .attr("font-family", "futura, sans-serif")
+    .attr("font-size", 14)
+    .attr("font-weight", 700)
+    .attr("fill", "black")
+    .attr("text-anchor", "start");
+
   this.lineFunction = d3
     .line()
     .x((d) => d.x)
@@ -3449,7 +3464,7 @@ DrawFormulaClass.prototype.draw_pluto = function (x, y, radius, color) {
 DrawFormulaClass.prototype.draw_sun = function (x, y, radius, color) {
   let svg_planet = svg.append("g");
 
-  let points = [];
+  //   let points = [];
 
   y += 20;
   radius -= 3;
@@ -5236,59 +5251,59 @@ DrawFormulaClass.prototype.drawEgoCentre = function (fill) {
 };
 
 DrawFormulaClass.prototype.drawWhiteFormula = function () {
-  drawFormula.draw_64_47(0, "white");
-  drawFormula.draw_61_24(0, "white");
-  drawFormula.draw_63_4(0, "white");
+  this.draw_64_47(0, "white");
+  this.draw_61_24(0, "white");
+  this.draw_63_4(0, "white");
 
-  drawFormula.draw_17_62(0, "white");
-  drawFormula.draw_43_23(0, "white");
-  drawFormula.draw_11_56(0, "white");
+  this.draw_17_62(0, "white");
+  this.draw_43_23(0, "white");
+  this.draw_11_56(0, "white");
 
-  drawFormula.draw_31_7(0, "white");
-  drawFormula.draw_8_1(0, "white");
-  drawFormula.draw_33_13(0, "white");
+  this.draw_31_7(0, "white");
+  this.draw_8_1(0, "white");
+  this.draw_33_13(0, "white");
 
-  drawFormula.draw_26_44(0, "white");
+  this.draw_26_44(0, "white");
 
-  drawFormula.draw_15_5(0, "white");
-  drawFormula.draw_2_14(0, "white");
-  drawFormula.draw_46_29(0, "white");
+  this.draw_15_5(0, "white");
+  this.draw_2_14(0, "white");
+  this.draw_46_29(0, "white");
 
-  drawFormula.draw_42_53(0, "white");
-  drawFormula.draw_3_60(0, "white");
-  drawFormula.draw_9_52(0, "white");
+  this.draw_42_53(0, "white");
+  this.draw_3_60(0, "white");
+  this.draw_9_52(0, "white");
 
-  drawFormula.draw_18_58(0, "white");
-  drawFormula.draw_28_38(0, "white");
-  drawFormula.draw_32_54(0, "white");
+  this.draw_18_58(0, "white");
+  this.draw_28_38(0, "white");
+  this.draw_32_54(0, "white");
 
-  drawFormula.draw_50_27(0, "white");
-  drawFormula.draw_6_59(0, "white");
+  this.draw_50_27(0, "white");
+  this.draw_6_59(0, "white");
 
-  drawFormula.draw_30_41(0, "white");
-  drawFormula.draw_55_39(0, "white");
-  drawFormula.draw_49_19(0, "white");
+  this.draw_30_41(0, "white");
+  this.draw_55_39(0, "white");
+  this.draw_49_19(0, "white");
 
-  drawFormula.draw_12_22(0, "white");
-  drawFormula.draw_35_36(0, "white");
-  drawFormula.draw_40_37(0, "white");
+  this.draw_12_22(0, "white");
+  this.draw_35_36(0, "white");
+  this.draw_40_37(0, "white");
 
-  drawFormula.draw_45_21(0, "white");
-  drawFormula.draw_25_51(0, "white");
+  this.draw_45_21(0, "white");
+  this.draw_25_51(0, "white");
 
-  drawFormula.draw_16_48(0, "white");
+  this.draw_16_48(0, "white");
 
-  drawFormula.drawWhiteIntegration();
+  this.drawWhiteIntegration();
 
-  drawFormula.drawHeadCentre("white");
-  drawFormula.drawAjnaCentre("white");
-  drawFormula.drawThroatCentre("white");
-  drawFormula.drawGCentre("white");
-  drawFormula.drawSacralCentre("white");
-  drawFormula.drawRootCentre("white");
-  drawFormula.drawSpleenCentre("white");
-  drawFormula.drawEmoCentre("white");
-  drawFormula.drawEgoCentre("white");
+  this.drawHeadCentre("white");
+  this.drawAjnaCentre("white");
+  this.drawThroatCentre("white");
+  this.drawGCentre("white");
+  this.drawSacralCentre("white");
+  this.drawRootCentre("white");
+  this.drawSpleenCentre("white");
+  this.drawEmoCentre("white");
+  this.drawEgoCentre("white");
 };
 
 DrawFormulaClass.prototype.appendText = function (
@@ -5653,7 +5668,7 @@ DrawFormulaClass.prototype.draw_body_text = function () {
   this.appendText(pers_x, pers_y, `Authority: ${authority_text}`);
   pers_y += 20;
 
-  let definition_text = `${formula.definition}`;
+  //   let definition_text = `${formula.definition}`;
   // this.appendText(pers_x,pers_y,`Definition: ${definition_text}`);
 
   pers_y = this.pers_y - 40 + height - 60;
@@ -6267,14 +6282,56 @@ DrawFormulaClass.prototype.drawFormula = function () {
   this.x = width / 2;
   this.y = height;
   this.init();
-  this.draw_Fd(formula.personality, formula.per_centers);
+  //   this.draw_Fd(formula.personality, formula.per_centers);
   this.drawNumerology();
 
   //теперь рисуем Формулу Тела
   this.x = 2 * width + width / 2;
   this.y = height;
   this.init();
-  this.draw_Fd(formula.design, formula.des_centers);
+  //   this.draw_Fd(formula.design, formula.des_centers);
+
+  //console.log(formula);
+
+  //включаем кнопку на сохранение фото
+  //document.getElementById("img_button").disabled = false;
+  //document.getElementById("calc_button").disabled = true;
+};
+
+//V2 2024
+DrawFormulaClass.prototype.drawFormula = function (graph_type: string) {
+  //console.log(formula);
+
+  //сначала рисуем Полную Формулу
+  this.x = width + width / 2;
+  this.y = (height / 100) * 10;
+  this.init();
+  this.draw_Body();
+
+  //теперь рисуем Личность
+  this.x = width / 2;
+  this.y = (height / 100) * 10;
+  this.init();
+  this.draw_Pers();
+
+  //теперь рисуем Красное
+  this.x = 2 * width + width / 2;
+  this.y = (height / 100) * 10;
+  this.init();
+  this.draw_Des();
+
+  //теперь рисуем Формулу Души
+  this.x = width / 2;
+  this.y = height;
+  this.init();
+  //   this.draw_Fd(formula.personality, formula.per_centers);
+  this.drawNumerology();
+
+  //теперь рисуем Формулу Тела
+  this.x = 2 * width + width / 2;
+  this.y = height;
+  this.init();
+  //   this.draw_Fd(formula.design, formula.des_centers);
 
   //console.log(formula);
 
@@ -7932,9 +7989,9 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
   //y - левый верхний край планеты
   //x - точно посередине
 
-  console.log("this.draw_Fd");
-  console.log(formula_array);
-  console.log(centers_array);
+  //   console.log("this.draw_Fd");
+  //   console.log(formula_array);
+  //   console.log(centers_array);
 
   for (let key in this.planets_full_info) {
     //console.log(key);
@@ -11489,16 +11546,16 @@ DrawFormulaClass.prototype.draw_Transit = function () {
   //document.getElementById("img_button").disabled = false;
 };
 
-const drawFormula = new DrawFormulaClass();
+// const drawFormula = new DrawFormulaClass();
 
-drawFormula.drawWhiteFormula();
+// drawFormula.drawWhiteFormula();
 
-drawFormula.x = width + width / 2;
-drawFormula.init();
-drawFormula.drawWhiteFormula();
-drawFormula.x = 2 * width + width / 2;
-drawFormula.init();
-drawFormula.drawWhiteFormula();
+// drawFormula.x = width + width / 2;
+// drawFormula.init();
+// drawFormula.drawWhiteFormula();
+// drawFormula.x = 2 * width + width / 2;
+// drawFormula.init();
+// drawFormula.drawWhiteFormula();
 
 //document.getElementById("calc_button").disabled = true;
 //document.getElementById("img_button").disabled = true;

@@ -1,18 +1,51 @@
-import ShapeDrawer from "../ShapeDrawer/ShapeDrawer";
+// import ShapeDrawer from "../ShapeDrawer/ShapeDrawer";
+import { DrawFormulaClass } from "../body_formula.js";
+import { formula } from "../formula_object.js";
+import { useEffect } from "react";
+
+const full_width = 3 * 800;
+const full_height = 2 * 750;
+
+const width = 800;
+const height = 750;
 
 export const BodyGraph = (props) => {
-  // console.log(props.data.Centers.Center);
+  // console.log(props);
 
-  const centers = props.data.Centers.Center;
-  console.log(centers.Throat);
+  // const cd_data = props.data.data;
+  const graph_type = props.data.radiobutt;
+
+  console.log(graph_type);
+  // const centers = props.data.Centers.Center;
+
+  //formula.personality.sun.hex
+  useEffect(() => {
+    // console.log(formula);
+    const drawFormula = new DrawFormulaClass(
+      formula,
+      width,
+      height,
+      full_width,
+      full_height
+    );
+    drawFormula.drawWhiteFormula();
+    drawFormula.x = width + width / 2;
+    drawFormula.init();
+    drawFormula.drawWhiteFormula();
+    drawFormula.x = 2 * width + width / 2;
+    drawFormula.init();
+    drawFormula.drawWhiteFormula();
+    drawFormula.drawFormula();
+    // console.log("drawFormula was called");
+  });
+
+  // console.log(centers.Throat);
   return (
     <>
       <div className="formula_chart" id="formula_chart"></div>
 
-      <div>
-        <ShapeDrawer />
-      </div>
-
+      <div>{/* <ShapeDrawer /> */}</div>
+      {/* 
       <div className="flex flex-col">
         <div className="div">Head : {centers.Head}</div>
         <div className="div">Ajna : {centers.Ajna} </div>
@@ -29,7 +62,7 @@ export const BodyGraph = (props) => {
         </div>
 
         <div className="div">Root : {centers.Root}</div>
-      </div>
+      </div> */}
 
       {/* <div className="div">{JSON.stringify(props.data)}</div> */}
     </>
