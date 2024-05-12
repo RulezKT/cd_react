@@ -3,8 +3,8 @@ import { DrawFormulaClass } from "../body_formula.js";
 import { formula } from "../formula_object.js";
 import { useEffect } from "react";
 
-const full_width = 3 * 800;
-const full_height = 2 * 750;
+// const full_width = 3 * 800;
+// const full_height = 2 * 750;
 
 const width = 800;
 const height = 750;
@@ -21,13 +21,7 @@ export const BodyGraph = (props) => {
   useEffect(() => {
     // console.log(formula);
 
-    const drawFormula = new DrawFormulaClass(
-      formula,
-      width,
-      height,
-      full_width,
-      full_height
-    );
+    const drawFormula = new DrawFormulaClass(formula, width, height);
 
     drawFormula.drawFormulaV2(graph_type);
     // console.log("drawFormula was called");
