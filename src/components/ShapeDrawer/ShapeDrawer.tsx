@@ -53,7 +53,9 @@ const ShapeDrawer = () => {
         {/* Add more shape options if needed */}
       </select>
       <input type="number" value={shapeSize} onChange={handleSizeChange} />
-      <svg ref={svgRef} width={width} height={height} />
+      <svg ref={svgRef} width={width} height={height}>
+        {" "}
+      </svg>
     </div>
   );
 };

@@ -7,6 +7,8 @@ export const BodyGraph = (props) => {
   console.log(centers.Throat);
   return (
     <>
+      <div className="formula_chart" id="formula_chart"></div>
+
       <div>
         <ShapeDrawer />
       </div>
