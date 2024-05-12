@@ -1650,6 +1650,10 @@ function App() {
           <RadioGroupItem value="composite" id="option-seven" disabled />
           <Label htmlFor="option-seven">Composite</Label>
         </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="numerology" id="option-eight" />
+          <Label htmlFor="option-eight">Numerology</Label>
+        </div>
       </RadioGroup>
 
       <MainScene radiobutt={selectedRadioButt} data={cd_data} />

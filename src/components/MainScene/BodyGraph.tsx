@@ -15,12 +15,12 @@ export const BodyGraph = (props) => {
   // const cd_data = props.data.data;
   const graph_type = props.data.radiobutt;
 
-  console.log(graph_type);
   // const centers = props.data.Centers.Center;
 
   //formula.personality.sun.hex
   useEffect(() => {
     // console.log(formula);
+
     const drawFormula = new DrawFormulaClass(
       formula,
       width,
@@ -28,14 +28,8 @@ export const BodyGraph = (props) => {
       full_width,
       full_height
     );
-    drawFormula.drawWhiteFormula();
-    drawFormula.x = width + width / 2;
-    drawFormula.init();
-    drawFormula.drawWhiteFormula();
-    drawFormula.x = 2 * width + width / 2;
-    drawFormula.init();
-    drawFormula.drawWhiteFormula();
-    drawFormula.drawFormula();
+
+    drawFormula.drawFormulaV2(graph_type);
     // console.log("drawFormula was called");
   });
 

@@ -27,8 +27,8 @@ let transits = NaN;
 // let for_data = NaN;
 let for_name = "";
 
-let full_width;
-let full_height;
+// let full_width;
+// let full_height;
 
 let width;
 let height;
@@ -50,38 +50,43 @@ export function DrawFormulaClass(
 ) {
   width = view_width;
   height = view_height;
-  full_width = view_full_width;
-  full_height = view_full_height;
+
+  this.full_width = view_full_width;
+  this.full_height = view_full_height;
 
   formula = data_formula;
+
+  //удаляем старый график before drawing a new one
+  svg = d3.select("#svg_formula_chart").remove();
 
   svg = d3
     .select("#formula_chart")
     .append("svg")
-    .attr("width", full_width)
-    .attr("height", full_height);
+    .attr("id", "svg_formula_chart")
+    .attr("width", width)
+    .attr("height", height);
 
   svg.append("g").attr("transform", "translate(" + 0 + "," + 0 + ")");
 
   //окантовка, чтобы видеть полный квадрат формулы
-  svg
-    .append("rect")
-    .attr("height", `${full_width}`)
-    .attr("width", `${full_height}`)
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("fill", "#D3D3D3")
-    .attr("stroke", "red");
+  //   svg
+  //     .append("rect")
+  //     .attr("height", this.full_width)
+  //     .attr("width", this.full_height)
+  //     .attr("x", 0)
+  //     .attr("y", 0)
+  //     .attr("fill", "#D3D3D3")
+  //     .attr("stroke", "red");
 
   //окантовка, чтобы видеть квадрат общей формулы
-  svg
-    .append("rect")
-    .attr("height", `${height}`)
-    .attr("width", `${width}`)
-    .attr("x", width)
-    .attr("y", 0)
-    .attr("fill", "#D3D3D3")
-    .attr("stroke", "#5367d3");
+  //   svg
+  //     .append("rect")
+  //     .attr("height", `${height}`)
+  //     .attr("width", `${width}`)
+  //     .attr("x", width)
+  //     .attr("y", 0)
+  //     .attr("fill", "#D3D3D3")
+  //     .attr("stroke", "#5367d3");
 
   //окантовка, чтобы видеть квадрат черного
   svg
@@ -94,25 +99,25 @@ export function DrawFormulaClass(
     .attr("stroke", "#000000");
 
   //окантовка, чтобы видеть квадрат красного
-  svg
-    .append("rect")
-    .attr("height", `${height}`)
-    .attr("width", `${width}`)
-    .attr("x", width * 2)
-    .attr("y", 0)
-    .attr("fill", "#D3D3D3")
-    .attr("stroke", "red");
+  //   svg
+  //     .append("rect")
+  //     .attr("height", `${height}`)
+  //     .attr("width", `${width}`)
+  //     .attr("x", width * 2)
+  //     .attr("y", 0)
+  //     .attr("fill", "#D3D3D3")
+  //     .attr("stroke", "red");
 
-  svg
-    .append("text")
-    .attr("x", `${full_width - 300}`)
-    .attr("y", `${full_height - 10}`)
-    .text(verText)
-    .attr("font-family", "futura, sans-serif")
-    .attr("font-size", 14)
-    .attr("font-weight", 700)
-    .attr("fill", "black")
-    .attr("text-anchor", "start");
+  //   svg
+  //     .append("text")
+  //     .attr("x", `${this.full_width - 300}`)
+  //     .attr("y", `${this.full_height - 10}`)
+  //     .text(verText)
+  //     .attr("font-family", "futura, sans-serif")
+  //     .attr("font-size", 14)
+  //     .attr("font-weight", 700)
+  //     .attr("fill", "black")
+  //     .attr("text-anchor", "start");
 
   this.lineFunction = d3
     .line()
@@ -6207,12 +6212,21 @@ DrawFormulaClass.prototype.draw_des_text_extended = function () {
 };
 
 DrawFormulaClass.prototype.drawNumerology = function () {
+  svg
+    .append("rect")
+    .attr("height", `${height}`)
+    .attr("width", `${width}`)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", "#D3D3D3")
+    .attr("stroke", "#000000");
+
   //координаты для текста
   this.pers_x = this.x - width / 2;
   this.pers_y = this.y;
 
   let num_x = this.pers_x;
-  let num_y = this.pers_y + height - 199;
+  let num_y = this.pers_y;
 
   svg
     .append("rect")
@@ -6299,38 +6313,42 @@ DrawFormulaClass.prototype.drawFormula = function () {
 };
 
 //V2 2024
-DrawFormulaClass.prototype.drawFormula = function (graph_type: string) {
-  //console.log(formula);
-
-  //сначала рисуем Полную Формулу
-  this.x = width + width / 2;
-  this.y = (height / 100) * 10;
+DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
   this.init();
-  this.draw_Body();
+  this.drawWhiteFormula();
 
-  //теперь рисуем Личность
   this.x = width / 2;
   this.y = (height / 100) * 10;
-  this.init();
-  this.draw_Pers();
 
-  //теперь рисуем Красное
-  this.x = 2 * width + width / 2;
-  this.y = (height / 100) * 10;
-  this.init();
-  this.draw_Des();
+  switch (graph_type) {
+    case "bodygraph":
+      //рисуем Полную Формулу
+      this.draw_Body();
+      break;
 
-  //теперь рисуем Формулу Души
-  this.x = width / 2;
-  this.y = height;
-  this.init();
+    case "design":
+      //рисуем Красное
+      this.draw_Des();
+      break;
+
+    case "personality":
+      //рисуем Личность
+
+      this.draw_Pers();
+      break;
+
+    case "numerology":
+      this.drawNumerology();
+      break;
+
+    default:
+      console.log(`Sorry, some error in drawFormulaV2.`);
+  }
+
+  //рисуем Формулу Души
   //   this.draw_Fd(formula.personality, formula.per_centers);
-  this.drawNumerology();
 
-  //теперь рисуем Формулу Тела
-  this.x = 2 * width + width / 2;
-  this.y = height;
-  this.init();
+  // рисуем Формулу Тела
   //   this.draw_Fd(formula.design, formula.des_centers);
 
   //console.log(formula);
