@@ -1,21 +1,19 @@
 import { BodyGraph } from "./BodyGraph";
-import { PersDesNumbers } from "./PersDesNumbers";
+import { DesNumbers } from "./DesNumbers";
+import { PersNumbers } from "./PersNumbers";
 // import type { CD } from "../../types/cd_types_ts/cd_types";
 
 export const MainScene = (props) => {
-  let data = {};
-  if (props.data == null) {
-    data.Design = "";
-    data.Personality = "";
-  } else {
-    data = props.data;
-  }
+  // console.log(props);
 
   return (
     <div className="flex flex-row justify-between gap-5 m-10">
-      <PersDesNumbers calc_type="Design" data={data.Design} />
-      <BodyGraph data={props} />
-      <PersDesNumbers calc_type="Personality" data={data.Personality} />
+      <DesNumbers calc_type="Design" data={props.data.hd.design.planetsData} />
+      <BodyGraph data={props.data} radiobutt={props.radiobutt} />
+      <PersNumbers
+        calc_type="Personality"
+        data={props.data.hd.personality.planetsData}
+      />
     </div>
   );
 };

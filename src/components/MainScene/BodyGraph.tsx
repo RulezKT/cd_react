@@ -13,7 +13,11 @@ export const BodyGraph = (props) => {
   // console.log(props);
 
   // const cd_data = props.data.data;
-  const graph_type = props.data.radiobutt;
+  const graph_type = props.radiobutt;
+  // console.log(graph_type);
+
+  const cdInfo = props.data;
+  // console.log(cdInfo);
 
   // const centers = props.data.Centers.Center;
 
@@ -21,7 +25,7 @@ export const BodyGraph = (props) => {
   useEffect(() => {
     // console.log(formula);
 
-    const drawFormula = new DrawFormulaClass(formula, width, height);
+    const drawFormula = new DrawFormulaClass(cdInfo, width, height);
 
     drawFormula.drawFormulaV2(graph_type);
     // console.log("drawFormula was called");
