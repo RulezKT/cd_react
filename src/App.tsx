@@ -11,6 +11,20 @@ import { useState } from "react";
 
 import { cdInf } from "./components/cdInf";
 
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+import { Input } from "@/components/ui/input";
+
+import { useForm } from "react-hook-form";
+
 // import { GetData } from "./lib/GetData";
 
 // interface BearState {
@@ -104,6 +118,14 @@ function App() {
     // console.log(data);
   };
 
+  function onSubmit(values) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
+
+  const form = useForm();
+
   // State for storing the selected option. Default is "Male"
   const [selectedRadioButt, setSelectedRadioButt] = useState("bodygraph");
 
@@ -116,14 +138,34 @@ function App() {
 
   return (
     <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="shadcn" {...field} />
+                </FormControl>
+                <FormControl>
+                  <Input placeholder="shadcn" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is your public display name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+
       {/* <div className="flex flex-row justify-center h-96 items-center">
-        <Button onClick={increasePopulation}>
-          Number of bears is: {bears}
-        </Button>
-      </div> */}
-      <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
-      </div>
+      </div> */}
       <RadioGroup
         className="flex flex-row gap-5 m-10"
         onValueChange={onRadioButtValueChange}
