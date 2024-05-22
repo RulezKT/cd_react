@@ -49,9 +49,14 @@ https://gist.github.com/mjbalcueva/1fbcb1be9ef68a82c14d778b686a04fa
 
 https://flowbite-react.com/docs/components/datepicker
 
-https://coreui.io/react/docs/forms/date-picker/
-
 ======================================
 
 https://projects.wojtekmaj.pl/react-datetime-picker/
 https://github.com/wojtekmaj/react-datetime-picker
+
+=================
+https://reactdatepicker.com/
+https://github.com/Hacker0x01/react-datepicker/
+===================
+
+https://shadcnui-expansions.typeart.cc/docs/datetime-picker

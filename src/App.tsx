@@ -25,6 +25,9 @@ import { Input } from "@/components/ui/input";
 
 import { useForm } from "react-hook-form";
 
+import { Calendar } from "@/components/ui/calendar";
+import { numDays } from "./lib/utils";
+
 // import { GetData } from "./lib/GetData";
 
 // interface BearState {
@@ -122,6 +125,8 @@ function App() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(nameValue);
+    console.log(dayValue);
+    console.log(dateTimeValue);
     console.log(values);
   }
 
@@ -130,6 +135,29 @@ function App() {
   // State for storing the selected option. Default is "Male"
   const [selectedRadioButt, setSelectedRadioButt] = useState("bodygraph");
   const [nameValue, setNameValue] = useState("");
+
+  const [dayValue, setDayValue] = useState(15);
+  const [monthValue, setMonthValue] = useState(6);
+  const [yearValue, setYearValue] = useState(2000);
+
+  // const [dateTimeValue, setDateTimeValue] = useState(new Date());
+  const [dateTimeValue, setDateTimeValue] = useState<Date>();
+
+  function onDayValueChange(value) {
+    let day = parseInt(value.target.value);
+
+    if (isNaN(day) || day < 1) {
+      day = 1;
+    }
+
+    const maxDay = numDays(yearValue, monthValue);
+
+    if (day > maxDay) {
+      day = maxDay;
+    }
+
+    setDayValue(day);
+  }
 
   // Function to handle the change in radio button selection
   function onRadioButtValueChange(value: string) {
@@ -147,17 +175,53 @@ function App() {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Nickname</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="shadcn"
-                    {...field}
+                    placeholder="enter your nickname"
+                    // {...field}
                     onChange={(e) => setNameValue(e.target.value)}
+                    value={nameValue}
+                  />
+                </FormControl>
+                <FormLabel>Date of birth </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="day"
+                    onChange={onDayValueChange}
+                    value={dayValue}
+                  />
+                </FormControl>
+                <FormControl>
+                  <Input
+                    placeholder="month"
+                    onChange={(e) => setMonthValue(e.target.value)}
+                    value={monthValue}
+                  />
+                </FormControl>
+                <FormControl>
+                  <Input
+                    placeholder="year"
+                    onChange={(e) => setYearValue(e.target.value)}
+                    value={yearValue}
+                  />
+                </FormControl>
+                <FormControl>
+                  <Calendar
+                    captionLayout="dropdown-buttons"
+                    fromYear={2010}
+                    toYear={2024}
+                    mode="single"
+                    selected={dateTimeValue}
+                    onSelect={setDateTimeValue}
+                    initialFocus
                   />
                 </FormControl>
 
                 <FormDescription>
-                  This is your public display name.
+                  Please choose your nickname and date of birth. If you know
+                  your UTC time, just check the UTC box. Otherwise choose the
+                  place of birth.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
