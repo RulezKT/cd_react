@@ -25,8 +25,14 @@ import { Input } from "@/components/ui/input";
 
 import { useForm } from "react-hook-form";
 
-import { Calendar } from "@/components/ui/calendar";
-import { numDays } from "./lib/utils";
+import DateTimePicker from "react-datetime-picker";
+import "react-datetime-picker/dist/DateTimePicker.css";
+import "react-calendar/dist/Calendar.css";
+import "react-clock/dist/Clock.css";
+
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 // import { GetData } from "./lib/GetData";
 
@@ -53,6 +59,7 @@ function App() {
   // const data = GetData("17.05.1978");
   // console.log(data);
   // };
+  const [dateTime, setDateTime] = useState<Value>(new Date());
 
   const [cd_data, setData] = useState(cdInf);
 
@@ -125,9 +132,7 @@ function App() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(nameValue);
-    console.log(dayValue);
-    console.log(dateTimeValue);
-    console.log(values);
+    console.log(dateTime);
   }
 
   const form = useForm();
@@ -135,29 +140,6 @@ function App() {
   // State for storing the selected option. Default is "Male"
   const [selectedRadioButt, setSelectedRadioButt] = useState("bodygraph");
   const [nameValue, setNameValue] = useState("");
-
-  const [dayValue, setDayValue] = useState(15);
-  const [monthValue, setMonthValue] = useState(6);
-  const [yearValue, setYearValue] = useState(2000);
-
-  // const [dateTimeValue, setDateTimeValue] = useState(new Date());
-  const [dateTimeValue, setDateTimeValue] = useState<Date>();
-
-  function onDayValueChange(value) {
-    let day = parseInt(value.target.value);
-
-    if (isNaN(day) || day < 1) {
-      day = 1;
-    }
-
-    const maxDay = numDays(yearValue, monthValue);
-
-    if (day > maxDay) {
-      day = maxDay;
-    }
-
-    setDayValue(day);
-  }
 
   // Function to handle the change in radio button selection
   function onRadioButtValueChange(value: string) {
@@ -172,7 +154,7 @@ function App() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="username"
+            name="nick and date"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Nickname</FormLabel>
@@ -184,44 +166,21 @@ function App() {
                     value={nameValue}
                   />
                 </FormControl>
-                <FormLabel>Date of birth </FormLabel>
+                <FormLabel>Date and Time </FormLabel>
+
                 <FormControl>
-                  <Input
-                    placeholder="day"
-                    onChange={onDayValueChange}
-                    value={dayValue}
-                  />
-                </FormControl>
-                <FormControl>
-                  <Input
-                    placeholder="month"
-                    onChange={(e) => setMonthValue(e.target.value)}
-                    value={monthValue}
-                  />
-                </FormControl>
-                <FormControl>
-                  <Input
-                    placeholder="year"
-                    onChange={(e) => setYearValue(e.target.value)}
-                    value={yearValue}
-                  />
-                </FormControl>
-                <FormControl>
-                  <Calendar
-                    captionLayout="dropdown-buttons"
-                    fromYear={2010}
-                    toYear={2024}
-                    mode="single"
-                    selected={dateTimeValue}
-                    onSelect={setDateTimeValue}
-                    initialFocus
+                  <DateTimePicker
+                    format="y-MMM-dd HH:mm"
+                    isClockOpen={false}
+                    onChange={setDateTime}
+                    value={dateTime}
                   />
                 </FormControl>
 
                 <FormDescription>
-                  Please choose your nickname and date of birth. If you know
-                  your UTC time, just check the UTC box. Otherwise choose the
-                  place of birth.
+                  Please choose your nickname, date and time. If you know your
+                  UTC time, just check the UTC box. Otherwise choose the place
+                  of birth.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
