@@ -17,6 +17,7 @@ export const BodyGraph = (props) => {
   // console.log(graph_type);
 
   const cdInfo = props.data;
+
   // console.log(cdInfo);
 
   // const centers = props.data.Centers.Center;

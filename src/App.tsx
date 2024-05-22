@@ -121,6 +121,7 @@ function App() {
   function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    console.log(nameValue);
     console.log(values);
   }
 
@@ -128,6 +129,7 @@ function App() {
 
   // State for storing the selected option. Default is "Male"
   const [selectedRadioButt, setSelectedRadioButt] = useState("bodygraph");
+  const [nameValue, setNameValue] = useState("");
 
   // Function to handle the change in radio button selection
   function onRadioButtValueChange(value: string) {
@@ -147,11 +149,13 @@ function App() {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input
+                    placeholder="shadcn"
+                    {...field}
+                    onChange={(e) => setNameValue(e.target.value)}
+                  />
                 </FormControl>
-                <FormControl>
-                  <Input placeholder="shadcn" {...field} />
-                </FormControl>
+
                 <FormDescription>
                   This is your public display name.
                 </FormDescription>
@@ -163,9 +167,9 @@ function App() {
         </form>
       </Form>
 
-      {/* <div className="flex flex-row justify-center h-96 items-center">
+      <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
-      </div> */}
+      </div>
       <RadioGroup
         className="flex flex-row gap-5 m-10"
         onValueChange={onRadioButtValueChange}
@@ -202,6 +206,10 @@ function App() {
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="numerology" id="option-eight" />
           <Label htmlFor="option-eight">Numerology</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="fd" id="option-nine" />
+          <Label htmlFor="option-nine">FD</Label>
         </div>
       </RadioGroup>
 

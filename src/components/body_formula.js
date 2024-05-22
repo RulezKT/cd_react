@@ -5308,7 +5308,21 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
       break;
 
     case "numerology":
-      drawNumerology(svg, this.x, this.y, width, height, this.data_formula);
+      drawNumerology(
+        svg,
+        this.x,
+        this.y,
+        width,
+        height,
+        this.data_formula.numerologyInfo
+      );
+
+      break;
+
+    case "fd":
+      //рисуем Формулу Души
+      this.draw_Fd(formula.personality, formula.per_centers);
+      this.draw_Fd(formula.design, formula.des_centers);
       break;
 
     default:
