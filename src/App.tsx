@@ -25,13 +25,19 @@ import { Input } from "@/components/ui/input";
 
 import { useForm } from "react-hook-form";
 
+import DatePicker from "react-date-picker";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+
 import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 
 type ValuePiece = Date | null;
-
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 // import { GetData } from "./lib/GetData";
@@ -60,6 +66,8 @@ function App() {
   // console.log(data);
   // };
   const [dateTime, setDateTime] = useState<Value>(new Date());
+  const [date, setDate] = useState<Value>(new Date());
+  const [time, setTime] = useState<Value>(new Date());
 
   const [cd_data, setData] = useState(cdInf);
 
@@ -132,19 +140,27 @@ function App() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(nameValue);
+    console.log(date);
+    console.log(time);
     console.log(dateTime);
   }
 
   const form = useForm();
 
-  // State for storing the selected option. Default is "Male"
   const [selectedRadioButt, setSelectedRadioButt] = useState("bodygraph");
+  const [selectedRadioTimeType, setSelectedRadioTimeType] = useState("local");
   const [nameValue, setNameValue] = useState("");
 
   // Function to handle the change in radio button selection
   function onRadioButtValueChange(value: string) {
     // Updating the state with the selected radio button's value
     setSelectedRadioButt(value);
+    // console.log("inside onRadioButtValueChange");
+  }
+
+  function onRadioTimeTypeChange(value: string) {
+    // Updating the state with the selected radio button's value
+    setSelectedRadioTimeType(value);
     // console.log("inside onRadioButtValueChange");
   }
 
@@ -166,15 +182,34 @@ function App() {
                     value={nameValue}
                   />
                 </FormControl>
-                <FormLabel>Date and Time </FormLabel>
 
                 <FormControl>
-                  <DateTimePicker
-                    format="y-MMM-dd HH:mm"
-                    isClockOpen={false}
-                    onChange={setDateTime}
-                    value={dateTime}
-                  />
+                  <>
+                    <Label htmlFor="datetime">Date and Time</Label>
+                    <DateTimePicker
+                      id="datetime"
+                      format="dd-MMM-y HH:mm"
+                      clearIcon={null}
+                      disableClock={true}
+                      disableCalendar={true}
+                      onChange={setDateTime}
+                      value={dateTime}
+                    />
+                    <RadioGroup
+                      className="flex flex-row gap-5 m-10"
+                      onValueChange={onRadioTimeTypeChange}
+                      defaultValue="local"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="local" id="option-one" />
+                        <Label htmlFor="option-one">Local</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="utc" id="option-two" />
+                        <Label htmlFor="option-two">UTC</Label>
+                      </div>
+                    </RadioGroup>
+                  </>
                 </FormControl>
 
                 <FormDescription>
