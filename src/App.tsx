@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 
 import { useForm } from "react-hook-form";
 
-import { PlaceAutocomplete } from "./components/GoogleAPIs/PlaceAutocomplete";
+// import { PlaceAutocomplete } from "./components/GoogleAPIs/PlaceAutocomplete";
 
 import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
@@ -35,7 +35,7 @@ import "react-clock/dist/Clock.css";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-import { Map } from "./components/GoogleAPIs/Map";
+// import { Map } from "./components/GoogleAPIs/Map";
 import Autocomplete from "react-google-autocomplete";
 
 // import { GetData } from "./lib/GetData";
@@ -224,6 +224,28 @@ function App() {
       <Autocomplete
         apiKey={"AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys"}
         onPlaceSelected={(place) => {
+          const geocoder = new google.maps.Geocoder();
+          geocoder.geocode(
+            { address: place.formatted_address },
+            function (results, status) {
+              if (status == "OK") {
+                console.log("📍 Coordinates: ", results);
+                console.log(
+                  "📍 Coordinates: ",
+                  results[0].geometry.location.lat()
+                );
+                console.log(
+                  "📍 Coordinates: ",
+                  results[0].geometry.location.lng()
+                );
+              } else {
+                alert(
+                  "Geocode was not successful for the following reason: " +
+                    status
+                );
+              }
+            }
+          );
           console.log(place);
         }}
       />

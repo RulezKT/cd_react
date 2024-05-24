@@ -24,4 +24,4 @@ https://developers.google.com/maps/documentation/javascript/place-autocomplete
     src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&loading=async&libraries=places&callback=initMap">
 </script>
 
-https://github.com/JustFly1984/react-google-maps-api/tree/develop/packages/react-google-maps-api
+https://github.com/ErrorPro/react-google-autocomplete?tab=readme-ov-file#reactgoogleautocomplete
