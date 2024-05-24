@@ -35,8 +35,17 @@ import "react-clock/dist/Clock.css";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
+type TimeZone = {
+  dstOffset: number;
+  rawOffset: number; // seconds
+  status: "";
+  timeZoneId: "";
+  timeZoneName: "";
+};
+
 // import { Map } from "./components/GoogleAPIs/Map";
 import Autocomplete from "react-google-autocomplete";
+import { time } from "console";
 
 // require("dotenv").config();
 
@@ -68,6 +77,8 @@ function App() {
   // console.log(data);
   // };
   const [dateTime, setDateTime] = useState<Value>(new Date());
+
+  const [timeZone, setTimeZone] = useState<TimeZone | null>(null);
 
   const [cd_data, setData] = useState(cdInf);
 
@@ -101,6 +112,18 @@ function App() {
   //   longitude: 0,
   //   name: "Vio",
   // };
+
+  function convertLocalDateToUTCTimestamp(date: Date) {
+    return Date.UTC(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds()
+    );
+  }
 
   const handleClick = async () => {
     const { data } = await axios.post(
@@ -139,10 +162,13 @@ function App() {
   function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+
     console.log(nameValue);
-    console.log(date);
-    console.log(time);
     console.log(dateTime);
+    console.log(timeZone);
+    if (selectedRadioTimeType === "utc") {
+      setTimeZone(null);
+    }
   }
 
   const form = useForm();
@@ -209,6 +235,53 @@ function App() {
                         <Label htmlFor="option-two">UTC</Label>
                       </div>
                     </RadioGroup>
+                    <Autocomplete
+                      disabled={selectedRadioTimeType === "utc" ? true : false}
+                      apiKey={GOOGLE_MAPS_API_KEY}
+                      onPlaceSelected={(place) => {
+                        const geocoder = new google.maps.Geocoder();
+                        geocoder.geocode(
+                          { address: place.formatted_address },
+                          async function (results, status) {
+                            if (status == "OK") {
+                              // console.log("📍 Coordinates: ", results);
+                              // console.log(
+                              //   "📍 Coordinates: ",
+                              //   results[0].geometry.location.lat()
+                              // );
+                              // console.log(
+                              //   "📍 Coordinates: ",
+                              //   results[0].geometry.location.lng()
+                              // );
+
+                              const lat = results[0].geometry.location.lat();
+                              const lng = results[0].geometry.location.lng();
+
+                              let timestamp = dateTime.getTime() / 1000;
+
+                              const timestampdiff =
+                                timestamp -
+                                convertLocalDateToUTCTimestamp(dateTime) / 1000;
+
+                              timestamp -= timestampdiff;
+
+                              const { data } = await axios.get(
+                                `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
+                              );
+
+                              setTimeZone(data);
+                              console.log(data);
+                            } else {
+                              console.log(
+                                "Geocode was not successful for the following reason: " +
+                                  status
+                              );
+                            }
+                          }
+                        );
+                        // console.log(place);
+                      }}
+                    />
                   </>
                 </FormControl>
 
@@ -224,44 +297,6 @@ function App() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-      {/* <Map /> */}
-      <Autocomplete
-        apiKey={GOOGLE_MAPS_API_KEY}
-        onPlaceSelected={(place) => {
-          const geocoder = new google.maps.Geocoder();
-          geocoder.geocode(
-            { address: place.formatted_address },
-            async function (results, status) {
-              if (status == "OK") {
-                // console.log("📍 Coordinates: ", results);
-                // console.log(
-                //   "📍 Coordinates: ",
-                //   results[0].geometry.location.lat()
-                // );
-                // console.log(
-                //   "📍 Coordinates: ",
-                //   results[0].geometry.location.lng()
-                // );
-
-                const lat = results[0].geometry.location.lat();
-                const lng = results[0].geometry.location.lng();
-
-                const { data } = await axios.get(
-                  `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=1331161200&key=${GOOGLE_MAPS_API_KEY}`
-                );
-
-                console.log(data);
-              } else {
-                console.log(
-                  "Geocode was not successful for the following reason: " +
-                    status
-                );
-              }
-            }
-          );
-          // console.log(place);
-        }}
-      />
 
       <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
