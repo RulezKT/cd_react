@@ -1,10 +1,3 @@
-script(
-  (src =
-    "https://maps.googleapis.com/maps/api/js?key=AIzaSyBk8bppwBUrN4xw2mgv_uH2Gs1QBNtGlpw&libraries=places&callback=initMap"),
-  (async = ""),
-  (defer = "")
-);
-
 let map = {};
 let marker = {};
 let latitude = NaN;

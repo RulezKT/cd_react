@@ -25,12 +25,7 @@ import { Input } from "@/components/ui/input";
 
 import { useForm } from "react-hook-form";
 
-import DatePicker from "react-date-picker";
-import "react-date-picker/dist/DatePicker.css";
-import "react-calendar/dist/Calendar.css";
-import TimePicker from "react-time-picker";
-import "react-time-picker/dist/TimePicker.css";
-import "react-clock/dist/Clock.css";
+import { PlaceAutocomplete } from "./components/GoogleAPIs/PlaceAutocomplete";
 
 import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
@@ -39,6 +34,9 @@ import "react-clock/dist/Clock.css";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+import { Map } from "./components/GoogleAPIs/Map";
+import Autocomplete from "react-google-autocomplete";
 
 // import { GetData } from "./lib/GetData";
 
@@ -66,8 +64,6 @@ function App() {
   // console.log(data);
   // };
   const [dateTime, setDateTime] = useState<Value>(new Date());
-  const [date, setDate] = useState<Value>(new Date());
-  const [time, setTime] = useState<Value>(new Date());
 
   const [cd_data, setData] = useState(cdInf);
 
@@ -224,6 +220,13 @@ function App() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
+      {/* <Map /> */}
+      <Autocomplete
+        apiKey={"AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys"}
+        onPlaceSelected={(place) => {
+          console.log(place);
+        }}
+      />
 
       <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
@@ -270,7 +273,6 @@ function App() {
           <Label htmlFor="option-nine">FD</Label>
         </div>
       </RadioGroup>
-
       <MainScene radiobutt={selectedRadioButt} data={cd_data} />
     </>
   );
