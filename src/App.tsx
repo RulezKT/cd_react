@@ -38,6 +38,10 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 // import { Map } from "./components/GoogleAPIs/Map";
 import Autocomplete from "react-google-autocomplete";
 
+// require("dotenv").config();
+
+const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
+
 // import { GetData } from "./lib/GetData";
 
 // interface BearState {
@@ -222,31 +226,40 @@ function App() {
       </Form>
       {/* <Map /> */}
       <Autocomplete
-        apiKey={"AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys"}
+        apiKey={GOOGLE_MAPS_API_KEY}
         onPlaceSelected={(place) => {
           const geocoder = new google.maps.Geocoder();
           geocoder.geocode(
             { address: place.formatted_address },
-            function (results, status) {
+            async function (results, status) {
               if (status == "OK") {
-                console.log("📍 Coordinates: ", results);
-                console.log(
-                  "📍 Coordinates: ",
-                  results[0].geometry.location.lat()
+                // console.log("📍 Coordinates: ", results);
+                // console.log(
+                //   "📍 Coordinates: ",
+                //   results[0].geometry.location.lat()
+                // );
+                // console.log(
+                //   "📍 Coordinates: ",
+                //   results[0].geometry.location.lng()
+                // );
+
+                const lat = results[0].geometry.location.lat();
+                const lng = results[0].geometry.location.lng();
+
+                const { data } = await axios.get(
+                  `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=1331161200&key=${GOOGLE_MAPS_API_KEY}`
                 );
-                console.log(
-                  "📍 Coordinates: ",
-                  results[0].geometry.location.lng()
-                );
+
+                console.log(data);
               } else {
-                alert(
+                console.log(
                   "Geocode was not successful for the following reason: " +
                     status
                 );
               }
             }
           );
-          console.log(place);
+          // console.log(place);
         }}
       />
 
