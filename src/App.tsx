@@ -43,9 +43,13 @@ type TimeZone = {
   timeZoneName: "";
 };
 
-// import { Map } from "./components/GoogleAPIs/Map";
+type Place = {
+  name: string;
+  latitude: number;
+  longitude: number;
+};
+
 import Autocomplete from "react-google-autocomplete";
-import { time } from "console";
 
 // require("dotenv").config();
 
@@ -76,6 +80,9 @@ function App() {
   // const data = GetData("17.05.1978");
   // console.log(data);
   // };
+
+  const [place, setPlace] = useState<Place | null>(null);
+
   const [dateTime, setDateTime] = useState<Value>(new Date());
 
   const [timeZone, setTimeZone] = useState<TimeZone | null>(null);
@@ -113,18 +120,6 @@ function App() {
   //   name: "Vio",
   // };
 
-  function convertLocalDateToUTCTimestamp(date: Date) {
-    return Date.UTC(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-      date.getHours(),
-      date.getMinutes(),
-      date.getSeconds(),
-      date.getMilliseconds()
-    );
-  }
-
   const handleClick = async () => {
     const { data } = await axios.post(
       "http://127.0.0.1:3000/api",
@@ -159,16 +154,47 @@ function App() {
     // console.log(data);
   };
 
-  function onSubmit(values) {
+  async function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
     console.log(nameValue);
     console.log(dateTime);
+    console.log(place);
     console.log(timeZone);
+    // console.log(selectedRadioTimeType);
     if (selectedRadioTimeType === "utc") {
       setTimeZone(null);
+      setPlace(null);
+      console.log(place);
+      console.log(timeZone);
     }
+
+    const { data } = await axios.post(
+      "http://127.0.0.1:3000/api",
+      {
+        year: dateTime.getFullYear(),
+        month: dateTime.getMonth() + 1,
+        day: dateTime.getDate(),
+        hours: dateTime.getHours(),
+        minutes: dateTime.getMinutes(),
+        typeOfTime: selectedRadioTimeType === "utc" ? 0 : 1,
+        offset: 0,
+        place: selectedRadioTimeType === "utc" ? "" : place.name,
+        latitude: selectedRadioTimeType === "utc" ? 0 : place.latitude,
+        longitude: selectedRadioTimeType === "utc" ? 0 : place.longitude,
+        name: nameValue,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+
+          Accept: "*/*",
+        },
+      }
+    );
+
+    setData(data);
   }
 
   const form = useForm();
@@ -257,13 +283,13 @@ function App() {
                               const lat = results[0].geometry.location.lat();
                               const lng = results[0].geometry.location.lng();
 
-                              let timestamp = dateTime.getTime() / 1000;
-
-                              const timestampdiff =
-                                timestamp -
-                                convertLocalDateToUTCTimestamp(dateTime) / 1000;
-
-                              timestamp -= timestampdiff;
+                              setPlace({
+                                name: place.formatted_address,
+                                latitude: lat,
+                                longitude: lng,
+                              });
+                              const timestamp = dateTime.getTime() / 1000;
+                              // console.log("timestamp", timestamp);
 
                               const { data } = await axios.get(
                                 `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
