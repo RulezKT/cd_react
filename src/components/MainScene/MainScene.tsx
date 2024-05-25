@@ -8,12 +8,12 @@ export const MainScene = (props) => {
 
   return (
     <div className="flex flex-row justify-between gap-5 m-10">
-      <DesNumbers calc_type="Design" data={props.data.hd.design.planetsData} />
+      {/* <DesNumbers calc_type="Design" data={props.data.hd.design.planetsData} /> */}
       <BodyGraph data={props.data} radiobutt={props.radiobutt} />
-      <PersNumbers
+      {/* <PersNumbers
         calc_type="Personality"
         data={props.data.hd.personality.planetsData}
-      />
+      /> */}
     </div>
   );
 };

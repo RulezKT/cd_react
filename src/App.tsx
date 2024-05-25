@@ -7,7 +7,7 @@ import { MainScene } from "./components/MainScene/MainScene";
 
 import axios from "axios";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cdInf } from "./components/cdInf";
 
@@ -72,22 +72,39 @@ const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 //   setData: (data) => set((state) => ({ cd_data: data })),
 // }));
 
+// const increasePopulation = useStore((state) => state.increasePopulation);
+// const bears = useStore((state) => state.bears);
+
+// const useCallGetData = () => {
+// const data = GetData("17.05.1978");
+// console.log(data);
+// };
 function App() {
-  // const increasePopulation = useStore((state) => state.increasePopulation);
-  // const bears = useStore((state) => state.bears);
+  // console.log("setting useState");
 
-  // const useCallGetData = () => {
-  // const data = GetData("17.05.1978");
-  // console.log(data);
-  // };
-
-  const [place, setPlace] = useState<Place | null>(null);
+  const [place, setPlace] = useState<Place>({
+    name: "",
+    latitude: 0,
+    longitude: 0,
+  });
 
   const [dateTime, setDateTime] = useState<Value>(new Date());
 
-  const [timeZone, setTimeZone] = useState<TimeZone | null>(null);
+  const [timeZone, setTimeZone] = useState<TimeZone>({
+    dstOffset: 0,
+    rawOffset: 0,
+    status: "",
+    timeZoneId: "",
+    timeZoneName: "",
+  });
 
   const [cd_data, setData] = useState(cdInf);
+
+  const [selectedRadioButt, setSelectedRadioButt] = useState("personality");
+  const [selectedRadioTimeType, setSelectedRadioTimeType] = useState("utc");
+  const [nameValue, setNameValue] = useState("Transits");
+
+  // console.log(cd_data);
 
   // const setData = useStore((state) => state.setData);
   // const cd_data = useStore((state) => state.cd_data);
@@ -119,6 +136,76 @@ function App() {
   //   longitude: 0,
   //   name: "Vio",
   // };
+
+  useEffect(() => {
+    getTransits();
+  }, []);
+
+  async function getTransits() {
+    // console.log("getTransits");
+    // Date.now();
+    // const d = new Date();
+    // const julianDay = Date.now() / 86400 + 2440587.5;
+
+    const d = new Date();
+    const offset = Math.abs(d.getTimezoneOffset() * 60);
+
+    // setDateTime(jDtoGreg(julianDay));
+    // console.log(dateTime);
+
+    setDateTime(d);
+    setPlace({
+      name: "",
+      latitude: 0,
+      longitude: 0,
+    });
+    setTimeZone({
+      dstOffset: 0,
+      rawOffset: 0,
+      status: "",
+      timeZoneId: "",
+      timeZoneName: "",
+    });
+
+    setNameValue("Transits");
+    setSelectedRadioButt("personality");
+    setSelectedRadioTimeType("local");
+
+    // console.log(`dateTime.getFullYear() ${dateTime.getFullYear()}`);
+    // console.log(`dateTime.getMonth() ${dateTime.getMonth()}`);
+    // console.log(`dateTime.getDate() ${dateTime.getDate()}`);
+    // console.log(`dateTime.getHours() ${dateTime.getHours()}`);
+    // console.log(`dateTime.getMinutes() ${dateTime.getMinutes()}`);
+
+    const { data } = await axios.post(
+      "http://127.0.0.1:3000/api",
+      {
+        year: dateTime.getFullYear(),
+        month: dateTime.getMonth() + 1,
+        day: dateTime.getDate(),
+        hours: dateTime.getHours(),
+        minutes: dateTime.getMinutes(),
+        typeOfTime: 1,
+        offset: offset,
+        place: "",
+        latitude: 0,
+        longitude: 0,
+        name: nameValue,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+
+          Accept: "*/*",
+        },
+      }
+    );
+    // console.log("data");
+    // console.log(data);
+    setData(data);
+    // console.log("initial data");
+    // console.log(cd_data);
+  }
 
   const handleClick = async () => {
     const { data } = await axios.post(
@@ -179,7 +266,10 @@ function App() {
         hours: dateTime.getHours(),
         minutes: dateTime.getMinutes(),
         typeOfTime: selectedRadioTimeType === "utc" ? 0 : 1,
-        offset: 0,
+        offset:
+          selectedRadioTimeType === "utc"
+            ? 0
+            : timeZone?.rawOffset + timeZone?.dstOffset,
         place: selectedRadioTimeType === "utc" ? "" : place.name,
         latitude: selectedRadioTimeType === "utc" ? 0 : place.latitude,
         longitude: selectedRadioTimeType === "utc" ? 0 : place.longitude,
@@ -198,10 +288,6 @@ function App() {
   }
 
   const form = useForm();
-
-  const [selectedRadioButt, setSelectedRadioButt] = useState("bodygraph");
-  const [selectedRadioTimeType, setSelectedRadioTimeType] = useState("local");
-  const [nameValue, setNameValue] = useState("");
 
   // Function to handle the change in radio button selection
   function onRadioButtValueChange(value: string) {
@@ -324,13 +410,13 @@ function App() {
         </form>
       </Form>
 
-      <div className="flex flex-row justify-center h-96 items-center">
+      {/* <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
-      </div>
+      </div> */}
       <RadioGroup
         className="flex flex-row gap-5 m-10"
         onValueChange={onRadioButtValueChange}
-        defaultValue="bodygraph"
+        defaultValue="personality"
       >
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="bodygraph" id="option-one" />
@@ -344,10 +430,7 @@ function App() {
           <RadioGroupItem value="personality" id="option-three" />
           <Label htmlFor="option-three">Personality</Label>
         </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="transits" id="option-four" disabled />
-          <Label htmlFor="option-four">Transits</Label>
-        </div>
+
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="bodytransits" id="option-five" disabled />
           <Label htmlFor="option-five">Body+Transits</Label>
