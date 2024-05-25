@@ -1,228 +1,124 @@
-//рисование стрелок между планетами
-DrawFormulaClass.prototype.draw_arrows = function (number, planets_coords) {
-  //для двухпланетных центров
-  if (number === 2) {
-    this.draw_arrow(
-      planets_coords[0][0],
-      planets_coords[0][1],
-      planets_coords[1][0],
-      planets_coords[1][1],
-      true
-    );
-    return;
-  }
+import * as d3 from "d3";
+import { appendText, appendTextPlanets } from "./auxiliary_fns.ts";
+const lineFunction = d3
+  .line()
+  .x((d) => d.x)
+  .y((d) => d.y);
 
-  for (let i = 0; i < number - 1; i++) {
-    this.draw_arrow(
-      planets_coords[i][0],
-      planets_coords[i][1],
-      planets_coords[i + 1][0],
-      planets_coords[i + 1][1]
-    );
-  }
+const planetsArr = [
+  "ssb",
+  "mercury",
+  "venus",
+  "earth",
+  "mars",
+  "jupiter",
+  "saturn",
+  "uranus",
+  "neptune",
+  "pluto",
+  "sun",
+  "moon",
+  "north_node",
+  "south_node",
+  "hiron",
+];
 
-  this.draw_arrow(
-    planets_coords[number - 1][0],
-    planets_coords[number - 1][1],
-    planets_coords[0][0],
-    planets_coords[0][1]
-  );
+const size_of_the_planet_to_draw = 14;
+
+//название как ключ,
+// координаты планеты на графике + флаг нарисовали мы ее или еще нет
+const planets_full_info = {
+  mercury: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  venus: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  earth: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  mars: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  jupiter: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  saturn: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  uranus: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  neptune: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  pluto: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  sun: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  moon: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  north_node: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
+  south_node: {
+    x: NaN,
+    y: NaN,
+    drawn: false,
+  },
 };
 
-DrawFormulaClass.prototype.draw_contour = function (
-  number,
-  planets_coords,
-  height,
-  width
-) {
-  let x, y;
-
-  switch (number) {
-    case 1:
-      x = planets_coords[0][0] - 15;
-      y = planets_coords[0][1] - 10;
-      break;
-
-    case 2:
-      x = planets_coords[1][0] - 15;
-      y = planets_coords[0][1] - 10;
-      break;
-
-    case 3:
-      x = planets_coords[2][0] - 15;
-      y =
-        (planets_coords[2][1] < planets_coords[0][1]
-          ? planets_coords[2][1]
-          : planets_coords[0][1]) - 20;
-      break;
-
-    case 4:
-      x = planets_coords[3][0] - 15;
-      y = planets_coords[3][1] - 10;
-      break;
-
-    case 5:
-      x = planets_coords[4][0] - 15;
-      y =
-        (planets_coords[4][1] < planets_coords[0][1]
-          ? planets_coords[4][1]
-          : planets_coords[0][1]) - 20;
-      break;
-
-    case 6:
-      x = planets_coords[5][0] - 10;
-      y = planets_coords[5][1] - 20;
-      break;
-
-    case 7:
-      x = planets_coords[6][0] - 15;
-      y =
-        (planets_coords[6][1] < planets_coords[0][1]
-          ? planets_coords[6][1]
-          : planets_coords[0][1]) - 20;
-      break;
-
-    case 8:
-      x = planets_coords[7][0] - 10;
-      y = planets_coords[7][1] - 20;
-      break;
-
-    case 9:
-      x = planets_coords[8][0] - 10;
-      y = planets_coords[0][1] - 20;
-      break;
-
-    case 10:
-      x = planets_coords[8][0] - 10;
-      y = planets_coords[0][1] - 20;
-      break;
-
-    default:
-      x = NaN;
-      y = NaN;
-  }
-
-  //обводим цетр
-  svg
-    .append("rect")
-    .attr("height", height + 20)
-    .attr("width", width + 15)
-    .attr("x", x)
-    .attr("y", y)
-    .attr("rx", 15)
-    .attr("ry", 15)
-    .attr("fill", "none")
-    .attr("stroke", "black");
-};
-
-//Циклический сдвиг массива
-//принимает на вход массив с количеством элементов от 2 до 10
-//второй параметр  - на сколько элементов сдвинуть
-//движение производится вперед по часовой стрелке по кругу
-//если элемента 2, то они просто меняются местами
-//возвращает измененный массив
-DrawFormulaClass.prototype.move_array = function (array, number_to_move) {
-  /*
-  a=a.splice(-k).concat(a);
-  
-  The splice() method changes the contents of an array by removing existing elements and/or adding new elements.
-  
-  start
-  Index at which to start changing the array (with origin 0). If greater than the length of the array, actual starting index will be set to
-  the length of the array. If negative, will begin that many elements from the end of the array (with origin -1)
-  
-  The concat() method is used to merge two or more arrays. This method does not change the existing arrays,
-  but instead returns a new array.and will be set to 0 if absolute value is greater than the length of the array.
-  
-  so for example
-  let a =[1,2,3];
-  a.splice(-1) === 3
-  a=a.splice(-1).concat(a) === 3 + 1,2
-  */
-
-  if (array.length < 2) {
-    console.log("array is to small");
-    throw "093";
-  }
-
-  //insurance against error in 2 elements array
-  if (array.length === 2) number_to_move = 1;
-
-  return array.splice(-number_to_move).concat(array);
-};
-
-//ищет в массиве центров планеты, на которые указывает максимум 1 планета,
-//для того чтобы можно было съэкономить место на орбитах и рисовать такую планету слева на формуле.
-DrawFormulaClass.prototype.find_horizontal = function (array, formula_array) {
-  let planet_horizontal = [];
-
-  //изначально устанавливаем на все планеты, что они могут рисоваться слева
-  for (let i = 0; i < array.length; i++) {
-    planet_horizontal[i] = true;
-  }
-
-  //теперь отсекаем варианты
-  for (let key in formula_array) {
-    for (let i = 0; i < array.length; i++) {
-      //console.log(formula_array[key].point_to_planet);
-
-      if (
-        array[i] === formula_array[key].point_to_planet &&
-        formula_array[key].orbit === 1 &&
-        planet_horizontal[i]
-      ) {
-        for (let key2 in formula_array) {
-          if (
-            key === formula_array[key2].point_to_planet &&
-            formula_array[key2].orbit === 2 &&
-            planet_horizontal[i]
-          ) {
-            // console.log(key);
-            // console.log(formula_array[key2].point_to_planet);
-            planet_horizontal[i] = false;
-          }
-        }
-      }
-    }
-  }
-
-  return planet_horizontal;
-};
-
-//находит следующую планету, которая указывает на текущую
-//либо возвращает false
-DrawFormulaClass.prototype.find_next_planet = function (planet, formula_array) {
-  for (let key in formula_array) {
-    if (
-      planet === formula_array[key].point_to_planet &&
-      !this.planets_full_info[key].drawn &&
-      formula_array[planet].orbit === formula_array[key].orbit - 1
-    ) {
-      return key;
-    }
-  }
-  return false;
-};
-
-//находит предыдущую планету, на которую указывает текущая
-//либо возвращает false если планета, на которую она указывает, находится в центре формулы
-DrawFormulaClass.prototype.find_prev_planet = function (planet, formula_array) {
-  let points_to = formula_array[planet].point_to_planet;
-
-  if (formula_array[points_to].orbit !== 0) {
-    //console.log(`points_to = ${points_to}`);
-    return points_to;
-  }
-
-  return false;
-};
+let thissvg = null;
 
 //рисуем формулу души и тела
 //входные аргументы
 //formula.personality и formula.per_centers
 //или
 //formula.design и formula.des_centers
-DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
+export function Draw_Fd(
+  svg: d3.Selection<SVGGElement, unknown, null, undefined>,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  fdInfo
+) {
+  const formula_array = fdInfo.plfData;
+  const centers_array = fdInfo.centersArr;
+
+  // pers: { plfData: PlFdData[]; centersArr: string[] };
+  console.log(formula_array);
+  console.log(centers_array);
+  // console.log(`draw_Fd svg = ${svg}`);
+  thissvg = svg;
+  // console.log(`draw_Fd thissvg = ${thissvg}`);
   //y - левый верхний край планеты
   //x - точно посередине
 
@@ -230,15 +126,24 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
   //   console.log(formula_array);
   //   console.log(centers_array);
 
-  for (let key in this.planets_full_info) {
+  svg
+    .append("rect")
+    .attr("height", `${height}`)
+    .attr("width", `${width}`)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", "#D3D3D3")
+    .attr("stroke", "#000000");
+
+  for (const key in planets_full_info) {
     //console.log(key);
-    this.planets_full_info[key].x = NaN;
-    this.planets_full_info[key].y = NaN;
-    this.planets_full_info[key].drawn = false;
+    planets_full_info[key].x = NaN;
+    planets_full_info[key].y = NaN;
+    planets_full_info[key].drawn = false;
   }
 
-  let pers_x = this.pers_x;
-  let pers_y = this.pers_y;
+  let pers_x = x;
+  let pers_y = y;
 
   //окантовка для Формулы Души
   svg
@@ -250,7 +155,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     .attr("fill", "none")
     .attr("stroke", "black");
 
-  let temp_y = pers_y + 60;
+  const temp_y = pers_y + 60;
 
   let temp_x = 0;
 
@@ -261,7 +166,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
 
   svg
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", "black")
     .attr("fill", "none");
 
@@ -274,7 +179,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
 
   svg
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", "black")
     .attr("fill", "none");
 
@@ -287,33 +192,33 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
 
   svg
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", "black")
     .attr("fill", "none");
 
-  this.draw_planet(
+  draw_planet(
     "mercury",
     pers_x + 30,
     pers_y + 15,
-    this.size_of_the_planet_to_draw,
+    size_of_the_planet_to_draw,
     "blue"
   );
   //рисуем силу и ретроградность
-  this.draw_power_and_retro(
+  draw_power_and_retro(
     "mercury",
     [pers_x + 30, pers_y + 15],
     "blue",
     formula_array
   );
-  this.draw_planet(
+  draw_planet(
     "mercury",
     pers_x + temp_x + 30,
     pers_y + 15,
-    this.size_of_the_planet_to_draw,
+    size_of_the_planet_to_draw,
     "blue"
   );
   //рисуем силу и ретроградность
-  this.draw_power_and_retro(
+  draw_power_and_retro(
     "mercury",
     [pers_x + temp_x + 30, pers_y + 15],
     "blue",
@@ -330,22 +235,22 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
 
     svg
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", "none");
 
     //пропускаем Землю
     if (i === 3) temp_i++;
-    this.draw_planet(
-      planets_arr[temp_i],
+    draw_planet(
+      planetsArr[temp_i],
       pers_x + temp_x + 30,
       pers_y + 15,
-      this.size_of_the_planet_to_draw,
+      size_of_the_planet_to_draw,
       "blue"
     );
     //рисуем силу и ретроградность
-    this.draw_power_and_retro(
-      planets_arr[temp_i],
+    draw_power_and_retro(
+      planetsArr[temp_i],
       [pers_x + temp_x + 30, pers_y + 15],
       "blue",
       formula_array
@@ -363,7 +268,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
 
   svg
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", "black")
     .attr("fill", "none");
 
@@ -380,7 +285,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     // и от этого зависит высота 40 или 80
     //если горизонтально, то первая планета будет нарисована слева
     if (centers_array[i][1] === 2) {
-      let planet_horizontal = this.find_horizontal(
+      const planet_horizontal = find_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -391,7 +296,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         centers_array[i][2] = [40, "horizontal"];
         //меняем местами
         if (planet_horizontal[0]) {
-          centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+          centers_array[i][0] = move_array(centers_array[i][0], 1);
           // console.log(centers_array[i][0]);
         }
       }
@@ -401,7 +306,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     // и от этого зависит высота 80 (horizontal) или
     // 120 (vertical)
     if (centers_array[i][1] === 3) {
-      let planet_horizontal = this.find_horizontal(
+      const planet_horizontal = find_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -420,10 +325,10 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!planet_horizontal[2]) {
           if (planet_horizontal[0]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[1]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           }
         }
       }
@@ -435,7 +340,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     if (centers_array[i][1] === 4) {
       //console.log(centers_array[i][0]);
 
-      let planet_horizontal = this.find_horizontal(
+      const planet_horizontal = find_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -461,13 +366,13 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!(planet_horizontal[2] && planet_horizontal[3])) {
           if (planet_horizontal[0] && planet_horizontal[1]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[1] && planet_horizontal[2]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           }
         }
       } else if (
@@ -482,13 +387,13 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!planet_horizontal[2]) {
           if (planet_horizontal[0]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[1]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           }
         }
       } else {
@@ -501,7 +406,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     // либо 3 спереди одна сзади и одна сзади вверх 160
     // либо 3 спереди и 2 сзади вверху и внизу 200
     if (centers_array[i][1] === 5) {
-      let planet_horizontal = this.find_horizontal(
+      const planet_horizontal = find_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -527,16 +432,28 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!(planet_horizontal[3] && planet_horizontal[4])) {
           if (planet_horizontal[0] && planet_horizontal[1]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (planet_horizontal[1] && planet_horizontal[2]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (planet_horizontal[2] && planet_horizontal[3]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           }
         }
       } else if (
@@ -552,16 +469,28 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!planet_horizontal[3]) {
           if (planet_horizontal[0]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (planet_horizontal[1]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (planet_horizontal[2]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           }
         }
       } else {
@@ -576,7 +505,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     // либо 3 спереди две сзади,  и  одна сзади вверх 160
     // либо 3 спереди  одна сзади, и 2 сзади вверху и внизу 200
     if (centers_array[i][1] === 6) {
-      let planet_horizontal = this.find_horizontal(
+      const planet_horizontal = size_of_the_planet_to_drawfind_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -628,31 +557,46 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[2]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
             planet_horizontal[3]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
             planet_horizontal[4]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else if (
             planet_horizontal[4] &&
             planet_horizontal[5] &&
             planet_horizontal[0]
           ) {
             //двигаем на 5 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 5);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              5
+            );
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           }
         }
       } else if (
@@ -669,19 +613,34 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!(planet_horizontal[3] && planet_horizontal[4])) {
           if (planet_horizontal[0] && planet_horizontal[1]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (planet_horizontal[1] && planet_horizontal[2]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (planet_horizontal[2] && planet_horizontal[3]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else if (planet_horizontal[4] && planet_horizontal[5]) {
             //двигаем на 5 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 5);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              5
+            );
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           }
         }
       } else if (
@@ -698,19 +657,34 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!planet_horizontal[4]) {
           if (planet_horizontal[0]) {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           } else if (planet_horizontal[1]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (planet_horizontal[2]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (planet_horizontal[3]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 5);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              5
+            );
           }
         }
       } else {
@@ -726,7 +700,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     // либо 4 спереди две сзади,  и  одна сзади вверх 200
     // либо 4 спереди  одна сзади, и 2 сзади вверху и внизу 240
     if (centers_array[i][1] === 7) {
-      let planet_horizontal = this.find_horizontal(
+      const planet_horizontal = size_of_the_planet_to_drawfind_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -782,38 +756,56 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[2]
           ) {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
             planet_horizontal[3]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
             planet_horizontal[4]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (
             planet_horizontal[3] &&
             planet_horizontal[4] &&
             planet_horizontal[5]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else if (
             planet_horizontal[5] &&
             planet_horizontal[6] &&
             planet_horizontal[0]
           ) {
             //двигаем на 6 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 6);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              6
+            );
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 5);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              5
+            );
           }
         }
       } else if (
@@ -831,22 +823,40 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!(planet_horizontal[4] && planet_horizontal[5])) {
           if (planet_horizontal[0] && planet_horizontal[1]) {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           } else if (planet_horizontal[1] && planet_horizontal[2]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (planet_horizontal[2] && planet_horizontal[3]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (planet_horizontal[3] && planet_horizontal[4]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else if (planet_horizontal[5] && planet_horizontal[6]) {
             //двигаем на 6 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 6);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              6
+            );
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 5);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              5
+            );
           }
         }
       } else if (
@@ -864,22 +874,40 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
         if (!planet_horizontal[5]) {
           if (planet_horizontal[0]) {
             //двигаем на 5 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 5);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              5
+            );
           } else if (planet_horizontal[1]) {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           } else if (planet_horizontal[2]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (planet_horizontal[3]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (planet_horizontal[4]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else {
             //двигаем на 6 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 6);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              6
+            );
           }
         }
       } else {
@@ -895,7 +923,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     // если 4 горизонтальные, что имеет огромную вероятность то 160
     // если 4 спереди и одна сзади наверх то 200
     if (centers_array[i][1] === 8) {
-      let planet_horizontal = this.find_horizontal(
+      const planet_horizontal = size_of_the_planet_to_drawfind_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -963,7 +991,10 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[3]
           ) {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
@@ -971,7 +1002,10 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[4]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
@@ -979,7 +1013,10 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[5]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (
             planet_horizontal[3] &&
             planet_horizontal[4] &&
@@ -987,7 +1024,10 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[6]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else if (
             planet_horizontal[5] &&
             planet_horizontal[6] &&
@@ -995,10 +1035,16 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[0]
           ) {
             //двигаем на 7 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 7);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              7
+            );
           } else {
             //двигаем на 6 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 6);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              6
+            );
           }
         }
       } else {
@@ -1018,38 +1064,56 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             planet_horizontal[2]
           ) {
             //двигаем на 4 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 4);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              4
+            );
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
             planet_horizontal[3]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 3);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              3
+            );
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
             planet_horizontal[4]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 2);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              2
+            );
           } else if (
             planet_horizontal[3] &&
             planet_horizontal[4] &&
             planet_horizontal[5]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 1);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              1
+            );
           } else if (
             planet_horizontal[5] &&
             planet_horizontal[6] &&
             planet_horizontal[0]
           ) {
             //двигаем на 6 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 6);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              6
+            );
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = this.move_array(centers_array[i][0], 5);
+            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
+              centers_array[i][0],
+              5
+            );
           }
         }
       }
@@ -1069,8 +1133,8 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
   }
   //console.log(centers_array);
 
-  pers_x = this.pers_x;
-  pers_y = this.pers_y;
+  pers_x = x;
+  pers_y = y;
 
   //две колонки рисования для многопланетных центров
   const first_column_x = pers_x + 60 + 30;
@@ -1189,7 +1253,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
     //console.log(`centers_array[i][0] = ${centers_array[i][0]}`);
 
     //координаты планет x и y
-    let planets_coords = [];
+    const planets_coords = [];
 
     //добавляем дополнительное пространство для планет
     //не увеличиваем одиночные центры и горизонтальные двойные
@@ -1371,14 +1435,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         10,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(10, planets_coords);
-      this.draw_contour(10, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(10, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        10,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //9 планет
@@ -1540,14 +1609,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         9,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(9, planets_coords);
-      this.draw_contour(9, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(9, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        9,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //8 планет
@@ -1784,14 +1858,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         8,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(8, planets_coords);
-      this.draw_contour(8, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(8, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        8,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //7 планет
@@ -2101,14 +2180,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         7,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(7, planets_coords);
-      this.draw_contour(7, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(7, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        7,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //6 планет
@@ -2356,14 +2440,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         6,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(6, planets_coords);
-      this.draw_contour(6, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(6, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        6,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //5 планет
@@ -2573,14 +2662,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         5,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(5, planets_coords);
-      this.draw_contour(5, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(5, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        5,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //4 планеты
@@ -2738,14 +2832,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         4,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(4, planets_coords);
-      this.draw_contour(4, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(4, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        4,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //3 планеты
@@ -2826,14 +2925,19 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         3,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(3, planets_coords);
-      this.draw_contour(3, planets_coords, centers_array[i][2][0], 80);
+      size_of_the_planet_to_drawdraw_arrows(3, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
+        3,
+        planets_coords,
+        centers_array[i][2][0],
+        80
+      );
     }
 
     //2 планеты
@@ -2885,14 +2989,14 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         2,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_arrows(2, planets_coords);
-      this.draw_contour(
+      size_of_the_planet_to_drawdraw_arrows(2, planets_coords);
+      size_of_the_planet_to_drawdraw_contour(
         2,
         planets_coords,
         centers_array[i][2][0],
@@ -2937,24 +3041,24 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
       }
 
       // console.log(centers_array[i][0][0]);
-      this.draw_many_planets(
+      size_of_the_planet_to_drawdraw_many_planets(
         1,
         centers_array[i][0],
         planets_coords,
         formula_array
       );
-      this.draw_contour(1, planets_coords, 30, 30);
+      size_of_the_planet_to_drawdraw_contour(1, planets_coords, 30, 30);
     }
   }
 
-  // console.log(this.planets_full_info);
+  // console.log(planets_full_info);
 
   //при высоте в 480 у нас есть столбики, состоящие из 12 квадратов по вертикали каждый
   // 10 столбиков вправо и 1 столбик, дублирующий орбиту меркурия влево
   // если квадрат true, значит он уже занят планетой
   //от 1 до 10 орбиты
   //0-ой элемент - дублирующая орбита
-  let occupied_arr = [];
+  const occupied_arr = [];
   for (let i = 0; i < 11; i++) {
     occupied_arr[i] = [];
 
@@ -2975,12 +3079,17 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
   //рисуем орбиты, отталкиваясь от центров
   for (let i = 0; i < centers_array.length; i++) {
     for (let k = 0; k < centers_array[i][1]; k++) {
-      while (this.find_next_planet(centers_array[i][0][k], formula_array)) {
-        let next_planet = this.find_next_planet(
+      while (
+        size_of_the_planet_to_drawfind_next_planet(
+          centers_array[i][0][k],
+          formula_array
+        )
+      ) {
+        let next_planet = size_of_the_planet_to_drawfind_next_planet(
           centers_array[i][0][k],
           formula_array
         );
-        let prev_planet = this.find_prev_planet(
+        let prev_planet = size_of_the_planet_to_drawfind_prev_planet(
           centers_array[i][0][k],
           formula_array
         );
@@ -2993,20 +3102,20 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             prev_planet = next_planet;
 
             let y_square = NaN;
-            let orbit = formula_array[next_planet].orbit;
-            let points_to = formula_array[next_planet].point_to_planet;
+            const orbit = formula_array[next_planet].orbit;
+            const points_to = formula_array[next_planet].point_to_planet;
 
             if (orbit === 1) {
               //возможность нарисовать планету слева
               let left_side = true;
 
-              let center_number = formula_array[points_to].center_number;
+              const center_number = formula_array[points_to].center_number;
 
               //проверяем для сдвоенного центра, если планета в центра стоит во втором ряду, то налево уже не нарисовать
               if (
                 centers_array[center_number][1] === 2 &&
                 centers_array[center_number][2][0] === 40 &&
-                this.planets_full_info[points_to].x === second_column_x
+                planets_full_info[points_to].x === second_column_x
               ) {
                 left_side = false;
               }
@@ -3014,13 +3123,13 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
               //проверяем для остальных центров, если планета в центра стоит во втором ряду, то налево уже не нарисовать
               if (
                 centers_array[center_number][1] > 2 &&
-                this.planets_full_info[points_to].x === second_column_x
+                planets_full_info[points_to].x === second_column_x
               ) {
                 left_side = false;
               }
 
               //проверяем, возможно на эту планету больше никакая другая не указывает, тогда ставим ее слева
-              for (let key in formula_array) {
+              for (const key in formula_array) {
                 if (next_planet === formula_array[key].point_to_planet) {
                   left_side = false;
                   break;
@@ -3030,7 +3139,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
               if (left_side) {
                 //определяем в каком квадрате рисовать
                 y_square = Math.ceil(
-                  (this.planets_full_info[points_to].y - start_center_y) /
+                  (planets_full_info[points_to].y - start_center_y) /
                     (vertical_size / 12)
                 );
                 //console.log(y_square);
@@ -3058,24 +3167,24 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
                 if (!occupied_arr[0][y_square]) {
                   occupied_arr[0][y_square] = true;
 
-                  let planets_coords = [
+                  const planets_coords = [
                     [
                       pers_x - gap_between_orbits * 2,
                       (vertical_size / 12) * y_square + start_center_y,
                     ],
                     [
-                      this.planets_full_info[points_to].x,
-                      this.planets_full_info[points_to].y,
+                      planets_full_info[points_to].x,
+                      planets_full_info[points_to].y,
                     ],
                   ];
 
-                  this.draw_many_planets(
+                  size_of_the_planet_to_drawdraw_many_planets(
                     1,
                     [next_planet],
                     planets_coords,
                     formula_array
                   );
-                  this.draw_arrow(
+                  size_of_the_planet_to_drawdraw_arrow(
                     planets_coords[0][0],
                     planets_coords[0][1],
                     planets_coords[1][0],
@@ -3089,7 +3198,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
               if (!left_side) {
                 //определяем в каком квадрате рисовать
                 y_square = Math.ceil(
-                  (this.planets_full_info[points_to].y - start_center_y) /
+                  (planets_full_info[points_to].y - start_center_y) /
                     (vertical_size / 12)
                 );
                 //console.log(y_square);
@@ -3117,27 +3226,27 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
                 if (!occupied_arr[orbit][y_square]) {
                   occupied_arr[orbit][y_square] = true;
 
-                  let planets_coords = [
+                  const planets_coords = [
                     [
                       pers_x + gap_between_orbits * orbit,
                       (vertical_size / 12) * y_square + start_center_y,
                     ],
                     [
-                      this.planets_full_info[points_to].x,
-                      this.planets_full_info[points_to].y,
+                      planets_full_info[points_to].x,
+                      planets_full_info[points_to].y,
                     ],
                   ];
                   //                            console.log(key);
                   //                            console.log(planets_coords);
                   //                            console.log(planets_coords[0][0]);
                   //                            console.log(planets_coords[0][1]);
-                  this.draw_many_planets(
+                  size_of_the_planet_to_drawdraw_many_planets(
                     1,
                     [next_planet],
                     planets_coords,
                     formula_array
                   );
-                  this.draw_arrow(
+                  size_of_the_planet_to_drawdraw_arrow(
                     planets_coords[0][0],
                     planets_coords[0][1],
                     planets_coords[1][0],
@@ -3152,7 +3261,7 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
             } else {
               //определяем в каком квадрате рисовать
               y_square = Math.ceil(
-                (this.planets_full_info[points_to].y - start_center_y) /
+                (planets_full_info[points_to].y - start_center_y) /
                   (vertical_size / 12)
               );
               //console.log(y_square);
@@ -3180,27 +3289,27 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
               if (!occupied_arr[orbit][y_square]) {
                 occupied_arr[orbit][y_square] = true;
 
-                let planets_coords = [
+                const planets_coords = [
                   [
                     pers_x + gap_between_orbits * orbit,
                     (vertical_size / 12) * y_square + start_center_y,
                   ],
                   [
-                    this.planets_full_info[points_to].x,
-                    this.planets_full_info[points_to].y,
+                    planets_full_info[points_to].x,
+                    planets_full_info[points_to].y,
                   ],
                 ];
                 //                            console.log(key);
                 //                            console.log(planets_coords);
                 //                            console.log(planets_coords[0][0]);
                 //                            console.log(planets_coords[0][1]);
-                this.draw_many_planets(
+                size_of_the_planet_to_drawdraw_many_planets(
                   1,
                   [next_planet],
                   planets_coords,
                   formula_array
                 );
-                this.draw_arrow(
+                size_of_the_planet_to_drawdraw_arrow(
                   planets_coords[0][0],
                   planets_coords[0][1],
                   planets_coords[1][0],
@@ -3211,12 +3320,21 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
               }
             }
 
-            next_planet = this.find_next_planet(next_planet, formula_array);
+            next_planet = size_of_the_planet_to_drawfind_next_planet(
+              next_planet,
+              formula_array
+            );
           } else {
-            prev_planet = this.find_prev_planet(prev_planet, formula_array);
+            prev_planet = size_of_the_planet_to_drawfind_prev_planet(
+              prev_planet,
+              formula_array
+            );
 
             if (prev_planet) {
-              next_planet = this.find_next_planet(prev_planet, formula_array);
+              next_planet = size_of_the_planet_to_drawfind_next_planet(
+                prev_planet,
+                formula_array
+              );
             } else {
               break;
             }
@@ -3225,63 +3343,271 @@ DrawFormulaClass.prototype.draw_Fd = function (formula_array, centers_array) {
       }
     }
   }
-};
+}
 
-DrawFormulaClass.prototype.draw_planet = function (planet, x, y, size, color) {
+//рисование стрелок между планетами
+function draw_arrows(number, planets_coords) {
+  //для двухпланетных центров
+  if (number === 2) {
+    size_of_the_planet_to_drawdraw_arrow(
+      planets_coords[0][0],
+      planets_coords[0][1],
+      planets_coords[1][0],
+      planets_coords[1][1],
+      true
+    );
+    return;
+  }
+
+  for (let i = 0; i < number - 1; i++) {
+    size_of_the_planet_to_drawdraw_arrow(
+      planets_coords[i][0],
+      planets_coords[i][1],
+      planets_coords[i + 1][0],
+      planets_coords[i + 1][1]
+    );
+  }
+
+  size_of_the_planet_to_drawdraw_arrow(
+    planets_coords[number - 1][0],
+    planets_coords[number - 1][1],
+    planets_coords[0][0],
+    planets_coords[0][1]
+  );
+}
+
+function draw_contour(number, planets_coords, height, width) {
+  let x, y;
+
+  switch (number) {
+    case 1:
+      x = planets_coords[0][0] - 15;
+      y = planets_coords[0][1] - 10;
+      break;
+
+    case 2:
+      x = planets_coords[1][0] - 15;
+      y = planets_coords[0][1] - 10;
+      break;
+
+    case 3:
+      x = planets_coords[2][0] - 15;
+      y =
+        (planets_coords[2][1] < planets_coords[0][1]
+          ? planets_coords[2][1]
+          : planets_coords[0][1]) - 20;
+      break;
+
+    case 4:
+      x = planets_coords[3][0] - 15;
+      y = planets_coords[3][1] - 10;
+      break;
+
+    case 5:
+      x = planets_coords[4][0] - 15;
+      y =
+        (planets_coords[4][1] < planets_coords[0][1]
+          ? planets_coords[4][1]
+          : planets_coords[0][1]) - 20;
+      break;
+
+    case 6:
+      x = planets_coords[5][0] - 10;
+      y = planets_coords[5][1] - 20;
+      break;
+
+    case 7:
+      x = planets_coords[6][0] - 15;
+      y =
+        (planets_coords[6][1] < planets_coords[0][1]
+          ? planets_coords[6][1]
+          : planets_coords[0][1]) - 20;
+      break;
+
+    case 8:
+      x = planets_coords[7][0] - 10;
+      y = planets_coords[7][1] - 20;
+      break;
+
+    case 9:
+      x = planets_coords[8][0] - 10;
+      y = planets_coords[0][1] - 20;
+      break;
+
+    case 10:
+      x = planets_coords[8][0] - 10;
+      y = planets_coords[0][1] - 20;
+      break;
+
+    default:
+      x = NaN;
+      y = NaN;
+  }
+
+  //обводим цетр
+  thissvg
+    .append("rect")
+    .attr("height", height + 20)
+    .attr("width", width + 15)
+    .attr("x", x)
+    .attr("y", y)
+    .attr("rx", 15)
+    .attr("ry", 15)
+    .attr("fill", "none")
+    .attr("stroke", "black");
+}
+
+//Циклический сдвиг массива
+//принимает на вход массив с количеством элементов от 2 до 10
+//второй параметр  - на сколько элементов сдвинуть
+//движение производится вперед по часовой стрелке по кругу
+//если элемента 2, то они просто меняются местами
+//возвращает измененный массив
+function move_array(array, number_to_move) {
+  /*
+  a=a.splice(-k).concat(a);
+  
+  The splice() method changes the contents of an array by removing existing elements and/or adding new elements.
+  
+  start
+  Index at which to start changing the array (with origin 0). If greater than the length of the array, actual starting index will be set to
+  the length of the array. If negative, will begin that many elements from the end of the array (with origin -1)
+  
+  The concat() method is used to merge two or more arrays. This method does not change the existing arrays,
+  but instead returns a new array.and will be set to 0 if absolute value is greater than the length of the array.
+  
+  so for example
+  let a =[1,2,3];
+  a.splice(-1) === 3
+  a=a.splice(-1).concat(a) === 3 + 1,2
+  */
+
+  if (array.length < 2) {
+    console.log("array is to small");
+    throw "093";
+  }
+
+  //insurance against error in 2 elements array
+  if (array.length === 2) number_to_move = 1;
+
+  return array.splice(-number_to_move).concat(array);
+}
+
+//ищет в массиве центров планеты, на которые указывает максимум 1 планета,
+//для того чтобы можно было съэкономить место на орбитах и рисовать такую планету слева на формуле.
+function find_horizontal(array, formula_array) {
+  const planet_horizontal = [];
+
+  //изначально устанавливаем на все планеты, что они могут рисоваться слева
+  for (let i = 0; i < array.length; i++) {
+    planet_horizontal[i] = true;
+  }
+
+  //теперь отсекаем варианты
+  for (const key in formula_array) {
+    for (let i = 0; i < array.length; i++) {
+      //console.log(formula_array[key].point_to_planet);
+
+      if (
+        array[i] === formula_array[key].point_to_planet &&
+        formula_array[key].orbit === 1 &&
+        planet_horizontal[i]
+      ) {
+        for (const key2 in formula_array) {
+          if (
+            key === formula_array[key2].point_to_planet &&
+            formula_array[key2].orbit === 2 &&
+            planet_horizontal[i]
+          ) {
+            // console.log(key);
+            // console.log(formula_array[key2].point_to_planet);
+            planet_horizontal[i] = false;
+          }
+        }
+      }
+    }
+  }
+
+  return planet_horizontal;
+}
+
+//находит следующую планету, которая указывает на текущую
+//либо возвращает false
+function find_next_planet(planet, formula_array) {
+  for (const key in formula_array) {
+    if (
+      planet === formula_array[key].point_to_planet &&
+      !planets_full_info[key].drawn &&
+      formula_array[planet].orbit === formula_array[key].orbit - 1
+    ) {
+      return key;
+    }
+  }
+  return false;
+}
+
+//находит предыдущую планету, на которую указывает текущая
+//либо возвращает false если планета, на которую она указывает, находится в центре формулы
+function find_prev_planet(planet, formula_array) {
+  const points_to = formula_array[planet].point_to_planet;
+
+  if (formula_array[points_to].orbit !== 0) {
+    //console.log(`points_to = ${points_to}`);
+    return points_to;
+  }
+
+  return false;
+}
+
+function draw_planet(planet, x, y, size, color) {
   switch (planet) {
     case "mercury":
-      this.draw_mercury(x, y, size, color);
+      draw_mercury(x, y, size, color);
       break;
     case "venus":
-      this.draw_venus(x, y, size, color);
+      draw_venus(x, y, size, color);
       break;
     case "earth":
-      this.draw_earth(x, y, size, color);
+      draw_earth(x, y, size, color);
       break;
     case "mars":
-      this.draw_mars(x, y, size, color);
+      draw_mars(x, y, size, color);
       break;
     case "jupiter":
-      this.draw_jupiter(x, y, size, color);
+      draw_jupiter(x, y, size, color);
       break;
     case "saturn":
-      this.draw_saturn(x, y, size, color);
+      draw_saturn(x, y, size, color);
       break;
     case "uranus":
-      this.draw_uranus(x, y, size, color);
+      draw_uranus(x, y, size, color);
       break;
     case "neptune":
-      this.draw_neptune(x, y, size, color);
+      draw_neptune(x, y, size, color);
       break;
     case "pluto":
-      this.draw_pluto(x, y, size, color);
+      draw_pluto(x, y, size, color);
       break;
     case "sun":
-      this.draw_sun(x, y, size, color);
+      draw_sun(x, y, size, color);
       break;
     case "moon":
-      this.draw_moon(x, y, size, color);
+      draw_moon(x, y, size, color);
       break;
     case "north_node":
-      this.draw_north_node(x, y, size, color);
+      draw_north_node(x, y, size, color);
       break;
     case "south_node":
-      this.draw_south_node(x, y, size, color);
+      draw_south_node(x, y, size, color);
       break;
 
     default:
       break;
   }
-};
+}
 
 //draw arrow from x,y to x1,y1 and orientation (vertical, horizontal, inclined)
-DrawFormulaClass.prototype.draw_arrow = function (
-  x,
-  y,
-  x1,
-  y1,
-  mutual_reception = false
-) {
+function draw_arrow(x, y, x1, y1, mutual_reception = false) {
   let corr_x1,
     corr_x2,
     corr_y1,
@@ -3306,7 +3632,7 @@ DrawFormulaClass.prototype.draw_arrow = function (
   if (orientation === "vertical") {
     //всегда рисуем сверху вниз
     if (y > y1) {
-      let temp = y;
+      const temp = y;
       y = y1;
       y1 = temp;
 
@@ -3320,7 +3646,7 @@ DrawFormulaClass.prototype.draw_arrow = function (
   } else if (orientation === "horizontal") {
     //всегда рисуем справа налево
     if (x < x1) {
-      let temp = x;
+      const temp = x;
       x = x1;
       x1 = temp;
 
@@ -3363,9 +3689,9 @@ DrawFormulaClass.prototype.draw_arrow = function (
     { x: x1 + corr_x2, y: y1 + corr_y2 },
   ];
 
-  svg
+  thissvg
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", "#1411ff")
     .attr("fill", "none");
 
@@ -3380,9 +3706,9 @@ DrawFormulaClass.prototype.draw_arrow = function (
       { x: x1 + corr_x2 + 3, y: y1 + corr_y2 - 3 },
     ];
 
-    svg
+    thissvg
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "#1411ff")
       .attr("fill", "none");
   }
@@ -3394,72 +3720,60 @@ DrawFormulaClass.prototype.draw_arrow = function (
       { x: x + corr_x1 + 3, y: y + corr_y1 + 3 },
     ];
 
-    svg
+    thissvg
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "#1411ff")
       .attr("fill", "none");
   }
-};
+}
 
 //рисование Центра
-DrawFormulaClass.prototype.draw_many_planets = function (
-  number,
-  planets,
-  planets_coords,
-  formula_array
-) {
+function draw_many_planets(number, planets, planets_coords, formula_array) {
   for (let i = 0; i < number; i++) {
-    this.draw_planet(
+    draw_planet(
       planets[i],
       planets_coords[i][0],
       planets_coords[i][1],
-      this.size_of_the_planet_to_draw,
+      size_of_the_planet_to_draw,
       "black"
     );
 
-    this.planets_full_info[planets[i]].x = planets_coords[i][0];
-    this.planets_full_info[planets[i]].y = planets_coords[i][1];
-    this.planets_full_info[planets[i]].drawn = true;
+    planets_full_info[planets[i]].x = planets_coords[i][0];
+    planets_full_info[planets[i]].y = planets_coords[i][1];
+    planets_full_info[planets[i]].drawn = true;
 
     //рисуем силу и ретроградность
-    this.draw_power_and_retro(
-      planets[i],
-      planets_coords[i],
-      "black",
-      formula_array
-    );
+    draw_power_and_retro(planets[i], planets_coords[i], "black", formula_array);
   }
-};
+}
 
 //рисуем силу и ретроградность
-DrawFormulaClass.prototype.draw_power_and_retro = function (
-  planet,
-  planets_coords,
-  color,
-  formula_array
-) {
+function draw_power_and_retro(planet, planets_coords, color, formula_array) {
+  // console.log(`planet = ${planet}`);
   //рисуем силу и ретроградность
-  this.appendText(
+  appendText(
+    thissvg,
     planets_coords[0] + 7,
     planets_coords[1] + 17,
-    `${formula_array[planet].direction}`,
+    `${formula_array[planetsArr.indexOf(planet)].direction}`,
     color,
     "start",
     10
   );
-  this.appendText(
+  appendText(
+    thissvg,
     planets_coords[0] + 7,
     planets_coords[1] + 29,
-    `${formula_array[planet].power}`,
+    `${formula_array[planetsArr.indexOf(planet)].power}`,
     color,
     "start",
     10
   );
-};
+}
 
-DrawFormulaClass.prototype.draw_mercury = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+function draw_mercury(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   y += 15;
 
@@ -3482,7 +3796,7 @@ DrawFormulaClass.prototype.draw_mercury = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3493,13 +3807,13 @@ DrawFormulaClass.prototype.draw_mercury = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
   points = [{ x: x, y: y - radius }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
   //полукруг
   svg_planet
     .append("path")
@@ -3517,9 +3831,9 @@ DrawFormulaClass.prototype.draw_mercury = function (x, y, radius, color) {
         endAngle: -(Math.PI + Math.PI / 2),
       })
     );
-};
-DrawFormulaClass.prototype.draw_venus = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_venus(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3542,7 +3856,7 @@ DrawFormulaClass.prototype.draw_venus = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3553,12 +3867,12 @@ DrawFormulaClass.prototype.draw_venus = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
-};
-DrawFormulaClass.prototype.draw_earth = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_earth(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3580,7 +3894,7 @@ DrawFormulaClass.prototype.draw_earth = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3591,12 +3905,12 @@ DrawFormulaClass.prototype.draw_earth = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
-};
-DrawFormulaClass.prototype.draw_mars = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_mars(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3619,7 +3933,7 @@ DrawFormulaClass.prototype.draw_mars = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3630,7 +3944,7 @@ DrawFormulaClass.prototype.draw_mars = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3641,12 +3955,12 @@ DrawFormulaClass.prototype.draw_mars = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
-};
-DrawFormulaClass.prototype.draw_jupiter = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_jupiter(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3657,7 +3971,7 @@ DrawFormulaClass.prototype.draw_jupiter = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3668,13 +3982,13 @@ DrawFormulaClass.prototype.draw_jupiter = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
   points = [{ x: x, y: y }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
 
   //полукруг
   svg_planet
@@ -3696,9 +4010,9 @@ DrawFormulaClass.prototype.draw_jupiter = function (x, y, radius, color) {
         endAngle: -Math.PI * 2,
       })
     );
-};
-DrawFormulaClass.prototype.draw_saturn = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_saturn(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3711,7 +4025,7 @@ DrawFormulaClass.prototype.draw_saturn = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3722,13 +4036,13 @@ DrawFormulaClass.prototype.draw_saturn = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
   points = [{ x: x + radius, y: y + radius + Math.trunc((radius * 1.5) / 2) }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
 
   //полукруг
   svg_planet
@@ -3750,9 +4064,9 @@ DrawFormulaClass.prototype.draw_saturn = function (x, y, radius, color) {
         endAngle: -Math.PI * 2,
       })
     );
-};
-DrawFormulaClass.prototype.draw_neptune = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_neptune(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   y += 23;
 
@@ -3765,13 +4079,13 @@ DrawFormulaClass.prototype.draw_neptune = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
   points = [{ x: x, y: y - radius }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
   //полукруг
   svg_planet
     .append("path")
@@ -3786,9 +4100,9 @@ DrawFormulaClass.prototype.draw_neptune = function (x, y, radius, color) {
         endAngle: -(Math.PI + Math.PI / 2),
       })
     );
-};
-DrawFormulaClass.prototype.draw_uranus = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_uranus(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3811,7 +4125,7 @@ DrawFormulaClass.prototype.draw_uranus = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3822,7 +4136,7 @@ DrawFormulaClass.prototype.draw_uranus = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3833,7 +4147,7 @@ DrawFormulaClass.prototype.draw_uranus = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3844,12 +4158,12 @@ DrawFormulaClass.prototype.draw_uranus = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
-};
-DrawFormulaClass.prototype.draw_pluto = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_pluto(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3868,7 +4182,7 @@ DrawFormulaClass.prototype.draw_pluto = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
@@ -3879,13 +4193,13 @@ DrawFormulaClass.prototype.draw_pluto = function (x, y, radius, color) {
 
   svg_planet
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", color)
     .attr("fill", "none");
 
   points = [{ x: x, y: y + radius }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
   //полукруг
   svg_planet
     .append("path")
@@ -3903,9 +4217,9 @@ DrawFormulaClass.prototype.draw_pluto = function (x, y, radius, color) {
         endAngle: -(Math.PI + Math.PI / 2),
       })
     );
-};
-DrawFormulaClass.prototype.draw_sun = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_sun(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   //   let points = [];
 
@@ -3927,9 +4241,9 @@ DrawFormulaClass.prototype.draw_sun = function (x, y, radius, color) {
     .attr("r", 1)
     .attr("stroke", color)
     .style("fill", color);
-};
-DrawFormulaClass.prototype.draw_moon = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_moon(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -3938,7 +4252,7 @@ DrawFormulaClass.prototype.draw_moon = function (x, y, radius, color) {
 
   points = [{ x: x, y: y }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
 
   //полукруг
   svg_planet
@@ -3955,9 +4269,9 @@ DrawFormulaClass.prototype.draw_moon = function (x, y, radius, color) {
         endAngle: -Math.PI * 2,
       })
     );
-};
-DrawFormulaClass.prototype.draw_north_node = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_north_node(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   y += 15;
 
@@ -3981,7 +4295,7 @@ DrawFormulaClass.prototype.draw_north_node = function (x, y, radius, color) {
 
   points = [{ x: x, y: y + radius }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
   //полукруг
   svg_planet
     .append("path")
@@ -3999,9 +4313,9 @@ DrawFormulaClass.prototype.draw_north_node = function (x, y, radius, color) {
         endAngle: Math.PI / 2,
       })
     );
-};
-DrawFormulaClass.prototype.draw_south_node = function (x, y, radius, color) {
-  let svg_planet = svg.append("g");
+}
+function draw_south_node(x, y, radius, color) {
+  const svg_planet = thissvg.append("g");
 
   let points = [];
 
@@ -4025,7 +4339,7 @@ DrawFormulaClass.prototype.draw_south_node = function (x, y, radius, color) {
 
   points = [{ x: x, y: y + radius }];
 
-  let arc = d3.arc();
+  const arc = d3.arc();
   //полукруг
   svg_planet
     .append("path")
@@ -4043,4 +4357,4 @@ DrawFormulaClass.prototype.draw_south_node = function (x, y, radius, color) {
         endAngle: -(Math.PI + Math.PI / 2),
       })
     );
-};
+}

@@ -2,6 +2,8 @@ import * as d3 from "d3";
 import { appendText, appendTextPlanets } from "./auxiliary_fns.ts";
 import { drawNumerology } from "./numerology.ts";
 
+import { Draw_Fd } from "./fd.ts";
+
 import { environment, motivation, nutrition } from "./phs.ts";
 
 export const SSB = 0;
@@ -134,76 +136,6 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
   this.egoCentreCoord = {};
   this.spleenCentreCoord = {};
   this.emoCentreCoord = {};
-
-  //название как ключ,
-  // координаты планеты на графике + флаг нарисовали мы ее или еще нет
-  this.planets_full_info = {
-    mercury: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    venus: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    earth: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    mars: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    jupiter: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    saturn: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    uranus: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    neptune: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    pluto: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    sun: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    moon: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    north_node: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-    south_node: {
-      x: NaN,
-      y: NaN,
-      drawn: false,
-    },
-  };
 
   //размер, которым рисуется планета
   this.size_of_the_planet_to_draw = 14;
@@ -5321,8 +5253,23 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
 
     case "fd":
       //рисуем Формулу Души
-      this.draw_Fd(formula.personality, formula.per_centers);
-      this.draw_Fd(formula.design, formula.des_centers);
+      Draw_Fd(
+        svg,
+        this.x,
+        this.y,
+        width,
+        height,
+        this.data_formula.fdInfo.pers
+      );
+      // Draw_Fd(
+      //   svg,
+      //   this.x,
+      //   this.y,
+      //   width,
+      //   height,
+      //   this.data_formula.hd.design.planetsData,
+      //   formula.des_centers
+      // );
       break;
 
     default:
