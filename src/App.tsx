@@ -150,8 +150,32 @@ function App() {
 
   useEffect(() => {
     getTransits();
+    getCookies();
   }, []);
 
+  async function getCookies() {
+    const cookies = Cookies.get("last10");
+    // console.log(cookies);
+    const json = JSON.parse(cookies);
+    console.log(json);
+    // setLast10(json);
+
+    const { data } = await axios.post(
+      "http://127.0.0.1:3000/api/cookies",
+      {
+        cookies: json,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+
+          Accept: "*/*",
+        },
+      }
+    );
+
+    // setLast10(data);
+  }
   async function getTransits() {
     // console.log("getTransits");
     // Date.now();
@@ -269,9 +293,19 @@ function App() {
       setLast10([...last10, data]);
     }
 
-    // await Cookies.set("last10", JSON.parse(last10));
-    // const cookies_now = await Cookies.get("last10");
-    // console.log(cookies_now);
+    const json = [];
+    for (let i = 0; i < last10.length; i++) {
+      const jsonIndex = {
+        name: last10[i].name,
+        time: last10[i].time.pers_time_utc,
+      };
+      json.push(jsonIndex);
+      // console.log(json);
+    }
+
+    // item.name === value.name &&
+    // item.time.pers_time_utc === value.time.pers_time_utc
+    Cookies.set("last10", JSON.stringify(json));
   }
 
   const form = useForm();
@@ -292,7 +326,13 @@ function App() {
   function handleSelectChange(value) {
     // console.log("inside handleSelectChange");
     setSelectedRadioButt("bodygraph");
-    setData(last10.find((item) => item.name === value));
+    setData(
+      last10.find(
+        (item) =>
+          item.name === value.name &&
+          item.time.pers_time_utc === value.time.pers_time_utc
+      )
+    );
   }
 
   return (
@@ -421,7 +461,7 @@ function App() {
           <SelectContent>
             <SelectGroup>
               {last10.map((item, index) => (
-                <SelectItem key={index} value={item.name}>
+                <SelectItem key={index} value={item}>
                   {`${item.name} : ${JSON.stringify(item.time.pers_time_utc)}`}
                 </SelectItem>
               ))}
