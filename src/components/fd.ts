@@ -114,8 +114,8 @@ export function Draw_Fd(
   const centers_array = fdInfo.centersArr;
 
   // pers: { plfData: PlFdData[]; centersArr: string[] };
-  console.log(formula_array);
-  console.log(centers_array);
+  // console.log(formula_array);
+  // console.log(centers_array);
   // console.log(`draw_Fd svg = ${svg}`);
   thissvg = svg;
   // console.log(`draw_Fd thissvg = ${thissvg}`);
@@ -2818,7 +2818,7 @@ export function Draw_Fd(
     }
   }
 
-  // console.log( occupied_arr);
+  // console.log(` occupied_arr = ${occupied_arr}`);
 
   pers_x = second_column_x;
   const gap_between_orbits = 60;
@@ -2830,6 +2830,9 @@ export function Draw_Fd(
   //рисуем орбиты, отталкиваясь от центров
   for (let i = 0; i < centers_array.length; i++) {
     for (let k = 0; k < centers_array[i][1]; k++) {
+      // console.log(centers_array[i]);
+      // console.log(centers_array[i][1]);
+      // console.log(centers_array[i][2]);
       while (find_next_planet(centers_array[i][0][k], formula_array)) {
         let next_planet = find_next_planet(
           centers_array[i][0][k],
@@ -2855,7 +2858,8 @@ export function Draw_Fd(
               //возможность нарисовать планету слева
               let left_side = true;
 
-              const center_number = formula_array[points_to].center_number;
+              const center_number =
+                formula_array[planetsArr.indexOf(points_to)].center_number;
 
               //проверяем для сдвоенного центра, если планета в центра стоит во втором ряду, то налево уже не нарисовать
               if (
@@ -3272,7 +3276,7 @@ function find_horizontal(array, formula_array) {
 //либо возвращает false
 function find_next_planet(planet, formula_array) {
   // console.log(`formula_array = ${JSON.stringify(formula_array)}`);
-  console.log(`planet = ${planet}`);
+  // console.log(`planet = ${planet}`);
   for (const key in formula_array) {
     if (key == "0") {
       continue;
@@ -3292,9 +3296,18 @@ function find_next_planet(planet, formula_array) {
 //находит предыдущую планету, на которую указывает текущая
 //либо возвращает false если планета, на которую она указывает, находится в центре формулы
 function find_prev_planet(planet, formula_array) {
-  const points_to = formula_array[planet].point_to_planet;
+  // console.log(`planet = ${planet}`);
+  if (parseInt(planet)) {
+    // console.log(`planet = ${planet}`);
+    return false;
+  }
+  // console.log(`formula_array = ${JSON.stringify(formula_array)}`);
+  const points_to = formula_array[planetsArr.indexOf(planet)].point_to_planet;
+  // console.log(`points_to = ${points_to}`);
+  // console.log(`orbit = ${formula_array[planetsArr.indexOf(points_to)].orbit}`);
 
-  if (formula_array[points_to].orbit !== 0) {
+  // console.log(`points_to = ${points_to}`);
+  if (formula_array[planetsArr.indexOf(points_to)].orbit !== 0) {
     //console.log(`points_to = ${points_to}`);
     return points_to;
   }
@@ -3474,6 +3487,9 @@ function draw_arrow(x, y, x1, y1, mutual_reception = false) {
 //рисование Центра
 function draw_many_planets(number, planets, planets_coords, formula_array) {
   for (let i = 0; i < number; i++) {
+    if (parseInt(planets[i])) {
+      continue;
+    }
     draw_planet(
       planets[i],
       planets_coords[i][0],
@@ -3482,6 +3498,8 @@ function draw_many_planets(number, planets, planets_coords, formula_array) {
       "black"
     );
 
+    // console.log(typeof planets[i]);
+    // console.log(`planets[i] = ${planets[i]}`);
     planets_full_info[planets[i]].x = planets_coords[i][0];
     planets_full_info[planets[i]].y = planets_coords[i][1];
     planets_full_info[planets[i]].drawn = true;

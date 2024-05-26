@@ -281,6 +281,30 @@ export const ZodiacNames: string[] = [
   "Pisces",
 ];
 
+export enum ZodiacNamesEnum {
+  "Aries" = 0,
+  "Taurus",
+  "Gemini",
+  "Cancer",
+  "Leo",
+  "Virgo",
+  "Libra",
+  "Scorpio",
+  "Sagittarius",
+  "Capricorn",
+  "Aquarius",
+  "Pisces",
+}
+
+export type ZodPlanet = {
+  name: string;
+  index: number;
+  degrees: number;
+  minutes: number;
+  seconds: number;
+  text: string;
+};
+
 // months from 1 to 12
 export const MonthsArr: string[] = [
   "",
@@ -526,13 +550,46 @@ export type CDinfo = {
   numerologyInfo: Numerology;
 };
 
-export type Fd = {};
-
-export type Astro = {
-  zodiac: Zodiac;
+export type PlFdData = {
+  orbit: number;
+  point_to_planet: string;
+  center_number: number;
 };
 
-export type Numerology = {};
+export type Fd = {
+  pers: { plfData: PlFdData[]; centersArr: string[] };
+  des: { plfData: PlFdData[]; centersArr: string[] };
+};
+
+export type Astro = {};
+
+export type Numerology = {
+  karmicTask: string;
+  pifagor_number_1: number;
+  pifagor_number_2: number;
+  soul_level: number;
+  pifagor_number_3: number;
+  planetary_task: number;
+  soul_level_past_life: number;
+  pifagor_number_4: number;
+  keeper: boolean;
+  white_mage: boolean;
+  pifagor_number_5: number;
+  pifagor_number_6: number;
+  social_task: number;
+  mc1: [number, number];
+  mc2: [number, number];
+  mc3: [number, number];
+  mc_whole_life_task: number;
+  mc1_task: number;
+  mc2_task: number;
+  mc3_task: number;
+  mc2_optional_task: string;
+  opv: number;
+  opv2: number;
+  tp: number;
+  matrix_code: number;
+};
 
 export type HD = {
   personality: OneSide;
@@ -659,6 +716,7 @@ export type PlanetsData = {
   number: number;
   power: number;
   direction: string;
+  zodiac: ZodPlanet;
 };
 
 export type PlanetsDataArr = { pers: PlanetsData[]; des: PlanetsData[] };
@@ -671,22 +729,6 @@ export type HexLine = {
   base: number;
   number_of_passed_degrees: number;
 };
-
-//   pl.planet[0] = { name: "SSB", number: 0 }
-//   pl.planet[1] = { name: "Mercury", number: 1 }
-//   pl.planet[2] = { name: "Venus", number: 2 }
-//   pl.planet[3] = { name: "Earth", number: 3 }
-//   pl.planet[4] = { name: "Mars", number: 4 }
-//   pl.planet[5] = { name: "Jupiter", number: 5 }
-//   pl.planet[6] = { name: "Saturn", number: 6 }
-//   pl.planet[7] = { name: "Uranus", number: 7 }
-//   pl.planet[8] = { name: "Neptune", number: 8 }
-//   pl.planet[9] = { name: "Pluto", number: 9 }
-//   pl.planet[10] = { name: "Sun", number: 10 }
-//   pl.planet[11] = { name: "Moon", number: 11 }
-//   pl.planet[12] = { name: "NorthNode", number: 12 }
-//   pl.planet[13] = { name: "SouthNde", number: 13 }
-//   pl.planet[14] = { name: "Chiron", number: 14 }
 
 // для каждого знака зодиака определяется сила планеты
 // поиск идет от 6 к 0, берется первое найденное
@@ -835,7 +877,7 @@ export const planetsPower = [
 ];
 
 // показывает какие планеты из planets_numbers какими управляют знаками из zodiac_names
-const dispositors = [
+export const Dispositors = [
   // ssb
   [],
 
@@ -872,6 +914,11 @@ const dispositors = [
   // moon
   ["Cancer"],
 ];
+
+export type PlanetFD = {
+  orbit: number; // what orbit it is on (0- center)
+  point_to_planet: string; //what planet it points to
+};
 
 export type ChannelsNumbers = {
   number: number;
@@ -1126,7 +1173,7 @@ export const planetsNumbers = {
 
 // массив с названиями планет в том порядке, в котором они находятся в файле de430.bsp
 // +после 11 номера идут дополнительные планеты
-export const planetsArr = [
+export const planetsNamesArr = [
   "ssb",
   "mercury",
   "venus",
@@ -1142,4 +1189,106 @@ export const planetsArr = [
   "north_node",
   "south_node",
   "hiron",
+];
+
+const PlanetsNames = [
+  "Solar System Barycenter",
+  "Mercury Barycenter",
+  "Venus Barycenter",
+  "Earth Barycenter",
+  "Mars Barycenter",
+  "Jupiter Barycenter",
+  "Saturn Barycenter",
+  "Uranus Barycenter",
+  "Neptune Barycenter",
+  "Pluto Barycenter",
+  "Sun",
+  "Moon",
+  "Earth",
+  "Mercury",
+  "Venus",
+];
+
+const signs_sorted_by_deg = [
+  [0, [0, 0]],
+
+  //Aries, Овен from 0 to 29.9
+  [1, [0, 30]],
+
+  //Taurus,  Телец from 30 to 59.9
+  [2, [30, 60]],
+
+  //Gemini,  Близнецы from 60 to 89.9
+  [3, [60, 90]],
+
+  //Cancer,  Рак from 90 to 119.9
+  [4, [90, 120]],
+
+  //Leo,  Лев from 120 to 149.9
+  [5, [120, 150]],
+
+  //Virgo,  Дева from 150 to 179.9
+  [6, [150, 180]],
+
+  //Libra,  Весы from 180 to 209.9
+  [7, [180, 210]],
+
+  //Scorpio,  Скорпион from 210 to 239.9
+  [8, [210, 240]],
+
+  //Sagittarius,  Стрелец from 240 to 269.9
+  [9, [240, 270]],
+
+  //Capricorn,  Козерог from 270 to 299.9
+  [10, [270, 300]],
+
+  //Aquarius,  Водолей from 300 to 329.9
+  [11, [300, 330]],
+
+  //Pisces,  Рыбы from 330 to 359.9
+  [12, [330, 360]],
+];
+
+//дома планет,
+// указаны соответствующие номера знаков зодиака от 1 до 12
+const planets_houses = [
+  [0],
+
+  //Mercury Barycenter - Gemini and Virgo
+  [3, 6],
+
+  //Venus Barycenter - Taurus and Libra
+  [2, 7],
+
+  //Earth Barycenter
+  [0],
+
+  //Mars - Aries
+  [1],
+
+  //Jupiter  - Sagittarius
+  [9],
+
+  //Saturn - Capricorn
+  [10],
+
+  //Uranus - Aquarius
+  [11],
+
+  //Neptune - Pisces
+  [12],
+
+  //Pluto - Scorpio
+  [8],
+
+  //Sun - Leo
+  [5],
+
+  //Moon - Cancer
+  [4],
+
+  //Earth, Mercury, Venus
+  [0],
+  [0],
+  [0],
 ];
