@@ -12,9 +12,18 @@ import { useEffect, useState } from "react";
 import { cdInf } from "./components/cdInf";
 
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -99,6 +108,7 @@ function App() {
   });
 
   const [cd_data, setData] = useState(cdInf);
+  const [last10, setLast10] = useState([]);
 
   const [selectedRadioButt, setSelectedRadioButt] = useState("personality");
   const [selectedRadioTimeType, setSelectedRadioTimeType] = useState("utc");
@@ -207,40 +217,6 @@ function App() {
     // console.log(cd_data);
   }
 
-  const handleClick = async () => {
-    const { data } = await axios.post(
-      "http://127.0.0.1:3000/api",
-      {
-        year: 2012,
-        month: 10,
-        day: 1,
-        hours: 8,
-        minutes: 30,
-        typeOfTime: 0,
-        offset: 0,
-        place: "Berlin",
-        latitude: 0,
-        longitude: 0,
-        name: "Vio",
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-
-          // "Access-Control-Allow-Origin": "*",
-          Accept: "*/*",
-
-          // "access-control-allow-origin": "*",
-          // "Access-Control-Allow-Headers": "Content-Type, Authorization",
-          // "Access-Control-Allow-Methods": "*",
-        },
-      }
-    );
-
-    setData(data);
-    // console.log(data);
-  };
-
   async function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -285,6 +261,12 @@ function App() {
     );
 
     setData(data);
+    if (last10.length < 10) {
+      setLast10([...last10, data]);
+    } else {
+      last10.shift();
+      setLast10([...last10, data]);
+    }
   }
 
   const form = useForm();
@@ -300,6 +282,12 @@ function App() {
     // Updating the state with the selected radio button's value
     setSelectedRadioTimeType(value);
     // console.log("inside onRadioButtValueChange");
+  }
+
+  function handleSelectChange(value) {
+    // console.log("inside handleSelectChange");
+    setSelectedRadioButt("bodygraph");
+    setData(last10.find((item) => item.name === value));
   }
 
   return (
@@ -418,6 +406,23 @@ function App() {
             </div>
           </form>
         </Form>
+      </div>
+      <div className="flex flex-row w-full justify-center items-center h-auto">
+        <Select onValueChange={handleSelectChange}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Last 10" />
+          </SelectTrigger>
+
+          <SelectContent>
+            <SelectGroup>
+              {last10.map((item, index) => (
+                <SelectItem key={index} value={item.name}>
+                  {`${item.name} : ${JSON.stringify(item.time.pers_time_utc)}`}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex flex-row w-full justify-center items-center h-auto">
         <p>
