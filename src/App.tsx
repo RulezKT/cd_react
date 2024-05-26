@@ -16,7 +16,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -40,6 +39,8 @@ import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
+
+import Cookies from "js-cookie";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -267,6 +268,10 @@ function App() {
       last10.shift();
       setLast10([...last10, data]);
     }
+
+    // await Cookies.set("last10", JSON.parse(last10));
+    // const cookies_now = await Cookies.get("last10");
+    // console.log(cookies_now);
   }
 
   const form = useForm();
@@ -301,7 +306,7 @@ function App() {
             <FormField
               control={form.control}
               name="nick and date"
-              render={({ field }) => (
+              render={() => (
                 <FormItem className="flex flex-row  ">
                   <div className="flex flex-col items-start">
                     <FormLabel>Nickname</FormLabel>
