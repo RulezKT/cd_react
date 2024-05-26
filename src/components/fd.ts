@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { appendText, appendTextPlanets } from "./auxiliary_fns.ts";
+import { appendText } from "./auxiliary_fns.ts";
 const lineFunction = d3
   .line()
   .x((d) => d.x)
@@ -135,12 +135,12 @@ export function Draw_Fd(
     .attr("fill", "#D3D3D3")
     .attr("stroke", "#000000");
 
-  for (const key in planets_full_info) {
-    //console.log(key);
-    planets_full_info[key].x = NaN;
-    planets_full_info[key].y = NaN;
-    planets_full_info[key].drawn = false;
-  }
+  // for (const key in planets_full_info) {
+  //   //console.log(key);
+  //   planets_full_info[key].x = NaN;
+  //   planets_full_info[key].y = NaN;
+  //   planets_full_info[key].drawn = false;
+  // }
 
   let pers_x = x;
   let pers_y = y;
@@ -2851,8 +2851,9 @@ export function Draw_Fd(
             prev_planet = next_planet;
 
             let y_square = NaN;
-            const orbit = formula_array[next_planet].orbit;
-            const points_to = formula_array[next_planet].point_to_planet;
+            const orbit = formula_array[planetsArr.indexOf(next_planet)].orbit;
+            const points_to =
+              formula_array[planetsArr.indexOf(next_planet)].point_to_planet;
 
             if (orbit === 1) {
               //возможность нарисовать планету слева
@@ -2880,6 +2881,10 @@ export function Draw_Fd(
 
               //проверяем, возможно на эту планету больше никакая другая не указывает, тогда ставим ее слева
               for (const key in formula_array) {
+                // console.log(`next_planet = ${next_planet}`);
+                // console.log(
+                //   `formula_array[key].point_to_planet = ${formula_array[key].point_to_planet}`
+                // );
                 if (next_planet === formula_array[key].point_to_planet) {
                   left_side = false;
                   break;
@@ -2892,7 +2897,7 @@ export function Draw_Fd(
                   (planets_full_info[points_to].y - start_center_y) /
                     (vertical_size / 12)
                 );
-                //console.log(y_square);
+                // console.log(`y_square = ${y_square}`);
                 //console.log(formula_array[key].point_to_planet);
 
                 if (occupied_arr[0][y_square]) {
@@ -2974,8 +2979,11 @@ export function Draw_Fd(
                 }
 
                 if (!occupied_arr[orbit][y_square]) {
-                  occupied_arr[orbit][y_square] = true;
+                  // console.log(`orbit = ${orbit}`);
+                  // console.log(`y_square = ${y_square}`);
+                  // console.log(`occupied_arr = ${occupied_arr[orbit]}`);
 
+                  // console.log(`next_planet = ${next_planet}`);
                   const planets_coords = [
                     [
                       pers_x + gap_between_orbits * orbit,
@@ -3002,7 +3010,9 @@ export function Draw_Fd(
                     planets_coords[1][0],
                     planets_coords[1][1]
                   );
+                  occupied_arr[orbit][y_square] = true;
                 } else {
+                  // console.log(`occupied_arr = ${occupied_arr[1]}`);
                   throw "not enough space on the 1st orbit";
                 }
               }
@@ -3287,7 +3297,7 @@ function find_next_planet(planet, formula_array) {
       formula_array[planetsArr.indexOf(planet)].orbit ===
         formula_array[key].orbit - 1
     ) {
-      return key;
+      return planetsArr[key];
     }
   }
   return false;
@@ -3503,6 +3513,8 @@ function draw_many_planets(number, planets, planets_coords, formula_array) {
     planets_full_info[planets[i]].x = planets_coords[i][0];
     planets_full_info[planets[i]].y = planets_coords[i][1];
     planets_full_info[planets[i]].drawn = true;
+
+    // console.log(`planets_full_info = ${JSON.stringify(planets_full_info)}`);
 
     //рисуем силу и ретроградность
     draw_power_and_retro(planets[i], planets_coords[i], "black", formula_array);

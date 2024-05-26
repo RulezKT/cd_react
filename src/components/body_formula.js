@@ -5253,40 +5253,13 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
 
     case "fd":
       //рисуем Формулу Души
-      Draw_Fd(
-        svg,
-        this.x,
-        this.y,
-        width,
-        height,
-        this.data_formula.fdInfo.pers
-      );
-      // Draw_Fd(
-      //   svg,
-      //   this.x,
-      //   this.y,
-      //   width,
-      //   height,
-      //   this.data_formula.hd.design.planetsData,
-      //   formula.des_centers
-      // );
+      Draw_Fd(svg, 0, 0, width, height, this.data_formula.fdInfo.pers);
+
       break;
 
     default:
       console.log(`Sorry, some error in drawFormulaV2.`);
   }
-
-  //рисуем Формулу Души
-  //   this.draw_Fd(formula.personality, formula.per_centers);
-
-  // рисуем Формулу Тела
-  //   this.draw_Fd(formula.design, formula.des_centers);
-
-  //console.log(formula);
-
-  //включаем кнопку на сохранение фото
-  //document.getElementById("img_button").disabled = false;
-  //document.getElementById("calc_button").disabled = true;
 };
 
 DrawFormulaClass.prototype.draw_Body = function () {
