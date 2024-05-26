@@ -432,28 +432,16 @@ export function Draw_Fd(
         if (!(planet_horizontal[3] && planet_horizontal[4])) {
           if (planet_horizontal[0] && planet_horizontal[1]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (planet_horizontal[1] && planet_horizontal[2]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[2] && planet_horizontal[3]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           }
         }
       } else if (
@@ -469,28 +457,16 @@ export function Draw_Fd(
         if (!planet_horizontal[3]) {
           if (planet_horizontal[0]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (planet_horizontal[1]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[2]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           }
         }
       } else {
@@ -505,7 +481,7 @@ export function Draw_Fd(
     // либо 3 спереди две сзади,  и  одна сзади вверх 160
     // либо 3 спереди  одна сзади, и 2 сзади вверху и внизу 200
     if (centers_array[i][1] === 6) {
-      const planet_horizontal = size_of_the_planet_to_drawfind_horizontal(
+      const planet_horizontal = find_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -557,46 +533,31 @@ export function Draw_Fd(
             planet_horizontal[2]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
             planet_horizontal[3]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
             planet_horizontal[4]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else if (
             planet_horizontal[4] &&
             planet_horizontal[5] &&
             planet_horizontal[0]
           ) {
             //двигаем на 5 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              5
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 5);
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           }
         }
       } else if (
@@ -613,34 +574,19 @@ export function Draw_Fd(
         if (!(planet_horizontal[3] && planet_horizontal[4])) {
           if (planet_horizontal[0] && planet_horizontal[1]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (planet_horizontal[1] && planet_horizontal[2]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[2] && planet_horizontal[3]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else if (planet_horizontal[4] && planet_horizontal[5]) {
             //двигаем на 5 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              5
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 5);
           } else {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           }
         }
       } else if (
@@ -657,34 +603,19 @@ export function Draw_Fd(
         if (!planet_horizontal[4]) {
           if (planet_horizontal[0]) {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           } else if (planet_horizontal[1]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (planet_horizontal[2]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[3]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              5
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 5);
           }
         }
       } else {
@@ -700,7 +631,7 @@ export function Draw_Fd(
     // либо 4 спереди две сзади,  и  одна сзади вверх 200
     // либо 4 спереди  одна сзади, и 2 сзади вверху и внизу 240
     if (centers_array[i][1] === 7) {
-      const planet_horizontal = size_of_the_planet_to_drawfind_horizontal(
+      const planet_horizontal = find_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -756,56 +687,38 @@ export function Draw_Fd(
             planet_horizontal[2]
           ) {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
             planet_horizontal[3]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
             planet_horizontal[4]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (
             planet_horizontal[3] &&
             planet_horizontal[4] &&
             planet_horizontal[5]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else if (
             planet_horizontal[5] &&
             planet_horizontal[6] &&
             planet_horizontal[0]
           ) {
             //двигаем на 6 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              6
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 6);
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              5
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 5);
           }
         }
       } else if (
@@ -823,40 +736,22 @@ export function Draw_Fd(
         if (!(planet_horizontal[4] && planet_horizontal[5])) {
           if (planet_horizontal[0] && planet_horizontal[1]) {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           } else if (planet_horizontal[1] && planet_horizontal[2]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (planet_horizontal[2] && planet_horizontal[3]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[3] && planet_horizontal[4]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else if (planet_horizontal[5] && planet_horizontal[6]) {
             //двигаем на 6 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              6
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 6);
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              5
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 5);
           }
         }
       } else if (
@@ -874,40 +769,22 @@ export function Draw_Fd(
         if (!planet_horizontal[5]) {
           if (planet_horizontal[0]) {
             //двигаем на 5 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              5
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 5);
           } else if (planet_horizontal[1]) {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           } else if (planet_horizontal[2]) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (planet_horizontal[3]) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (planet_horizontal[4]) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else {
             //двигаем на 6 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              6
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 6);
           }
         }
       } else {
@@ -923,7 +800,7 @@ export function Draw_Fd(
     // если 4 горизонтальные, что имеет огромную вероятность то 160
     // если 4 спереди и одна сзади наверх то 200
     if (centers_array[i][1] === 8) {
-      const planet_horizontal = size_of_the_planet_to_drawfind_horizontal(
+      const planet_horizontal = find_horizontal(
         centers_array[i][0],
         formula_array
       );
@@ -991,10 +868,7 @@ export function Draw_Fd(
             planet_horizontal[3]
           ) {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
@@ -1002,10 +876,7 @@ export function Draw_Fd(
             planet_horizontal[4]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
@@ -1013,10 +884,7 @@ export function Draw_Fd(
             planet_horizontal[5]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (
             planet_horizontal[3] &&
             planet_horizontal[4] &&
@@ -1024,10 +892,7 @@ export function Draw_Fd(
             planet_horizontal[6]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else if (
             planet_horizontal[5] &&
             planet_horizontal[6] &&
@@ -1035,16 +900,10 @@ export function Draw_Fd(
             planet_horizontal[0]
           ) {
             //двигаем на 7 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              7
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 7);
           } else {
             //двигаем на 6 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              6
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 6);
           }
         }
       } else {
@@ -1064,56 +923,38 @@ export function Draw_Fd(
             planet_horizontal[2]
           ) {
             //двигаем на 4 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              4
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 4);
           } else if (
             planet_horizontal[1] &&
             planet_horizontal[2] &&
             planet_horizontal[3]
           ) {
             //двигаем на 3 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              3
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 3);
           } else if (
             planet_horizontal[2] &&
             planet_horizontal[3] &&
             planet_horizontal[4]
           ) {
             //двигаем на 2 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              2
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 2);
           } else if (
             planet_horizontal[3] &&
             planet_horizontal[4] &&
             planet_horizontal[5]
           ) {
             //двигаем на 1 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              1
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 1);
           } else if (
             planet_horizontal[5] &&
             planet_horizontal[6] &&
             planet_horizontal[0]
           ) {
             //двигаем на 6 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              6
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 6);
           } else {
             //двигаем на 5 вправо
-            centers_array[i][0] = size_of_the_planet_to_drawmove_array(
-              centers_array[i][0],
-              5
-            );
+            centers_array[i][0] = move_array(centers_array[i][0], 5);
           }
         }
       }
@@ -1435,19 +1276,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        10,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(10, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        10,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(10, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(10, planets_coords);
+      draw_contour(10, planets_coords, centers_array[i][2][0], 80);
     }
 
     //9 планет
@@ -1609,19 +1440,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        9,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(9, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        9,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(9, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(9, planets_coords);
+      draw_contour(9, planets_coords, centers_array[i][2][0], 80);
     }
 
     //8 планет
@@ -1858,19 +1679,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        8,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(8, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        8,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(8, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(8, planets_coords);
+      draw_contour(8, planets_coords, centers_array[i][2][0], 80);
     }
 
     //7 планет
@@ -2180,19 +1991,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        7,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(7, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        7,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(7, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(7, planets_coords);
+      draw_contour(7, planets_coords, centers_array[i][2][0], 80);
     }
 
     //6 планет
@@ -2440,19 +2241,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        6,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(6, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        6,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(6, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(6, planets_coords);
+      draw_contour(6, planets_coords, centers_array[i][2][0], 80);
     }
 
     //5 планет
@@ -2662,19 +2453,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        5,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(5, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        5,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(5, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(5, planets_coords);
+      draw_contour(5, planets_coords, centers_array[i][2][0], 80);
     }
 
     //4 планеты
@@ -2832,19 +2613,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        4,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(4, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        4,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(4, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(4, planets_coords);
+      draw_contour(4, planets_coords, centers_array[i][2][0], 80);
     }
 
     //3 планеты
@@ -2925,19 +2696,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        3,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(3, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
-        3,
-        planets_coords,
-        centers_array[i][2][0],
-        80
-      );
+      draw_many_planets(3, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(3, planets_coords);
+      draw_contour(3, planets_coords, centers_array[i][2][0], 80);
     }
 
     //2 планеты
@@ -2989,14 +2750,9 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      size_of_the_planet_to_drawdraw_many_planets(
-        2,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_arrows(2, planets_coords);
-      size_of_the_planet_to_drawdraw_contour(
+      draw_many_planets(2, centers_array[i][0], planets_coords, formula_array);
+      draw_arrows(2, planets_coords);
+      draw_contour(
         2,
         planets_coords,
         centers_array[i][2][0],
@@ -3041,13 +2797,8 @@ export function Draw_Fd(
       }
 
       // console.log(centers_array[i][0][0]);
-      size_of_the_planet_to_drawdraw_many_planets(
-        1,
-        centers_array[i][0],
-        planets_coords,
-        formula_array
-      );
-      size_of_the_planet_to_drawdraw_contour(1, planets_coords, 30, 30);
+      draw_many_planets(1, centers_array[i][0], planets_coords, formula_array);
+      draw_contour(1, planets_coords, 30, 30);
     }
   }
 
@@ -3079,17 +2830,12 @@ export function Draw_Fd(
   //рисуем орбиты, отталкиваясь от центров
   for (let i = 0; i < centers_array.length; i++) {
     for (let k = 0; k < centers_array[i][1]; k++) {
-      while (
-        size_of_the_planet_to_drawfind_next_planet(
-          centers_array[i][0][k],
-          formula_array
-        )
-      ) {
-        let next_planet = size_of_the_planet_to_drawfind_next_planet(
+      while (find_next_planet(centers_array[i][0][k], formula_array)) {
+        let next_planet = find_next_planet(
           centers_array[i][0][k],
           formula_array
         );
-        let prev_planet = size_of_the_planet_to_drawfind_prev_planet(
+        let prev_planet = find_prev_planet(
           centers_array[i][0][k],
           formula_array
         );
@@ -3178,13 +2924,13 @@ export function Draw_Fd(
                     ],
                   ];
 
-                  size_of_the_planet_to_drawdraw_many_planets(
+                  draw_many_planets(
                     1,
                     [next_planet],
                     planets_coords,
                     formula_array
                   );
-                  size_of_the_planet_to_drawdraw_arrow(
+                  draw_arrow(
                     planets_coords[0][0],
                     planets_coords[0][1],
                     planets_coords[1][0],
@@ -3240,13 +2986,13 @@ export function Draw_Fd(
                   //                            console.log(planets_coords);
                   //                            console.log(planets_coords[0][0]);
                   //                            console.log(planets_coords[0][1]);
-                  size_of_the_planet_to_drawdraw_many_planets(
+                  draw_many_planets(
                     1,
                     [next_planet],
                     planets_coords,
                     formula_array
                   );
-                  size_of_the_planet_to_drawdraw_arrow(
+                  draw_arrow(
                     planets_coords[0][0],
                     planets_coords[0][1],
                     planets_coords[1][0],
@@ -3303,13 +3049,13 @@ export function Draw_Fd(
                 //                            console.log(planets_coords);
                 //                            console.log(planets_coords[0][0]);
                 //                            console.log(planets_coords[0][1]);
-                size_of_the_planet_to_drawdraw_many_planets(
+                draw_many_planets(
                   1,
                   [next_planet],
                   planets_coords,
                   formula_array
                 );
-                size_of_the_planet_to_drawdraw_arrow(
+                draw_arrow(
                   planets_coords[0][0],
                   planets_coords[0][1],
                   planets_coords[1][0],
@@ -3320,21 +3066,12 @@ export function Draw_Fd(
               }
             }
 
-            next_planet = size_of_the_planet_to_drawfind_next_planet(
-              next_planet,
-              formula_array
-            );
+            next_planet = find_next_planet(next_planet, formula_array);
           } else {
-            prev_planet = size_of_the_planet_to_drawfind_prev_planet(
-              prev_planet,
-              formula_array
-            );
+            prev_planet = find_prev_planet(prev_planet, formula_array);
 
             if (prev_planet) {
-              next_planet = size_of_the_planet_to_drawfind_next_planet(
-                prev_planet,
-                formula_array
-              );
+              next_planet = find_next_planet(prev_planet, formula_array);
             } else {
               break;
             }
@@ -3349,7 +3086,7 @@ export function Draw_Fd(
 function draw_arrows(number, planets_coords) {
   //для двухпланетных центров
   if (number === 2) {
-    size_of_the_planet_to_drawdraw_arrow(
+    draw_arrow(
       planets_coords[0][0],
       planets_coords[0][1],
       planets_coords[1][0],
@@ -3360,7 +3097,7 @@ function draw_arrows(number, planets_coords) {
   }
 
   for (let i = 0; i < number - 1; i++) {
-    size_of_the_planet_to_drawdraw_arrow(
+    draw_arrow(
       planets_coords[i][0],
       planets_coords[i][1],
       planets_coords[i + 1][0],
@@ -3368,7 +3105,7 @@ function draw_arrows(number, planets_coords) {
     );
   }
 
-  size_of_the_planet_to_drawdraw_arrow(
+  draw_arrow(
     planets_coords[number - 1][0],
     planets_coords[number - 1][1],
     planets_coords[0][0],
@@ -3534,11 +3271,17 @@ function find_horizontal(array, formula_array) {
 //находит следующую планету, которая указывает на текущую
 //либо возвращает false
 function find_next_planet(planet, formula_array) {
+  // console.log(`formula_array = ${JSON.stringify(formula_array)}`);
+  console.log(`planet = ${planet}`);
   for (const key in formula_array) {
+    if (key == "0") {
+      continue;
+    }
     if (
       planet === formula_array[key].point_to_planet &&
-      !planets_full_info[key].drawn &&
-      formula_array[planet].orbit === formula_array[key].orbit - 1
+      !planets_full_info[planetsArr[key]].drawn &&
+      formula_array[planetsArr.indexOf(planet)].orbit ===
+        formula_array[key].orbit - 1
     ) {
       return key;
     }

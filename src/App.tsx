@@ -245,16 +245,16 @@ function App() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
-    console.log(nameValue);
-    console.log(dateTime);
-    console.log(place);
-    console.log(timeZone);
+    // console.log(nameValue);
+    // console.log(dateTime);
+    // console.log(place);
+    // console.log(timeZone);
     // console.log(selectedRadioTimeType);
     if (selectedRadioTimeType === "utc") {
       setTimeZone(null);
       setPlace(null);
-      console.log(place);
-      console.log(timeZone);
+      // console.log(place);
+      // console.log(timeZone);
     }
 
     const { data } = await axios.post(
