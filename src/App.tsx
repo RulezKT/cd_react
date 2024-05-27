@@ -160,6 +160,7 @@ function App() {
     // console.log(json);
     // setLast10(json);
 
+    // console.log(`getCookies ${json.length}`);
     const { data } = await axios.post(
       "http://127.0.0.1:3000/api/cookies",
       {
@@ -295,12 +296,16 @@ function App() {
     );
 
     setData(data);
-    if (data.name !== "Transits") {
+
+    if (data.name != "Transits") {
       if (last10.length < 10) {
-        setLast10([...last10, data]);
+        last10.push(data);
+        setLast10(last10);
       } else {
         last10.shift();
-        setLast10([...last10, data]);
+        last10.push(data);
+
+        setLast10(last10);
       }
 
       const json = [];
@@ -312,6 +317,8 @@ function App() {
         json.push(jsonIndex);
         // console.log(json);
       }
+
+      // console.log(json.length);
 
       // item.name === value.name &&
       // item.time.pers_time_utc === value.time.pers_time_utc
@@ -392,6 +399,7 @@ function App() {
                         className="flex flex-row "
                         onValueChange={onRadioTimeTypeChange}
                         defaultValue="local"
+                        value={selectedRadioTimeType}
                       >
                         <div className=" ">
                           <RadioGroupItem value="local" id="option-one" />
