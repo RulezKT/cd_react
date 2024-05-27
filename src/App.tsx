@@ -396,7 +396,7 @@ function App() {
                       </div>
 
                       <RadioGroup
-                        className="flex flex-row "
+                        className="flex flex-col"
                         onValueChange={onRadioTimeTypeChange}
                         defaultValue="local"
                         value={selectedRadioTimeType}
@@ -471,28 +471,30 @@ function App() {
             </div>
           </form>
         </Form>
-      </div>
-      <div className="flex flex-row w-full justify-center items-center h-auto">
-        <Select onValueChange={handleSelectChange}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Last 10" />
-          </SelectTrigger>
+        <div className="flex flex-row w-48 justify-center items-center h-auto">
+          <Select onValueChange={handleSelectChange}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Last 10" />
+            </SelectTrigger>
 
-          <SelectContent>
-            <SelectGroup>
-              {last10.map((item, index) => (
-                <SelectItem key={index} value={item}>
-                  {`${item.name} : ${JSON.stringify(item.time.pers_time_utc)}`}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+            <SelectContent>
+              <SelectGroup>
+                {last10.map((item, index) => (
+                  <SelectItem key={index} value={item}>
+                    {`${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
-      <div className="flex flex-row w-full justify-center items-center h-auto">
+
+      <div className="flex flex-col w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
+        <p>Please choose your nickname, date and time.</p>
         <p>
-          Please choose your nickname, date and time. If you know your UTC time,
-          just check the UTC box. Otherwise choose the place of birth.
+          If you know your UTC time, check the UTC box. Otherwise choose the
+          place of birth.
         </p>
       </div>
       {/* <div className="flex flex-row justify-center h-96 items-center">

@@ -7,7 +7,7 @@ export const MainScene = (props) => {
   // console.log(props);
 
   return (
-    <div className="flex flex-row justify-between gap-5 m-10">
+    <div className="flex flex-row justify-center">
       {/* <DesNumbers calc_type="Design" data={props.data.hd.design.planetsData} /> */}
       <BodyGraph data={props.data} radiobutt={props.radiobutt} />
       {/* <PersNumbers
