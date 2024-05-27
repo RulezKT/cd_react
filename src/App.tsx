@@ -157,7 +157,7 @@ function App() {
     const cookies = Cookies.get("last10");
     // console.log(cookies);
     const json = JSON.parse(cookies);
-    console.log(json);
+    // console.log(json);
     // setLast10(json);
 
     const { data } = await axios.post(
@@ -174,7 +174,7 @@ function App() {
       }
     );
 
-    // setLast10(data);
+    setLast10(data);
   }
   async function getTransits() {
     // console.log("getTransits");
@@ -183,10 +183,17 @@ function App() {
     // const julianDay = Date.now() / 86400 + 2440587.5;
 
     const d = new Date();
+
+    // const timestamp = d.getTime() / 1000;
+    // console.log("timestamp", timestamp);
+
+    // const { data: offset_data } = await axios.get(
+    //   `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
+    // );
     const offset = Math.abs(d.getTimezoneOffset() * 60);
 
     // setDateTime(jDtoGreg(julianDay));
-    // console.log(dateTime);
+    // console.log(`offset ${offset}`);
 
     setDateTime(d);
     setPlace({
@@ -258,6 +265,8 @@ function App() {
       // console.log(timeZone);
     }
 
+    onRadioButtValueChange("bodygraph");
+
     const { data } = await axios.post(
       "http://127.0.0.1:3000/api",
       {
@@ -313,6 +322,7 @@ function App() {
   // Function to handle the change in radio button selection
   function onRadioButtValueChange(value: string) {
     // Updating the state with the selected radio button's value
+    // console.log(`inside onRadioButtValueChange ${value}`);
     setSelectedRadioButt(value);
     // console.log("inside onRadioButtValueChange");
   }
@@ -325,7 +335,7 @@ function App() {
 
   function handleSelectChange(value) {
     // console.log("inside handleSelectChange");
-    setSelectedRadioButt("bodygraph");
+    onRadioButtValueChange("bodygraph");
     setData(
       last10.find(
         (item) =>
@@ -427,7 +437,7 @@ function App() {
                                 );
 
                                 setTimeZone(data);
-                                console.log(data);
+                                // console.log(data);
                               } else {
                                 console.log(
                                   "Geocode was not successful for the following reason: " +
@@ -482,7 +492,8 @@ function App() {
         <RadioGroup
           className="flex flex-row gap-5 m-10"
           onValueChange={onRadioButtValueChange}
-          defaultValue="personality"
+          defaultValue={selectedRadioButt}
+          value={selectedRadioButt}
         >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="bodygraph" id="option-one" />
