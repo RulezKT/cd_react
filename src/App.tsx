@@ -295,26 +295,28 @@ function App() {
     );
 
     setData(data);
-    if (last10.length < 10) {
-      setLast10([...last10, data]);
-    } else {
-      last10.shift();
-      setLast10([...last10, data]);
-    }
+    if (data.name !== "Transits") {
+      if (last10.length < 10) {
+        setLast10([...last10, data]);
+      } else {
+        last10.shift();
+        setLast10([...last10, data]);
+      }
 
-    const json = [];
-    for (let i = 0; i < last10.length; i++) {
-      const jsonIndex = {
-        name: last10[i].name,
-        time: last10[i].time.pers_time_utc,
-      };
-      json.push(jsonIndex);
-      // console.log(json);
-    }
+      const json = [];
+      for (let i = 0; i < last10.length; i++) {
+        const jsonIndex = {
+          name: last10[i].name,
+          time: last10[i].time.pers_time_utc,
+        };
+        json.push(jsonIndex);
+        // console.log(json);
+      }
 
-    // item.name === value.name &&
-    // item.time.pers_time_utc === value.time.pers_time_utc
-    Cookies.set("last10", JSON.stringify(json));
+      // item.name === value.name &&
+      // item.time.pers_time_utc === value.time.pers_time_utc
+      Cookies.set("last10", JSON.stringify(json));
+    }
   }
 
   const form = useForm();
