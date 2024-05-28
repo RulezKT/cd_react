@@ -356,10 +356,10 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-row  ">
+      <div className="flex flex-row border-solid border-2 border-slate-950 w-full justify-center items-center">
         <Form {...form}>
           <form
-            className="flex flex-row w-full space-x-2 gap-4 m-8 justify-center items-center"
+            className="flex flex-row w-2/3 space-x-2 gap-4 m-2 p-2 justify-center items-center"
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <FormField
@@ -396,7 +396,7 @@ function App() {
                       </div>
 
                       <RadioGroup
-                        className="flex flex-col"
+                        className="flex flex-col p-2 m-2"
                         onValueChange={onRadioTimeTypeChange}
                         defaultValue="local"
                         value={selectedRadioTimeType}
@@ -471,7 +471,7 @@ function App() {
             </div>
           </form>
         </Form>
-        <div className="flex flex-row w-48 justify-center items-center h-auto">
+        <div className="flex flex-row w-48 justify-center items-center h-auto m-2 p-2">
           <Select onValueChange={handleSelectChange}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Last 10" />
@@ -489,59 +489,60 @@ function App() {
           </Select>
         </div>
       </div>
-
-      <div className="flex flex-col w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
-        <p>Please choose your nickname, date and time.</p>
-        <p>
-          If you know your UTC time, check the UTC box. Otherwise choose the
-          place of birth.
-        </p>
-      </div>
-      {/* <div className="flex flex-row justify-center h-96 items-center">
+      <div className="w-full">
+        <div className="flex flex-col w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
+          <p>Please choose your nickname, date and time.</p>
+          <p>
+            If you know your UTC time, check the UTC box. Otherwise choose the
+            place of birth.
+          </p>
+        </div>
+        {/* <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
       </div> */}
-      <div className="flex flex-col w-full justify-center items-center h-auto">
-        <RadioGroup
-          className="flex flex-row gap-5 m-10"
-          onValueChange={onRadioButtValueChange}
-          defaultValue={selectedRadioButt}
-          value={selectedRadioButt}
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="bodygraph" id="option-one" />
-            <Label htmlFor="option-one">Body</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="design" id="option-two" />
-            <Label htmlFor="option-two">Design</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="personality" id="option-three" />
-            <Label htmlFor="option-three">Personality</Label>
-          </div>
+        <div className="flex flex-col w-full justify-center items-center h-auto">
+          <RadioGroup
+            className="flex flex-row gap-5 m-10"
+            onValueChange={onRadioButtValueChange}
+            defaultValue={selectedRadioButt}
+            value={selectedRadioButt}
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="bodygraph" id="option-one" />
+              <Label htmlFor="option-one">Body</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="design" id="option-two" />
+              <Label htmlFor="option-two">Design</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="personality" id="option-three" />
+              <Label htmlFor="option-three">Personality</Label>
+            </div>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="bodytransits" id="option-five" disabled />
-            <Label htmlFor="option-five">Body+Transits</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="mandala" id="option-six" disabled />
-            <Label htmlFor="option-six">Mandala</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="composite" id="option-seven" disabled />
-            <Label htmlFor="option-seven">Composite</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="numerology" id="option-eight" />
-            <Label htmlFor="option-eight">Numerology</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="fd" id="option-nine" />
-            <Label htmlFor="option-nine">FD</Label>
-          </div>
-        </RadioGroup>
-        <MainScene radiobutt={selectedRadioButt} data={cd_data} />
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="bodytransits" id="option-five" disabled />
+              <Label htmlFor="option-five">Body+Transits</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="mandala" id="option-six" disabled />
+              <Label htmlFor="option-six">Mandala</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="composite" id="option-seven" disabled />
+              <Label htmlFor="option-seven">Composite</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="numerology" id="option-eight" />
+              <Label htmlFor="option-eight">Numerology</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="fd" id="option-nine" />
+              <Label htmlFor="option-nine">FD</Label>
+            </div>
+          </RadioGroup>
+          <MainScene radiobutt={selectedRadioButt} data={cd_data} />
+        </div>
       </div>
     </>
   );
