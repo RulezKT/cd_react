@@ -63,6 +63,7 @@ type Place = {
 
 import Autocomplete from "react-google-autocomplete";
 import { CheckedState } from "@radix-ui/react-checkbox";
+import { NewApp } from "./components/NewApp";
 
 // require("dotenv").config();
 
@@ -380,11 +381,11 @@ function App() {
                 name="nick and date"
                 render={() => (
                   <FormItem className="flex flex-row space-x-4 ">
-                    <div className="flex flex-col items-center w-28 h-5 space-y-2">
+                    <div className="flex flex-col items-center w-28 space-y-2">
                       <FormLabel>Nickname</FormLabel>
                       <FormControl>
                         <Input
-                          className="flex flex-row justify-between"
+                          className="flex flex-row justify-between w-28 h-7"
                           placeholder="enter your nickname"
                           // {...field}
                           onChange={(e) => setNameValue(e.target.value)}
@@ -398,6 +399,7 @@ function App() {
                         <div className="flex flex-col items-start">
                           <Label htmlFor="datetime">Date and Time</Label>
                           <DateTimePicker
+                            className="rounded"
                             id="datetime"
                             format="dd-MMM-y HH:mm"
                             maxDate={new Date(2100, 12, 31, 23, 59, 59, 999)}
@@ -527,6 +529,8 @@ function App() {
           {/* <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
       </div> */}
+          <NewApp />
+
           <div className="flex flex-col w-full justify-center items-center h-auto">
             <RadioGroup
               className="flex flex-row gap-5 m-10"
