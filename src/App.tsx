@@ -438,6 +438,7 @@ function App() {
                           </div>
 
                           <Autocomplete
+                            className=" h-10 rounded"
                             required={utc === "local" ? true : false}
                             disabled={utc === "utc" ? true : false}
                             apiKey={GOOGLE_MAPS_API_KEY}
