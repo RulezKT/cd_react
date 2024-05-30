@@ -436,6 +436,7 @@ function App() {
                           </div>
 
                           <Autocomplete
+                            required={utc === "local" ? true : false}
                             disabled={utc === "utc" ? true : false}
                             apiKey={GOOGLE_MAPS_API_KEY}
                             onPlaceSelected={(place) => {
