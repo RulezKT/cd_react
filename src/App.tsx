@@ -42,6 +42,8 @@ import "react-clock/dist/Clock.css";
 
 import Cookies from "js-cookie";
 
+import { Checkbox } from "@/components/ui/checkbox";
+
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
@@ -60,6 +62,7 @@ type Place = {
 };
 
 import Autocomplete from "react-google-autocomplete";
+import { CheckedState } from "@radix-ui/react-checkbox";
 
 // require("dotenv").config();
 
@@ -111,8 +114,9 @@ function App() {
   const [cd_data, setData] = useState(cdInf);
   const [last10, setLast10] = useState([]);
 
+  const [utc, setUTC] = useState("local");
   const [selectedRadioButt, setSelectedRadioButt] = useState("personality");
-  const [selectedRadioTimeType, setSelectedRadioTimeType] = useState("utc");
+  // const [selectedRadioTimeType, setSelectedRadioTimeType] = useState("utc");
   const [nameValue, setNameValue] = useState("Transits");
 
   // console.log(cd_data);
@@ -212,7 +216,7 @@ function App() {
 
     setNameValue("Transits");
     setSelectedRadioButt("personality");
-    setSelectedRadioTimeType("local");
+    setUTC("local");
 
     // console.log(`dateTime.getFullYear() ${dateTime.getFullYear()}`);
     // console.log(`dateTime.getMonth() ${dateTime.getMonth()}`);
@@ -259,7 +263,7 @@ function App() {
     // console.log(place);
     // console.log(timeZone);
     // console.log(selectedRadioTimeType);
-    if (selectedRadioTimeType === "utc") {
+    if (utc === "utc") {
       setTimeZone(null);
       setPlace(null);
       // console.log(place);
@@ -276,14 +280,11 @@ function App() {
         day: dateTime.getDate(),
         hours: dateTime.getHours(),
         minutes: dateTime.getMinutes(),
-        typeOfTime: selectedRadioTimeType === "utc" ? 0 : 1,
-        offset:
-          selectedRadioTimeType === "utc"
-            ? 0
-            : timeZone?.rawOffset + timeZone?.dstOffset,
-        place: selectedRadioTimeType === "utc" ? "" : place.name,
-        latitude: selectedRadioTimeType === "utc" ? 0 : place.latitude,
-        longitude: selectedRadioTimeType === "utc" ? 0 : place.longitude,
+        typeOfTime: utc === "utc" ? 0 : 1,
+        offset: utc === "utc" ? 0 : timeZone?.rawOffset + timeZone?.dstOffset,
+        place: utc === "utc" ? "" : place.name,
+        latitude: utc === "utc" ? 0 : place.latitude,
+        longitude: utc === "utc" ? 0 : place.longitude,
         name: nameValue,
       },
       {
@@ -336,11 +337,22 @@ function App() {
     // console.log("inside onRadioButtValueChange");
   }
 
-  function onRadioTimeTypeChange(value: string) {
+  function onCheckBoxChange(checked: CheckedState) {
     // Updating the state with the selected radio button's value
-    setSelectedRadioTimeType(value);
-    // console.log("inside onRadioButtValueChange");
+    if (checked) {
+      setUTC("utc");
+      // console.log("utc");
+    } else {
+      setUTC("local");
+      // console.log("local");
+    }
   }
+
+  // function onRadioTimeTypeChange(value: string) {
+  //   // Updating the state with the selected radio button's value
+  //   setSelectedRadioTimeType(value);
+  //   // console.log("inside onRadioButtValueChange");
+  // }
 
   function handleSelectChange(value) {
     // console.log("inside handleSelectChange");
@@ -356,192 +368,211 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-row border-solid border-2 border-slate-950 w-full justify-center items-center">
-        <Form {...form}>
-          <form
-            className="flex flex-row w-2/3 space-x-2 gap-4 m-2 p-2 justify-center items-center"
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <FormField
-              control={form.control}
-              name="nick and date"
-              render={() => (
-                <FormItem className="flex flex-row  ">
-                  <div className="flex flex-col items-start">
-                    <FormLabel>Nickname</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="flex flex-row w-40 justify-between"
-                        placeholder="enter your nickname"
-                        // {...field}
-                        onChange={(e) => setNameValue(e.target.value)}
-                        value={nameValue}
-                      />
-                    </FormControl>
-                  </div>
-
-                  <FormControl>
-                    <>
-                      <div className="flex flex-col items-start">
-                        <Label htmlFor="datetime">Date and Time</Label>
-                        <DateTimePicker
-                          id="datetime"
-                          format="dd-MMM-y HH:mm"
-                          clearIcon={null}
-                          disableClock={true}
-                          disableCalendar={true}
-                          onChange={setDateTime}
-                          value={dateTime}
+      <div className="flex flex-col container mx-auto border-solid border-2 border-slate-950 w-full justify-center items-center  p-2   gap-5 m-2 space-x-4">
+        <div className="flex flex-row    p-2  items-center align-middle space-x-4">
+          <Form {...form}>
+            <form
+              className="flex flex-row items-center space-x-4"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              <FormField
+                control={form.control}
+                name="nick and date"
+                render={() => (
+                  <FormItem className="flex flex-row space-x-4 ">
+                    <div className="flex flex-col items-center w-28 h-5 space-y-2">
+                      <FormLabel>Nickname</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="flex flex-row justify-between"
+                          placeholder="enter your nickname"
+                          // {...field}
+                          onChange={(e) => setNameValue(e.target.value)}
+                          value={nameValue}
                         />
-                      </div>
+                      </FormControl>
+                    </div>
 
-                      <RadioGroup
-                        className="flex flex-col p-2 m-2"
-                        onValueChange={onRadioTimeTypeChange}
-                        defaultValue="local"
-                        value={selectedRadioTimeType}
-                      >
-                        <div className=" ">
-                          <RadioGroupItem value="local" id="option-one" />
-                          <Label htmlFor="option-one">Local</Label>
+                    <FormControl>
+                      <>
+                        <div className="flex flex-col items-start">
+                          <Label htmlFor="datetime">Date and Time</Label>
+                          <DateTimePicker
+                            id="datetime"
+                            format="dd-MMM-y HH:mm"
+                            maxDate={new Date(2100, 12, 31, 23, 59, 59, 999)}
+                            minDate={new Date(1900, 1, 1, 0, 0, 0, 0)}
+                            clearIcon={null}
+                            disableClock={true}
+                            disableCalendar={true}
+                            onChange={setDateTime}
+                            value={dateTime}
+                          />
                         </div>
-                        <div className=" ">
-                          <RadioGroupItem value="utc" id="option-two" />
-                          <Label htmlFor="option-two">UTC</Label>
+                        {/* <RadioGroup
+                          className="flex flex-col p-2 m-2"
+                          onValueChange={onRadioTimeTypeChange}
+                          defaultValue="local"
+                          value={selectedRadioTimeType}
+                        >
+                          <div className=" ">
+                            <RadioGroupItem value="local" id="option-one" />
+                            <Label htmlFor="option-one">Local</Label>
+                          </div>
+                          <div className=" ">
+                            <RadioGroupItem value="utc" id="option-two" />
+                            <Label htmlFor="option-two">UTC</Label>
+                          </div>
+                        </RadioGroup> */}
+
+                        <div className="flex flex-col items-start w-48 space-x-4">
+                          <div className="flex flex-row p-2 m-2 items-start">
+                            <Checkbox
+                              id="utc"
+                              value={utc}
+                              onCheckedChange={onCheckBoxChange}
+                            />
+                            <Label htmlFor="utc">UTC</Label>
+                          </div>
+
+                          <Autocomplete
+                            disabled={utc === "utc" ? true : false}
+                            apiKey={GOOGLE_MAPS_API_KEY}
+                            onPlaceSelected={(place) => {
+                              const geocoder = new google.maps.Geocoder();
+                              geocoder.geocode(
+                                { address: place.formatted_address },
+                                async function (results, status) {
+                                  if (status == "OK") {
+                                    // console.log("📍 Coordinates: ", results);
+                                    // console.log(
+                                    //   "📍 Coordinates: ",
+                                    //   results[0].geometry.location.lat()
+                                    // );
+                                    // console.log(
+                                    //   "📍 Coordinates: ",
+                                    //   results[0].geometry.location.lng()
+                                    // );
+
+                                    const lat =
+                                      results[0].geometry.location.lat();
+                                    const lng =
+                                      results[0].geometry.location.lng();
+
+                                    setPlace({
+                                      name: place.formatted_address,
+                                      latitude: lat,
+                                      longitude: lng,
+                                    });
+                                    const timestamp = dateTime.getTime() / 1000;
+                                    // console.log("timestamp", timestamp);
+
+                                    const { data } = await axios.get(
+                                      `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
+                                    );
+
+                                    setTimeZone(data);
+                                    // console.log(data);
+                                  } else {
+                                    console.log(
+                                      "Geocode was not successful for the following reason: " +
+                                        status
+                                    );
+                                  }
+                                }
+                              );
+                              // console.log(place);
+                            }}
+                          />
                         </div>
-                      </RadioGroup>
-                      <Autocomplete
-                        disabled={
-                          selectedRadioTimeType === "utc" ? true : false
-                        }
-                        apiKey={GOOGLE_MAPS_API_KEY}
-                        onPlaceSelected={(place) => {
-                          const geocoder = new google.maps.Geocoder();
-                          geocoder.geocode(
-                            { address: place.formatted_address },
-                            async function (results, status) {
-                              if (status == "OK") {
-                                // console.log("📍 Coordinates: ", results);
-                                // console.log(
-                                //   "📍 Coordinates: ",
-                                //   results[0].geometry.location.lat()
-                                // );
-                                // console.log(
-                                //   "📍 Coordinates: ",
-                                //   results[0].geometry.location.lng()
-                                // );
+                      </>
+                    </FormControl>
 
-                                const lat = results[0].geometry.location.lat();
-                                const lng = results[0].geometry.location.lng();
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex items-center space-x-4">
+                <Button type="submit">Submit</Button>
+              </div>
+            </form>
+          </Form>
+          <div className="flex w-24 items-center">
+            <Select onValueChange={handleSelectChange}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Last 10" />
+              </SelectTrigger>
 
-                                setPlace({
-                                  name: place.formatted_address,
-                                  latitude: lat,
-                                  longitude: lng,
-                                });
-                                const timestamp = dateTime.getTime() / 1000;
-                                // console.log("timestamp", timestamp);
-
-                                const { data } = await axios.get(
-                                  `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
-                                );
-
-                                setTimeZone(data);
-                                // console.log(data);
-                              } else {
-                                console.log(
-                                  "Geocode was not successful for the following reason: " +
-                                    status
-                                );
-                              }
-                            }
-                          );
-                          // console.log(place);
-                        }}
-                      />
-                    </>
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex flex-row justify-start items-start">
-              <Button type="submit">Submit</Button>
-            </div>
-          </form>
-        </Form>
-        <div className="flex flex-row w-48 justify-center items-center h-auto m-2 p-2">
-          <Select onValueChange={handleSelectChange}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Last 10" />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectGroup>
-                {last10.map((item, index) => (
-                  <SelectItem key={index} value={item}>
-                    {`${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+              <SelectContent>
+                <SelectGroup>
+                  {last10.map((item, index) => (
+                    <SelectItem key={index} value={item}>
+                      {`${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
-      </div>
-      <div className="w-full">
-        <div className="flex flex-col w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
-          <p>Please choose your nickname, date and time.</p>
-          <p>
-            If you know your UTC time, check the UTC box. Otherwise choose the
-            place of birth.
-          </p>
-        </div>
-        {/* <div className="flex flex-row justify-center h-96 items-center">
+
+        <div className="w-full">
+          <div className="flex flex-col w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
+            <p>
+              Choose your nickname, date and time. If you know your UTC time,
+              check the box. Otherwise choose the place of birth.
+            </p>
+          </div>
+          {/* <div className="flex flex-row justify-center h-96 items-center">
         <Button onClick={handleClick}>Fetch data </Button>
       </div> */}
-        <div className="flex flex-col w-full justify-center items-center h-auto">
-          <RadioGroup
-            className="flex flex-row gap-5 m-10"
-            onValueChange={onRadioButtValueChange}
-            defaultValue={selectedRadioButt}
-            value={selectedRadioButt}
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="bodygraph" id="option-one" />
-              <Label htmlFor="option-one">Body</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="design" id="option-two" />
-              <Label htmlFor="option-two">Design</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="personality" id="option-three" />
-              <Label htmlFor="option-three">Personality</Label>
-            </div>
+          <div className="flex flex-col w-full justify-center items-center h-auto">
+            <RadioGroup
+              className="flex flex-row gap-5 m-10"
+              onValueChange={onRadioButtValueChange}
+              defaultValue={selectedRadioButt}
+              value={selectedRadioButt}
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="bodygraph" id="option-one" />
+                <Label htmlFor="option-one">Body</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="design" id="option-two" />
+                <Label htmlFor="option-two">Design</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="personality" id="option-three" />
+                <Label htmlFor="option-three">Personality</Label>
+              </div>
 
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="bodytransits" id="option-five" disabled />
-              <Label htmlFor="option-five">Body+Transits</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="mandala" id="option-six" disabled />
-              <Label htmlFor="option-six">Mandala</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="composite" id="option-seven" disabled />
-              <Label htmlFor="option-seven">Composite</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="numerology" id="option-eight" />
-              <Label htmlFor="option-eight">Numerology</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="fd" id="option-nine" />
-              <Label htmlFor="option-nine">FD</Label>
-            </div>
-          </RadioGroup>
-          <MainScene radiobutt={selectedRadioButt} data={cd_data} />
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem
+                  value="bodytransits"
+                  id="option-five"
+                  disabled
+                />
+                <Label htmlFor="option-five">Body+Transits</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="mandala" id="option-six" disabled />
+                <Label htmlFor="option-six">Mandala</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="composite" id="option-seven" disabled />
+                <Label htmlFor="option-seven">Composite</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="numerology" id="option-eight" />
+                <Label htmlFor="option-eight">Numerology</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="fd" id="option-nine" />
+                <Label htmlFor="option-nine">FD</Label>
+              </div>
+            </RadioGroup>
+            <MainScene radiobutt={selectedRadioButt} data={cd_data} />
+          </div>
         </div>
       </div>
     </>
