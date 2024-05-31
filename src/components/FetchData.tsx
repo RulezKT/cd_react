@@ -1,4 +1,4 @@
-import { ReqData, CookiesData } from "@/lib/cd_consts";
+import { ReqData, CookiesData } from "@/lib/cd_consts.ts";
 import axios from "axios";
 
 export const FETCH_API = "http://127.0.0.1:3000/api";

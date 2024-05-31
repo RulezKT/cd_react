@@ -534,6 +534,18 @@ export type ReqData = {
   name: string;
 };
 
+export type CookiesData = {
+  name: string;
+  time: {
+    year: number;
+    month: number;
+    day: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+};
+
 // 1 - local time, 0- UTC Time
 export enum TypeOfTime {
   UTC = 0,
