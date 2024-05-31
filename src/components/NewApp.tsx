@@ -20,8 +20,7 @@ import { CheckboxChangeEvent } from "antd/es/checkbox/Checkbox";
 
 import Cookies from "js-cookie";
 
-import { cdInf } from "./components/cdInf";
-const [cd_data, setData] = useState(cdInf);
+import { cdInf } from "./cdInf";
 
 type TimeZone = {
   dstOffset: number;
@@ -56,6 +55,7 @@ export function NewApp() {
   const timeFormat = "HH:mm";
   const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 
+  const [cd_data, setData] = useState(cdInf);
   const [utc, setUTC] = useState("local");
   const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
   //   const [time, setTime] = useState<Dayjs>(dateTime);

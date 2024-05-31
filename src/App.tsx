@@ -64,6 +64,7 @@ type Place = {
 import Autocomplete from "react-google-autocomplete";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { NewApp } from "./components/NewApp";
+import { FETCH_API, FETCH_COOKIES, fetchData } from "./components/FetchData";
 
 // require("dotenv").config();
 
@@ -162,23 +163,8 @@ function App() {
     const cookies = Cookies.get("last10");
     // console.log(cookies);
     const json = JSON.parse(cookies);
-    // console.log(json);
-    // setLast10(json);
 
-    // console.log(`getCookies ${json.length}`);
-    const { data } = await axios.post(
-      "http://127.0.0.1:3000/api/cookies",
-      {
-        cookies: json,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-
-          Accept: "*/*",
-        },
-      }
-    );
+    const data = await fetchData(json, FETCH_COOKIES);
 
     setLast10(data);
   }
@@ -202,52 +188,26 @@ function App() {
     // console.log(`offset ${offset}`);
 
     setDateTime(d);
-    setPlace({
-      name: "",
-      latitude: 0,
-      longitude: 0,
-    });
-    setTimeZone({
-      dstOffset: 0,
-      rawOffset: 0,
-      status: "",
-      timeZoneId: "",
-      timeZoneName: "",
-    });
 
     setNameValue("Transits");
     setSelectedRadioButt("personality");
     setUTC("local");
 
-    // console.log(`dateTime.getFullYear() ${dateTime.getFullYear()}`);
-    // console.log(`dateTime.getMonth() ${dateTime.getMonth()}`);
-    // console.log(`dateTime.getDate() ${dateTime.getDate()}`);
-    // console.log(`dateTime.getHours() ${dateTime.getHours()}`);
-    // console.log(`dateTime.getMinutes() ${dateTime.getMinutes()}`);
+    const reqData: ReqData = {
+      year: dateTime.getFullYear(),
+      month: dateTime.getMonth() + 1,
+      day: dateTime.getDate(),
+      hours: dateTime.getHours(),
+      minutes: dateTime.getMinutes(),
+      typeOfTime: 1,
+      offset: offset,
+      place: "",
+      latitude: 0,
+      longitude: 0,
+      name: nameValue,
+    };
 
-    const { data } = await axios.post(
-      "http://127.0.0.1:3000/api",
-      {
-        year: dateTime.getFullYear(),
-        month: dateTime.getMonth() + 1,
-        day: dateTime.getDate(),
-        hours: dateTime.getHours(),
-        minutes: dateTime.getMinutes(),
-        typeOfTime: 1,
-        offset: offset,
-        place: "",
-        latitude: 0,
-        longitude: 0,
-        name: nameValue,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-
-          Accept: "*/*",
-        },
-      }
-    );
+    const data = await fetchData(reqData, FETCH_API);
     // console.log("data");
     // console.log(data);
     setData(data);
@@ -273,29 +233,21 @@ function App() {
 
     onRadioButtValueChange("bodygraph");
 
-    const { data } = await axios.post(
-      "http://127.0.0.1:3000/api",
-      {
-        year: dateTime.getFullYear(),
-        month: dateTime.getMonth() + 1,
-        day: dateTime.getDate(),
-        hours: dateTime.getHours(),
-        minutes: dateTime.getMinutes(),
-        typeOfTime: utc === "utc" ? 0 : 1,
-        offset: utc === "utc" ? 0 : timeZone?.rawOffset + timeZone?.dstOffset,
-        place: utc === "utc" ? "" : place.name,
-        latitude: utc === "utc" ? 0 : place.latitude,
-        longitude: utc === "utc" ? 0 : place.longitude,
-        name: nameValue,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+    const reqData: ReqData = {
+      year: dateTime.getFullYear(),
+      month: dateTime.getMonth() + 1,
+      day: dateTime.getDate(),
+      hours: dateTime.getHours(),
+      minutes: dateTime.getMinutes(),
+      typeOfTime: utc === "utc" ? 0 : 1,
+      offset: utc === "utc" ? 0 : timeZone?.rawOffset + timeZone?.dstOffset,
+      place: utc === "utc" ? "" : place.name,
+      latitude: utc === "utc" ? 0 : place.latitude,
+      longitude: utc === "utc" ? 0 : place.longitude,
+      name: nameValue,
+    };
 
-          Accept: "*/*",
-        },
-      }
-    );
+    const data = await fetchData(reqData, FETCH_API);
 
     setData(data);
 
