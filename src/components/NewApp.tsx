@@ -172,7 +172,7 @@ export function NewApp() {
       label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
     }));
 
-    console.log(items);
+    // console.log(items);
   }
 
   useEffect(() => {
@@ -269,9 +269,9 @@ export function NewApp() {
     }
   }
 
-  const onChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+  // const onChange = (value: string) => {
+  //   console.log(`selected ${value}`);
+  // };
 
   const onSearch = (value: string) => {
     console.log("search:", value);
@@ -282,6 +282,20 @@ export function NewApp() {
     input: string,
     option?: { label: string; value: string }
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
+  function handleLast10Select(value) {
+    console.log("inside handleSelectChange");
+    console.log(value);
+    typeOfChart.set("bodygraph");
+    cdInfo.set(
+      last10[value]
+      // last10.find(
+      //   (item) =>
+      //     item.name === value.name &&
+      //     item.time.pers_time_utc === value.time.pers_time_utc
+      // )
+    );
+  }
 
   return (
     <div className="flex flex-row justify-center items-center space-x-2">
@@ -372,15 +386,16 @@ export function NewApp() {
         showSearch
         placeholder="Last 10"
         optionFilterProp="children"
-        onChange={onChange}
+        onChange={handleLast10Select}
+        // onValueChange={handleLast10Select}
         onSearch={onSearch}
+        // onSelect={handleLast10Select}
         filterOption={filterOption}
         placement="bottomLeft"
         dropdownStyle={{ width: "12rem" }}
-        // dropdownRender={(menu) => <div />}
         options={last10.map((item, index) => ({
-          key: index,
           label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
+          value: `${index}`,
         }))}
       />
     </div>
