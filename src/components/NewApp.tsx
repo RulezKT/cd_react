@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Button, DatePicker } from "antd";
 
-import { Dropdown } from "antd";
+import { Dropdown, MenuProps } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
 import { Checkbox } from "antd";
@@ -20,7 +20,14 @@ import { CheckboxChangeEvent } from "antd/es/checkbox/Checkbox";
 
 import Cookies from "js-cookie";
 
-import { cdInf } from "./cdInf";
+import { UseCdInfo, useCdInfo } from "./cdInfo";
+import { UseTypeOfChart, useTypeOfChart } from "./typeOfChart";
+
+import { ReqData } from "@/lib/cd_consts";
+import { FETCH_API, FETCH_COOKIES, fetchData } from "./FetchData";
+import { CDinfo } from "@/lib/cd_consts_old";
+
+import { Select } from "antd";
 
 type TimeZone = {
   dstOffset: number;
@@ -36,26 +43,63 @@ type Place = {
   longitude: number;
 };
 
-const items = [
-  {
-    key: "1",
-    label: "Option 1",
-  },
-  {
-    key: "2",
-    label: "Option 2",
-  },
-  {
-    key: "3",
-    label: "Option 3",
-  },
-];
-
 export function NewApp() {
+  let items: MenuProps["items"] = [];
+  // const items: MenuProps["items"] = [
+  //   {
+  //     key: "1",
+  //     label: (
+  //       <a
+  //         target="_blank"
+  //         rel="noopener noreferrer"
+  //         href="https://www.antgroup.com"
+  //       >
+  //         1st menu item
+  //       </a>
+  //     ),
+  //   },
+  //   {
+  //     key: "2",
+  //     label: (
+  //       <a
+  //         target="_blank"
+  //         rel="noopener noreferrer"
+  //         href="https://www.aliyun.com"
+  //       >
+  //         2nd menu item (disabled)
+  //       </a>
+  //     ),
+
+  //     disabled: true,
+  //   },
+  //   {
+  //     key: "3",
+  //     label: (
+  //       <a
+  //         target="_blank"
+  //         rel="noopener noreferrer"
+  //         href="https://www.luohanacademy.com"
+  //       >
+  //         3rd menu item (disabled)
+  //       </a>
+  //     ),
+  //     disabled: true,
+  //   },
+  //   {
+  //     key: "4",
+  //     danger: true,
+  //     label: "a danger item",
+  //   },
+  // ];
+
+  // console.log(items);
   const timeFormat = "HH:mm";
   const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 
-  const [cd_data, setData] = useState(cdInf);
+  const cdInfo: UseCdInfo = useCdInfo();
+  const typeOfChart: UseTypeOfChart = useTypeOfChart();
+
+  const [last10, setLast10] = useState<CDinfo[]>([]);
   const [utc, setUTC] = useState("local");
   const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
   //   const [time, setTime] = useState<Dayjs>(dateTime);
@@ -100,7 +144,7 @@ export function NewApp() {
 
     // setDate(date);
 
-    console.log(tempDate);
+    // console.log(tempDate);
   };
 
   const onTimeChange = (time: Dayjs) => {
@@ -120,54 +164,91 @@ export function NewApp() {
     console.log(tempTime);
   };
 
-  async function onSubmit(values) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  function setLast10andMenuItems(data: CDinfo[]) {
+    setLast10(data);
 
-    console.log("values", values);
-    // console.log(nameValue);
-    // console.log(dateTime);
-    // console.log(place);
-    // console.log(timeZone);
-    // console.log(selectedRadioTimeType);
+    items = data.map((item, index) => ({
+      key: index,
+      label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
+    }));
 
-    // onRadioButtValueChange("bodygraph");
+    console.log(items);
+  }
 
-    const { data } = await axios.post(
-      "http://127.0.0.1:3000/api",
-      {
-        year: dateTime.year(),
-        month: dateTime.month() + 1,
-        day: dateTime.date(),
-        hours: dateTime.hour(),
-        minutes: dateTime.minute(),
-        typeOfTime: utc === "utc" ? 0 : 1,
-        offset: utc === "utc" ? 0 : timeZone?.rawOffset + timeZone?.dstOffset,
-        place: utc === "utc" ? "" : place.name,
-        latitude: utc === "utc" ? 0 : place.latitude,
-        longitude: utc === "utc" ? 0 : place.longitude,
-        name: nameValue,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+  useEffect(() => {
+    getTransits();
+    getCookies();
+  }, []);
 
-          Accept: "*/*",
-        },
-      }
-    );
+  async function getCookies() {
+    const cookies = Cookies.get("last10");
+    // console.log(cookies);
+    const json = JSON.parse(cookies);
 
-    setData(data);
+    const data: CDinfo[] = await fetchData(json, FETCH_COOKIES);
+
+    setLast10andMenuItems(data);
+  }
+
+  async function getTransits() {
+    const d = dayjs();
+    const offset = Math.abs(dayjs().utcOffset() * 60);
+
+    setDateTime(d);
+
+    setNameValue("Transits");
+    typeOfChart.set("personality");
+    setUTC("local");
+
+    const reqData: ReqData = {
+      year: dateTime.year(),
+      month: dateTime.month() + 1,
+      day: dateTime.date(),
+      hours: dateTime.hour(),
+      minutes: dateTime.minute(),
+      typeOfTime: 1,
+      offset: offset,
+      place: "",
+      latitude: 0,
+      longitude: 0,
+      name: nameValue,
+    };
+
+    const data = await fetchData(reqData, FETCH_API);
+
+    cdInfo.set(data);
+  }
+
+  async function onSubmit() {
+    typeOfChart.set("bodygraph");
+
+    const reqData: ReqData = {
+      year: dateTime.year(),
+      month: dateTime.month() + 1,
+      day: dateTime.date(),
+      hours: dateTime.hour(),
+      minutes: dateTime.minute(),
+      typeOfTime: utc === "utc" ? 0 : 1,
+      offset: utc === "utc" ? 0 : timeZone?.rawOffset + timeZone?.dstOffset,
+      place: utc === "utc" ? "" : place.name,
+      latitude: utc === "utc" ? 0 : place.latitude,
+      longitude: utc === "utc" ? 0 : place.longitude,
+      name: nameValue,
+    };
+
+    const data = await fetchData(reqData, FETCH_API);
+
+    cdInfo.set(data);
 
     if (data.name != "Transits") {
       if (last10.length < 10) {
         last10.push(data);
-        setLast10(last10);
+        setLast10andMenuItems(last10);
       } else {
         last10.shift();
         last10.push(data);
 
-        setLast10(last10);
+        setLast10andMenuItems(last10);
       }
 
       const json = [];
@@ -187,6 +268,20 @@ export function NewApp() {
       Cookies.set("last10", JSON.stringify(json));
     }
   }
+
+  const onChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+
+  const onSearch = (value: string) => {
+    console.log("search:", value);
+  };
+
+  // Filter `option.label` match the user type `input`
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string }
+  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   return (
     <div className="flex flex-row justify-center items-center space-x-2">
@@ -273,11 +368,21 @@ export function NewApp() {
         Calculate
       </Button>
 
-      <Dropdown menu={{ items }} placement="bottomLeft" trigger={["click"]}>
-        <Button>
-          Last 10 <DownOutlined />
-        </Button>
-      </Dropdown>
+      <Select
+        showSearch
+        placeholder="Last 10"
+        optionFilterProp="children"
+        onChange={onChange}
+        onSearch={onSearch}
+        filterOption={filterOption}
+        placement="bottomLeft"
+        dropdownStyle={{ width: "12rem" }}
+        // dropdownRender={(menu) => <div />}
+        options={last10.map((item, index) => ({
+          key: index,
+          label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
+        }))}
+      />
     </div>
   );
 }

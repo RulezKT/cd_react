@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
-// import { create } from "zustand";
+
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { MainScene } from "./components/MainScene/MainScene";
 
+import dayjs from "dayjs";
+import type { Dayjs } from "dayjs";
+
 import axios from "axios";
 
 import { useEffect, useState } from "react";
-
-import { cdInf } from "./components/cdInf";
 
 import {
   Select,
@@ -44,8 +45,8 @@ import Cookies from "js-cookie";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+// type ValuePiece = Date | null;
+// type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 type TimeZone = {
   dstOffset: number;
@@ -65,6 +66,9 @@ import Autocomplete from "react-google-autocomplete";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { NewApp } from "./components/NewApp";
 import { FETCH_API, FETCH_COOKIES, fetchData } from "./components/FetchData";
+import { ReqData } from "./lib/cd_consts";
+import { UseCdInfo, useCdInfo } from "./components/cdInfo";
+import { UseTypeOfChart, useTypeOfChart } from "./components/typeOfChart";
 
 // require("dotenv").config();
 
@@ -97,13 +101,19 @@ const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 function App() {
   // console.log("setting useState");
 
+  const cdInfo: UseCdInfo = useCdInfo();
+  const typeOfChart: UseTypeOfChart = useTypeOfChart();
+
+  // console.log("cdInfo");
+  // console.log(cdInfo);
+
   const [place, setPlace] = useState<Place>({
     name: "",
     latitude: 0,
     longitude: 0,
   });
 
-  const [dateTime, setDateTime] = useState<Value>(new Date());
+  const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
 
   const [timeZone, setTimeZone] = useState<TimeZone>({
     dstOffset: 0,
@@ -113,11 +123,13 @@ function App() {
     timeZoneName: "",
   });
 
-  const [cd_data, setData] = useState(cdInf);
+  // const [cd_data, setData] = useState(cdInf);
   const [last10, setLast10] = useState([]);
 
   const [utc, setUTC] = useState("local");
+
   const [selectedRadioButt, setSelectedRadioButt] = useState("personality");
+
   // const [selectedRadioTimeType, setSelectedRadioTimeType] = useState("utc");
   const [nameValue, setNameValue] = useState("Transits");
 
@@ -174,7 +186,7 @@ function App() {
     // const d = new Date();
     // const julianDay = Date.now() / 86400 + 2440587.5;
 
-    const d = new Date();
+    const d = dayjs();
 
     // const timestamp = d.getTime() / 1000;
     // console.log("timestamp", timestamp);
@@ -182,7 +194,11 @@ function App() {
     // const { data: offset_data } = await axios.get(
     //   `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
     // );
-    const offset = Math.abs(d.getTimezoneOffset() * 60);
+
+    // console.log(dayjs().utcOffset());
+
+    // const offset = Math.abs(d.getTimezoneOffset() * 60);
+    const offset = Math.abs(dayjs().utcOffset() * 60);
 
     // setDateTime(jDtoGreg(julianDay));
     // console.log(`offset ${offset}`);
@@ -190,15 +206,15 @@ function App() {
     setDateTime(d);
 
     setNameValue("Transits");
-    setSelectedRadioButt("personality");
+    onRadioButtValueChange("personality");
     setUTC("local");
 
     const reqData: ReqData = {
-      year: dateTime.getFullYear(),
-      month: dateTime.getMonth() + 1,
-      day: dateTime.getDate(),
-      hours: dateTime.getHours(),
-      minutes: dateTime.getMinutes(),
+      year: dateTime.year(),
+      month: dateTime.month() + 1,
+      day: dateTime.date(),
+      hours: dateTime.hour(),
+      minutes: dateTime.minute(),
       typeOfTime: 1,
       offset: offset,
       place: "",
@@ -207,38 +223,28 @@ function App() {
       name: nameValue,
     };
 
+    // console.log("reqData");
+    // console.log(reqData);
+
     const data = await fetchData(reqData, FETCH_API);
     // console.log("data");
     // console.log(data);
-    setData(data);
+    // setData(data);
     // console.log("initial data");
     // console.log(cd_data);
+
+    cdInfo.set(data);
   }
 
   async function onSubmit(values) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-
-    // console.log(nameValue);
-    // console.log(dateTime);
-    // console.log(place);
-    // console.log(timeZone);
-    // console.log(selectedRadioTimeType);
-    if (utc === "utc") {
-      setTimeZone(null);
-      setPlace(null);
-      // console.log(place);
-      // console.log(timeZone);
-    }
-
-    onRadioButtValueChange("bodygraph");
+    typeOfChart.set("bodygraph");
 
     const reqData: ReqData = {
-      year: dateTime.getFullYear(),
-      month: dateTime.getMonth() + 1,
-      day: dateTime.getDate(),
-      hours: dateTime.getHours(),
-      minutes: dateTime.getMinutes(),
+      year: dateTime.year(),
+      month: dateTime.month() + 1,
+      day: dateTime.date(),
+      hours: dateTime.hour(),
+      minutes: dateTime.minute(),
       typeOfTime: utc === "utc" ? 0 : 1,
       offset: utc === "utc" ? 0 : timeZone?.rawOffset + timeZone?.dstOffset,
       place: utc === "utc" ? "" : place.name,
@@ -249,7 +255,8 @@ function App() {
 
     const data = await fetchData(reqData, FETCH_API);
 
-    setData(data);
+    // setData(data);
+    cdInfo.set(data);
 
     if (data.name != "Transits") {
       if (last10.length < 10) {
@@ -288,6 +295,9 @@ function App() {
     // console.log(`inside onRadioButtValueChange ${value}`);
     setSelectedRadioButt(value);
     // console.log("inside onRadioButtValueChange");
+
+    typeOfChart.set(value);
+    // console.log(typeOfChart);
   }
 
   function onCheckBoxChange(checked: CheckedState) {
@@ -301,6 +311,12 @@ function App() {
     }
   }
 
+  function onChangetDateTime(value: Date) {
+    // Updating the state with the selected radio button's value
+
+    setDateTime(dayjs(value));
+  }
+
   // function onRadioTimeTypeChange(value: string) {
   //   // Updating the state with the selected radio button's value
   //   setSelectedRadioTimeType(value);
@@ -309,8 +325,8 @@ function App() {
 
   function handleSelectChange(value) {
     // console.log("inside handleSelectChange");
-    onRadioButtValueChange("bodygraph");
-    setData(
+    typeOfChart.set("bodygraph");
+    cdInfo.set(
       last10.find(
         (item) =>
           item.name === value.name &&
@@ -359,7 +375,7 @@ function App() {
                             clearIcon={null}
                             disableClock={true}
                             disableCalendar={true}
-                            onChange={setDateTime}
+                            onChange={onChangetDateTime}
                             value={dateTime}
                           />
                         </div>
@@ -420,7 +436,9 @@ function App() {
                                       latitude: lat,
                                       longitude: lng,
                                     });
-                                    const timestamp = dateTime.getTime() / 1000;
+                                    // const timestamp = dateTime.getTime() / 1000;
+                                    const timestamp = dateTime.unix();
+
                                     // console.log("timestamp", timestamp);
 
                                     const { data } = await axios.get(
@@ -488,8 +506,8 @@ function App() {
             <RadioGroup
               className="flex flex-row gap-5 m-10"
               onValueChange={onRadioButtValueChange}
-              defaultValue={selectedRadioButt}
-              value={selectedRadioButt}
+              defaultValue={typeOfChart.typeOfChart}
+              value={typeOfChart.typeOfChart}
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="bodygraph" id="option-one" />
@@ -529,7 +547,7 @@ function App() {
                 <Label htmlFor="option-nine">FD</Label>
               </div>
             </RadioGroup>
-            <MainScene radiobutt={selectedRadioButt} data={cd_data} />
+            <MainScene radiobutt={selectedRadioButt} data={cdInfo.cdInfo} />
           </div>
         </div>
       </div>

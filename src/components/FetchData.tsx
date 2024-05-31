@@ -8,6 +8,9 @@ export async function fetchData(
   reqData: ReqData | CookiesData,
   api: string = FETCH_API
 ) {
+  // console.log("fetchData", reqData);
+  // console.log("fetchData", ...reqData);
+
   const { data } = await axios.post(
     api,
     {
