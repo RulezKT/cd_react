@@ -1,6 +1,6 @@
 // import ShapeDrawer from "../ShapeDrawer/ShapeDrawer";
-import { DrawFormulaClass } from "../body_formula.js";
-import { formula } from "../formula_object.js";
+import { DrawFormulaClass } from "./body_formula.js";
+// import { formula } from "./formula_object.js";
 import { useEffect } from "react";
 
 // const full_width = 3 * 800;

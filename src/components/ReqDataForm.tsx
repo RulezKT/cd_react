@@ -3,8 +3,8 @@ import axios from "axios";
 
 import { Button, DatePicker } from "antd";
 
-import { Dropdown, MenuProps } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+// import { Dropdown, MenuProps } from "antd";
+// import { DownOutlined } from "@ant-design/icons";
 
 import { Checkbox } from "antd";
 
@@ -43,8 +43,8 @@ type Place = {
   longitude: number;
 };
 
-export function NewApp() {
-  let items: MenuProps["items"] = [];
+export function ReqDataForm() {
+  // let items: MenuProps["items"] = [];
   // const items: MenuProps["items"] = [
   //   {
   //     key: "1",
@@ -161,16 +161,16 @@ export function NewApp() {
 
     // setTime(time);
 
-    console.log(tempTime);
+    // console.log(tempTime);
   };
 
   function setLast10andMenuItems(data: CDinfo[]) {
     setLast10(data);
 
-    items = data.map((item, index) => ({
-      key: index,
-      label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
-    }));
+    // items = data.map((item, index) => ({
+    //   key: index,
+    //   label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
+    // }));
 
     // console.log(items);
   }
@@ -283,12 +283,12 @@ export function NewApp() {
     option?: { label: string; value: string }
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-  function handleLast10Select(value) {
-    console.log("inside handleSelectChange");
-    console.log(value);
+  function handleLast10Select(index: string) {
+    // console.log("inside handleSelectChange");
+    // console.log(index);
     typeOfChart.set("bodygraph");
     cdInfo.set(
-      last10[value]
+      last10[parseInt(index)]
       // last10.find(
       //   (item) =>
       //     item.name === value.name &&
@@ -298,106 +298,114 @@ export function NewApp() {
   }
 
   return (
-    <div className="flex flex-row justify-center items-center space-x-2">
-      <Input
-        className="w-28"
-        placeholder="Nickname"
-        prefix={<UserOutlined />}
-        onChange={(e) => setNameValue(e.target.value)}
-        value={nameValue}
-      />
+    <>
+      <div className="flex flex-row justify-center items-center space-x-2">
+        <Input
+          className="w-28"
+          placeholder="Nickname"
+          prefix={<UserOutlined />}
+          onChange={(e) => setNameValue(e.target.value)}
+          value={nameValue}
+        />
 
-      <DatePicker
-        required={true}
-        className="w-32"
-        value={dateTime}
-        onChange={onDateChange}
-        placeholder="select date"
-      />
+        <DatePicker
+          required={true}
+          className="w-32"
+          value={dateTime}
+          onChange={onDateChange}
+          placeholder="select date"
+        />
 
-      <TimePicker
-        required={true}
-        className="w-20"
-        value={dateTime}
-        onChange={onTimeChange}
-        format={timeFormat}
-      />
+        <TimePicker
+          required={true}
+          className="w-20"
+          value={dateTime}
+          onChange={onTimeChange}
+          format={timeFormat}
+        />
 
-      <Checkbox onChange={onUtcChange}>UTC</Checkbox>
+        <Checkbox onChange={onUtcChange}>UTC</Checkbox>
 
-      <Autocomplete
-        className=" w-34 h-8 rounded"
-        required={utc === "local" ? true : false}
-        disabled={utc === "utc" ? true : false}
-        apiKey={GOOGLE_MAPS_API_KEY}
-        onPlaceSelected={(place) => {
-          const geocoder = new google.maps.Geocoder();
-          geocoder.geocode(
-            { address: place.formatted_address },
-            async function (results, status) {
-              if (status == "OK") {
-                // console.log("📍 Coordinates: ", results);
-                // console.log(
-                //   "📍 Coordinates: ",
-                //   results[0].geometry.location.lat()
-                // );
-                // console.log(
-                //   "📍 Coordinates: ",
-                //   results[0].geometry.location.lng()
-                // );
+        <Autocomplete
+          className=" w-34 h-8 rounded"
+          required={utc === "local" ? true : false}
+          disabled={utc === "utc" ? true : false}
+          apiKey={GOOGLE_MAPS_API_KEY}
+          onPlaceSelected={(place) => {
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode(
+              { address: place.formatted_address },
+              async function (results, status) {
+                if (status == "OK") {
+                  // console.log("📍 Coordinates: ", results);
+                  // console.log(
+                  //   "📍 Coordinates: ",
+                  //   results[0].geometry.location.lat()
+                  // );
+                  // console.log(
+                  //   "📍 Coordinates: ",
+                  //   results[0].geometry.location.lng()
+                  // );
 
-                const lat = results[0].geometry.location.lat();
-                const lng = results[0].geometry.location.lng();
+                  const lat = results[0].geometry.location.lat();
+                  const lng = results[0].geometry.location.lng();
 
-                setPlace({
-                  name: place.formatted_address,
-                  latitude: lat,
-                  longitude: lng,
-                });
+                  setPlace({
+                    name: place.formatted_address,
+                    latitude: lat,
+                    longitude: lng,
+                  });
 
-                // console.log(time.hour());
-                // console.log(time.minute());
-                const timestamp = dateTime.unix();
-                // console.log("timestamp", timestamp);
+                  // console.log(time.hour());
+                  // console.log(time.minute());
+                  const timestamp = dateTime.unix();
+                  // console.log("timestamp", timestamp);
 
-                const { data } = await axios.get(
-                  `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
-                );
+                  const { data } = await axios.get(
+                    `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${GOOGLE_MAPS_API_KEY}`
+                  );
 
-                setTimeZone(data);
-                // console.log(data);
-              } else {
-                console.log(
-                  "Geocode was not successful for the following reason: " +
-                    status
-                );
+                  setTimeZone(data);
+                  // console.log(data);
+                } else {
+                  console.log(
+                    "Geocode was not successful for the following reason: " +
+                      status
+                  );
+                }
               }
-            }
-          );
-          // console.log(place);
-        }}
-      />
+            );
+            // console.log(place);
+          }}
+        />
 
-      <Button type="primary" htmlType="submit" onClick={onSubmit}>
-        Calculate
-      </Button>
+        <Button type="primary" htmlType="submit" onClick={onSubmit}>
+          Calculate
+        </Button>
 
-      <Select
-        showSearch
-        placeholder="Last 10"
-        optionFilterProp="children"
-        onChange={handleLast10Select}
-        // onValueChange={handleLast10Select}
-        onSearch={onSearch}
-        // onSelect={handleLast10Select}
-        filterOption={filterOption}
-        placement="bottomLeft"
-        dropdownStyle={{ width: "12rem" }}
-        options={last10.map((item, index) => ({
-          label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
-          value: `${index}`,
-        }))}
-      />
-    </div>
+        <Select
+          showSearch
+          placeholder="Last 10"
+          optionFilterProp="children"
+          onChange={handleLast10Select}
+          // onValueChange={handleLast10Select}
+          onSearch={onSearch}
+          // onSelect={handleLast10Select}
+          filterOption={filterOption}
+          placement="bottomLeft"
+          dropdownStyle={{ width: "12rem" }}
+          options={last10.map((item, index) => ({
+            label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
+            value: `${index}`,
+          }))}
+        />
+      </div>
+      <div className="flex flex-col w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
+        <p>
+          Choose your nickname, date and time. If you know your UTC time, check
+          the box. Otherwise choose your birth place.
+        </p>
+      </div>
+    </>
   );
 }

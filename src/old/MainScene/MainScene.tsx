@@ -1,4 +1,4 @@
-import { BodyGraph } from "./BodyGraph";
+import { BodyGraph } from "../BodyGraph";
 import { DesNumbers } from "./DesNumbers";
 import { PersNumbers } from "./PersNumbers";
 // import type { CD } from "../../types/cd_types_ts/cd_types";
