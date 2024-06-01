@@ -1,63 +1,42 @@
 // import ShapeDrawer from "../ShapeDrawer/ShapeDrawer";
-import { DrawFormulaClass } from "./body_formula.js";
-// import { formula } from "./formula_object.js";
-import { useEffect } from "react";
-
-// const full_width = 3 * 800;
-// const full_height = 2 * 750;
-
-const width = 800;
-const height = 750;
+import { Body } from "./Body.js";
+import { Numerology } from "./Numerology.js";
+import { Fd } from "./Fd.js";
 
 export const BodyGraph = (props) => {
-  // console.log(props);
-
-  // const cd_data = props.data.data;
   const graph_type = props.radiobutt;
-  // console.log(graph_type);
 
   const cdInfo = props.data;
 
-  // console.log(cdInfo);
+  // useEffect(() => {
+  //   const drawFormula = new DrawFormulaClass(cdInfo, width, height);
 
-  // const centers = props.data.Centers.Center;
+  //   drawFormula.drawFormulaV2(graph_type);
+  // });
 
-  //formula.personality.sun.hex
-  useEffect(() => {
-    // console.log(formula);
+  function renderSwitch(graph_type: string) {
+    switch (graph_type) {
+      case "bodygraph":
+        return <Body data={cdInfo} radiobutt={graph_type} />;
+      case "design":
+        return <Body data={cdInfo} radiobutt={graph_type} />;
+      case "personality":
+        return <Body data={cdInfo} radiobutt={graph_type} />;
+      case "bodytransits":
+        return <Body data={cdInfo} />;
+      case "mandala":
+        return <Body data={cdInfo} />;
+      case "composite":
+        return <Body data={cdInfo} />;
+      case "numerology":
+        return <Numerology data={cdInfo} />;
+      case "fd":
+        return <Fd data={cdInfo} />;
 
-    const drawFormula = new DrawFormulaClass(cdInfo, width, height);
+      default:
+        return <Body data={cdInfo} radiobutt={graph_type} />;
+    }
+  }
 
-    drawFormula.drawFormulaV2(graph_type);
-    // console.log("drawFormula was called");
-  });
-
-  // console.log(centers.Throat);
-  return (
-    <>
-      <div className="formula_chart" id="formula_chart"></div>
-
-      <div>{/* <ShapeDrawer /> */}</div>
-      {/* 
-      <div className="flex flex-col">
-        <div className="div">Head : {centers.Head}</div>
-        <div className="div">Ajna : {centers.Ajna} </div>
-
-        <div className="div">Throat : {centers.Throat}</div>
-
-        <div className="div">G : {centers.G}</div>
-
-        <div className="div">Ego : {centers.Ego}</div>
-
-        <div className="div">
-          Spleen : {centers.Spleen} Sacral : {centers.Sacral} Emo :{" "}
-          {centers.Emo}{" "}
-        </div>
-
-        <div className="div">Root : {centers.Root}</div>
-      </div> */}
-
-      {/* <div className="div">{JSON.stringify(props.data)}</div> */}
-    </>
-  );
+  return <div>{renderSwitch(graph_type)}</div>;
 };
