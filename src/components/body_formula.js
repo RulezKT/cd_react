@@ -4634,7 +4634,7 @@ DrawFormulaClass.prototype.draw_body_text = function () {
   let pers_y = this.pers_y - 40;
 
   //Name
-  appendText(svg, pers_x, pers_y, `Name: ${for_name}`);
+  appendText(svg, pers_x, pers_y, `Name: ${formula.name}`);
   pers_y += 20;
 
   //PERSONALITY
@@ -4660,6 +4660,10 @@ DrawFormulaClass.prototype.draw_body_text = function () {
 
   let authority_text = `${formula.hd.generalInfo.authority}`;
   appendText(svg, pers_x, pers_y, `Authority: ${authority_text}`);
+  pers_y += 20;
+
+  let definition_text = `${formula.hd.generalInfo.definition}`;
+  appendText(svg, pers_x, pers_y, `Definition: ${definition_text}`);
   pers_y += 20;
 
   //   let definition_text = `${formula.definition}`;
