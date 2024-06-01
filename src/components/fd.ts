@@ -108,10 +108,11 @@ export function Draw_Fd(
   y: number,
   width: number,
   height: number,
-  fdInfo
+  type_of_chart: string,
+  formula
 ) {
-  const formula_array = fdInfo.plfData;
-  const centers_array = fdInfo.centersArr;
+  const formula_array = formula.fdInfo[type_of_chart].plfData;
+  const centers_array = formula.fdInfo[type_of_chart].centersArr;
 
   // pers: { plfData: PlFdData[]; centersArr: string[] };
   // console.log(formula_array);
@@ -208,7 +209,8 @@ export function Draw_Fd(
     "mercury",
     [pers_x + 30, pers_y + 15],
     "blue",
-    formula_array
+    formula_array,
+    formula
   );
   draw_planet(
     "mercury",
@@ -222,7 +224,8 @@ export function Draw_Fd(
     "mercury",
     [pers_x + temp_x + 30, pers_y + 15],
     "blue",
-    formula_array
+    formula_array,
+    formula
   );
   let temp_i = 2;
   for (let i = 2; i <= 8; i++) {
@@ -253,7 +256,8 @@ export function Draw_Fd(
       planetsArr[temp_i],
       [pers_x + temp_x + 30, pers_y + 15],
       "blue",
-      formula_array
+      formula_array,
+      formula
     );
 
     temp_i++;
@@ -1276,7 +1280,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(10, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        10,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(10, planets_coords);
       draw_contour(10, planets_coords, centers_array[i][2][0], 80);
     }
@@ -1440,7 +1450,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(9, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        9,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(9, planets_coords);
       draw_contour(9, planets_coords, centers_array[i][2][0], 80);
     }
@@ -1679,7 +1695,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(8, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        8,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(8, planets_coords);
       draw_contour(8, planets_coords, centers_array[i][2][0], 80);
     }
@@ -1991,7 +2013,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(7, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        7,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(7, planets_coords);
       draw_contour(7, planets_coords, centers_array[i][2][0], 80);
     }
@@ -2241,7 +2269,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(6, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        6,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(6, planets_coords);
       draw_contour(6, planets_coords, centers_array[i][2][0], 80);
     }
@@ -2453,7 +2487,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(5, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        5,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(5, planets_coords);
       draw_contour(5, planets_coords, centers_array[i][2][0], 80);
     }
@@ -2613,7 +2653,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(4, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        4,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(4, planets_coords);
       draw_contour(4, planets_coords, centers_array[i][2][0], 80);
     }
@@ -2696,7 +2742,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(3, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        3,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(3, planets_coords);
       draw_contour(3, planets_coords, centers_array[i][2][0], 80);
     }
@@ -2750,7 +2802,13 @@ export function Draw_Fd(
           lower_y_border + centers_array[i][2][0] + gap_between_centers;
       }
 
-      draw_many_planets(2, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        2,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_arrows(2, planets_coords);
       draw_contour(
         2,
@@ -2797,7 +2855,13 @@ export function Draw_Fd(
       }
 
       // console.log(centers_array[i][0][0]);
-      draw_many_planets(1, centers_array[i][0], planets_coords, formula_array);
+      draw_many_planets(
+        1,
+        centers_array[i][0],
+        planets_coords,
+        formula_array,
+        formula
+      );
       draw_contour(1, planets_coords, 30, 30);
     }
   }
@@ -2937,7 +3001,8 @@ export function Draw_Fd(
                     1,
                     [next_planet],
                     planets_coords,
-                    formula_array
+                    formula_array,
+                    formula
                   );
                   draw_arrow(
                     planets_coords[0][0],
@@ -3002,7 +3067,8 @@ export function Draw_Fd(
                     1,
                     [next_planet],
                     planets_coords,
-                    formula_array
+                    formula_array,
+                    formula
                   );
                   draw_arrow(
                     planets_coords[0][0],
@@ -3067,7 +3133,8 @@ export function Draw_Fd(
                   1,
                   [next_planet],
                   planets_coords,
-                  formula_array
+                  formula_array,
+                  formula
                 );
                 draw_arrow(
                   planets_coords[0][0],
@@ -3495,7 +3562,13 @@ function draw_arrow(x, y, x1, y1, mutual_reception = false) {
 }
 
 //рисование Центра
-function draw_many_planets(number, planets, planets_coords, formula_array) {
+function draw_many_planets(
+  number,
+  planets,
+  planets_coords,
+  formula_array,
+  formula
+) {
   for (let i = 0; i < number; i++) {
     if (parseInt(planets[i])) {
       continue;
@@ -3517,19 +3590,34 @@ function draw_many_planets(number, planets, planets_coords, formula_array) {
     // console.log(`planets_full_info = ${JSON.stringify(planets_full_info)}`);
 
     //рисуем силу и ретроградность
-    draw_power_and_retro(planets[i], planets_coords[i], "black", formula_array);
+    draw_power_and_retro(
+      planets[i],
+      planets_coords[i],
+      "black",
+      formula_array,
+      formula
+    );
   }
 }
 
 //рисуем силу и ретроградность
-function draw_power_and_retro(planet, planets_coords, color, formula_array) {
+function draw_power_and_retro(
+  planet,
+  planets_coords,
+  color,
+  formula_array,
+  formula
+) {
+  // console.log(formula_array);
   // console.log(`planet = ${planet}`);
   //рисуем силу и ретроградность
   appendText(
     thissvg,
     planets_coords[0] + 7,
     planets_coords[1] + 17,
-    `${formula_array[planetsArr.indexOf(planet)].direction}`,
+    `${
+      formula.hd.personality.planetsData[planetsArr.indexOf(planet)].direction
+    }`,
     color,
     "start",
     10
@@ -3538,7 +3626,7 @@ function draw_power_and_retro(planet, planets_coords, color, formula_array) {
     thissvg,
     planets_coords[0] + 7,
     planets_coords[1] + 29,
-    `${formula_array[planetsArr.indexOf(planet)].power}`,
+    `${formula.hd.personality.planetsData[planetsArr.indexOf(planet)].power}`,
     color,
     "start",
     10

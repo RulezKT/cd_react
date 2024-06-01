@@ -5257,7 +5257,7 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
 
     case "fd":
       //рисуем Формулу Души
-      Draw_Fd(svg, 0, 0, width, height, this.data_formula.fdInfo.pers);
+      Draw_Fd(svg, 0, 0, width, height, "pers", this.data_formula);
 
       break;
 
