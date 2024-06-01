@@ -4633,22 +4633,24 @@ DrawFormulaClass.prototype.draw_body_text = function () {
   let pers_x = this.pers_x + 10;
   let pers_y = this.pers_y - 40;
 
+  let date_text = ``;
+
   //Name
-  appendText(svg, pers_x, pers_y, `Name: ${formula.name}`);
-  pers_y += 20;
+  // appendText(svg, pers_x, pers_y, `Name: ${formula.name}`);
+  // pers_y += 20;
 
   //PERSONALITY
 
-  let date_text = `${this.pers_utc.hours}:${this.pers_utc.minutes}:${this.pers_utc.seconds} ${this.pers_utc.day}.${this.pers_utc.month}.${this.pers_utc.year}`;
-  appendText(svg, pers_x, pers_y, `UTC: ${date_text}`);
-  pers_y += 20;
+  // date_text = `${this.pers_utc.hours}:${this.pers_utc.minutes}:${this.pers_utc.seconds} ${this.pers_utc.day}.${this.pers_utc.month}.${this.pers_utc.year}`;
+  // appendText(svg, pers_x, pers_y, `UTC: ${date_text}`);
+  // pers_y += 20;
 
-  if (this.pers_local) {
-    date_text = `${this.pers_local.hours}:${this.pers_local.minutes}:${this.pers_local.seconds} ${this.pers_local.day}.${this.pers_local.month}.${this.pers_local.year}`;
-    appendText(svg, pers_x, pers_y, `Loc.: ${date_text}`);
-  }
+  // if (this.pers_local) {
+  //   date_text = `${this.pers_local.hours}:${this.pers_local.minutes}:${this.pers_local.seconds} ${this.pers_local.day}.${this.pers_local.month}.${this.pers_local.year}`;
+  //   appendText(svg, pers_x, pers_y, `Loc.: ${date_text}`);
+  // }
 
-  pers_y += 20;
+  // pers_y += 20;
 
   let type_text = `${formula.hd.generalInfo.type}`;
   appendText(svg, pers_x, pers_y, `Type: ${type_text}`);
@@ -4724,11 +4726,11 @@ DrawFormulaClass.prototype.draw_body_text = function () {
     seconds: d_second_d,
   } = formula.time.des_time;
 
-  date_text = `${d_hour_d}:${d_minute_d}:${d_second_d}`;
-  appendText(svg, des_x, des_y, `D.UTC: ${date_text}`);
-  des_y += 20;
-  date_text = `${d_day_d}.${d_month_d}.${d_year_d}`;
-  appendText(svg, des_x, des_y, `D.Date: ${date_text}`);
+  // date_text = `${d_hour_d}:${d_minute_d}:${d_second_d}`;
+  // appendText(svg, des_x, des_y, `D.UTC: ${date_text}`);
+  // des_y += 20;
+  // date_text = `${d_day_d}.${d_month_d}.${d_year_d}`;
+  // appendText(svg, des_x, des_y, `D.Date: ${date_text}`);
 
   des_x = this.pers_x + 190;
   des_y = this.pers_y + 100;
