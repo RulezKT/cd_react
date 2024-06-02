@@ -587,8 +587,8 @@ export type PlFdData = {
 };
 
 export type Fd = {
-  pers: { plfData: PlFdData[]; centersArr: string[] };
-  des: { plfData: PlFdData[]; centersArr: string[] };
+  pers: { plfData: PlFdData[]; centersArr: string[][] };
+  des: { plfData: PlFdData[]; centersArr: string[][] };
 };
 
 export type Astro = {};
