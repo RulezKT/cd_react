@@ -322,6 +322,24 @@ export const MonthsArr: string[] = [
   "December",
 ];
 
+export const planetsArr = [
+  "ssb",
+  "mercury",
+  "venus",
+  "earth",
+  "mars",
+  "jupiter",
+  "saturn",
+  "uranus",
+  "neptune",
+  "pluto",
+  "sun",
+  "moon",
+  "north_node",
+  "south_node",
+  "hiron",
+];
+
 function GetName(targetCode: number): string {
   const NaifCodes: { [key: number]: string } = {
     0: "SSB",

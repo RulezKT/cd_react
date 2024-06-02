@@ -1,105 +1,89 @@
 import * as d3 from "d3";
 import { appendText } from "./auxiliary_fns.ts";
 import { CDinfo, PlanetsData, PlFdData } from "@/lib/cd_consts.ts";
+import { planetsArr } from "@/lib/cd_consts.ts";
 const lineFunction = d3
   .line()
   .x((d) => d.x)
   .y((d) => d.y);
 
-const planetsArr = [
-  "ssb",
-  "mercury",
-  "venus",
-  "earth",
-  "mars",
-  "jupiter",
-  "saturn",
-  "uranus",
-  "neptune",
-  "pluto",
-  "sun",
-  "moon",
-  "north_node",
-  "south_node",
-  "hiron",
-];
-
-const size_of_the_planet_to_draw = 14;
-
-//название как ключ,
-// координаты планеты на графике + флаг нарисовали мы ее или еще нет
-const planets_full_info = {
-  mercury: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  venus: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  earth: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  mars: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  jupiter: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  saturn: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  uranus: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  neptune: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  pluto: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  sun: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  moon: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  north_node: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-  south_node: {
-    x: NaN,
-    y: NaN,
-    drawn: false,
-  },
-};
-
 export class FD {
   svg: d3.Selection<SVGGElement, unknown, null, undefined>;
   width: number;
   height: number;
+
+  size_of_the_planet_to_draw = 14;
+
+  //название как ключ,
+  // координаты планеты на графике + флаг нарисовали мы ее или еще нет
+  planets_full_info = {
+    mercury: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    venus: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    earth: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    mars: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    jupiter: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    saturn: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    uranus: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    neptune: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    pluto: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    sun: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    moon: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    north_node: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+    south_node: {
+      x: NaN,
+      y: NaN,
+      drawn: false,
+    },
+  };
+
   constructor(
     svg: d3.Selection<SVGGElement, unknown, null, undefined>,
     width: number,
@@ -213,7 +197,7 @@ export class FD {
       "mercury",
       pers_x + 30,
       pers_y + 15,
-      size_of_the_planet_to_draw,
+      this.size_of_the_planet_to_draw,
       "blue"
     );
     //рисуем силу и ретроградность
@@ -228,7 +212,7 @@ export class FD {
       "mercury",
       pers_x + temp_x + 30,
       pers_y + 15,
-      size_of_the_planet_to_draw,
+      this.size_of_the_planet_to_draw,
       "blue"
     );
     //рисуем силу и ретроградность
@@ -260,7 +244,7 @@ export class FD {
         planetsArr[temp_i],
         pers_x + temp_x + 30,
         pers_y + 15,
-        size_of_the_planet_to_draw,
+        this.size_of_the_planet_to_draw,
         "blue"
       );
       //рисуем силу и ретроградность
@@ -2978,7 +2962,7 @@ export class FD {
                 if (
                   centers_array[center_number][1] === 2 &&
                   centers_array[center_number][2][0] === 40 &&
-                  planets_full_info[points_to].x === second_column_x
+                  this.planets_full_info[points_to].x === second_column_x
                 ) {
                   left_side = false;
                 }
@@ -2986,7 +2970,7 @@ export class FD {
                 //проверяем для остальных центров, если планета в центра стоит во втором ряду, то налево уже не нарисовать
                 if (
                   centers_array[center_number][1] > 2 &&
-                  planets_full_info[points_to].x === second_column_x
+                  this.planets_full_info[points_to].x === second_column_x
                 ) {
                   left_side = false;
                 }
@@ -3006,7 +2990,7 @@ export class FD {
                 if (left_side) {
                   //определяем в каком квадрате рисовать
                   y_square = Math.ceil(
-                    (planets_full_info[points_to].y - start_center_y) /
+                    (this.planets_full_info[points_to].y - start_center_y) /
                       (vertical_size / 12)
                   );
                   // console.log(`y_square = ${y_square}`);
@@ -3040,8 +3024,8 @@ export class FD {
                         (vertical_size / 12) * y_square + start_center_y,
                       ],
                       [
-                        planets_full_info[points_to].x,
-                        planets_full_info[points_to].y,
+                        this.planets_full_info[points_to].x,
+                        this.planets_full_info[points_to].y,
                       ],
                     ];
 
@@ -3066,7 +3050,7 @@ export class FD {
                 if (!left_side) {
                   //определяем в каком квадрате рисовать
                   y_square = Math.ceil(
-                    (planets_full_info[points_to].y - start_center_y) /
+                    (this.planets_full_info[points_to].y - start_center_y) /
                       (vertical_size / 12)
                   );
                   //console.log(y_square);
@@ -3103,8 +3087,8 @@ export class FD {
                         (vertical_size / 12) * y_square + start_center_y,
                       ],
                       [
-                        planets_full_info[points_to].x,
-                        planets_full_info[points_to].y,
+                        this.planets_full_info[points_to].x,
+                        this.planets_full_info[points_to].y,
                       ],
                     ];
                     //                            console.log(key);
@@ -3135,7 +3119,7 @@ export class FD {
               } else {
                 //определяем в каком квадрате рисовать
                 y_square = Math.ceil(
-                  (planets_full_info[points_to].y - start_center_y) /
+                  (this.planets_full_info[points_to].y - start_center_y) /
                     (vertical_size / 12)
                 );
                 //console.log(y_square);
@@ -3169,8 +3153,8 @@ export class FD {
                       (vertical_size / 12) * y_square + start_center_y,
                     ],
                     [
-                      planets_full_info[points_to].x,
-                      planets_full_info[points_to].y,
+                      this.planets_full_info[points_to].x,
+                      this.planets_full_info[points_to].y,
                     ],
                   ];
                   //                            console.log(key);
@@ -3408,7 +3392,7 @@ export class FD {
       }
       if (
         planet === formula_array[key].point_to_planet &&
-        !planets_full_info[planetsArr[key]].drawn &&
+        !this.planets_full_info[planetsArr[key]].drawn &&
         formula_array[planetsArr.indexOf(planet)].orbit ===
           formula_array[key].orbit - 1
       ) {
@@ -3625,15 +3609,15 @@ export class FD {
         planets[i],
         planets_coords[i][0],
         planets_coords[i][1],
-        size_of_the_planet_to_draw,
+        this.size_of_the_planet_to_draw,
         "black"
       );
 
       // console.log(typeof planets[i]);
       // console.log(`planets[i] = ${planets[i]}`);
-      planets_full_info[planets[i]].x = planets_coords[i][0];
-      planets_full_info[planets[i]].y = planets_coords[i][1];
-      planets_full_info[planets[i]].drawn = true;
+      this.planets_full_info[planets[i]].x = planets_coords[i][0];
+      this.planets_full_info[planets[i]].y = planets_coords[i][1];
+      this.planets_full_info[planets[i]].drawn = true;
 
       // console.log(`planets_full_info = ${JSON.stringify(planets_full_info)}`);
 
