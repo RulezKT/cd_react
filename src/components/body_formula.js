@@ -2,8 +2,6 @@ import * as d3 from "d3";
 import { appendText, appendTextPlanets } from "./auxiliary_fns.ts";
 import { drawNumerology } from "./numerology.ts";
 
-import { Draw_Fd } from "./fd.ts";
-
 import { environment, motivation, nutrition } from "./phs.ts";
 
 export const SSB = 0;
@@ -5254,12 +5252,6 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
         height,
         this.data_formula.numerologyInfo
       );
-
-      break;
-
-    case "fd":
-      //рисуем Формулу Души
-      Draw_Fd(svg, 0, 0, width, height, "pers", this.data_formula);
 
       break;
 

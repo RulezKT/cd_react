@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { Draw_Fd } from "./fd.ts";
+import { Draw_Fd, FD } from "./fd.ts";
 import * as d3 from "d3";
 
 const width = 800;
@@ -31,7 +31,9 @@ export const Fd = (props) => {
       .attr("fill", "#D3D3D3")
       .attr("stroke", "#000000");
 
-    Draw_Fd(svg, 0, 0, width, height, "pers", cdInfo);
+    const fd = new FD(svg, width, height);
+
+    fd.draw(cdInfo);
   });
 
   return (
