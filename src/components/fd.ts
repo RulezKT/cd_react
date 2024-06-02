@@ -90,6 +90,41 @@ export class FD {
     this.height = height;
   }
   public draw(cdInfo: CDinfo, calc: string) {
+    let planetsData: PlanetsData[];
+    let formula_array: PlFdData[];
+    let centers_array: string[];
+
+    switch (calc) {
+      case "full":
+        //рисуем Полную Формулу
+        planetsData = cdInfo.hd.personality.planetsData;
+        formula_array = cdInfo.fdInfo.pers.plfData;
+        centers_array = cdInfo.fdInfo.pers.centersArr;
+        // console.log(`drawFormulaV2 full`);
+        break;
+
+      case "design":
+        //рисуем Красное
+        planetsData = cdInfo.hd.design.planetsData;
+        formula_array = cdInfo.fdInfo.des.plfData;
+        centers_array = cdInfo.fdInfo.des.centersArr;
+        break;
+
+      case "personality":
+        //рисуем Личность
+        planetsData = cdInfo.hd.personality.planetsData;
+        formula_array = cdInfo.fdInfo.pers.plfData;
+        centers_array = cdInfo.fdInfo.pers.centersArr;
+        // console.log(`drawFormulaV2 personality`);
+        break;
+
+      default:
+        planetsData = cdInfo.hd.personality.planetsData;
+        formula_array = cdInfo.fdInfo.pers.plfData;
+        centers_array = cdInfo.fdInfo.pers.centersArr;
+        console.log(`Sorry, some error in drawFormulaV2.`);
+    }
+
     //окантовка
     this.svg
       .append("rect")
@@ -100,33 +135,16 @@ export class FD {
       .attr("fill", "#D3D3D3")
       .attr("stroke", "#000000");
 
-    const planetsData = cdInfo.hd.personality.planetsData;
-    const formula_array = cdInfo.fdInfo.pers.plfData;
-    const centers_array = cdInfo.fdInfo.pers.centersArr;
     this.draw_Fd(
-      this.svg,
       this.width,
       this.height,
       formula_array,
       centers_array,
       planetsData
     );
-    // planetsData = cdInfo.hd.design.planetsData;
-    // formula_array = cdInfo.fdInfo.des.plfData;
-    // centers_array = cdInfo.fdInfo.des.centersArr;
-    // this.draw_Fd(
-    //   this.svg,
-    //   this.width,
-    //   this.height,
-    //   formula_array,
-    //   centers_array,
-    //   planetsData
-    // );
   }
 
   private draw_Fd(
-    svg: d3.Selection<SVGGElement, unknown, null, undefined>,
-
     width: number,
     height: number,
 
@@ -134,8 +152,6 @@ export class FD {
     centers_array: string[],
     planetsData: PlanetsData[]
   ) {
-    this.svg = svg;
-
     // svg
     //   .append("rect")
     //   .attr("height", `${height}`)
@@ -149,7 +165,7 @@ export class FD {
     let pers_y = 0;
 
     //окантовка для Формулы Души
-    svg
+    this.svg
       .append("rect")
       .attr("height", height - 200) //550
       .attr("width", width)
@@ -167,7 +183,7 @@ export class FD {
       { x: pers_x + width, y: temp_y },
     ];
 
-    svg
+    this.svg
       .append("path")
       .attr("d", lineFunction(points))
       .attr("stroke", "black")
@@ -180,7 +196,7 @@ export class FD {
       { x: pers_x + temp_x, y: pers_y + height - 200 },
     ];
 
-    svg
+    this.svg
       .append("path")
       .attr("d", lineFunction(points))
       .attr("stroke", "black")
@@ -193,7 +209,7 @@ export class FD {
       { x: pers_x + temp_x, y: pers_y + height - 200 },
     ];
 
-    svg
+    this.svg
       .append("path")
       .attr("d", lineFunction(points))
       .attr("stroke", "black")
@@ -238,7 +254,7 @@ export class FD {
         { x: pers_x + temp_x, y: pers_y + height - 200 },
       ];
 
-      svg
+      this.svg
         .append("path")
         .attr("d", lineFunction(points))
         .attr("stroke", "black")
@@ -272,7 +288,7 @@ export class FD {
       { x: pers_x + temp_x, y: pers_y + height - 200 },
     ];
 
-    svg
+    this.svg
       .append("path")
       .attr("d", lineFunction(points))
       .attr("stroke", "black")
