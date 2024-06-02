@@ -349,6 +349,7 @@ export function ReqDataForm() {
           filterOption={filterOption}
           placement="bottomLeft"
           dropdownStyle={{ width: "12rem" }}
+          style={{ width: "6rem" }}
           options={last10.map((item, index) => ({
             label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
             value: `${index}`,
