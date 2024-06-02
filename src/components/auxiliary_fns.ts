@@ -1,5 +1,15 @@
 import * as d3 from "d3";
 
+interface D3lineData {
+  x: number;
+  y: number;
+}
+
+export const lineFunction = d3
+  .line<D3lineData>()
+  .x((d) => d.x)
+  .y((d) => d.y);
+
 export const appendText = (
   svg: d3.Selection<SVGGElement, unknown, null, undefined>,
   x: number,

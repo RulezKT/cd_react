@@ -1,11 +1,7 @@
 import * as d3 from "d3";
-import { appendText } from "./auxiliary_fns.ts";
+import { appendText, lineFunction } from "./auxiliary_fns.ts";
 import { CDinfo, PlanetsData, PlFdData } from "@/lib/cd_consts.ts";
 import { planetsArr } from "@/lib/cd_consts.ts";
-const lineFunction = d3
-  .line()
-  .x((d) => d.x)
-  .y((d) => d.y);
 
 export class FD {
   svg: d3.Selection<SVGGElement, unknown, null, undefined>;
