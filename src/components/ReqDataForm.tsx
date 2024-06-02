@@ -22,6 +22,7 @@ import Cookies from "js-cookie";
 
 import { UseCdInfo, useCdInfo } from "./cdInfo";
 import { UseTypeOfChart, useTypeOfChart } from "./typeOfChart";
+import { UseCalcType, useCalcType } from "./calcType";
 
 import { ReqData } from "@/lib/cd_consts";
 import { FETCH_API, FETCH_COOKIES, fetchData } from "./FetchData";
@@ -44,60 +45,12 @@ type Place = {
 };
 
 export function ReqDataForm() {
-  // let items: MenuProps["items"] = [];
-  // const items: MenuProps["items"] = [
-  //   {
-  //     key: "1",
-  //     label: (
-  //       <a
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //         href="https://www.antgroup.com"
-  //       >
-  //         1st menu item
-  //       </a>
-  //     ),
-  //   },
-  //   {
-  //     key: "2",
-  //     label: (
-  //       <a
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //         href="https://www.aliyun.com"
-  //       >
-  //         2nd menu item (disabled)
-  //       </a>
-  //     ),
-
-  //     disabled: true,
-  //   },
-  //   {
-  //     key: "3",
-  //     label: (
-  //       <a
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //         href="https://www.luohanacademy.com"
-  //       >
-  //         3rd menu item (disabled)
-  //       </a>
-  //     ),
-  //     disabled: true,
-  //   },
-  //   {
-  //     key: "4",
-  //     danger: true,
-  //     label: "a danger item",
-  //   },
-  // ];
-
-  // console.log(items);
   const timeFormat = "HH:mm";
   const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 
   const cdInfo: UseCdInfo = useCdInfo();
   const typeOfChart: UseTypeOfChart = useTypeOfChart();
+  const calcType: UseCalcType = useCalcType();
 
   const [last10, setLast10] = useState<CDinfo[]>([]);
   const [utc, setUTC] = useState("local");
@@ -197,7 +150,9 @@ export function ReqDataForm() {
     setDateTime(d);
 
     setNameValue("Transits");
-    typeOfChart.set("personality");
+    typeOfChart.set("bodygraph");
+    calcType.set("personality");
+
     setUTC("local");
 
     const reqData: ReqData = {
@@ -298,7 +253,7 @@ export function ReqDataForm() {
   }
 
   return (
-    <>
+    <div className="flex flex-col">
       <div className="flex flex-row justify-center items-center space-x-2">
         <Input
           className="w-28"
@@ -400,12 +355,12 @@ export function ReqDataForm() {
           }))}
         />
       </div>
-      <div className="flex flex-col w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
+      <div className="flex flex-row w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
         <p>
           Choose your nickname, date and time. If you know your UTC time, check
           the box. Otherwise choose your birth place.
         </p>
       </div>
-    </>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ import { CDinfo, PlanetsData, PlFdData } from "@/lib/cd_consts.ts";
 import { planetsArr } from "@/lib/cd_consts.ts";
 
 export class FD {
-  svg: d3.Selection<SVGGElement, unknown, null, undefined>;
+  svg: d3.Selection<SVGGElement, unknown, HTMLElement, undefined>;
   width: number;
   height: number;
 
@@ -89,7 +89,17 @@ export class FD {
     this.width = width;
     this.height = height;
   }
-  public draw(cdInfo: CDinfo) {
+  public draw(cdInfo: CDinfo, calc: string) {
+    //окантовка
+    this.svg
+      .append("rect")
+      .attr("height", `${this.height}`)
+      .attr("width", `${this.width}`)
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("fill", "#D3D3D3")
+      .attr("stroke", "#000000");
+
     const planetsData = cdInfo.hd.personality.planetsData;
     const formula_array = cdInfo.fdInfo.pers.plfData;
     const centers_array = cdInfo.fdInfo.pers.centersArr;

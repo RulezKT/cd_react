@@ -1,10 +1,11 @@
 // import ShapeDrawer from "../ShapeDrawer/ShapeDrawer";
 import { Body } from "./Body.js";
-import { Numerology } from "./Numerology.js";
-import { Fd } from "./Fd.js";
+import { Numerology } from "./Numerology.tsx";
+import { Fd } from "./Fd.tsx";
 
 export const BodyGraph = (props) => {
-  const graph_type = props.radiobutt;
+  const graph_type = props.chart;
+  // const calcType = props.calc;
 
   const cdInfo = props.data;
 
@@ -17,24 +18,21 @@ export const BodyGraph = (props) => {
   function renderSwitch(graph_type: string) {
     switch (graph_type) {
       case "bodygraph":
-        return <Body data={cdInfo} radiobutt={graph_type} />;
-      case "design":
-        return <Body data={cdInfo} radiobutt={graph_type} />;
-      case "personality":
-        return <Body data={cdInfo} radiobutt={graph_type} />;
-      case "bodytransits":
-        return <Body data={cdInfo} />;
-      case "mandala":
-        return <Body data={cdInfo} />;
-      case "composite":
-        return <Body data={cdInfo} />;
+        return <Body data={cdInfo} calc={props.calc} />;
+
+      // case "bodytransits":
+      //   return <Body data={cdInfo} />;
+      // case "mandala":
+      //   return <Body data={cdInfo} />;
+      // case "composite":
+      //   return <Body data={cdInfo} />;
       case "numerology":
-        return <Numerology data={cdInfo} />;
+        return <Numerology data={cdInfo} calc={props.calc} />;
       case "fd":
-        return <Fd data={cdInfo} />;
+        return <Fd data={cdInfo} calc={props.calc} />;
 
       default:
-        return <Body data={cdInfo} radiobutt={graph_type} />;
+        return <Body data={cdInfo} calc={"full"} />;
     }
   }
 

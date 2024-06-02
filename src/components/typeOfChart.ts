@@ -6,7 +6,7 @@ export interface UseTypeOfChart {
 }
 
 export const useTypeOfChart = create<UseTypeOfChart>((set) => ({
-  typeOfChart: "personality",
+  typeOfChart: "bodygraph",
 
   set: (chartType: string) => set(() => ({ typeOfChart: chartType })),
 }));

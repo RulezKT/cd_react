@@ -5227,7 +5227,7 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
   this.y = (height / 100) * 10;
 
   switch (graph_type) {
-    case "bodygraph":
+    case "full":
       //рисуем Полную Формулу
       this.draw_Body();
       break;

@@ -7,14 +7,14 @@ const height = 750;
 
 export const Body = (props) => {
   const cdInfo = props.data;
-  const graph_type = props.radiobutt;
+  // const graph_type = props.calc;
 
   useEffect(() => {
     // console.log(formula);
 
     const drawFormula = new DrawFormulaClass(cdInfo, width, height);
 
-    drawFormula.drawFormulaV2(graph_type);
+    drawFormula.drawFormulaV2(props.calc);
     // console.log("drawFormula was called");
   });
 
