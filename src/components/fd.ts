@@ -8,6 +8,7 @@ export class FD {
   width: number;
   height: number;
 
+  // size and orientation of centers.
   // i of centers_array[i] and size_and_orientation[i] are equal
   size_and_orientation: [number, string][] = [];
 
@@ -97,36 +98,50 @@ export class FD {
     let formula_array: PlFdData[];
     let centers_array: string[][];
 
-    // size and orientation of centers.
-
+    //deep cloning
     switch (calc) {
       case "full":
         //рисуем Полную Формулу
-        planetsData = cdInfo.hd.personality.planetsData;
-        formula_array = cdInfo.fdInfo.pers.plfData;
-        centers_array = cdInfo.fdInfo.pers.centersArr;
+        planetsData = JSON.parse(
+          JSON.stringify(cdInfo.hd.personality.planetsData)
+        );
+        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.pers.plfData));
+        centers_array = JSON.parse(
+          JSON.stringify(cdInfo.fdInfo.pers.centersArr)
+        );
         // console.log(`drawFormulaV2 full`);
         break;
 
       case "design":
         //рисуем Красное
-        planetsData = cdInfo.hd.design.planetsData;
-        formula_array = cdInfo.fdInfo.des.plfData;
-        centers_array = cdInfo.fdInfo.des.centersArr;
+
+        planetsData = JSON.parse(JSON.stringify(cdInfo.hd.design.planetsData));
+        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.des.plfData));
+        centers_array = JSON.parse(
+          JSON.stringify(cdInfo.fdInfo.des.centersArr)
+        );
         break;
 
       case "personality":
         //рисуем Личность
-        planetsData = cdInfo.hd.personality.planetsData;
-        formula_array = cdInfo.fdInfo.pers.plfData;
-        centers_array = cdInfo.fdInfo.pers.centersArr;
+        planetsData = JSON.parse(
+          JSON.stringify(cdInfo.hd.personality.planetsData)
+        );
+        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.pers.plfData));
+        centers_array = JSON.parse(
+          JSON.stringify(cdInfo.fdInfo.pers.centersArr)
+        );
         // console.log(`drawFormulaV2 personality`);
         break;
 
       default:
-        planetsData = cdInfo.hd.personality.planetsData;
-        formula_array = cdInfo.fdInfo.pers.plfData;
-        centers_array = cdInfo.fdInfo.pers.centersArr;
+        planetsData = JSON.parse(
+          JSON.stringify(cdInfo.hd.personality.planetsData)
+        );
+        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.pers.plfData));
+        centers_array = JSON.parse(
+          JSON.stringify(cdInfo.fdInfo.pers.centersArr)
+        );
         console.log(`Sorry, some error in drawFormulaV2.`);
     }
 
@@ -140,19 +155,10 @@ export class FD {
       .attr("fill", "#D3D3D3")
       .attr("stroke", "#000000");
 
-    this.draw_Fd(
-      this.width,
-      this.height,
-      formula_array,
-      centers_array,
-      planetsData
-    );
+    this.draw_Fd(formula_array, centers_array, planetsData);
   }
 
   private draw_Fd(
-    width: number,
-    height: number,
-
     plFdata: PlFdData[],
     centers_array: string[][],
     planetsData: PlanetsData[]
@@ -172,8 +178,8 @@ export class FD {
     //окантовка для Формулы Души
     this.svg
       .append("rect")
-      .attr("height", height - 200) //550
-      .attr("width", width)
+      .attr("height", this.height - 200) //550
+      .attr("width", this.width)
       .attr("x", pers_x)
       .attr("y", pers_y)
       .attr("fill", "none")
@@ -185,7 +191,7 @@ export class FD {
 
     let points = [
       { x: pers_x, y: temp_y },
-      { x: pers_x + width, y: temp_y },
+      { x: pers_x + this.width, y: temp_y },
     ];
 
     this.svg
@@ -198,7 +204,7 @@ export class FD {
 
     points = [
       { x: pers_x + temp_x, y: pers_y },
-      { x: pers_x + temp_x, y: pers_y + height - 200 },
+      { x: pers_x + temp_x, y: pers_y + this.height - 200 },
     ];
 
     this.svg
@@ -211,7 +217,7 @@ export class FD {
 
     points = [
       { x: pers_x + temp_x, y: pers_y },
-      { x: pers_x + temp_x, y: pers_y + height - 200 },
+      { x: pers_x + temp_x, y: pers_y + this.height - 200 },
     ];
 
     this.svg
@@ -220,6 +226,7 @@ export class FD {
       .attr("stroke", "black")
       .attr("fill", "none");
 
+    //left side mercury
     this.draw_planet(
       "mercury",
       pers_x + 30,
@@ -235,28 +242,14 @@ export class FD {
       plFdata,
       planetsData
     );
-    this.draw_planet(
-      "mercury",
-      pers_x + temp_x + 30,
-      pers_y + 15,
-      this.size_of_the_planet_to_draw,
-      "blue"
-    );
-    //рисуем силу и ретроградность
-    this.draw_power_and_retro(
-      "mercury",
-      [pers_x + temp_x + 30, pers_y + 15],
-      "blue",
-      plFdata,
-      planetsData
-    );
-    let temp_i = 2;
-    for (let i = 2; i <= 8; i++) {
-      temp_x += 60;
 
+    // header planets
+    for (let i = 1; i <= 9; i++) {
+      //пропускаем Землю
+      if (i === 3) continue;
       points = [
         { x: pers_x + temp_x, y: pers_y },
-        { x: pers_x + temp_x, y: pers_y + height - 200 },
+        { x: pers_x + temp_x, y: pers_y + this.height - 200 },
       ];
 
       this.svg
@@ -265,10 +258,8 @@ export class FD {
         .attr("stroke", "black")
         .attr("fill", "none");
 
-      //пропускаем Землю
-      if (i === 3) temp_i++;
       this.draw_planet(
-        planetsArr[temp_i],
+        planetsArr[i],
         pers_x + temp_x + 30,
         pers_y + 15,
         this.size_of_the_planet_to_draw,
@@ -276,21 +267,21 @@ export class FD {
       );
       //рисуем силу и ретроградность
       this.draw_power_and_retro(
-        planetsArr[temp_i],
+        planetsArr[i],
         [pers_x + temp_x + 30, pers_y + 15],
         "blue",
         plFdata,
         planetsData
       );
 
-      temp_i++;
+      temp_x += 60;
     }
 
     temp_x += 60;
 
     points = [
       { x: pers_x + temp_x, y: pers_y },
-      { x: pers_x + temp_x, y: pers_y + height - 200 },
+      { x: pers_x + temp_x, y: pers_y + this.height - 200 },
     ];
 
     this.svg
@@ -302,7 +293,6 @@ export class FD {
     //устанавливаем минимальную занимаемую высоту центра
     // и его ориентацию
     //для одиночных центров это всегда константа
-
     for (let i = 0; i < centers_array.length; i++) {
       if (centers_array[i].length === 1) {
         this.size_and_orientation[i] = [40, "horizontal"];
@@ -1009,7 +999,7 @@ export class FD {
     const second_column_x = pers_x + 60 + 10 + 40 + 30;
 
     const start_center_y = pers_y + 60 + 5;
-    const end_center_y = pers_y + height - 200 - 5;
+    const end_center_y = pers_y + this.height - 200 - 5;
 
     //750-200   - 60 - 10 = 480 /40 = 12 планет помещается по вертикали
     //60 - верхняя кромка с орбитами,
@@ -3763,7 +3753,7 @@ export class FD {
 
   //ищет в массиве центров планеты, на которые указывает максимум 1 планета,
   //для того чтобы можно было съэкономить место на орбитах и рисовать такую планету слева на формуле.
-  private find_horizontal(array, formula_array) {
+  private find_horizontal(array, formula_array): boolean[] {
     const planet_horizontal = [];
 
     //изначально устанавливаем на все планеты, что они могут рисоваться слева
