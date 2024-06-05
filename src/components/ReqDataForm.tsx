@@ -25,7 +25,7 @@ import { UseTypeOfChart, useTypeOfChart } from "./typeOfChart";
 import { UseCalcType, useCalcType } from "./calcType";
 
 import { ReqData } from "@/lib/cd_consts";
-import { FETCH_API, FETCH_COOKIES, fetchData } from "./FetchData";
+import { fetchData } from "./FetchData";
 import { CDinfo } from "@/lib/cd_consts_old";
 
 import { Select } from "antd";
@@ -138,7 +138,8 @@ export function ReqDataForm() {
     // console.log(cookies);
     const json = JSON.parse(cookies);
 
-    const data: CDinfo[] = await fetchData(json, FETCH_COOKIES);
+    // console.log(FETCH_COOKIES);
+    const data: CDinfo[] = await fetchData(json, "cookies");
 
     setLast10andMenuItems(data);
   }
@@ -169,7 +170,7 @@ export function ReqDataForm() {
       name: nameValue,
     };
 
-    const data = await fetchData(reqData, FETCH_API);
+    const data = await fetchData(reqData);
 
     cdInfo.set(data);
   }
@@ -191,7 +192,7 @@ export function ReqDataForm() {
       name: nameValue,
     };
 
-    const data = await fetchData(reqData, FETCH_API);
+    const data = await fetchData(reqData);
 
     cdInfo.set(data);
 
