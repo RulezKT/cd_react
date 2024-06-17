@@ -98,51 +98,25 @@ export class FD {
     let formula_array: PlFdData[];
     let centers_array: string[][];
 
+    // console.log(`drawFormulaV2 info: ${JSON.stringify(cdInfo.fd)}`);
+
     //deep cloning
     switch (calc) {
-      case "full":
-        //рисуем Полную Формулу
-        planetsData = JSON.parse(
-          JSON.stringify(cdInfo.hd.personality.planetsData)
-        );
-        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.pers.plfData));
-        centers_array = JSON.parse(
-          JSON.stringify(cdInfo.fdInfo.pers.centersArr)
-        );
-        // console.log(`drawFormulaV2 full`);
-        break;
 
       case "design":
         //рисуем Красное
 
-        planetsData = JSON.parse(JSON.stringify(cdInfo.hd.design.planetsData));
-        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.des.plfData));
-        centers_array = JSON.parse(
-          JSON.stringify(cdInfo.fdInfo.des.centersArr)
-        );
+        planetsData = cdInfo.hd.design.planets_data
+        formula_array = cdInfo.fd.design[0]
+        centers_array = cdInfo.fd.design[1]
         break;
 
+      case "full":
       case "personality":
-        //рисуем Личность
-        planetsData = JSON.parse(
-          JSON.stringify(cdInfo.hd.personality.planetsData)
-        );
-        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.pers.plfData));
-        centers_array = JSON.parse(
-          JSON.stringify(cdInfo.fdInfo.pers.centersArr)
-        );
-        // console.log(`drawFormulaV2 personality`);
-        break;
-
       default:
-        planetsData = JSON.parse(
-          JSON.stringify(cdInfo.hd.personality.planetsData)
-        );
-        formula_array = JSON.parse(JSON.stringify(cdInfo.fdInfo.pers.plfData));
-        centers_array = JSON.parse(
-          JSON.stringify(cdInfo.fdInfo.pers.centersArr)
-        );
-        console.log(`Sorry, some error in drawFormulaV2.`);
+        planetsData = cdInfo.hd.personality.planets_data
+        formula_array = cdInfo.fd.personality[0]
+        centers_array = cdInfo.fd.personality[1]
     }
 
     //окантовка
@@ -1507,98 +1481,98 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 5) * 2,
-                ]
+                second_column_x,
+                center_center - (this.size_and_orientation[i][0] / 5) * 2,
+              ]
               : [
-                  second_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                second_column_x,
+                center_center - (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 5,
-                ]
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 5,
+              ]
               : [
-                  second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 4,
-                ];
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 5 - 40,
-                ]
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 5 - 40,
+              ]
               : [
-                  second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 4 - 40,
-                ];
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 4 - 40,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center +
-                    (this.size_and_orientation[i][0] / 5) * 2 -
-                    40,
-                ]
+                second_column_x,
+                center_center +
+                (this.size_and_orientation[i][0] / 5) * 2 -
+                40,
+              ]
               : [
-                  second_column_x,
-                  center_center +
-                    (this.size_and_orientation[i][0] / 4) * 2 -
-                    40,
-                ];
+                second_column_x,
+                center_center +
+                (this.size_and_orientation[i][0] / 4) * 2 -
+                40,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  center_center +
-                    (this.size_and_orientation[i][0] / 5) * 2 -
-                    40,
-                ]
+                first_column_x,
+                center_center +
+                (this.size_and_orientation[i][0] / 5) * 2 -
+                40,
+              ]
               : [
-                  first_column_x,
-                  center_center +
-                    (this.size_and_orientation[i][0] / 4) * 2 -
-                    40,
-                ];
+                first_column_x,
+                center_center +
+                (this.size_and_orientation[i][0] / 4) * 2 -
+                40,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  center_center + this.size_and_orientation[i][0] / 5 - 40,
-                ]
+                first_column_x,
+                center_center + this.size_and_orientation[i][0] / 5 - 40,
+              ]
               : [
-                  first_column_x,
-                  center_center + this.size_and_orientation[i][0] / 4 - 40,
-                ];
+                first_column_x,
+                center_center + this.size_and_orientation[i][0] / 4 - 40,
+              ];
 
           planets_coords[6] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  center_center - this.size_and_orientation[i][0] / 5,
-                ]
+                first_column_x,
+                center_center - this.size_and_orientation[i][0] / 5,
+              ]
               : [
-                  first_column_x,
-                  center_center - this.size_and_orientation[i][0] / 4,
-                ];
+                first_column_x,
+                center_center - this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[7] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 5) * 3,
-                ]
+                first_column_x,
+                center_center - (this.size_and_orientation[i][0] / 5) * 3,
+              ]
               : [
-                  first_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                first_column_x,
+                center_center - (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -1620,90 +1594,90 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
-                ]
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
+              ]
               : [
-                  second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ];
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
-                ]
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
+              ]
               : [
-                  second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
-                ];
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
-                ]
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
+              ]
               : [
-                  second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 5,
-                ]
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 5,
+              ]
               : [
-                  second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 4,
-                ];
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 5,
-                ]
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 5,
+              ]
               : [
-                  first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 4,
-                ];
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
-                ]
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
+              ]
               : [
-                  first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[6] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
-                ]
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
+              ]
               : [
-                  first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
-                ];
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
+              ];
 
           planets_coords[7] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ]
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ]
               : [
-                  first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ];
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -1715,76 +1689,76 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 5,
-                ]
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 5,
+              ]
               : [second_column_x, lower_y_border];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
-                ]
+                second_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
+              ]
               : [
-                  second_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                second_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
-                ]
+                second_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
+              ]
               : [
-                  second_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
-                ];
+                second_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] - 40,
-                ]
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ]
               : [
-                  second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] - 40,
-                ];
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] - 40,
-                ]
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ]
               : [
-                  first_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] - 40,
-                ];
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
-                ]
+                first_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
+              ]
               : [
-                  first_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
-                ];
+                first_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
+              ];
 
           planets_coords[6] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
-                ]
+                first_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
+              ]
               : [
-                  first_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                first_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[7] =
             this.size_and_orientation[i][1] === "vertical"
@@ -1830,125 +1804,125 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 6) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-              : [
                   second_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                  center_center - (this.size_and_orientation[i][0] / 6) * 2,
+                ]
+                : [
+                  second_column_x,
+                  center_center - (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+              : [
+                second_column_x,
+                center_center - (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 6,
-                  ]
-                : [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 5,
-                  ]
-              : [
                   second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 4,
-                ];
+                  center_center - this.size_and_orientation[i][0] / 6,
+                ]
+                : [
+                  second_column_x,
+                  center_center - this.size_and_orientation[i][0] / 5,
+                ]
+              : [
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 6 - 40,
-                  ]
-                : [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 5 - 40,
-                  ]
-              : [
                   second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 4 - 40,
-                ];
+                  center_center + this.size_and_orientation[i][0] / 6 - 40,
+                ]
+                : [
+                  second_column_x,
+                  center_center + this.size_and_orientation[i][0] / 5 - 40,
+                ]
+              : [
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 4 - 40,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    center_center +
-                      (this.size_and_orientation[i][0] / 6) * 2 -
-                      40,
-                  ]
-                : [
-                    second_column_x,
-                    center_center +
-                      (this.size_and_orientation[i][0] / 5) * 2 -
-                      40,
-                  ]
-              : [
                   second_column_x,
                   center_center +
-                    (this.size_and_orientation[i][0] / 4) * 2 -
-                    40,
-                ];
+                  (this.size_and_orientation[i][0] / 6) * 2 -
+                  40,
+                ]
+                : [
+                  second_column_x,
+                  center_center +
+                  (this.size_and_orientation[i][0] / 5) * 2 -
+                  40,
+                ]
+              : [
+                second_column_x,
+                center_center +
+                (this.size_and_orientation[i][0] / 4) * 2 -
+                40,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    center_center +
-                      (this.size_and_orientation[i][0] / 6) * 3 -
-                      40,
-                  ]
-                : [
-                    first_column_x,
-                    center_center +
-                      (this.size_and_orientation[i][0] / 5) * 2 -
-                      40,
-                  ]
-              : [
                   first_column_x,
                   center_center +
-                    (this.size_and_orientation[i][0] / 4) * 2 -
-                    40,
-                ];
+                  (this.size_and_orientation[i][0] / 6) * 3 -
+                  40,
+                ]
+                : [
+                  first_column_x,
+                  center_center +
+                  (this.size_and_orientation[i][0] / 5) * 2 -
+                  40,
+                ]
+              : [
+                first_column_x,
+                center_center +
+                (this.size_and_orientation[i][0] / 4) * 2 -
+                40,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    center_center + this.size_and_orientation[i][0] / 6 - 40,
-                  ]
-                : [
-                    first_column_x,
-                    center_center + this.size_and_orientation[i][0] / 5 - 40,
-                  ]
-              : [
                   first_column_x,
-                  center_center + this.size_and_orientation[i][0] / 4 - 40,
-                ];
+                  center_center + this.size_and_orientation[i][0] / 6 - 40,
+                ]
+                : [
+                  first_column_x,
+                  center_center + this.size_and_orientation[i][0] / 5 - 40,
+                ]
+              : [
+                first_column_x,
+                center_center + this.size_and_orientation[i][0] / 4 - 40,
+              ];
 
           planets_coords[6] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 6) * 3,
-                  ]
-                : [
-                    first_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-              : [
                   first_column_x,
-                  center_center - this.size_and_orientation[i][0] / 4,
-                ];
+                  center_center - (this.size_and_orientation[i][0] / 6) * 3,
+                ]
+                : [
+                  first_column_x,
+                  center_center - (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+              : [
+                first_column_x,
+                center_center - this.size_and_orientation[i][0] / 4,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -1975,113 +1949,113 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 6) * 5,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 6) * 5,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 6) * 4,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 6) * 4,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 6) * 3,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 6) * 3,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 6) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 5,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 4,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 6) * 2,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 5,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 6,
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 5,
-                  ]
-              : [
                   first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 4,
-                ];
+                  upper_y_border - this.size_and_orientation[i][0] / 6,
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 5,
+                ]
+              : [
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 6) * 3,
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-              : [
                   first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 6) * 3,
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+              : [
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[6] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0],
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0],
-                  ]
-              : [
                   first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
-                ];
+                  upper_y_border - this.size_and_orientation[i][0],
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - this.size_and_orientation[i][0],
+                ]
+              : [
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -2094,94 +2068,94 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 6,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 6,
+                ]
                 : [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 5,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 5,
+                ]
               : [second_column_x, lower_y_border];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 6) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 4,
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 6) * 2,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 4,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 6) * 3,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 6) * 3,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 6) * 4,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 4,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0],
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 6) * 4,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 4,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0],
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] - 40,
-                  ]
-                : [
-                    first_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] - 40,
-                  ]
-              : [
                   first_column_x,
                   lower_y_border + this.size_and_orientation[i][0] - 40,
-                ];
+                ]
+                : [
+                  first_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] - 40,
+                ]
+              : [
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 240
                 ? [
-                    first_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 6) * 3,
-                  ]
-                : [
-                    first_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-              : [
                   first_column_x,
-                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 6) * 3,
+                ]
+                : [
+                  first_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+              : [
+                first_column_x,
+                lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
+              ];
 
           planets_coords[6] =
             this.size_and_orientation[i][1] === "vertical"
@@ -2189,9 +2163,9 @@ export class FD {
                 ? [first_column_x, lower_y_border]
                 : [first_column_x, lower_y_border]
               : [
-                  first_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 4,
-                ];
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 4,
+              ];
 
           lower_y_border =
             lower_y_border +
@@ -2230,99 +2204,99 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   second_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 3) * 2,
-                ];
+                  center_center - (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+                : [
+                  second_column_x,
+                  center_center - (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                second_column_x,
+                center_center - (this.size_and_orientation[i][0] / 3) * 2,
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 5,
-                  ]
-                : [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 4,
-                  ]
-              : [
                   second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 3,
-                ];
+                  center_center - this.size_and_orientation[i][0] / 5,
+                ]
+                : [
+                  second_column_x,
+                  center_center - this.size_and_orientation[i][0] / 4,
+                ]
+              : [
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 5 - 40,
-                  ]
-                : [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 4 - 40,
-                  ]
-              : [
                   second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 3 - 40,
-                ];
+                  center_center + this.size_and_orientation[i][0] / 5 - 40,
+                ]
+                : [
+                  second_column_x,
+                  center_center + this.size_and_orientation[i][0] / 4 - 40,
+                ]
+              : [
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 3 - 40,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    center_center +
-                      (this.size_and_orientation[i][0] / 5) * 2 -
-                      40,
-                  ]
-                : [
-                    first_column_x,
-                    center_center + this.size_and_orientation[i][0] / 4 - 40,
-                  ]
-              : [
                   first_column_x,
-                  center_center + this.size_and_orientation[i][0] / 3 - 40,
-                ];
+                  center_center +
+                  (this.size_and_orientation[i][0] / 5) * 2 -
+                  40,
+                ]
+                : [
+                  first_column_x,
+                  center_center + this.size_and_orientation[i][0] / 4 - 40,
+                ]
+              : [
+                first_column_x,
+                center_center + this.size_and_orientation[i][0] / 3 - 40,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    center_center - this.size_and_orientation[i][0] / 5,
-                  ]
-                : [
-                    first_column_x,
-                    center_center - this.size_and_orientation[i][0] / 4,
-                  ]
-              : [
                   first_column_x,
-                  center_center - this.size_and_orientation[i][0] / 3,
-                ];
+                  center_center - this.size_and_orientation[i][0] / 5,
+                ]
+                : [
+                  first_column_x,
+                  center_center - this.size_and_orientation[i][0] / 4,
+                ]
+              : [
+                first_column_x,
+                center_center - this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-                : [
-                    first_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 4) * 3,
-                  ]
-              : [
                   first_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 3) * 2,
-                ];
+                  center_center - (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+                : [
+                  first_column_x,
+                  center_center - (this.size_and_orientation[i][0] / 4) * 3,
+                ]
+              : [
+                first_column_x,
+                center_center - (this.size_and_orientation[i][0] / 3) * 2,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -2349,97 +2323,97 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 4,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 3,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 4,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 5,
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 4,
-                  ]
-              : [
                   first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 3,
-                ];
+                  upper_y_border - this.size_and_orientation[i][0] / 5,
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 4,
+                ]
+              : [
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0],
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0],
-                  ]
-              : [
                   first_column_x,
                   upper_y_border - this.size_and_orientation[i][0],
-                ];
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - this.size_and_orientation[i][0],
+                ]
+              : [
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -2452,78 +2426,78 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 5,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 5,
+                ]
                 : [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 4,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 4,
+                ]
               : [second_column_x, lower_y_border];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 3,
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0],
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0],
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    lower_y_border + this.size_and_orientation[i][0],
-                  ]
-                : [
-                    first_column_x,
-                    lower_y_border + this.size_and_orientation[i][0],
-                  ]
-              : [
                   first_column_x,
                   lower_y_border + this.size_and_orientation[i][0],
-                ];
+                ]
+                : [
+                  first_column_x,
+                  lower_y_border + this.size_and_orientation[i][0],
+                ]
+              : [
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0],
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-                : [
-                    first_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   first_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 3,
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+                : [
+                  first_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[5] =
             this.size_and_orientation[i][1] === "vertical"
@@ -2567,83 +2541,83 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   second_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 3) * 2,
-                ];
+                  center_center - (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+                : [
+                  second_column_x,
+                  center_center - (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                second_column_x,
+                center_center - (this.size_and_orientation[i][0] / 3) * 2,
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 5,
-                  ]
-                : [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 4,
-                  ]
-              : [
                   second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 3,
-                ];
+                  center_center - this.size_and_orientation[i][0] / 5,
+                ]
+                : [
+                  second_column_x,
+                  center_center - this.size_and_orientation[i][0] / 4,
+                ]
+              : [
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 5 - 40,
-                  ]
-                : [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 4 - 40,
-                  ]
-              : [
                   second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 3 - 40,
-                ];
+                  center_center + this.size_and_orientation[i][0] / 5 - 40,
+                ]
+                : [
+                  second_column_x,
+                  center_center + this.size_and_orientation[i][0] / 4 - 40,
+                ]
+              : [
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 3 - 40,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    center_center +
-                      (this.size_and_orientation[i][0] / 5) * 2 -
-                      40,
-                  ]
-                : [
-                    first_column_x,
-                    center_center + this.size_and_orientation[i][0] / 4 - 40,
-                  ]
-              : [
                   first_column_x,
-                  center_center + this.size_and_orientation[i][0] / 3 - 40,
-                ];
+                  center_center +
+                  (this.size_and_orientation[i][0] / 5) * 2 -
+                  40,
+                ]
+                : [
+                  first_column_x,
+                  center_center + this.size_and_orientation[i][0] / 4 - 40,
+                ]
+              : [
+                first_column_x,
+                center_center + this.size_and_orientation[i][0] / 3 - 40,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-                : [
-                    first_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 4) * 3,
-                  ]
-              : [
                   first_column_x,
-                  center_center - this.size_and_orientation[i][0] / 3,
-                ];
+                  center_center - (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+                : [
+                  first_column_x,
+                  center_center - (this.size_and_orientation[i][0] / 4) * 3,
+                ]
+              : [
+                first_column_x,
+                center_center - this.size_and_orientation[i][0] / 3,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -2670,81 +2644,81 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 4,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 4,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 3,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 4,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 5,
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 4,
-                  ]
-              : [
                   first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 3,
-                ];
+                  upper_y_border - this.size_and_orientation[i][0] / 5,
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 4,
+                ]
+              : [
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0],
-                  ]
-                : [
-                    first_column_x,
-                    upper_y_border - this.size_and_orientation[i][0],
-                  ]
-              : [
                   first_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
-                ];
+                  upper_y_border - this.size_and_orientation[i][0],
+                ]
+                : [
+                  first_column_x,
+                  upper_y_border - this.size_and_orientation[i][0],
+                ]
+              : [
+                first_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -2757,62 +2731,62 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 5,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 5,
+                ]
                 : [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 4,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 4,
+                ]
               : [second_column_x, lower_y_border];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 3,
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 2,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 2,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 3,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0],
-                ];
+                  lower_y_border + (this.size_and_orientation[i][0] / 5) * 3,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 4) * 3,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0],
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 200
                 ? [
-                    first_column_x,
-                    lower_y_border + this.size_and_orientation[i][0],
-                  ]
-                : [
-                    first_column_x,
-                    lower_y_border + this.size_and_orientation[i][0],
-                  ]
-              : [
                   first_column_x,
                   lower_y_border + this.size_and_orientation[i][0],
-                ];
+                ]
+                : [
+                  first_column_x,
+                  lower_y_border + this.size_and_orientation[i][0],
+                ]
+              : [
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0],
+              ];
 
           planets_coords[4] =
             this.size_and_orientation[i][1] === "vertical"
@@ -2820,9 +2794,9 @@ export class FD {
                 ? [first_column_x, lower_y_border]
                 : [first_column_x, lower_y_border]
               : [
-                  first_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 3,
-                ];
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 3,
+              ];
 
           lower_y_border =
             lower_y_border +
@@ -2860,65 +2834,65 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 4,
-                  ]
-                : [
-                    second_column_x,
-                    center_center - this.size_and_orientation[i][0] / 3,
-                  ]
-              : [
                   second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 2,
-                ];
+                  center_center - this.size_and_orientation[i][0] / 4,
+                ]
+                : [
+                  second_column_x,
+                  center_center - this.size_and_orientation[i][0] / 3,
+                ]
+              : [
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 2,
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 4 - 40,
-                  ]
-                : [
-                    second_column_x,
-                    center_center + this.size_and_orientation[i][0] / 3 - 40,
-                  ]
-              : [
                   second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 2 - 40,
-                ];
+                  center_center + this.size_and_orientation[i][0] / 4 - 40,
+                ]
+                : [
+                  second_column_x,
+                  center_center + this.size_and_orientation[i][0] / 3 - 40,
+                ]
+              : [
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 2 - 40,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    first_column_x,
-                    center_center + this.size_and_orientation[i][0] / 2 - 40,
-                  ]
-                : [
-                    first_column_x,
-                    center_center + this.size_and_orientation[i][0] / 3 - 40,
-                  ]
-              : [
                   first_column_x,
                   center_center + this.size_and_orientation[i][0] / 2 - 40,
-                ];
+                ]
+                : [
+                  first_column_x,
+                  center_center + this.size_and_orientation[i][0] / 3 - 40,
+                ]
+              : [
+                first_column_x,
+                center_center + this.size_and_orientation[i][0] / 2 - 40,
+              ];
 
           planets_coords[3] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    first_column_x,
-                    center_center - this.size_and_orientation[i][0] / 2,
-                  ]
-                : [
-                    first_column_x,
-                    center_center - (this.size_and_orientation[i][0] / 3) * 2,
-                  ]
-              : [
                   first_column_x,
                   center_center - this.size_and_orientation[i][0] / 2,
-                ];
+                ]
+                : [
+                  first_column_x,
+                  center_center - (this.size_and_orientation[i][0] / 3) * 2,
+                ]
+              : [
+                first_column_x,
+                center_center - this.size_and_orientation[i][0] / 2,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -2931,8 +2905,8 @@ export class FD {
 
           lower_y_border =
             lower_y_border +
-            (this.size_and_orientation[i][1] === "vertical" &&
-              this.size_and_orientation[i][0] === 120)
+              (this.size_and_orientation[i][1] === "vertical" &&
+                this.size_and_orientation[i][0] === 120)
               ? this.size_and_orientation[i][0] / 3
               : this.size_and_orientation[i][0] / 2 + gap_between_centers;
 
@@ -2945,29 +2919,29 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
-                  ]
-                : [
-                    second_column_x,
-                    upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
-                  ]
-              : [
                   second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0] / 2,
-                ];
+                  upper_y_border - (this.size_and_orientation[i][0] / 4) * 3,
+                ]
+                : [
+                  second_column_x,
+                  upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
+                ]
+              : [
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0] / 2,
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    second_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 4 - 40,
-                  ]
+                  second_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 4 - 40,
+                ]
                 : [
-                    second_column_x,
-                    upper_y_border - this.size_and_orientation[i][0] / 3 - 40,
-                  ]
+                  second_column_x,
+                  upper_y_border - this.size_and_orientation[i][0] / 3 - 40,
+                ]
               : [second_column_x, upper_y_border - 40];
 
           planets_coords[2] = [first_column_x, upper_y_border - 40];
@@ -2988,32 +2962,32 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 4,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 4,
+                ]
                 : [
-                    second_column_x,
-                    lower_y_border + this.size_and_orientation[i][0] / 3,
-                  ]
+                  second_column_x,
+                  lower_y_border + this.size_and_orientation[i][0] / 3,
+                ]
               : [second_column_x, lower_y_border];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? this.size_and_orientation[i][0] === 160
                 ? [
-                    second_column_x,
-                    lower_y_border +
-                      (this.size_and_orientation[i][0] / 4) * 3 -
-                      40,
-                  ]
-                : [
-                    second_column_x,
-                    lower_y_border + (this.size_and_orientation[i][0] / 3) * 2,
-                  ]
-              : [
                   second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] - 40,
-                ];
+                  lower_y_border +
+                  (this.size_and_orientation[i][0] / 4) * 3 -
+                  40,
+                ]
+                : [
+                  second_column_x,
+                  lower_y_border + (this.size_and_orientation[i][0] / 3) * 2,
+                ]
+              : [
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ];
 
           planets_coords[2] = [
             second_column_x,
@@ -3056,35 +3030,35 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 3,
-                ]
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 3,
+              ]
               : [
-                  second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 2,
-                ];
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 2,
+              ];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 3 - 40,
-                ]
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 3 - 40,
+              ]
               : [
-                  second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 2 - 40,
-                ];
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 2 - 40,
+              ];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  center_center - (this.size_and_orientation[i][0] / 3) * 2,
-                ]
+                first_column_x,
+                center_center - (this.size_and_orientation[i][0] / 3) * 2,
+              ]
               : [
-                  first_column_x,
-                  center_center + this.size_and_orientation[i][0] / 2 - 40,
-                ];
+                first_column_x,
+                center_center + this.size_and_orientation[i][0] / 2 - 40,
+              ];
 
           upper_y_border =
             upper_y_border -
@@ -3105,22 +3079,22 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
-                ]
+                second_column_x,
+                upper_y_border - (this.size_and_orientation[i][0] / 3) * 2,
+              ]
               : [
-                  second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ];
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ];
 
           planets_coords[1] = [second_column_x, upper_y_border - 40];
 
           planets_coords[2] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  first_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ]
+                first_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ]
               : [first_column_x, upper_y_border - 40];
 
           upper_y_border =
@@ -3133,9 +3107,9 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] / 3,
-                ]
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] / 3,
+              ]
               : [second_column_x, lower_y_border];
           planets_coords[1] = [
             second_column_x,
@@ -3145,9 +3119,9 @@ export class FD {
             this.size_and_orientation[i][1] === "vertical"
               ? [first_column_x, lower_y_border]
               : [
-                  first_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] - 40,
-                ];
+                first_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ];
 
           lower_y_border =
             lower_y_border +
@@ -3179,17 +3153,17 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center - this.size_and_orientation[i][0] / 2,
-                ]
+                second_column_x,
+                center_center - this.size_and_orientation[i][0] / 2,
+              ]
               : [second_column_x, center_center - 20];
 
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  center_center + this.size_and_orientation[i][0] / 2 - 40,
-                ]
+                second_column_x,
+                center_center + this.size_and_orientation[i][0] / 2 - 40,
+              ]
               : [first_column_x, center_center - 20];
 
           upper_y_border =
@@ -3209,9 +3183,9 @@ export class FD {
           planets_coords[0] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  upper_y_border - this.size_and_orientation[i][0],
-                ]
+                second_column_x,
+                upper_y_border - this.size_and_orientation[i][0],
+              ]
               : [second_column_x, upper_y_border - 40];
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
@@ -3229,9 +3203,9 @@ export class FD {
           planets_coords[1] =
             this.size_and_orientation[i][1] === "vertical"
               ? [
-                  second_column_x,
-                  lower_y_border + this.size_and_orientation[i][0] - 40,
-                ]
+                second_column_x,
+                lower_y_border + this.size_and_orientation[i][0] - 40,
+              ]
               : [first_column_x, lower_y_border];
 
           lower_y_border =
@@ -3399,7 +3373,7 @@ export class FD {
                   //определяем в каком квадрате рисовать
                   y_square = Math.ceil(
                     (this.planets_full_info[points_to].y - start_center_y) /
-                      (vertical_size / 12)
+                    (vertical_size / 12)
                   );
                   // console.log(`y_square = ${y_square}`);
                   //console.log(formula_array[key].point_to_planet);
@@ -3459,7 +3433,7 @@ export class FD {
                   //определяем в каком квадрате рисовать
                   y_square = Math.ceil(
                     (this.planets_full_info[points_to].y - start_center_y) /
-                      (vertical_size / 12)
+                    (vertical_size / 12)
                   );
                   //console.log(y_square);
                   //console.log(formula_array[key].point_to_planet);
@@ -3528,7 +3502,7 @@ export class FD {
                 //определяем в каком квадрате рисовать
                 y_square = Math.ceil(
                   (this.planets_full_info[points_to].y - start_center_y) /
-                    (vertical_size / 12)
+                  (vertical_size / 12)
                 );
                 //console.log(y_square);
                 //console.log(formula_array[key].point_to_planet);
@@ -3802,7 +3776,7 @@ export class FD {
         planet === formula_array[key].point_to_planet &&
         !this.planets_full_info[planetsArr[key]].drawn &&
         formula_array[planetsArr.indexOf(planet)].orbit ===
-          formula_array[key].orbit - 1
+        formula_array[key].orbit - 1
       ) {
         return planetsArr[key];
       }
@@ -4119,8 +4093,8 @@ export class FD {
       .attr(
         "transform",
         "translate(" +
-          [points[0].x, points[0].y - Math.trunc(radius / 1.5)] +
-          ")"
+        [points[0].x, points[0].y - Math.trunc(radius / 1.5)] +
+        ")"
       )
       .attr("stroke", color)
       .attr(
@@ -4297,8 +4271,8 @@ export class FD {
       .attr(
         "transform",
         "translate(" +
-          [points[0].x - radius, points[0].y + Math.trunc(radius)] +
-          ")"
+        [points[0].x - radius, points[0].y + Math.trunc(radius)] +
+        ")"
       )
       .attr("stroke", color)
       .attr("fill", "none")
@@ -4353,8 +4327,8 @@ export class FD {
       .attr(
         "transform",
         "translate(" +
-          [points[0].x - radius, points[0].y + Math.trunc(radius)] +
-          ")"
+        [points[0].x - radius, points[0].y + Math.trunc(radius)] +
+        ")"
       )
       .attr("stroke", color)
       .attr("fill", "none")
@@ -4515,8 +4489,8 @@ export class FD {
       .attr(
         "transform",
         "translate(" +
-          [points[0].x, points[0].y - Math.trunc(radius / 1.5)] +
-          ")"
+        [points[0].x, points[0].y - Math.trunc(radius / 1.5)] +
+        ")"
       )
       .attr("stroke", color)
       .attr(

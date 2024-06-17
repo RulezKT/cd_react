@@ -1,33 +1,33 @@
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Label } from "./ui/label";
+import { Radio } from "antd";
 
 import { UseTypeOfChart, useTypeOfChart } from "./typeOfChart";
 
 export const TypeOfChartRadio = () => {
   const typeOfChart: UseTypeOfChart = useTypeOfChart();
   return (
-    <RadioGroup
+    <Radio.Group
       className="flex flex-row gap-5 m-1"
-      onValueChange={(value) => {
-        typeOfChart.set(value);
+      onChange={(e) => {
+        typeOfChart.set(e.target.value);
       }}
-      defaultValue={typeOfChart.typeOfChart}
       value={typeOfChart.typeOfChart}
     >
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="bodygraph" id="option-1" />
-        <Label htmlFor="option-1">HD</Label>
+      <div className="flex items-center space-x-2 text-black">
+        <Radio value="bodygraph" id="option-one">
+          <label htmlFor="option-one">HD</label>
+        </Radio>
+      </div>
+      <div className="flex items-center space-x-2  text-black">
+        <Radio value="numerology" id="option-two">
+          <label htmlFor="option-two">Numerology</label>
+        </Radio>
       </div>
 
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="numerology" id="option-2" />
-        <Label htmlFor="option-2">Numerology</Label>
+      <div className="flex items-center space-x-2  text-black">
+        <Radio value="fd" id="option-three">
+          <label htmlFor="option-three">FD</label>
+        </Radio>
       </div>
-
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="fd" id="option-3" />
-        <Label htmlFor="option-3">FD</Label>
-      </div>
-    </RadioGroup>
+    </Radio.Group>
   );
 };

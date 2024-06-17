@@ -340,7 +340,7 @@ export const cdInf = {
         Spleen: false,
         Emo: false,
       },
-      planetsData: [
+      planets_data: [
         {
           hex: 0,
           line: 0,

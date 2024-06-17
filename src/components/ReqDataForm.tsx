@@ -26,9 +26,10 @@ import { UseCalcType, useCalcType } from "./calcType";
 
 import { ReqData } from "@/lib/cd_consts";
 import { fetchData } from "./FetchData";
-import { CDinfo } from "@/lib/cd_consts_old";
+import { CDinfo } from "@/lib/cd_consts";
 
 import { Select } from "antd";
+import { CalcTypeRadio } from "./CalcTypeRadio";
 
 type TimeZone = {
   dstOffset: number;
@@ -119,6 +120,7 @@ export function ReqDataForm() {
 
   function setLast10andMenuItems(data: CDinfo[]) {
     setLast10(data);
+    // console.log(data);
 
     // items = data.map((item, index) => ({
     //   key: index,
@@ -134,14 +136,23 @@ export function ReqDataForm() {
   }, []);
 
   async function getCookies() {
+    // Cookies.remove("last10");
     const cookies = Cookies.get("last10");
+
+    if (cookies === undefined) {
+      return;
+    }
+
     // console.log(cookies);
+    // const cookies_req = {"cookies": [cookies]}
     const json = JSON.parse(cookies);
+    // console.log(json);
 
     // console.log(FETCH_COOKIES);
-    const data: CDinfo[] = await fetchData(json, "cookies");
+    const data: CDinfo[] = await fetchData({ "cookies": json }, "cookies");
 
-    setLast10andMenuItems(data);
+    setLast10andMenuItems(data["cookies"]);
+    // console.log(last10);
   }
 
   async function getTransits() {
@@ -157,6 +168,7 @@ export function ReqDataForm() {
     setUTC("local");
 
     const reqData: ReqData = {
+      name: nameValue,
       year: dateTime.year(),
       month: dateTime.month() + 1,
       day: dateTime.date(),
@@ -167,18 +179,20 @@ export function ReqDataForm() {
       place: "",
       latitude: 0,
       longitude: 0,
-      name: nameValue,
+
     };
 
     const data = await fetchData(reqData);
-
+    // console.log(data);
     cdInfo.set(data);
   }
 
   async function onSubmit() {
     typeOfChart.set("bodygraph");
+    calcType.set("full");
 
     const reqData: ReqData = {
+      name: nameValue,
       year: dateTime.year(),
       month: dateTime.month() + 1,
       day: dateTime.date(),
@@ -189,7 +203,7 @@ export function ReqDataForm() {
       place: utc === "utc" ? "" : place.name,
       latitude: utc === "utc" ? 0 : place.latitude,
       longitude: utc === "utc" ? 0 : place.longitude,
-      name: nameValue,
+
     };
 
     const data = await fetchData(reqData);
@@ -211,7 +225,11 @@ export function ReqDataForm() {
       for (let i = 0; i < last10.length; i++) {
         const jsonIndex = {
           name: last10[i].name,
-          time: last10[i].time.pers_time_utc,
+          year: last10[i].time.pers_time_utc.year,
+          month: last10[i].time.pers_time_utc.month,
+          day: last10[i].time.pers_time_utc.day,
+          hours: last10[i].time.pers_time_utc.hours,
+          minutes: last10[i].time.pers_time_utc.minutes,
         };
         json.push(jsonIndex);
         // console.log(json);
@@ -243,6 +261,7 @@ export function ReqDataForm() {
     // console.log("inside handleSelectChange");
     // console.log(index);
     typeOfChart.set("bodygraph");
+    calcType.set("full");
     cdInfo.set(
       last10[parseInt(index)]
       // last10.find(
@@ -326,7 +345,7 @@ export function ReqDataForm() {
                 } else {
                   console.log(
                     "Geocode was not successful for the following reason: " +
-                      status
+                    status
                   );
                 }
               }

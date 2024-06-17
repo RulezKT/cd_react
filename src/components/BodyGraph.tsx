@@ -8,6 +8,7 @@ export const BodyGraph = (props) => {
   // const calcType = props.calc;
 
   const cdInfo = props.data;
+  // console.log(cdInfo);
 
   // useEffect(() => {
   //   const drawFormula = new DrawFormulaClass(cdInfo, width, height);

@@ -539,6 +539,7 @@ export const DE440S_FILE_RECORDS = [
 // =================================================================================================//
 
 export type ReqData = {
+  name: string;
   year: number;
   month: number;
   day: number;
@@ -549,19 +550,16 @@ export type ReqData = {
   place: string;
   latitude: number;
   longitude: number;
-  name: string;
+
 };
 
 export type CookiesData = {
   name: string;
-  time: {
-    year: number;
-    month: number;
-    day: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
+  year: number;
+  month: number;
+  day: number;
+  hours: number;
+  minutes: number;
 };
 
 // 1 - local time, 0- UTC Time
@@ -656,7 +654,7 @@ export type LocalTime = UTCTime & {
 
 export type OneSide = {
   generalInfo: GeneralInfo;
-  planetsData: PlanetsData[]; // 13 planets + 0 SSB
+  planets_data: PlanetsData[]; // 13 planets + 0 SSB
   gates: Gates[]; // 64 gates   and  + index 0 is empty = 65
   channels: Channels[]; // 36 channels and  + index 0 is empty = 37
   centers: Centers; // 9 centers

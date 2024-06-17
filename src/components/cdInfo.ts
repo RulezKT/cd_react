@@ -529,7 +529,7 @@ export const useCdInfo = create<UseCdInfo>((set) => ({
           Spleen: false,
           Emo: false,
         },
-        planetsData: [
+        planets_data: [
           {
             hex: 0,
             line: 0,
@@ -1202,7 +1202,7 @@ export const useCdInfo = create<UseCdInfo>((set) => ({
           Spleen: false,
           Emo: false,
         },
-        planetsData: [
+        planets_data: [
           {
             hex: 0,
             line: 0,

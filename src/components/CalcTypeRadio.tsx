@@ -1,31 +1,33 @@
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Label } from "./ui/label";
+import { Radio } from "antd";
 
 import { UseCalcType, useCalcType } from "./calcType";
 
 export const CalcTypeRadio = () => {
   const calcType: UseCalcType = useCalcType();
   return (
-    <RadioGroup
+    <Radio.Group
       className="flex flex-row gap-5 m-1"
-      onValueChange={(value) => {
-        calcType.set(value);
+      onChange={(e) => {
+        calcType.set(e.target.value);
       }}
-      defaultValue={calcType.calcType}
       value={calcType.calcType}
     >
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="full" id="option-one" />
-        <Label htmlFor="option-one">Full</Label>
+        <Radio value="full" id="option-one">
+          <label htmlFor="option-one">Full</label>
+        </Radio>
       </div>
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="personality" id="option-two" />
-        <Label htmlFor="option-two">Personality</Label>
+        <Radio value="personality" id="option-two">
+          <label htmlFor="option-two">Personality</label>
+        </Radio>
       </div>
+
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="design" id="option-three" />
-        <Label htmlFor="option-three">Design</Label>
+        <Radio value="design" id="option-three">
+          <label htmlFor="option-three">Design</label>
+        </Radio>
       </div>
-    </RadioGroup>
+    </Radio.Group>
   );
 };

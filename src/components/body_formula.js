@@ -33,6 +33,7 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
   formula = data_formula;
 
   this.data_formula = data_formula;
+  // console.log(data_formula.hd.personality);
 
   width = view_width;
   height = view_height;
@@ -49,36 +50,36 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
   this.pers_utc = data_formula.time.pers_time_utc;
   this.pers_local = data_formula.time.pers_time_local;
 
-  this.design_short = data_formula.hd.design.planetsData;
-  this.pers_short = data_formula.hd.personality.planetsData;
+  this.design_short = data_formula.hd.design.planets_data;
+  this.pers_short = data_formula.hd.personality.planets_data;
 
-  this.pers_sun_short = data_formula.hd.personality.planetsData[SUN];
-  this.pers_earth_short = data_formula.hd.personality.planetsData[EARTH];
-  this.pers_moon_short = data_formula.hd.personality.planetsData[MOON];
-  this.pers_nnode_short = data_formula.hd.personality.planetsData[NORTHNODE];
-  this.pers_snode_short = data_formula.hd.personality.planetsData[SOUTHNODE];
-  this.pers_mercury_short = data_formula.hd.personality.planetsData[MERCURY];
-  this.pers_venus_short = data_formula.hd.personality.planetsData[VENUS];
-  this.pers_mars_short = data_formula.hd.personality.planetsData[MARS];
-  this.pers_jupiter_short = data_formula.hd.personality.planetsData[JUPITER];
-  this.pers_saturn_short = data_formula.hd.personality.planetsData[SATURN];
-  this.pers_neptune_short = data_formula.hd.personality.planetsData[NEPTUNE];
-  this.pers_uranus_short = data_formula.hd.personality.planetsData[URANUS];
-  this.pers_pluto_short = data_formula.hd.personality.planetsData[PLUTO];
+  this.pers_sun_short = data_formula.hd.personality.planets_data[SUN];
+  this.pers_earth_short = data_formula.hd.personality.planets_data[EARTH];
+  this.pers_moon_short = data_formula.hd.personality.planets_data[MOON];
+  this.pers_nnode_short = data_formula.hd.personality.planets_data[NORTHNODE];
+  this.pers_snode_short = data_formula.hd.personality.planets_data[SOUTHNODE];
+  this.pers_mercury_short = data_formula.hd.personality.planets_data[MERCURY];
+  this.pers_venus_short = data_formula.hd.personality.planets_data[VENUS];
+  this.pers_mars_short = data_formula.hd.personality.planets_data[MARS];
+  this.pers_jupiter_short = data_formula.hd.personality.planets_data[JUPITER];
+  this.pers_saturn_short = data_formula.hd.personality.planets_data[SATURN];
+  this.pers_neptune_short = data_formula.hd.personality.planets_data[NEPTUNE];
+  this.pers_uranus_short = data_formula.hd.personality.planets_data[URANUS];
+  this.pers_pluto_short = data_formula.hd.personality.planets_data[PLUTO];
 
-  this.des_sun_short = data_formula.hd.design.planetsData[SUN];
-  this.des_earth_short = data_formula.hd.design.planetsData[EARTH];
-  this.des_moon_short = data_formula.hd.design.planetsData[MOON];
-  this.des_nnode_short = data_formula.hd.design.planetsData[NORTHNODE];
-  this.des_snode_short = data_formula.hd.design.planetsData[SOUTHNODE];
-  this.des_mercury_short = data_formula.hd.design.planetsData[MERCURY];
-  this.des_venus_short = data_formula.hd.design.planetsData[VENUS];
-  this.des_mars_short = data_formula.hd.design.planetsData[MARS];
-  this.des_jupiter_short = data_formula.hd.design.planetsData[JUPITER];
-  this.des_saturn_short = data_formula.hd.design.planetsData[SATURN];
-  this.des_neptune_short = data_formula.hd.design.planetsData[NEPTUNE];
-  this.des_uranus_short = data_formula.hd.design.planetsData[URANUS];
-  this.des_pluto_short = data_formula.hd.design.planetsData[PLUTO];
+  this.des_sun_short = data_formula.hd.design.planets_data[SUN];
+  this.des_earth_short = data_formula.hd.design.planets_data[EARTH];
+  this.des_moon_short = data_formula.hd.design.planets_data[MOON];
+  this.des_nnode_short = data_formula.hd.design.planets_data[NORTHNODE];
+  this.des_snode_short = data_formula.hd.design.planets_data[SOUTHNODE];
+  this.des_mercury_short = data_formula.hd.design.planets_data[MERCURY];
+  this.des_venus_short = data_formula.hd.design.planets_data[VENUS];
+  this.des_mars_short = data_formula.hd.design.planets_data[MARS];
+  this.des_jupiter_short = data_formula.hd.design.planets_data[JUPITER];
+  this.des_saturn_short = data_formula.hd.design.planets_data[SATURN];
+  this.des_neptune_short = data_formula.hd.design.planets_data[NEPTUNE];
+  this.des_uranus_short = data_formula.hd.design.planets_data[URANUS];
+  this.des_pluto_short = data_formula.hd.design.planets_data[PLUTO];
 
   //удаляем старый график before drawing a new one
   svg = d3.select("#svg_formula_chart").remove();
@@ -4784,9 +4785,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_sun_short.line
   )}-.${Math.ceil(this.pers_sun_short.color)}-.${Math.ceil(
     this.pers_sun_short.tone
-  )}-.${Math.ceil(this.pers_sun_short.base)}-.${this.pers_sun_short.direction}${
-    this.pers_sun_short.power
-  }`;
+  )}-.${Math.ceil(this.pers_sun_short.base)}-.${this.pers_sun_short.direction}${this.pers_sun_short.power
+    }`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4794,9 +4794,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_earth_short.line
   )}-.${Math.ceil(this.pers_earth_short.color)}-.${Math.ceil(
     this.pers_earth_short.tone
-  )}-.${Math.ceil(this.pers_earth_short.base)}-.${
-    this.pers_earth_short.direction
-  }${this.pers_earth_short.power}`;
+  )}-.${Math.ceil(this.pers_earth_short.base)}-.${this.pers_earth_short.direction
+    }${this.pers_earth_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4804,9 +4803,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_moon_short.line
   )}-.${Math.ceil(this.pers_moon_short.color)}-.${Math.ceil(
     this.pers_moon_short.tone
-  )}-.${Math.ceil(this.pers_moon_short.base)}-.${
-    this.pers_moon_short.direction
-  }${this.pers_moon_short.power}`;
+  )}-.${Math.ceil(this.pers_moon_short.base)}-.${this.pers_moon_short.direction
+    }${this.pers_moon_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4814,9 +4812,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_nnode_short.line
   )}-.${Math.ceil(this.pers_nnode_short.color)}-.${Math.ceil(
     this.pers_nnode_short.tone
-  )}-.${Math.ceil(this.pers_nnode_short.base)}-.${
-    this.pers_nnode_short.direction
-  }${this.pers_nnode_short.power}`;
+  )}-.${Math.ceil(this.pers_nnode_short.base)}-.${this.pers_nnode_short.direction
+    }${this.pers_nnode_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4824,9 +4821,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_snode_short.line
   )}-.${Math.ceil(this.pers_snode_short.color)}-.${Math.ceil(
     this.pers_snode_short.tone
-  )}-.${Math.ceil(this.pers_snode_short.base)}-.${
-    this.pers_snode_short.direction
-  }${this.pers_snode_short.power}`;
+  )}-.${Math.ceil(this.pers_snode_short.base)}-.${this.pers_snode_short.direction
+    }${this.pers_snode_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4834,9 +4830,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_mercury_short.line
   )}-.${Math.ceil(this.pers_mercury_short.color)}-.${Math.ceil(
     this.pers_mercury_short.tone
-  )}-.${Math.ceil(this.pers_mercury_short.base)}-.${
-    this.pers_mercury_short.direction
-  }${this.pers_mercury_short.power}`;
+  )}-.${Math.ceil(this.pers_mercury_short.base)}-.${this.pers_mercury_short.direction
+    }${this.pers_mercury_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4844,9 +4839,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_venus_short.line
   )}-.${Math.ceil(this.pers_venus_short.color)}-.${Math.ceil(
     this.pers_venus_short.tone
-  )}-.${Math.ceil(this.pers_venus_short.base)}-.${
-    this.pers_venus_short.direction
-  }${this.pers_venus_short.power}`;
+  )}-.${Math.ceil(this.pers_venus_short.base)}-.${this.pers_venus_short.direction
+    }${this.pers_venus_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4854,9 +4848,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_mars_short.line
   )}-.${Math.ceil(this.pers_mars_short.color)}-.${Math.ceil(
     this.pers_mars_short.tone
-  )}-.${Math.ceil(this.pers_mars_short.base)}-.${
-    this.pers_mars_short.direction
-  }${this.pers_mars_short.power}`;
+  )}-.${Math.ceil(this.pers_mars_short.base)}-.${this.pers_mars_short.direction
+    }${this.pers_mars_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4864,9 +4857,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_jupiter_short.line
   )}-.${Math.ceil(this.pers_jupiter_short.color)}-.${Math.ceil(
     this.pers_jupiter_short.tone
-  )}-.${Math.ceil(this.pers_jupiter_short.base)}-.${
-    this.pers_jupiter_short.direction
-  }${this.pers_jupiter_short.power}`;
+  )}-.${Math.ceil(this.pers_jupiter_short.base)}-.${this.pers_jupiter_short.direction
+    }${this.pers_jupiter_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4874,9 +4866,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_saturn_short.line
   )}-.${Math.ceil(this.pers_saturn_short.color)}-.${Math.ceil(
     this.pers_saturn_short.tone
-  )}-.${Math.ceil(this.pers_saturn_short.base)}-.${
-    this.pers_saturn_short.direction
-  }${this.pers_saturn_short.power}`;
+  )}-.${Math.ceil(this.pers_saturn_short.base)}-.${this.pers_saturn_short.direction
+    }${this.pers_saturn_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4884,9 +4875,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_uranus_short.line
   )}-.${Math.ceil(this.pers_uranus_short.color)}-.${Math.ceil(
     this.pers_uranus_short.tone
-  )}-.${Math.ceil(this.pers_uranus_short.base)}-.${
-    this.pers_uranus_short.direction
-  }${this.pers_uranus_short.power}`;
+  )}-.${Math.ceil(this.pers_uranus_short.base)}-.${this.pers_uranus_short.direction
+    }${this.pers_uranus_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4894,9 +4884,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_neptune_short.line
   )}-.${Math.ceil(this.pers_neptune_short.color)}-.${Math.ceil(
     this.pers_neptune_short.tone
-  )}-.${Math.ceil(this.pers_neptune_short.base)}-.${
-    this.pers_neptune_short.direction
-  }${this.pers_neptune_short.power}`;
+  )}-.${Math.ceil(this.pers_neptune_short.base)}-.${this.pers_neptune_short.direction
+    }${this.pers_neptune_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
@@ -4904,9 +4893,8 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
     this.pers_pluto_short.line
   )}-.${Math.ceil(this.pers_pluto_short.color)}-.${Math.ceil(
     this.pers_pluto_short.tone
-  )}-.${Math.ceil(this.pers_pluto_short.base)}-.${
-    this.pers_pluto_short.direction
-  }${this.pers_pluto_short.power}`;
+  )}-.${Math.ceil(this.pers_pluto_short.base)}-.${this.pers_pluto_short.direction
+    }${this.pers_pluto_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 };
@@ -5000,9 +4988,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_sun_short.line
   )}-.${Math.ceil(this.des_sun_short.color)}-.${Math.ceil(
     this.des_sun_short.tone
-  )}-.${Math.ceil(this.des_sun_short.base)}-.${this.des_sun_short.direction}${
-    this.des_sun_short.power
-  }`;
+  )}-.${Math.ceil(this.des_sun_short.base)}-.${this.des_sun_short.direction}${this.des_sun_short.power
+    }`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5010,9 +4997,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_earth_short.line
   )}-.${Math.ceil(this.des_earth_short.color)}-.${Math.ceil(
     this.des_earth_short.tone
-  )}-.${Math.ceil(this.des_earth_short.base)}-.${
-    this.des_earth_short.direction
-  }${this.des_earth_short.power}`;
+  )}-.${Math.ceil(this.des_earth_short.base)}-.${this.des_earth_short.direction
+    }${this.des_earth_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5020,9 +5006,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_moon_short.line
   )}-.${Math.ceil(this.des_moon_short.color)}-.${Math.ceil(
     this.des_moon_short.tone
-  )}-.${Math.ceil(this.des_moon_short.base)}-.${this.des_moon_short.direction}${
-    this.des_moon_short.power
-  }`;
+  )}-.${Math.ceil(this.des_moon_short.base)}-.${this.des_moon_short.direction}${this.des_moon_short.power
+    }`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5030,9 +5015,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_nnode_short.line
   )}-.${Math.ceil(this.des_nnode_short.color)}-.${Math.ceil(
     this.des_nnode_short.tone
-  )}-.${Math.ceil(this.des_nnode_short.base)}-.${
-    this.des_nnode_short.direction
-  }${this.des_nnode_short.power}`;
+  )}-.${Math.ceil(this.des_nnode_short.base)}-.${this.des_nnode_short.direction
+    }${this.des_nnode_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5040,9 +5024,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_snode_short.line
   )}-.${Math.ceil(this.des_snode_short.color)}-.${Math.ceil(
     this.des_snode_short.tone
-  )}-.${Math.ceil(this.des_snode_short.base)}-.${
-    this.des_snode_short.direction
-  }${this.des_snode_short.power}`;
+  )}-.${Math.ceil(this.des_snode_short.base)}-.${this.des_snode_short.direction
+    }${this.des_snode_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5050,9 +5033,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_mercury_short.line
   )}-.${Math.ceil(this.des_mercury_short.color)}-.${Math.ceil(
     this.des_mercury_short.tone
-  )}-.${Math.ceil(this.des_mercury_short.base)}-.${
-    this.des_mercury_short.direction
-  }${this.des_mercury_short.power}`;
+  )}-.${Math.ceil(this.des_mercury_short.base)}-.${this.des_mercury_short.direction
+    }${this.des_mercury_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5060,9 +5042,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_venus_short.line
   )}-.${Math.ceil(this.des_venus_short.color)}-.${Math.ceil(
     this.des_venus_short.tone
-  )}-.${Math.ceil(this.des_venus_short.base)}-.${
-    this.des_venus_short.direction
-  }${this.des_venus_short.power}`;
+  )}-.${Math.ceil(this.des_venus_short.base)}-.${this.des_venus_short.direction
+    }${this.des_venus_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5070,9 +5051,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_mars_short.line
   )}-.${Math.ceil(this.des_mars_short.color)}-.${Math.ceil(
     this.des_mars_short.tone
-  )}-.${Math.ceil(this.des_mars_short.base)}-.${this.des_mars_short.direction}${
-    this.des_mars_short.power
-  }`;
+  )}-.${Math.ceil(this.des_mars_short.base)}-.${this.des_mars_short.direction}${this.des_mars_short.power
+    }`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5080,9 +5060,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_jupiter_short.line
   )}-.${Math.ceil(this.des_jupiter_short.color)}-.${Math.ceil(
     this.des_jupiter_short.tone
-  )}-.${Math.ceil(this.des_jupiter_short.base)}-.${
-    this.des_jupiter_short.direction
-  }${this.des_jupiter_short.power}`;
+  )}-.${Math.ceil(this.des_jupiter_short.base)}-.${this.des_jupiter_short.direction
+    }${this.des_jupiter_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5090,9 +5069,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_saturn_short.line
   )}-.${Math.ceil(this.des_saturn_short.color)}-.${Math.ceil(
     this.des_saturn_short.tone
-  )}-.${Math.ceil(this.des_saturn_short.base)}-.${
-    this.des_saturn_short.direction
-  }${this.des_saturn_short.power}`;
+  )}-.${Math.ceil(this.des_saturn_short.base)}-.${this.des_saturn_short.direction
+    }${this.des_saturn_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5100,9 +5078,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_uranus_short.line
   )}-.${Math.ceil(this.des_uranus_short.color)}-.${Math.ceil(
     this.des_uranus_short.tone
-  )}-.${Math.ceil(this.des_uranus_short.base)}-.${
-    this.des_uranus_short.direction
-  }${this.des_uranus_short.power}`;
+  )}-.${Math.ceil(this.des_uranus_short.base)}-.${this.des_uranus_short.direction
+    }${this.des_uranus_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5110,9 +5087,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_neptune_short.line
   )}-.${Math.ceil(this.des_neptune_short.color)}-.${Math.ceil(
     this.des_neptune_short.tone
-  )}-.${Math.ceil(this.des_neptune_short.base)}-.${
-    this.des_neptune_short.direction
-  }${this.des_neptune_short.power}`;
+  )}-.${Math.ceil(this.des_neptune_short.base)}-.${this.des_neptune_short.direction
+    }${this.des_neptune_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
@@ -5120,9 +5096,8 @@ DrawFormulaClass.prototype.draw_des_text = function () {
     this.des_pluto_short.line
   )}-.${Math.ceil(this.des_pluto_short.color)}-.${Math.ceil(
     this.des_pluto_short.tone
-  )}-.${Math.ceil(this.des_pluto_short.base)}-.${
-    this.des_pluto_short.direction
-  }${this.des_pluto_short.power}`;
+  )}-.${Math.ceil(this.des_pluto_short.base)}-.${this.des_pluto_short.direction
+    }${this.des_pluto_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 };
@@ -5250,7 +5225,7 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
         this.y,
         width,
         height,
-        this.data_formula.numerologyInfo
+        this.data_formula.numerology.personality
       );
 
       break;
