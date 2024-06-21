@@ -139,7 +139,7 @@ export function ReqDataForm() {
     // Cookies.remove("last10");
     const cookies = Cookies.get("last10");
 
-    if (cookies === undefined) {
+    if (cookies === undefined || cookies.length === 0) {
       return;
     }
 
@@ -370,7 +370,7 @@ export function ReqDataForm() {
           placement="bottomLeft"
           dropdownStyle={{ width: "12rem" }}
           style={{ width: "6rem" }}
-          options={last10.map((item, index) => ({
+          options={last10 && last10.map((item, index) => ({
             label: `${item.name}  ${item.time.pers_time_utc.year}-${item.time.pers_time_utc.month}-${item.time.pers_time_utc.day} ${item.time.pers_time_utc.hours}:${item.time.pers_time_utc.minutes} UTC`,
             value: `${index}`,
           }))}

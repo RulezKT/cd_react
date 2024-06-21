@@ -99,6 +99,7 @@ export class FD {
     let centers_array: string[][];
 
     // console.log(`drawFormulaV2 info: ${JSON.stringify(cdInfo.fd)}`);
+    // console.log(cdInfo.fdInfo)
 
     //deep cloning
     switch (calc) {
@@ -106,17 +107,19 @@ export class FD {
       case "design":
         //рисуем Красное
 
+        // cdInfo.numerologyInfo.Personality
+
         planetsData = cdInfo.hd.design.planets_data
-        formula_array = cdInfo.fd.design[0]
-        centers_array = cdInfo.fd.design[1]
+        formula_array = cdInfo.fdInfo.des.plfData
+        centers_array = cdInfo.fdInfo.des.centersArr
         break;
 
       case "full":
       case "personality":
       default:
         planetsData = cdInfo.hd.personality.planets_data
-        formula_array = cdInfo.fd.personality[0]
-        centers_array = cdInfo.fd.personality[1]
+        formula_array = cdInfo.fdInfo.pers.plfData
+        centers_array = cdInfo.fdInfo.pers.centersArr
     }
 
     //окантовка

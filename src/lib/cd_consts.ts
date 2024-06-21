@@ -296,14 +296,15 @@ export enum ZodiacNamesEnum {
   "Pisces",
 }
 
-export type ZodPlanet = {
+export type Zodiac = {
   name: string;
-  index: number;
   degrees: number;
   minutes: number;
   seconds: number;
   text: string;
 };
+
+
 
 // months from 1 to 12
 export const MonthsArr: string[] = [
@@ -545,7 +546,7 @@ export type ReqData = {
   day: number;
   hours: number;
   minutes: number;
-  typeOfTime: TypeOfTime;
+  typeOfTime: number; // 1 - local time, 0- UTC Time
   offset: number; // offset in seconds to subtract from local to get UTC
   place: string;
   latitude: number;
@@ -572,7 +573,6 @@ export type CDinfo = {
   name: string;
   time: CDTime;
   hd: HD;
-
   fdInfo: Fd;
   astroInfo: Astro;
   numerologyInfo: Numerology;
@@ -635,7 +635,7 @@ export type CDTime = {
   pers_time_local: LocalTime;
   pers_time_utc: UTCTime;
   des_time: UTCTime;
-  typeOfTime: TypeOfTime; // 1 - local time, 0- UTC Time
+  typeOfTime: number; // 1 - local time, 0- UTC Time
 };
 
 export type UTCTime = {
@@ -644,12 +644,13 @@ export type UTCTime = {
   day: number;
   hours: number;
   minutes: number;
-  seconds: number;
 };
 
 export type LocalTime = UTCTime & {
   offset: number; //offset in seconds to subtract from local to get UTC
   place: string; // place of birth
+  longitude: number; // longitude
+  latitude: number; // latitude
 };
 
 export type OneSide = {
@@ -684,13 +685,7 @@ export type SpecialInfo = {
   cross: Cross;
 };
 
-export type Zodiac = {
-  degrees: number;
-  minutes: number;
-  seconds: number;
-  zodiac: string;
-  fmtString: string; //formatted string to display
-};
+
 
 export type Gates = {
   defined: boolean;
@@ -733,18 +728,17 @@ export type CentersArr = {
 };
 
 export type PlanetsData = {
+  name: string;
+  number: number;
+  longitude: number;
   hex: number;
   line: number;
   color: number;
   tone: number;
   base: number;
-  number_of_passed_degrees: number;
-  longitude: number; // Radians
-  name: string;
-  number: number;
   power: number;
   direction: string;
-  zodiac: ZodPlanet;
+  zodiac: Zodiac;
 };
 
 export type PlanetsDataArr = { pers: PlanetsData[]; des: PlanetsData[] };

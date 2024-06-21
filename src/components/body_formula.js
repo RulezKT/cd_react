@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { appendText, appendTextPlanets } from "./auxiliary_fns.ts";
-import { drawNumerology } from "./numerology.ts";
+
 
 import { environment, motivation, nutrition } from "./phs.ts";
 
@@ -5216,18 +5216,6 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
       //рисуем Личность
 
       this.draw_Pers();
-      break;
-
-    case "numerology":
-      drawNumerology(
-        svg,
-        this.x,
-        this.y,
-        width,
-        height,
-        this.data_formula.numerology.personality
-      );
-
       break;
 
     default:
