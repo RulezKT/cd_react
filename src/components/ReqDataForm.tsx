@@ -149,9 +149,9 @@ export function ReqDataForm() {
     // console.log(json);
 
     // console.log(FETCH_COOKIES);
-    const data: CDinfo[] = await fetchData({ "cookies": json }, "cookies");
+    const data: CDinfo[] = await fetchData(json, "cookies");
 
-    setLast10andMenuItems(data["cookies"]);
+    setLast10andMenuItems(data);
     // console.log(last10);
   }
 
