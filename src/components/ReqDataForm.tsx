@@ -153,6 +153,7 @@ export function ReqDataForm() {
 
     setLast10andMenuItems(data);
     // console.log(last10);
+
   }
 
   async function getTransits() {
@@ -188,6 +189,8 @@ export function ReqDataForm() {
   }
 
   async function onSubmit() {
+
+    // console.log(last10)
     typeOfChart.set("bodygraph");
     calcType.set("full");
 
