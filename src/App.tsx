@@ -8,6 +8,9 @@ import { UseTypeOfChart, useTypeOfChart } from "./components/typeOfChart";
 import { CalcTypeRadio } from "./components/CalcTypeRadio";
 import { UseCalcType, useCalcType } from "./components/calcType";
 
+
+
+
 function App() {
   const cdInfo: UseCdInfo = useCdInfo();
   const typeOfChart: UseTypeOfChart = useTypeOfChart();
@@ -23,6 +26,7 @@ function App() {
 
   return (
     <div className="flex flex-col container mx-auto border-solid border-2 border-slate-950 w-full justify-center items-center  p-1  gap-1 m-1 space-x-4 space-y-0">
+
       <div className="w-full space-y-0">
         <div className="flex flex-row justify-center items-center space-x-2 space-y-2">
           <ReqDataForm />

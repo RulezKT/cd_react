@@ -29,7 +29,9 @@ import { fetchData } from "./FetchData";
 import { CDinfo } from "@/lib/cd_consts";
 
 import { Select } from "antd";
-import { CalcTypeRadio } from "./CalcTypeRadio";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+
 
 type TimeZone = {
   dstOffset: number;
@@ -46,6 +48,11 @@ type Place = {
 };
 
 export function ReqDataForm() {
+
+  const { register, handleSubmit, formState } = useForm<IForm>({
+    mode: "onChange",
+  });
+
   const timeFormat = "HH:mm";
   const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 
@@ -58,10 +65,16 @@ export function ReqDataForm() {
   const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
   //   const [time, setTime] = useState<Dayjs>(dateTime);
   //   const [date, setDate] = useState<Dayjs>(dateTime);
+
+
+
+  // But if you just want an answer for the maximum bounds for Google Maps:
+  //   Latitude: -85 to + 85(actually - 85.05115 for some reason)
+  //   Longitude: -180 to + 180
   const [place, setPlace] = useState<Place>({
     name: "",
-    latitude: 0,
-    longitude: 0,
+    latitude: 90,
+    longitude: 200,
   });
 
   const [timeZone, setTimeZone] = useState<TimeZone>({
@@ -71,7 +84,7 @@ export function ReqDataForm() {
     timeZoneId: "",
     timeZoneName: "",
   });
-  const [nameValue, setNameValue] = useState("Transits");
+  const [nameValue, setNameValue] = useState("");
 
   function onUtcChange(e: CheckboxChangeEvent) {
     if (e.target.checked) {
@@ -162,14 +175,14 @@ export function ReqDataForm() {
 
     setDateTime(d);
 
-    setNameValue("Transits");
+    // setNameValue("Transits");
     typeOfChart.set("bodygraph");
     calcType.set("personality");
 
     setUTC("local");
 
     const reqData: ReqData = {
-      name: nameValue,
+      name: "Transits",
       year: dateTime.year(),
       month: dateTime.month() + 1,
       day: dateTime.date(),
@@ -190,9 +203,26 @@ export function ReqDataForm() {
 
   async function onSubmit() {
 
+    if (utc === "local" && place.name === "" && place.latitude === 90 && place.longitude === 200) {
+
+      return;
+    }
+
     // console.log(last10)
     typeOfChart.set("bodygraph");
     calcType.set("full");
+
+    // console.log("onSubmit");
+    // console.log(nameValue);
+    // console.log(dateTime);
+    // console.log(utc);
+    // console.log(place);
+    // console.log(timeZone);
+    // console.log(place.name);
+    // console.log(place.latitude);
+    // console.log(place.longitude);
+
+
 
     const reqData: ReqData = {
       name: nameValue,
@@ -213,7 +243,7 @@ export function ReqDataForm() {
 
     cdInfo.set(data);
 
-    if (data.name != "Transits") {
+    if (data.name != "Transits" && data.name != "") {
       if (last10.length < 10) {
         last10.push(data);
         setLast10andMenuItems(last10);
@@ -275,10 +305,70 @@ export function ReqDataForm() {
     );
   }
 
+  const onSubmit2: SubmitHandler<IForm> = (data) => { console.log(data); }
+  const emailError = formState.errors.email?.message;
+
+  interface IForm {
+    name: string;
+    email: string;
+    message: string;
+  }
+
+  const dateFormat = 'YYYY-MM-DD HH:mm';
+
   return (
     <div className="flex flex-col">
+
+
+
+      <form onSubmit={handleSubmit(onSubmit2)} className="w-full mt-16 px-5">
+        <input type="text" placeholder="Name" {...register('name', { required: "this field is required", })} />
+        <input type="email" placeholder="email" {...register('email', {
+          required: "this field is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            message: "invalid email address"
+          }
+        })} />
+        {emailError && <p className="text-red-900">{emailError}</p>}
+        <textarea name="message" placeholder="Message"></textarea>
+
+        <DatePicker
+          format={{
+            format: dateFormat,
+            type: 'mask',
+
+          }}
+          components={{
+
+          }}
+          showNow={false}
+        // minDate={dayjs('2019-08-01 00:00', dateFormat)}
+        // maxDate={dayjs('2020-10-31 00:00', dateFormat)}
+        // onChange={onChange}
+        />
+
+
+
+
+
+
+
+
+        <button type="submit">Send</button>
+
+
+
+      </form>
+
+
+
+
+
+
       <div className="flex flex-row justify-center items-center space-x-2">
         <Input
+          autoFocus={true}
           className="w-28"
           placeholder="Nickname"
           prefix={<UserOutlined />}
@@ -287,11 +377,21 @@ export function ReqDataForm() {
         />
 
         <DatePicker
+
           required={true}
           className="w-32"
           value={dateTime}
           onChange={onDateChange}
           placeholder="select date"
+          maxDate={dayjs('2100-01-01')}
+          minDate={dayjs('1900-01-01')}
+          format={{
+            format: 'YYYY-MM-DD',
+            type: 'mask',
+          }
+
+          }
+
         />
 
         <TimePicker
@@ -308,6 +408,8 @@ export function ReqDataForm() {
           className=" w-34 h-8 rounded"
           required={utc === "local" ? true : false}
           disabled={utc === "utc" ? true : false}
+          placeholder="Birth Place"
+          // value={place.name}
           apiKey={GOOGLE_MAPS_API_KEY}
           onPlaceSelected={(place) => {
             const geocoder = new google.maps.Geocoder();
