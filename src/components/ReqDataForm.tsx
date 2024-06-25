@@ -366,7 +366,7 @@ export function ReqDataForm() {
 
 
 
-      <div className="flex flex-row justify-center items-center space-x-2">
+      <div className="flex flex-row justify-between items-center  ">
         <Input
           autoFocus={true}
           className="w-28"
@@ -402,7 +402,12 @@ export function ReqDataForm() {
           format={timeFormat}
         />
 
+
         <Checkbox onChange={onUtcChange}>UTC</Checkbox>
+
+      </div>
+      <div className="flex flex-row justify-between items-center  ">
+
 
         <Autocomplete
           className=" w-34 h-8 rounded"

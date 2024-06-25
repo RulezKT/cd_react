@@ -3,8 +3,7 @@ import { appendText } from "./auxiliary_fns.ts";
 
 export const drawNumerology = (
   svg: d3.Selection<SVGGElement, unknown, null, undefined>,
-  x: number,
-  y: number,
+
   width: number,
   height: number,
   formula
@@ -22,17 +21,8 @@ export const drawNumerology = (
     .attr("stroke", "#000000");
 
   //координаты для текста
-  let num_x = x - width / 2;
-  let num_y = y;
-
-  svg
-    .append("rect")
-    .attr("height", 199)
-    .attr("width", width)
-    .attr("x", num_x)
-    .attr("y", num_y)
-    .attr("fill", "none")
-    .attr("stroke", "red");
+  let num_x = 0;
+  let num_y = 0;
 
   num_x += 10;
   num_y += 30;
@@ -56,7 +46,11 @@ export const drawNumerology = (
   appendText(svg, num_x, num_y, numerology_text, "black", "start");
   num_y += 30;
 
-  numerology_text = `Meta tasks: [${formula.mc1_task}].[${formula.mc2_task}].[${formula.mc3_task}].Whole life task: ${formula.mc_whole_life_task}. Mc2 optional task: ${formula.mc2_optional_task}`;
+  numerology_text = `Meta tasks: [${formula.mc1_task}].[${formula.mc2_task}].[${formula.mc3_task}].`;
+  appendText(svg, num_x, num_y, numerology_text, "black", "start");
+  num_y += 30;
+
+  numerology_text = `Whole life task: ${formula.mc_whole_life_task}. Mc2 optional task: ${formula.mc2_optional_task}`;
   appendText(svg, num_x, num_y, numerology_text, "black", "start");
   num_y += 30;
 

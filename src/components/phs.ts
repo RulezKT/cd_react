@@ -137,6 +137,9 @@ export const nutrition = function (color: number, tone: number) {
 };
 
 export const motivation = function (color: number, tone: number) {
+  // console.log("motivation");
+  // console.log(color);
+  // console.log(tone);
   const colors = [
     [],
     //1st color
