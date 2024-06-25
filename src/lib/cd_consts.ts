@@ -676,13 +676,19 @@ export type GeneralInfo = {
 
 export type SpecialInfo = {
   cognition: string;
+  cognition_transf: string;
   theme: string;
+  theme_transf: string;
   nutr_type: string;
+  nutr_type_transf: string;
   environment: string;
+  environment_transf: string;
   mind: string;
   motivation: string;
   motivation_transf: string;
+  mind_transf: string;
   view: string;
+  view_transf: string;
   perspective: string;
   perspective_transf: string;
   profile: string;

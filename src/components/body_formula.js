@@ -4630,162 +4630,6 @@ DrawFormulaClass.prototype.drawWhiteFormula = function () {
   this.drawEgoCentre("white");
 };
 
-DrawFormulaClass.prototype.draw_body_text = function () {
-  let pers_x = this.pers_x + 10;
-  let pers_y = this.pers_y - 50;
-
-  let date_text = ``;
-
-  //Name
-  // appendText(svg, pers_x, pers_y, `Name: ${formula.name}`);
-  // pers_y += 20;
-
-  //PERSONALITY
-
-  // date_text = `${this.pers_utc.hours}:${this.pers_utc.minutes}:${this.pers_utc.seconds} ${this.pers_utc.day}.${this.pers_utc.month}.${this.pers_utc.year}`;
-  // appendText(svg, pers_x, pers_y, `UTC: ${date_text}`);
-  // pers_y += 20;
-
-  // if (this.pers_local) {
-  //   date_text = `${this.pers_local.hours}:${this.pers_local.minutes}:${this.pers_local.seconds} ${this.pers_local.day}.${this.pers_local.month}.${this.pers_local.year}`;
-  //   appendText(svg, pers_x, pers_y, `Loc.: ${date_text}`);
-  // }
-
-  // pers_y += 20;
-
-
-
-  let type_text = `${formula.hd.generalInfo.type}`;
-  switch (type_text) {
-    case "Reflector":
-      type_text = "R";
-      break;
-    case "Manifestor":
-      type_text = "M";
-      break;
-    case "Generator":
-      type_text = "G";
-      break;
-    case "Manifesting Generator":
-      type_text = "MG";
-      break;
-
-    case "Projector":
-      type_text = "P";
-      break;
-
-    default:
-      type_text = "??";
-      break;
-  }
-  appendText(svg, pers_x, pers_y, `${type_text}`);
-  let profile_text = `${formula.hd.specialInfo.profile}`;
-  pers_x += 30;
-  appendText(svg, pers_x, pers_y, ` ${profile_text}`);
-  pers_x += 30;
-
-  let authority_text = `${formula.hd.generalInfo.authority}`;
-  appendText(svg, pers_x, pers_y, ` ${authority_text}`);
-  pers_x += 50;
-
-  let definition_text = `${formula.hd.generalInfo.definition}`;
-  appendText(svg, pers_x, pers_y, ` ${definition_text}`);
-  pers_y += 20;
-
-  //motivation
-  //   let definition_text = `${formula.definition}`;
-  pers_x = this.x + width / 2 - 330;
-  pers_y = this.pers_y + 100;
-
-  let pers_sun_color = this.pers_sun_short.color;
-  let pers_sun_tone = this.pers_sun_short.tone;
-
-  let pers_node_color = this.pers_nnode_short.color;
-  let pers_node_tone = this.pers_nnode_short.tone;
-
-  appendText(
-    svg,
-    pers_x,
-    pers_y,
-    `P.Sun c/t: ${pers_sun_color}.${pers_sun_tone}`,
-    "black"
-  );
-  pers_y += 20;
-  let text_arr = this.spInfo.motivation;
-  appendText(svg, pers_x, pers_y, `Motiv.:${text_arr}`);
-  pers_y += 20;
-  appendText(svg, pers_x, pers_y, text_arr[1]);
-  pers_y += 20;
-  appendText(
-    svg,
-    pers_x,
-    pers_y,
-    `P.Nodes c/t: ${pers_node_color}.${pers_node_tone}`,
-    "black"
-  );
-  pers_y += 20;
-  // text_arr = this.perspective(pers_sun_color, pers_sun_tone);
-
-  pers_y += 20;
-
-  //DESIGN
-  let des_x = this.pers_x + width - 200;
-  let des_y = this.pers_y - 40;
-
-  let {
-    year: d_year_d,
-    month: d_month_d,
-    day: d_day_d,
-    hours: d_hour_d,
-    minutes: d_minute_d,
-    seconds: d_second_d,
-  } = formula.time.des_time;
-
-  // date_text = `${d_hour_d}:${d_minute_d}:${d_second_d}`;
-  // appendText(svg, des_x, des_y, `D.UTC: ${date_text}`);
-  // des_y += 20;
-  // date_text = `${d_day_d}.${d_month_d}.${d_year_d}`;
-  // appendText(svg, des_x, des_y, `D.Date: ${date_text}`);
-
-  des_x = this.pers_x + 190;
-  des_y = this.pers_y + 100;
-
-  let des_sun_color = Math.ceil(this.des_sun_short.color);
-  let des_sun_tone = Math.ceil(this.des_sun_short.tone);
-
-  let des_node_color = Math.ceil(this.des_nnode_short.color);
-  let des_node_tone = Math.ceil(this.des_nnode_short.tone);
-
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `D.Sun c/t: ${des_sun_color}.${des_sun_tone}`,
-    "red"
-  );
-  des_y += 20;
-  text_arr = nutrition(des_sun_color, des_sun_tone);
-  appendText(svg, des_x, des_y, text_arr[0]);
-  des_y += 20;
-  appendText(svg, des_x, des_y, text_arr[1]);
-  des_y += 20;
-  appendText(svg, des_x, des_y, text_arr[2]);
-  des_y += 20;
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `D.Nodes c/t: ${des_node_color}.${des_node_tone}`,
-    "red"
-  );
-  des_y += 20;
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `Env.: ${environment(des_node_color, des_node_tone)}`
-  );
-};
 
 //PERSONALITY texts on screen
 DrawFormulaClass.prototype.draw_pers_text = function () {
@@ -4939,79 +4783,7 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
   pers_y += 20;
 };
 
-//PERSONALITY texts on screen + transference
-DrawFormulaClass.prototype.draw_pers_text_extended = function () {
-  let pers_x = this.x + width / 2 - 330;
-  let pers_y = 20;
 
-  let pers_sun_color = this.pers_sun_short.color;
-  let pers_sun_tone = this.pers_sun_short.tone;
-
-  let pers_node_color = this.pers_nnode_short.color;
-  let pers_node_tone = this.pers_nnode_short.tone;
-
-  appendText(
-    svg,
-    pers_x,
-    pers_y,
-    `P.Sun c / t: ${pers_sun_color}.${pers_sun_tone} `,
-    "black"
-  );
-  pers_y += 20;
-  let text_arr = this.spInfo.motivation;
-  appendText(svg, pers_x, pers_y, `Motiv.:${text_arr} `);
-  pers_y += 20;
-  appendText(svg, pers_x, pers_y, text_arr[1]);
-  pers_y += 20;
-  appendText(
-    svg,
-    pers_x,
-    pers_y,
-    `P.Nodes c / t: ${pers_node_color}.${pers_node_tone} `,
-    "black"
-  );
-  pers_y += 20;
-  // text_arr = this.perspective(pers_sun_color, pers_sun_tone);
-
-  pers_y += 20;
-
-  //add transference
-  pers_x = this.pers_x + 10;
-  pers_y = this.pers_y + 100;
-
-  pers_sun_color = pers_sun_color > 3 ? pers_sun_color - 3 : pers_sun_color + 3;
-  pers_sun_tone = pers_sun_tone > 3 ? pers_sun_tone - 3 : pers_sun_tone + 3;
-  pers_node_color =
-    pers_node_color > 3 ? pers_node_color - 3 : pers_node_color + 3;
-  pers_node_tone = pers_node_tone > 3 ? pers_node_tone - 3 : pers_node_tone + 3;
-
-  appendText(
-    svg,
-    pers_x,
-    pers_y,
-    `P.Sun transference: ${pers_sun_color}.${pers_sun_tone} `,
-    "black"
-  );
-  pers_y += 20;
-  text_arr = this.spInfo.motivation;
-  appendText(svg, pers_x, pers_y, `Motiv.transference:${text_arr} `);
-  pers_y += 20;
-  appendText(svg, pers_x, pers_y, text_arr[1]);
-  pers_y += 20;
-  appendText(
-    svg,
-    pers_x,
-    pers_y,
-    `P.Nodes transference: ${pers_node_color}.${pers_node_tone} `,
-    "black"
-  );
-  pers_y += 20;
-  // text_arr = this.perspective(pers_sun_color, pers_sun_tone);
-
-  pers_y += 20;
-
-  this.draw_pers_text();
-};
 
 //DESIGN texts on screen
 DrawFormulaClass.prototype.draw_des_text = function () {
@@ -5129,96 +4901,7 @@ DrawFormulaClass.prototype.draw_des_text = function () {
   des_y += 20;
 };
 
-//DESIGN texts on screen + nutrition + environment + transference
-DrawFormulaClass.prototype.draw_des_text_extended = function () {
-  // дублируем питание и пишем переносы
-  let des_x = this.pers_x + 190;
-  let des_y = this.pers_y + 100;
 
-  let des_sun_color = Math.ceil(this.des_sun_short.color);
-  let des_sun_tone = Math.ceil(this.des_sun_short.tone);
-
-  let des_node_color = Math.ceil(this.des_nnode_short.color);
-  let des_node_tone = Math.ceil(this.des_nnode_short.tone);
-
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `D.Sun c / t: ${des_sun_color}.${des_sun_tone} `,
-    "red"
-  );
-  des_y += 20;
-  let text_arr = nutrition(des_sun_color, des_sun_tone);
-  appendText(svg, des_x, des_y, text_arr[0]);
-  des_y += 20;
-  appendText(svg, des_x, des_y, text_arr[1]);
-  des_y += 20;
-  appendText(svg, des_x, des_y, text_arr[2]);
-  des_y += 20;
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `D.Nodes c / t: ${des_node_color}.${des_node_tone} `,
-    "red"
-  );
-  des_y += 20;
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `Env.: ${environment(des_node_color, des_node_tone)} `
-  );
-
-  //add transference
-  des_x = this.pers_x + width - 10;
-  des_y = this.pers_y + 100;
-
-  des_sun_color = des_sun_color > 3 ? des_sun_color - 3 : des_sun_color + 3;
-  des_sun_tone = des_sun_tone > 3 ? des_sun_tone - 3 : des_sun_tone + 3;
-
-  des_node_color = des_node_color > 3 ? des_node_color - 3 : des_node_color + 3;
-  des_node_tone = des_node_tone > 3 ? des_node_tone - 3 : des_node_tone + 3;
-
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `D.Sun transference: ${des_sun_color}.${des_sun_tone} `,
-    "red",
-    "end"
-  );
-  des_y += 20;
-
-  text_arr = nutrition(des_sun_color, des_sun_tone);
-  appendText(svg, des_x, des_y, text_arr[0], "black", "end");
-  des_y += 20;
-  appendText(svg, des_x, des_y, text_arr[1], "black", "end");
-  des_y += 20;
-  appendText(svg, des_x, des_y, text_arr[2], "black", "end");
-  des_y += 20;
-
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `D.Nodes transference: ${des_node_color}.${des_node_tone} `,
-    "red",
-    "end"
-  );
-  des_y += 20;
-  appendText(
-    svg,
-    des_x,
-    des_y,
-    `Env.transference: ${environment(des_node_color, des_node_tone)} `,
-    "black",
-    "end"
-  );
-
-  this.draw_des_text();
-};
 
 //V2 2024
 DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
@@ -5257,7 +4940,7 @@ DrawFormulaClass.prototype.draw_Body = function () {
 
   this.draw_pers_text();
   this.draw_des_text();
-  this.draw_body_text();
+
 
   let gates = [];
 
@@ -5657,7 +5340,7 @@ DrawFormulaClass.prototype.draw_Body = function () {
 
 DrawFormulaClass.prototype.draw_Pers = function () {
   //this.draw_pers_text();
-  this.draw_pers_text_extended();
+  this.draw_pers_text();
 
   let gates = [];
 
@@ -6042,7 +5725,7 @@ DrawFormulaClass.prototype.draw_Pers = function () {
 
 DrawFormulaClass.prototype.draw_Des = function () {
   //this.draw_des_text();
-  this.draw_des_text_extended();
+  this.draw_des_text();
 
   let gates = [];
 

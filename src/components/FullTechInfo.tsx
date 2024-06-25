@@ -22,111 +22,10 @@ export const FullTechInfo = (props) => {
 
     const nutrString: string = `D.Sun c/t:  ${cdInfo.hd.design.planets_data[SUN].color}.${cdInfo.hd.design.planets_data[SUN].tone} Nutrition: ${cdInfo.hd.specialInfo.nutr_type}  Cognition: ${cdInfo.hd.specialInfo.cognition} Theme: ${cdInfo.hd.specialInfo.theme} D.Nodes c/t: ${cdInfo.hd.design.planets_data[NORTHNODE].color}.${cdInfo.hd.design.planets_data[NORTHNODE].tone} Environment: ${cdInfo.hd.specialInfo.environment} `;
 
+    const transfString: string = ` Motiv.transference: ${cdInfo.hd.specialInfo.motivation_transf} Mind transference ${cdInfo.hd.specialInfo.mind_transf}  Perspective transference ${cdInfo.hd.specialInfo.perspective_transf}  View transference ${cdInfo.hd.specialInfo.view_transf} `;
 
-
-
-    const pers_sun_color_transf = pers_sun_color > 3 ? pers_sun_color - 3 : pers_sun_color + 3;
-    const pers_sun_tone_transf = pers_sun_tone > 3 ? pers_sun_tone - 3 : pers_sun_tone + 3;
-    const pers_node_color_transf = pers_node_color > 3 ? pers_node_color - 3 : pers_node_color + 3;
-    const pers_node_tone_transf = pers_node_tone > 3 ? pers_node_tone - 3 : pers_node_tone + 3;
-
-
-
-
-
-
-    `P.Sun transference: ${pers_sun_color}.${pers_sun_tone} `,
-        "black"
-    text_arr = this.spInfo.motivation_transf;
-    `Motiv.transference:${text_arr} `);
-    pers_y += 20;
-    appendText(svg, pers_x, pers_y, text_arr[1]);
-    pers_y += 20;
-    appendText(
-        svg,
-        pers_x,
-        pers_y,
-        `P.Nodes transference: ${pers_node_color}.${pers_node_tone} `,
-        "black"
-    );
-    pers_y += 20;
-    // text_arr = this.perspective(pers_sun_color, pers_sun_tone);
-
-    appendText(
-        svg,
-        des_x,
-        des_y,
-        `D.Sun c / t: ${des_sun_color}.${des_sun_tone} `,
-        "red"
-    );
-    des_y += 20;
-    let text_arr = nutrition(des_sun_color, des_sun_tone);
-    appendText(svg, des_x, des_y, text_arr[0]);
-    des_y += 20;
-    appendText(svg, des_x, des_y, text_arr[1]);
-    des_y += 20;
-    appendText(svg, des_x, des_y, text_arr[2]);
-    des_y += 20;
-    appendText(
-        svg,
-        des_x,
-        des_y,
-        `D.Nodes c / t: ${des_node_color}.${des_node_tone} `,
-        "red"
-    );
-    des_y += 20;
-    appendText(
-        svg,
-        des_x,
-        des_y,
-        `Env.: ${environment(des_node_color, des_node_tone)} `
-    );
-
-    //add transference
-    des_x = this.pers_x + width - 10;
-    des_y = this.pers_y + 100;
-
-    des_sun_color = des_sun_color > 3 ? des_sun_color - 3 : des_sun_color + 3;
-    des_sun_tone = des_sun_tone > 3 ? des_sun_tone - 3 : des_sun_tone + 3;
-
-    des_node_color = des_node_color > 3 ? des_node_color - 3 : des_node_color + 3;
-    des_node_tone = des_node_tone > 3 ? des_node_tone - 3 : des_node_tone + 3;
-
-    appendText(
-        svg,
-        des_x,
-        des_y,
-        `D.Sun transference: ${des_sun_color}.${des_sun_tone} `,
-        "red",
-        "end"
-    );
-    des_y += 20;
-
-    text_arr = nutrition(des_sun_color, des_sun_tone);
-    appendText(svg, des_x, des_y, text_arr[0], "black", "end");
-    des_y += 20;
-    appendText(svg, des_x, des_y, text_arr[1], "black", "end");
-    des_y += 20;
-    appendText(svg, des_x, des_y, text_arr[2], "black", "end");
-    des_y += 20;
-
-    appendText(
-        svg,
-        des_x,
-        des_y,
-        `D.Nodes transference: ${des_node_color}.${des_node_tone} `,
-        "red",
-        "end"
-    );
-    des_y += 20;
-    appendText(
-        svg,
-        des_x,
-        des_y,
-        `Env.transference: ${environment(des_node_color, des_node_tone)} `,
-        "black",
-        "end"
-    );
+    const transf2String: string = `Environment transference: ${cdInfo.hd.specialInfo.environment_transf} `;
+    const transf3String: string = `Theme transference: ${cdInfo.hd.specialInfo.theme_transf}  Cognition transference: ${cdInfo.hd.specialInfo.cognition_transf}  Nutrition transference: ${cdInfo.hd.specialInfo.nutr_type_transf} `;
 
 
 
@@ -139,6 +38,10 @@ export const FullTechInfo = (props) => {
             <p> {motivString}</p >
             <p> {motiveString2}</p >
             <p> {nutrString}</p >
+            <p> {transfString}</p >
+            <p> {transf2String}</p >
+            <p> {transf3String}</p >
+
         </div >
     );
 }
