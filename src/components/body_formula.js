@@ -482,6 +482,8 @@ DrawFormulaClass.prototype.init = function () {
 
   x = x_for_ego + this.width_of_1_centre * 1.2 + this.gap_between_centres;
   y = y_for_ego + this.height_of_1_centre / 2 + this.gap_between_centres;
+
+  // console.log(x, y);
   this.egoCentreCoord = {
     x: x,
     y: y,
@@ -553,8 +555,15 @@ DrawFormulaClass.prototype.init = function () {
   };
 
 
+
+
+
+
   x = x_for_emo + this.gap_between_centres * 14;
   y = y_for_emo - this.height_of_1_centre / 2;
+
+  // console.log(x, y);
+
   this.emoCentreCoord = {
     x: x,
     y: y,
@@ -4392,175 +4401,218 @@ DrawFormulaClass.prototype.drawRootCentre = function (fill) {
   );
 };
 
-DrawFormulaClass.prototype.drawSpleenCentre = function (fill) {
+
+
+// console.log(this.spleenCentreCoord.text48coordinates.x, this.spleenCentreCoord.text48coordinates.y);
+// console.log(this.spleenCentreCoord.text57coordinates.x, this.spleenCentreCoord.text57coordinates.y);
+// console.log(this.spleenCentreCoord.text44coordinates.x, this.spleenCentreCoord.text44coordinates.y);
+// console.log(this.spleenCentreCoord.text50coordinates.x, this.spleenCentreCoord.text50coordinates.y);
+// console.log(this.spleenCentreCoord.text32coordinates.x, this.spleenCentreCoord.text32coordinates.y);
+// console.log(this.spleenCentreCoord.text28coordinates.x, this.spleenCentreCoord.text28coordinates.y);
+// console.log(this.spleenCentreCoord.text18coordinates.x, this.spleenCentreCoord.text18coordinates.y);
+
+// body_formula.js: 555 5 466.25
+// body_formula.js: 556 23 478.25
+
+// body_formula.js: 557 53 496.25
+
+// body_formula.js: 558 77 508.25
+
+// body_formula.js: 559 49.400000000000006 524.75
+// body_formula.js: 560 29 536.75
+// body_formula.js: 561 5 548.75
+
+
+
+
+
+DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
+
+  const x = 5
+  const y = 448.25
+
   const spleenCentreData = [
-    { x: this.spleenCentreCoord.x, y: this.spleenCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.spleenCentreCoord.x + this.width_of_1_centre * 1.2,
-      y: this.spleenCentreCoord.y + (this.height_of_1_centre * 1.5) / 2,
+      x: x + 96,
+      y: y + 504.5 - 448.25,
     },
     {
-      x: this.spleenCentreCoord.x,
-      y: this.spleenCentreCoord.y + this.height_of_1_centre * 1.5,
+      x: x,
+      y: y + 560.75 - 448.25,
     },
-    { x: this.spleenCentreCoord.x, y: this.spleenCentreCoord.y },
+    { x: x, y: y },
   ];
+
+  // console.log(spleenCentreData)
 
   const spleenTextData = [
     {
-      x: this.spleenCentreCoord.text48coordinates.x,
-      y: this.spleenCentreCoord.text48coordinates.y,
+      x: x,
+      y: y + 466.25 - 448.25,
       text: "48",
     },
     {
-      x: this.spleenCentreCoord.text57coordinates.x,
-      y: this.spleenCentreCoord.text57coordinates.y,
+      x: x + 18,
+      y: y + 478.25 - 448.25,
       text: "57",
     },
     {
-      x: this.spleenCentreCoord.text44coordinates.x,
-      y: this.spleenCentreCoord.text44coordinates.y,
+      x: x + 48,
+      y: y + 496.25 - 448.25,
       text: "44",
     },
 
     {
-      x: this.spleenCentreCoord.text50coordinates.x,
-      y: this.spleenCentreCoord.text50coordinates.y,
+      x: x + 72,
+      y: y + 508.25 - 448.25,
       text: "50",
     },
     {
-      x: this.spleenCentreCoord.text32coordinates.x,
-      y: this.spleenCentreCoord.text32coordinates.y,
+      x: x + 44.4,
+      y: y + 524.75 - 448.25,
       text: "32",
     },
     {
-      x: this.spleenCentreCoord.text28coordinates.x,
-      y: this.spleenCentreCoord.text28coordinates.y,
+      x: x + 24,
+      y: y + 536.75 - 448.25,
       text: "28",
     },
 
     {
-      x: this.spleenCentreCoord.text18coordinates.x,
-      y: this.spleenCentreCoord.text18coordinates.y,
+      x: x,
+      y: y + 548.75 - 448.25,
       text: "18",
     },
   ];
 
-  this.spleenCentreCoord.centreGroup = svg.append("g");
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.spleenCentreCoord.centreGroup,
+    centreGroup,
     spleenCentreData,
     spleenTextData,
     fill,
     "#F20C0C"
   );
 };
+DrawFormulaClass.prototype.drawEmo340 = function (fill) {
 
-DrawFormulaClass.prototype.drawEmoCentre = function (fill) {
+
+
+  let x = 545
+  let y = 448.25
+
   const emoCentreData = [
-    { x: this.emoCentreCoord.x, y: this.emoCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.emoCentreCoord.x - this.width_of_1_centre * 1.2,
-      y: this.emoCentreCoord.y + (this.height_of_1_centre * 1.5) / 2,
+      x: x - 96,
+      y: y + 504.5 - 448.25,
     },
     {
-      x: this.emoCentreCoord.x,
-      y: this.emoCentreCoord.y + this.height_of_1_centre * 1.5,
+      x: x,
+      y: y + 560 - 448.25,
     },
-    { x: this.emoCentreCoord.x, y: this.emoCentreCoord.y },
+    { x: x, y },
   ];
 
   const emoTextData = [
     {
-      x: this.emoCentreCoord.text6coordinates.x + this.styles.size / 4,
-      y: this.emoCentreCoord.text6coordinates.y,
+      x: x + 456 - 545,
+      y: y + 508.25 - 448.25,
       text: "6",
     },
     {
-      x: this.emoCentreCoord.text37coordinates.x,
-      y: this.emoCentreCoord.text37coordinates.y,
+      x: x + 485 - 545,
+      y: y + 496.25 - 448.25,
       text: "37",
     },
     {
-      x: this.emoCentreCoord.text22coordinates.x,
-      y: this.emoCentreCoord.text22coordinates.y,
+      x: x + 509 - 545,
+      y: y + 478.25 - 448.25,
       text: "22",
     },
 
     {
-      x: this.emoCentreCoord.text36coordinates.x,
-      y: this.emoCentreCoord.text36coordinates.y,
+      x: x + 528.2 - 545,
+      y: y + 466.25 - 448.25,
       text: "36",
     },
     {
-      x: this.emoCentreCoord.text49coordinates.x,
-      y: this.emoCentreCoord.text49coordinates.y,
+      x: x + 477 - 545,
+      y: y + 520.25 - 448.25,
       text: "49",
     },
     {
-      x: this.emoCentreCoord.text55coordinates.x,
-      y: this.emoCentreCoord.text55coordinates.y,
+      x: x + 501 - 545,
+      y: y + 532.25 - 448.25,
       text: "55",
     },
 
     {
-      x: this.emoCentreCoord.text30coordinates.x,
-      y: this.emoCentreCoord.text30coordinates.y,
+      x: x + 528.2 - 545,
+      y: y + 548.75 - 448.25,
       text: "30",
     },
   ];
 
-  this.emoCentreCoord.centreGroup = svg.append("g");
+
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.emoCentreCoord.centreGroup,
+    centreGroup,
     emoCentreData,
     emoTextData,
     fill,
     "#F59713"
   );
 };
+DrawFormulaClass.prototype.drawEgo340 = function (fill) {
 
-DrawFormulaClass.prototype.drawEgoCentre = function (fill) {
+  let x = 388.5
+  let y = 362
+
+
   const egoCentreData = [
-    { x: this.egoCentreCoord.x, y: this.egoCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.egoCentreCoord.x + this.width_of_1_centre / 4,
-      y: this.egoCentreCoord.y + this.height_of_1_centre / 1.1,
+      x: x + 408.5 - 388.5,
+      y: y + 430.1818181818182 - 362,
     },
     {
-      x: this.egoCentreCoord.x - this.width_of_1_centre / 1.2,
-      y: this.egoCentreCoord.y + this.height_of_1_centre / 1.5,
+      x: x + 321.8333333333333 - 388.5,
+      y: y + 412 - 362,
     },
-    { x: this.egoCentreCoord.x, y: this.egoCentreCoord.y },
+    { x: x, y: y },
   ];
+
+
 
   const egoTextData = [
     {
-      x: this.egoCentreCoord.text21coordinates.x,
-      y: this.egoCentreCoord.text21coordinates.y,
+      x: 376.5,
+      y: 378.8,
       text: "21",
     },
     {
-      x: this.egoCentreCoord.text51coordinates.x,
-      y: this.egoCentreCoord.text51coordinates.y,
+      x: 358.5,
+      y: 392,
       text: "51",
     },
     {
-      x: this.egoCentreCoord.text26coordinates.x,
-      y: this.egoCentreCoord.text26coordinates.y,
+      x: 337.5,
+      y: 410,
       text: "26",
     },
 
     {
-      x: this.egoCentreCoord.text40coordinates.x,
-      y: this.egoCentreCoord.text40coordinates.y,
+      x: 385.5,
+      y: 422,
       text: "40",
     },
   ];
 
-  this.egoCentreCoord.centreGroup = svg.append("g");
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.egoCentreCoord.centreGroup,
+    centreGroup,
     egoCentreData,
     egoTextData,
     fill,
@@ -4619,9 +4671,9 @@ DrawFormulaClass.prototype.drawWhiteFormula = function () {
   this.drawGCentre("white");
   this.drawSacralCentre("white");
   this.drawRootCentre("white");
-  this.drawSpleenCentre("white");
-  this.drawEmoCentre("white");
-  this.drawEgoCentre("white");
+  this.drawSpleen340("white");
+  this.drawEmo340("white");
+  this.drawEgo340("white");
 };
 
 
@@ -5217,9 +5269,9 @@ DrawFormulaClass.prototype.draw_Body = function () {
   centres.g ? this.drawGCentre() : this.drawGCentre("white");
   centres.sacral ? this.drawSacralCentre() : this.drawSacralCentre("white");
   centres.root ? this.drawRootCentre() : this.drawRootCentre("white");
-  centres.spleen ? this.drawSpleenCentre() : this.drawSpleenCentre("white");
-  centres.ego ? this.drawEgoCentre() : this.drawEgoCentre("white");
-  centres.emo ? this.drawEmoCentre() : this.drawEmoCentre("white");
+  centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
+  centres.ego ? this.drawEgo340() : this.drawEgo340("white");
+  centres.emo ? this.drawEmo340() : this.drawEmo340("white");
 
   //document.getElementById("img_button").disabled = false;
 };
@@ -5602,9 +5654,9 @@ DrawFormulaClass.prototype.draw_Pers = function () {
   centres.g ? this.drawGCentre() : this.drawGCentre("white");
   centres.sacral ? this.drawSacralCentre() : this.drawSacralCentre("white");
   centres.root ? this.drawRootCentre() : this.drawRootCentre("white");
-  centres.spleen ? this.drawSpleenCentre() : this.drawSpleenCentre("white");
-  centres.ego ? this.drawEgoCentre() : this.drawEgoCentre("white");
-  centres.emo ? this.drawEmoCentre() : this.drawEmoCentre("white");
+  centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
+  centres.ego ? this.drawEgo340() : this.drawEgo340("white");
+  centres.emo ? this.drawEmo340() : this.drawEmo340("white");
 
   //document.getElementById("img_button").disabled = false;
 };
@@ -5987,9 +6039,9 @@ DrawFormulaClass.prototype.draw_Des = function () {
   centres.g ? this.drawGCentre() : this.drawGCentre("white");
   centres.sacral ? this.drawSacralCentre() : this.drawSacralCentre("white");
   centres.root ? this.drawRootCentre() : this.drawRootCentre("white");
-  centres.spleen ? this.drawSpleenCentre() : this.drawSpleenCentre("white");
-  centres.ego ? this.drawEgoCentre() : this.drawEgoCentre("white");
-  centres.emo ? this.drawEmoCentre() : this.drawEmoCentre("white");
+  centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
+  centres.ego ? this.drawEgo340() : this.drawEgo340("white");
+  centres.emo ? this.drawEmo340() : this.drawEmo340("white");
 
   //document.getElementById("img_button").disabled = false;
 };
