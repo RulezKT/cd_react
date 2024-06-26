@@ -1,9 +1,6 @@
 import * as d3 from "d3";
 import { appendText, appendTextPlanets } from "./auxiliary_fns.ts";
 
-
-import { environment, nutrition } from "./phs.ts";
-
 export const SSB = 0;
 export const MERCURY = 1;
 export const VENUS = 2;
@@ -20,32 +17,25 @@ export const NORTHNODE = 12;
 export const SOUTHNODE = 13;
 export const HIRON = 14;
 
-let formula = NaN;
 
-let for_name = "";
-
-let width;
-let height;
+// let width;
+// let height;
 
 let svg;
 
 export function DrawFormulaClass(data_formula, view_width, view_height) {
-  formula = data_formula;
+  // formula = data_formula;
 
   this.data_formula = data_formula;
   // console.log(data_formula.hd.personality);
 
-  width = view_width;
-  height = view_height;
+  this.width = view_width;
+  this.height = view_height;
 
   //x - посередине
-  this.x = view_width / 2;
+  this.x = this.width / 2 - 130;
   //делаем сверху отступ на 10%
-  this.y = (view_height / 100) * 10;
-
-  //   //координаты для текста
-  //   this.pers_x = this.x - width / 2;
-  //   this.pers_y = 0;
+  this.y = (this.height / 100) * 10 - 70;
 
   this.spInfo = data_formula.hd.specialInfo;
 
@@ -90,16 +80,16 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
     .select("#formula_chart")
     .append("svg")
     .attr("id", "svg_formula_chart")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", this.width)
+    .attr("height", this.height);
 
   svg.append("g").attr("transform", "translate(" + 0 + "," + 0 + ")");
 
   //окантовка
   svg
     .append("rect")
-    .attr("height", `${height}`)
-    .attr("width", `${width}`)
+    .attr("height", `${this.height}`)
+    .attr("width", `${555}`)
     .attr("x", 0)
     .attr("y", 0)
     .attr("fill", "#D3D3D3")
@@ -120,13 +110,13 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
   };
 
   //ширина 1 центра 10%
-  this.width_of_1_centre = (width / 100) * 10;
+  this.width_of_1_centre = (this.width / 100) * 10;
 
   //высота 1 центра 10%
-  this.height_of_1_centre = (height / 100) * 10;
+  this.height_of_1_centre = (this.height / 100) * 10;
 
   //делаем начальный промежуток между центрами 3%
-  this.gap_between_centres = (height / 100) * 3;
+  this.gap_between_centres = (this.height / 100) * 3;
 
   this.headCentreCoord = {};
   this.ajnaCentreCoord = {};
@@ -148,7 +138,7 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
 // Надо сюда так-же засунуть все надписи
 DrawFormulaClass.prototype.init = function () {
   //координаты для текста
-  this.pers_x = this.x - width / 2;
+  this.pers_x = this.x - this.width / 2;
   this.pers_y = this.y;
 
   //находим координаты всех ворот, каналов и центров
@@ -519,9 +509,12 @@ DrawFormulaClass.prototype.init = function () {
 
   x = x_for_spleen - this.gap_between_centres * 10;
   y = y_for_spleen - this.height_of_1_centre / 2;
+
+  // console.log(x, y);
+
   this.spleenCentreCoord = {
-    x: x,
-    y: y,
+    x: 5,
+    y: 448.25,
 
     text48coordinates: {
       x: x,
@@ -558,6 +551,7 @@ DrawFormulaClass.prototype.init = function () {
       y: y + this.height_of_1_centre * 1.5 - this.styles.size,
     },
   };
+
 
   x = x_for_emo + this.gap_between_centres * 14;
   y = y_for_emo - this.height_of_1_centre / 2;
@@ -4635,268 +4629,160 @@ DrawFormulaClass.prototype.drawWhiteFormula = function () {
 DrawFormulaClass.prototype.draw_pers_text = function () {
   let planet_text = "";
 
-  let pers_x = this.x + width / 2 - 10;
-  let pers_y = this.pers_y;
+  let pers_x = 460;
+  let pers_y = 35;
+
+  // console.log(pers_x, pers_y);
 
 
-  planet_text = `Sun: ${this.pers_sun_short.hex}.${Math.ceil(
-    this.pers_sun_short.line
-  )
-    } -.${Math.ceil(this.pers_sun_short.color)} -.${Math.ceil(
-      this.pers_sun_short.tone
-    )
-    } -.${Math.ceil(this.pers_sun_short.base)} -.${this.pers_sun_short.direction}${this.pers_sun_short.power
-    } `;
+  planet_text = `${this.pers_sun_short.hex}-.${this.pers_sun_short.line} - ${this.pers_sun_short.direction}${this.pers_sun_short.power}- -☀️`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `Earth: ${this.pers_earth_short.hex}.${Math.ceil(
-    this.pers_earth_short.line
-  )
-    } -.${Math.ceil(this.pers_earth_short.color)} -.${Math.ceil(
-      this.pers_earth_short.tone
-    )
-    } -.${Math.ceil(this.pers_earth_short.base)} -.${this.pers_earth_short.direction
-    }${this.pers_earth_short.power} `;
+  planet_text = `${this.pers_earth_short.hex}-.${this.pers_earth_short.line} - ${this.pers_earth_short.direction}${this.pers_earth_short.power}- -🌎`;
+  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
+  pers_y += 25;
+
+  planet_text = `${this.pers_nnode_short.hex}-.${this.pers_nnode_short.line} - ${this.pers_nnode_short.direction
+    }${this.pers_nnode_short.power}- --☊`;
+  appendTextPlanets(svg, pers_x - 4, pers_y, planet_text, "black", "end");
+  pers_y += 20;
+
+  planet_text = `${this.pers_snode_short.hex}-.${this.pers_snode_short.line} - ${this.pers_snode_short.direction
+    }${this.pers_snode_short.power}- --☋`;
+  appendTextPlanets(svg, pers_x - 4, pers_y, planet_text, "black", "end");
+  pers_y += 20;
+
+  planet_text = `${this.pers_moon_short.hex}-.${this.pers_moon_short.line} - ${this.pers_moon_short.direction
+    }${this.pers_moon_short.power}- -🌕`;
+  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
+  pers_y += 25;
+
+  planet_text = `${this.pers_mercury_short.hex}-.${this.pers_mercury_short.line} - ${this.pers_mercury_short.direction
+    }${this.pers_mercury_short.power}- ☿️`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `Moon: ${this.pers_moon_short.hex}.${Math.ceil(
-    this.pers_moon_short.line
-  )
-    } -.${Math.ceil(this.pers_moon_short.color)} -.${Math.ceil(
-      this.pers_moon_short.tone
-    )
-    } -.${Math.ceil(this.pers_moon_short.base)} -.${this.pers_moon_short.direction
-    }${this.pers_moon_short.power} `;
+  planet_text = `${this.pers_venus_short.hex}-.${this.pers_venus_short.line} - ${this.pers_venus_short.direction
+    }${this.pers_venus_short.power}- ♀️`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `N.Node ${this.pers_nnode_short.hex}.${Math.ceil(
-    this.pers_nnode_short.line
-  )
-    } -.${Math.ceil(this.pers_nnode_short.color)} -.${Math.ceil(
-      this.pers_nnode_short.tone
-    )
-    } -.${Math.ceil(this.pers_nnode_short.base)} -.${this.pers_nnode_short.direction
-    }${this.pers_nnode_short.power} `;
+  planet_text = `${this.pers_mars_short.hex}-.${this.pers_mars_short.line} - ${this.pers_mars_short.direction
+    }${this.pers_mars_short.power}- ♂️`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `S.Node: ${this.pers_snode_short.hex}.${Math.ceil(
-    this.pers_snode_short.line
-  )
-    } -.${Math.ceil(this.pers_snode_short.color)} -.${Math.ceil(
-      this.pers_snode_short.tone
-    )
-    } -.${Math.ceil(this.pers_snode_short.base)} -.${this.pers_snode_short.direction
-    }${this.pers_snode_short.power} `;
+  planet_text = `${this.pers_jupiter_short.hex}-.${this.pers_jupiter_short.line} - ${this.pers_jupiter_short.direction
+    }${this.pers_jupiter_short.power}- ♃`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `Mercury: ${this.pers_mercury_short.hex}.${Math.ceil(
-    this.pers_mercury_short.line
-  )
-    } -.${Math.ceil(this.pers_mercury_short.color)} -.${Math.ceil(
-      this.pers_mercury_short.tone
-    )
-    } -.${Math.ceil(this.pers_mercury_short.base)} -.${this.pers_mercury_short.direction
-    }${this.pers_mercury_short.power} `;
+  planet_text = `${this.pers_saturn_short.hex}-.${this.pers_saturn_short.line} - ${this.pers_saturn_short.direction
+    }${this.pers_saturn_short.power}- ♄`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `Venus: ${this.pers_venus_short.hex}.${Math.ceil(
-    this.pers_venus_short.line
-  )
-    } -.${Math.ceil(this.pers_venus_short.color)} -.${Math.ceil(
-      this.pers_venus_short.tone
-    )
-    } -.${Math.ceil(this.pers_venus_short.base)} -.${this.pers_venus_short.direction
-    }${this.pers_venus_short.power} `;
+  planet_text = `${this.pers_uranus_short.hex}-.${this.pers_uranus_short.line} - ${this.pers_uranus_short.direction
+    }${this.pers_uranus_short.power}- ♅`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `Mars: ${this.pers_mars_short.hex}.${Math.ceil(
-    this.pers_mars_short.line
-  )
-    } -.${Math.ceil(this.pers_mars_short.color)} -.${Math.ceil(
-      this.pers_mars_short.tone
-    )
-    } -.${Math.ceil(this.pers_mars_short.base)} -.${this.pers_mars_short.direction
-    }${this.pers_mars_short.power} `;
+  planet_text = `${this.pers_neptune_short.hex}-.${this.pers_neptune_short.line} - ${this.pers_neptune_short.direction
+    }${this.pers_neptune_short.power}- ♆`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 
-  planet_text = `Jupiter: ${this.pers_jupiter_short.hex}.${Math.ceil(
-    this.pers_jupiter_short.line
-  )
-    } -.${Math.ceil(this.pers_jupiter_short.color)} -.${Math.ceil(
-      this.pers_jupiter_short.tone
-    )
-    } -.${Math.ceil(this.pers_jupiter_short.base)} -.${this.pers_jupiter_short.direction
-    }${this.pers_jupiter_short.power} `;
-  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
-  pers_y += 20;
-
-  planet_text = `Saturn: ${this.pers_saturn_short.hex}.${Math.ceil(
-    this.pers_saturn_short.line
-  )
-    } -.${Math.ceil(this.pers_saturn_short.color)} -.${Math.ceil(
-      this.pers_saturn_short.tone
-    )
-    } -.${Math.ceil(this.pers_saturn_short.base)} -.${this.pers_saturn_short.direction
-    }${this.pers_saturn_short.power} `;
-  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
-  pers_y += 20;
-
-  planet_text = `Uranus: ${this.pers_uranus_short.hex}.${Math.ceil(
-    this.pers_uranus_short.line
-  )
-    } -.${Math.ceil(this.pers_uranus_short.color)} -.${Math.ceil(
-      this.pers_uranus_short.tone
-    )
-    } -.${Math.ceil(this.pers_uranus_short.base)} -.${this.pers_uranus_short.direction
-    }${this.pers_uranus_short.power} `;
-  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
-  pers_y += 20;
-
-  planet_text = `Neptune: ${this.pers_neptune_short.hex}.${Math.ceil(
-    this.pers_neptune_short.line
-  )
-    } -.${Math.ceil(this.pers_neptune_short.color)} -.${Math.ceil(
-      this.pers_neptune_short.tone
-    )
-    } -.${Math.ceil(this.pers_neptune_short.base)} -.${this.pers_neptune_short.direction
-    }${this.pers_neptune_short.power} `;
-  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
-  pers_y += 20;
-
-  planet_text = `Pluto: ${this.pers_pluto_short.hex}.${Math.ceil(
-    this.pers_pluto_short.line
-  )
-    } -.${Math.ceil(this.pers_pluto_short.color)} -.${Math.ceil(
-      this.pers_pluto_short.tone
-    )
-    } -.${Math.ceil(this.pers_pluto_short.base)} -.${this.pers_pluto_short.direction
-    }${this.pers_pluto_short.power} `;
+  planet_text = `${this.pers_pluto_short.hex}.-${this.pers_pluto_short.line} - ${this.pers_pluto_short.direction
+    }${this.pers_pluto_short.power}- ♇`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 };
 
 
-
 //DESIGN texts on screen
 DrawFormulaClass.prototype.draw_des_text = function () {
   //DESIGN
-  let des_x = this.pers_x + 165;
-  let des_y = this.pers_y + 100;
+  let des_x = 160;
+  let des_y = 35;
+
+  // console.log(des_x, des_y)
+
+
 
   let planet_text = "";
 
 
-  planet_text = `Sun: ${this.des_sun_short.hex}.${this.des_sun_short.line
-    }-.${this.des_sun_short.color}-.${this.des_sun_short.tone
-    }-.${this.des_sun_short.base}-.${this.des_sun_short.direction}${this.des_sun_short.power
-    }`;
+  planet_text = `${this.des_sun_short.hex}-.${this.des_sun_short.line} - ${this.des_sun_short.direction}${this.des_sun_short.power}- -☀️`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `Earth: ${this.des_earth_short.hex}.${this.des_earth_short.line
-    }-.${this.des_earth_short.color}-.${this.des_earth_short.tone
-    }-.${this.des_earth_short.base}-.${this.des_earth_short.direction
-    }${this.des_earth_short.power}`;
+  planet_text = `${this.des_earth_short.hex}-.${this.des_earth_short.line} - ${this.des_earth_short.direction}${this.des_earth_short.power}- -🌎`;
+  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
+  des_y += 25;
+
+  planet_text = `${this.des_nnode_short.hex}-.${this.des_nnode_short.line} - ${this.des_nnode_short.direction}${this.des_nnode_short.power}- --☊`;
+  appendTextPlanets(svg, des_x - 4, des_y, planet_text, "red", "end");
+  des_y += 20;
+
+  planet_text = `${this.des_snode_short.hex}-.${this.des_snode_short.line
+    } - ${this.des_snode_short.direction}${this.des_snode_short.power}- --☋`;
+  appendTextPlanets(svg, des_x - 4, des_y, planet_text, "red", "end");
+  des_y += 20;
+
+  planet_text = `${this.des_moon_short.hex}-.${this.des_moon_short.line} - ${this.des_moon_short.direction}${this.des_moon_short.power}- -🌕`;
+  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
+  des_y += 25;
+
+  planet_text = `${this.des_mercury_short.hex}-.${this.des_mercury_short.line} - ${this.des_mercury_short.direction
+    }${this.des_mercury_short.power}- ☿️`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `Moon: ${this.des_moon_short.hex}.${Math.ceil(
-    this.des_moon_short.line
-  )}-.${this.des_moon_short.color}-.${this.des_moon_short.tone
-    }-.${this.des_moon_short.base}-.${this.des_moon_short.direction}${this.des_moon_short.power
-    }`;
+  planet_text = `${this.des_venus_short.hex}-.${this.des_venus_short.line
+
+    } - ${this.des_venus_short.direction
+    }${this.des_venus_short.power}- ♀️`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `N.Node ${this.des_nnode_short.hex}.${Math.ceil(
-    this.des_nnode_short.line
-  )}-.${Math.ceil(this.des_nnode_short.color)}-.${Math.ceil(
-    this.des_nnode_short.tone
-  )}-.${Math.ceil(this.des_nnode_short.base)}-.${this.des_nnode_short.direction
-    }${this.des_nnode_short.power}`;
+  planet_text = `${this.des_mars_short.hex}-.${this.des_mars_short.line
+
+    } - ${this.des_mars_short.direction}${this.des_mars_short.power
+    }- ♂️`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `S.Node: ${this.des_snode_short.hex}.${this.des_snode_short.line
-    }-.${this.des_snode_short.color}-.${this.des_snode_short.tone
-    }-.${this.des_snode_short.base}-.${this.des_snode_short.direction
-    }${this.des_snode_short.power}`;
+  planet_text = `${this.des_jupiter_short.hex}-.${this.des_jupiter_short.line
+
+    } - ${this.des_jupiter_short.direction
+    }${this.des_jupiter_short.power}- ♃`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `Mercury: ${this.des_mercury_short.hex}.${this.des_mercury_short.line
+  planet_text = `${this.des_saturn_short.hex}-.${this.des_saturn_short.line
 
-    } -.${this.des_mercury_short.color} -.${this.des_mercury_short.tone
-
-    } -.${this.des_mercury_short.base} -.${this.des_mercury_short.direction
-    }${this.des_mercury_short.power} `;
+    } - ${this.des_saturn_short.direction
+    }${this.des_saturn_short.power}- ♄`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `Venus: ${this.des_venus_short.hex}.${this.des_venus_short.line
+  planet_text = `${this.des_uranus_short.hex}-.${this.des_uranus_short.line
 
-    } -.${this.des_venus_short.color} -.${this.des_venus_short.tone
-
-    } -.${this.des_venus_short.base} -.${this.des_venus_short.direction
-    }${this.des_venus_short.power} `;
+    } - ${this.des_uranus_short.direction
+    }${this.des_uranus_short.power}- ♅`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `Mars: ${this.des_mars_short.hex}.${this.des_mars_short.line
-
-    } -.${this.des_mars_short.color} -.${this.des_mars_short.tone
-
-    } -.${this.des_mars_short.base} -.${this.des_mars_short.direction}${this.des_mars_short.power
-    } `;
+  planet_text = `${this.des_neptune_short.hex}-.${this.des_neptune_short.line
+    } - ${this.des_neptune_short.direction
+    }${this.des_neptune_short.power}- ♆`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
-  planet_text = `Jupiter: ${this.des_jupiter_short.hex}.${this.des_jupiter_short.line
-
-    } -.${this.des_jupiter_short.color} -.${this.des_jupiter_short.tone
-
-    } -.${this.des_jupiter_short.base} -.${this.des_jupiter_short.direction
-    }${this.des_jupiter_short.power} `;
-  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
-  des_y += 20;
-
-  planet_text = `Saturn: ${this.des_saturn_short.hex}.${this.des_saturn_short.line
-
-    } -.${this.des_saturn_short.color} -.${this.des_saturn_short.tone
-
-    } -.${this.des_saturn_short.base} -.${this.des_saturn_short.direction
-    }${this.des_saturn_short.power} `;
-  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
-  des_y += 20;
-
-  planet_text = `Uranus: ${this.des_uranus_short.hex}.${this.des_uranus_short.line
-
-    } -.${this.des_uranus_short.color} -.${this.des_uranus_short.tone
-
-    } -.${this.des_uranus_short.base} -.${this.des_uranus_short.direction
-    }${this.des_uranus_short.power} `;
-  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
-  des_y += 20;
-
-  planet_text = `Neptune: ${this.des_neptune_short.hex}.${this.des_neptune_short.line
-    } -.${this.des_neptune_short.color} -.${this.des_neptune_short.tone
-    } -.${this.des_neptune_short.base} -.${this.des_neptune_short.direction
-    }${this.des_neptune_short.power} `;
-  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
-  des_y += 20;
-
-  planet_text = `Pluto: ${this.des_pluto_short.hex}.${this.des_pluto_short.line
-    } -.${this.des_pluto_short.color} -.${this.des_pluto_short.tone
-    } -.${this.des_pluto_short.base} -.${this.des_pluto_short.direction
-    }${this.des_pluto_short.power} `;
+  planet_text = `${this.des_pluto_short.hex}-.${this.des_pluto_short.line
+    } - ${this.des_pluto_short.direction
+    }${this.des_pluto_short.power}- ♇`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 };
@@ -4908,8 +4794,8 @@ DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
   this.init();
   this.drawWhiteFormula();
 
-  this.x = width / 2;
-  this.y = (height / 100) * 10;
+  this.x = this.width / 2;
+  this.y = (this.height / 100) * 10;
 
   switch (graph_type) {
     case "full":

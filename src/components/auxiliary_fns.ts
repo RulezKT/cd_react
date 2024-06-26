@@ -54,19 +54,33 @@ export const appendTextPlanets = (
     .append("tspan")
     .style("fill", "blue")
     .text(text.split("-")[1])
-    .attr("font-size", 10)
+    .attr("font-size", 12)
 
     .append("tspan")
     .style("fill", "green")
     .text(text.split("-")[2])
-    .attr("font-size", 8)
+    .attr("font-size", 10)
     .append("tspan")
-    .style("fill", "grey")
-    .text(text.split("-")[3])
-    .attr("font-size", 6)
+
 
     .append("tspan")
-    .style("fill", "#8064FF")
+    // .attr("fill", color || "black")
+    .style("fill", color || "black")
+    .text(text.split("-")[3])
+    .attr("font-size", 24)
+
+
+    .append("tspan")
+    // .attr("fill", color || "black")
+    .style("fill", color || "black")
     .text(text.split("-")[4])
-    .attr("font-size", 14);
+    .attr("font-size", 14)
+
+    .append("tspan")
+    // .attr("fill", color || "black")
+    .style("fill", color || "black")
+    .text(text.split("-")[5])
+    .attr("font-size", 16);
+
+
 };

@@ -2,7 +2,7 @@
 export const ShortInfo = (props) => {
 
     const cdInfo = props.data;
-    const chart = props.chart;
+    // const chart = props.chart;
     const calc = props.calc;
 
 
