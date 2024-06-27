@@ -80,6 +80,7 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
     .select("#formula_chart")
     .append("svg")
     .attr("id", "svg_formula_chart")
+    // .attr("viewBox", `0 0 340 ${this.height}`)
     .attr("width", this.width)
     .attr("height", this.height);
 
@@ -89,7 +90,7 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
   svg
     .append("rect")
     .attr("height", `${this.height}`)
-    .attr("width", `${555}`)
+    .attr("width", `${this.width}`)
     .attr("x", 0)
     .attr("y", 0)
     .attr("fill", "#D3D3D3")
@@ -145,6 +146,9 @@ DrawFormulaClass.prototype.init = function () {
   let x = this.x;
   let y = this.y;
 
+
+  // console.log(x, y);
+
   this.headCentreCoord = {
     x: x,
     y: y,
@@ -170,6 +174,9 @@ DrawFormulaClass.prototype.init = function () {
   const vertical_x_3 = this.headCentreCoord.text63coordinates.x;
 
   y += this.height_of_1_centre * 2 + this.gap_between_centres;
+
+
+  // console.log(x, y);
 
   this.ajnaCentreCoord = {
     x: x,
@@ -208,6 +215,8 @@ DrawFormulaClass.prototype.init = function () {
 
   x -= this.width_of_1_centre / 2;
   y += this.gap_between_centres;
+
+  // console.log(x, y)
 
   this.throatCentreCoord = {
     x: x,
@@ -275,6 +284,8 @@ DrawFormulaClass.prototype.init = function () {
   let x_for_ego = x;
   let y_for_ego = y;
 
+  // console.log(x, y)
+
   this.gCentreCoord = {
     x: x,
     y: y,
@@ -329,6 +340,8 @@ DrawFormulaClass.prototype.init = function () {
   let x_for_emo = x;
   let y_for_emo = y;
 
+  // console.log(x, y)
+
   this.sacralCentreCoord = {
     x: x,
     y: y,
@@ -382,7 +395,7 @@ DrawFormulaClass.prototype.init = function () {
   };
 
   y += this.height_of_1_centre + this.gap_between_centres * 1.2;
-
+  // console.log(x, y)
   this.rootCentreCoord = {
     x: x,
     y: y,
@@ -2929,6 +2942,7 @@ DrawFormulaClass.prototype.drawIntegration = function (int_gates) {
   }
 };
 
+
 DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
   data
 ) {
@@ -3693,13 +3707,17 @@ DrawFormulaClass.prototype.draw_16_48 = function (gate, type) {
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_42_53 = function (gate, type) {
+  let x = 140
+  let y = 551
+  let length = 47;
+
   const data = {
     top_left_x:
-      this.sacralCentreCoord.text42coordinates.x + this.styles.size / 4,
-    top_left_y: this.sacralCentreCoord.text42coordinates.y,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.rootCentreCoord.text53coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text53coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3710,25 +3728,23 @@ DrawFormulaClass.prototype.draw_42_53 = function (gate, type) {
   if (gate === 42) data.gate = "top";
   if (gate === 53) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_3_60 = function (gate, type) {
+
+  let x = 161
+  let y = 551
+  let length = 47;
+
   const data = {
     top_left_x:
-      this.sacralCentreCoord.text3coordinates.x + this.styles.size / 4,
-    top_left_y: this.sacralCentreCoord.text3coordinates.y,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.rootCentreCoord.text60coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text60coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3739,25 +3755,23 @@ DrawFormulaClass.prototype.draw_3_60 = function (gate, type) {
   if (gate === 3) data.gate = "top";
   if (gate === 60) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_9_52 = function (gate, type) {
+
+  let x = 182
+  let y = 551
+  let length = 47;
+
   const data = {
     top_left_x:
-      this.sacralCentreCoord.text9coordinates.x + this.styles.size / 4,
-    top_left_y: this.sacralCentreCoord.text9coordinates.y,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.rootCentreCoord.text52coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text52coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3768,24 +3782,21 @@ DrawFormulaClass.prototype.draw_9_52 = function (gate, type) {
   if (gate === 9) data.gate = "top";
   if (gate === 52) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_15_5 = function (gate, type) {
-  const data = {
-    top_left_x: this.gCentreCoord.text15coordinates.x + this.styles.size / 4,
-    top_left_y: this.gCentreCoord.text15coordinates.y,
 
-    bottom_left_x: this.sacralCentreCoord.text5coordinates.x,
-    bottom_left_y: this.sacralCentreCoord.text5coordinates.y,
+  const x = 140
+  const y = 380
+  const length = 110;
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3796,24 +3807,22 @@ DrawFormulaClass.prototype.draw_15_5 = function (gate, type) {
   if (gate === 15) data.gate = "top";
   if (gate === 5) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_2_14 = function (gate, type) {
-  const data = {
-    top_left_x: this.gCentreCoord.text2coordinates.x + this.styles.size / 4,
-    top_left_y: this.gCentreCoord.text2coordinates.y,
 
-    bottom_left_x: this.sacralCentreCoord.text14coordinates.x,
-    bottom_left_y: this.sacralCentreCoord.text14coordinates.y,
+  const x = 160
+  const y = 380
+  const length = 110;
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3824,24 +3833,23 @@ DrawFormulaClass.prototype.draw_2_14 = function (gate, type) {
   if (gate === 2) data.gate = "top";
   if (gate === 14) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_46_29 = function (gate, type) {
-  const data = {
-    top_left_x: this.gCentreCoord.text46coordinates.x + this.styles.size / 4,
-    top_left_y: this.gCentreCoord.text46coordinates.y,
 
-    bottom_left_x: this.sacralCentreCoord.text29coordinates.x,
-    bottom_left_y: this.sacralCentreCoord.text29coordinates.y,
+  let x = 182
+  let y = 380
+
+  let length = 110;
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3852,25 +3860,23 @@ DrawFormulaClass.prototype.draw_46_29 = function (gate, type) {
   if (gate === 46) data.gate = "top";
   if (gate === 29) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_31_7 = function (gate, type) {
+
+  const x = 140;
+  const y = 281;
+
+  const length = 57
+
   const data = {
     top_left_x:
-      this.throatCentreCoord.text31coordinates.x + this.styles.size / 4,
-    top_left_y: this.throatCentreCoord.text31coordinates.y,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.gCentreCoord.text7coordinates.x,
-    bottom_left_y: this.gCentreCoord.text7coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3881,28 +3887,26 @@ DrawFormulaClass.prototype.draw_31_7 = function (gate, type) {
   if (gate === 31) data.gate = "top";
   if (gate === 7) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
+
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_8_1 = function (gate, type) {
+
+  const x = 161
+  const y = 281
+  const length = 26;
+
   const data = {
     top_left_x:
-      this.throatCentreCoord.text8coordinates.x + this.styles.size / 4,
-    top_left_y: this.throatCentreCoord.text8coordinates.y,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.gCentreCoord.text1coordinates.x,
-    bottom_left_y: this.gCentreCoord.text1coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3910,28 +3914,24 @@ DrawFormulaClass.prototype.draw_8_1 = function (gate, type) {
   if (gate === 8) data.gate = "top";
   if (gate === 1) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
+
+
   this.draw_vertical_channel_with_rotation(data);
 };
+
 DrawFormulaClass.prototype.draw_33_13 = function (gate, type) {
+
+  let x = 182
+  let y = 281
+  let length = 57;
   const data = {
-    top_left_x:
-      this.throatCentreCoord.text33coordinates.x + this.styles.size / 4,
-    top_left_y: this.throatCentreCoord.text33coordinates.y,
-
-    bottom_left_x: this.gCentreCoord.text13coordinates.x,
-    bottom_left_y: this.gCentreCoord.text13coordinates.y,
-
+    top_left_x: x,
+    top_left_y: y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
     width: 10,
-
     type: type,
   };
 
@@ -3939,15 +3939,9 @@ DrawFormulaClass.prototype.draw_33_13 = function (gate, type) {
   if (gate === 33) data.gate = "top";
   if (gate === 13) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
   data.rotation = NaN;
+
+  // console.log(data)
   this.draw_vertical_channel_with_rotation(data);
 };
 
@@ -3983,417 +3977,434 @@ DrawFormulaClass.prototype.drawGenerator = function (
     .attr("text-anchor", "start");
 };
 
-DrawFormulaClass.prototype.drawHeadCentre = function (fill) {
+DrawFormulaClass.prototype.drawHead340 = function (fill) {
+  let x = 165
+  let y = 5
+
   const headCentreData = [
-    { x: this.headCentreCoord.x, y: this.headCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.headCentreCoord.x + (this.width_of_1_centre * 1.2) / 2,
-      y: this.headCentreCoord.y + this.height_of_1_centre,
+      x: x + 48,
+      y: y + 75,
     },
     {
-      x: this.headCentreCoord.x - (this.width_of_1_centre * 1.2) / 2,
-      y: this.headCentreCoord.y + this.height_of_1_centre,
+      x: x - 48,
+      y: y + 75,
     },
-    { x: this.headCentreCoord.x, y: this.headCentreCoord.y },
+    { x: x, y: y },
   ];
 
   const headTextData = [
     {
-      x: this.headCentreCoord.text64coordinates.x,
-      y: this.headCentreCoord.text64coordinates.y,
+      x: x - 28,
+      y: y + 69,
       text: "64",
     },
     {
-      x: this.headCentreCoord.text61coordinates.x,
-      y: this.headCentreCoord.text61coordinates.y,
+      x: x - 6,
+      y: y + 69,
       text: "61",
     },
     {
-      x: this.headCentreCoord.text63coordinates.x,
-      y: this.headCentreCoord.text63coordinates.y,
+      x: x + 16,
+      y: y + 69,
       text: "63",
     },
   ];
 
-  this.headCentreCoord.centreGroup = svg.append("g");
+
+
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.headCentreCoord.centreGroup,
+    centreGroup,
     headCentreData,
     headTextData,
     fill,
     "#9400D3"
   );
 };
-
-DrawFormulaClass.prototype.drawAjnaCentre = function (fill) {
+DrawFormulaClass.prototype.drawAjna340 = function (fill) {
+  let x = 165
+  let y = 177.5
   const ajnaCentreData = [
-    { x: this.ajnaCentreCoord.x, y: this.ajnaCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.ajnaCentreCoord.x + (this.width_of_1_centre * 1.3) / 2,
-      y: this.ajnaCentreCoord.y - this.height_of_1_centre,
+      x: x + 52,
+      y: y - 75,
     },
     {
-      x: this.ajnaCentreCoord.x - (this.width_of_1_centre * 1.2) / 2,
-      y: this.ajnaCentreCoord.y - this.height_of_1_centre,
+      x: x - 48,
+      y: y - 75,
     },
-    { x: this.ajnaCentreCoord.x, y: this.ajnaCentreCoord.y },
+    { x: x, y: y },
   ];
 
   const ajnaTextData = [
     {
-      x: this.ajnaCentreCoord.text47coordinates.x,
-      y: this.ajnaCentreCoord.text47coordinates.y,
+      x: x - 28,
+      y: y - 63,
       text: "47",
     },
     {
-      x: this.ajnaCentreCoord.text24coordinates.x,
-      y: this.ajnaCentreCoord.text24coordinates.y,
+      x: x - 6,
+      y: y - 63,
       text: "24",
     },
     {
-      x: this.ajnaCentreCoord.text4coordinates.x + this.styles.size / 4,
-      y: this.ajnaCentreCoord.text4coordinates.y,
-      text: `4`,
+      x: x - 24,
+      y: y - 38.4,
+      text: `17`,
     },
 
     {
-      x: this.ajnaCentreCoord.text17coordinates.x,
-      y: this.ajnaCentreCoord.text17coordinates.y,
-      text: "17",
+      x: x + 18,
+      y: y - 63,
+      text: "4",
     },
     {
-      x: this.ajnaCentreCoord.text43coordinates.x,
-      y: this.ajnaCentreCoord.text43coordinates.y,
+      x: x - 6,
+      y: y - 14.4,
       text: "43",
     },
     {
-      x: this.ajnaCentreCoord.text11coordinates.x,
-      y: this.ajnaCentreCoord.text11coordinates.y,
+      x: x + 14,
+      y: y - 38.5,
       text: "11",
     },
   ];
 
-  this.ajnaCentreCoord.centreGroup = svg.append("g");
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.ajnaCentreCoord.centreGroup,
+    centreGroup,
     ajnaCentreData,
     ajnaTextData,
     fill,
     "#0000FF"
   );
 };
+DrawFormulaClass.prototype.drawThroat340 = function (fill) {
 
-DrawFormulaClass.prototype.drawThroatCentre = function (fill) {
+  let x = 125
+  let y = 200
+
+
   const throatCentreData = [
-    { x: this.throatCentreCoord.x, y: this.throatCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.throatCentreCoord.x + this.width_of_1_centre * 1.1,
-      y: this.throatCentreCoord.y,
+      x: x + 88,
+      y: y,
     },
     {
-      x: this.throatCentreCoord.x + this.width_of_1_centre * 1.1,
-      y: this.throatCentreCoord.y + this.height_of_1_centre * 1.1,
+      x: x + 88,
+      y: y + 82.5,
     },
     {
-      x: this.throatCentreCoord.x,
-      y: this.throatCentreCoord.y + this.height_of_1_centre * 1.1,
+      x: x,
+      y: y + 82.5,
     },
-    { x: this.throatCentreCoord.x, y: this.throatCentreCoord.y },
+    { x: x, y: y },
   ];
 
   const throatTextData = [
     {
-      x: this.throatCentreCoord.text62coordinates.x,
-      y: this.throatCentreCoord.text62coordinates.y,
+      x: x + 12,
+      y: y + 12,
       text: "62",
     },
     {
-      x: this.throatCentreCoord.text23coordinates.x,
-      y: this.throatCentreCoord.text23coordinates.y,
+      x: x + 34,
+      y: y + 12,
       text: "23",
     },
     {
-      x: this.throatCentreCoord.text56coordinates.x,
-      y: this.throatCentreCoord.text56coordinates.y,
+      x: x + 56,
+      y: y + 12,
       text: `56`,
     },
 
     {
-      x: this.throatCentreCoord.text31coordinates.x,
-      y: this.throatCentreCoord.text31coordinates.y,
+      x: x + 12,
+      y: y + 81,
       text: "31",
     },
     {
-      x: this.throatCentreCoord.text8coordinates.x + this.styles.size / 4,
-      y: this.throatCentreCoord.text8coordinates.y,
+      x: x + 37,
+      y: y + 81,
       text: "8",
     },
     {
-      x: this.throatCentreCoord.text33coordinates.x,
-      y: this.throatCentreCoord.text33coordinates.y,
+      x: x + 56,
+      y: y + 81,
       text: "33",
     },
 
     {
-      x: this.throatCentreCoord.text35coordinates.x,
-      y: this.throatCentreCoord.text35coordinates.y,
+      x: x + 68,
+      y: y + 24,
       text: "35",
     },
     {
-      x: this.throatCentreCoord.text12coordinates.x,
-      y: this.throatCentreCoord.text12coordinates.y,
+      x: x + 68,
+      y: y + 42,
       text: "12",
     },
     {
-      x: this.throatCentreCoord.text45coordinates.x,
-      y: this.throatCentreCoord.text45coordinates.y,
+      x: x + 68,
+      y: y + 63,
       text: "45",
     },
 
     {
-      x: this.throatCentreCoord.text16coordinates.x,
-      y: this.throatCentreCoord.text16coordinates.y,
+      x: x,
+      y: y + 30,
       text: "16",
     },
     {
-      x: this.throatCentreCoord.text20coordinates.x,
-      y: this.throatCentreCoord.text20coordinates.y,
+      x: x,
+      y: y + 54,
       text: "20",
     },
   ];
 
-  this.throatCentreCoord.centreGroup = svg.append("g");
+
+
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.throatCentreCoord.centreGroup,
+    centreGroup,
     throatCentreData,
     throatTextData,
     fill,
     "#40E0D0"
   );
 };
+DrawFormulaClass.prototype.drawG340 = function (fill) {
 
-DrawFormulaClass.prototype.drawGCentre = function (fill) {
+  let x = 165
+  let y = 302
   const gCentreData = [
-    { x: this.gCentreCoord.x, y: this.gCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.gCentreCoord.x + (this.width_of_1_centre * 1.5) / 2,
-      y: this.gCentreCoord.y + (this.height_of_1_centre * 1.3) / 2,
+      x: x + 60,
+      y: y + 48.75,
     },
     {
-      x: this.gCentreCoord.x,
-      y: this.gCentreCoord.y + this.height_of_1_centre * 1.3,
+      x: x,
+      y: y + 97.5,
     },
     {
-      x: this.gCentreCoord.x - (this.width_of_1_centre * 1.5) / 2,
-      y: this.gCentreCoord.y + (this.height_of_1_centre * 1.3) / 2,
+      x: x - 60,
+      y: y + 48.75,
     },
-    { x: this.gCentreCoord.x, y: this.gCentreCoord.y },
+    { x: x, y: y },
   ];
-
   const gTextData = [
     {
-      x: this.gCentreCoord.text7coordinates.x + this.styles.size / 4,
-      y: this.gCentreCoord.text7coordinates.y,
+      x: x - 25,
+      y: y + 36,
       text: "7",
     },
     {
-      x: this.gCentreCoord.text1coordinates.x + this.styles.size / 4,
-      y: this.gCentreCoord.text1coordinates.y,
+      x: x - 3,
+      y: y + 12,
       text: "1",
     },
     {
-      x: this.gCentreCoord.text13coordinates.x,
-      y: this.gCentreCoord.text13coordinates.y,
+      x: x + 14,
+      y: y + 36,
       text: `13`,
     },
 
     {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y,
+      x: x - 48,
+      y: y + 52.5,
       text: "10",
     },
     {
-      x: this.gCentreCoord.text25coordinates.x,
-      y: this.gCentreCoord.text25coordinates.y,
+      x: x + 36,
+      y: y + 52.5,
       text: "25",
     },
     {
-      x: this.gCentreCoord.text15coordinates.x,
-      y: this.gCentreCoord.text15coordinates.y,
+      x: x - 28,
+      y: y + 69.75,
       text: "15",
     },
 
     {
-      x: this.gCentreCoord.text46coordinates.x,
-      y: this.gCentreCoord.text46coordinates.y,
+      x: x + 16,
+      y: y + 69.75,
       text: "46",
     },
     {
-      x: this.gCentreCoord.text2coordinates.x + this.styles.size / 4,
-      y: this.gCentreCoord.text2coordinates.y,
+      x: x - 3,
+      y: y + 87.75,
       text: "2",
     },
   ];
 
-  this.gCentreCoord.centreGroup = svg.append("g");
+
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.gCentreCoord.centreGroup,
+    centreGroup,
     gCentreData,
     gTextData,
     fill,
     "#64E811"
   );
 };
-
-DrawFormulaClass.prototype.drawSacralCentre = function (fill) {
+DrawFormulaClass.prototype.drawSacral340 = function (fill) {
+  let x = 125
+  let y = 485.75
   const sacralCentreData = [
-    { x: this.sacralCentreCoord.x, y: this.sacralCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.sacralCentreCoord.x + this.width_of_1_centre,
-      y: this.sacralCentreCoord.y,
+      x: x + 80,
+      y: y,
     },
     {
-      x: this.sacralCentreCoord.x + this.width_of_1_centre,
-      y: this.sacralCentreCoord.y + this.height_of_1_centre,
+      x: x + 80,
+      y: y + 76.5,
     },
     {
-      x: this.sacralCentreCoord.x,
-      y: this.sacralCentreCoord.y + this.height_of_1_centre,
+      x: x,
+      y: y + 76.5,
     },
-    { x: this.sacralCentreCoord.x, y: this.sacralCentreCoord.y },
+    { x: x, y: y },
   ];
-
   const sacralTextData = [
     {
-      x: this.sacralCentreCoord.text5coordinates.x + this.styles.size / 4,
-      y: this.sacralCentreCoord.text5coordinates.y,
+      x: x + 15,
+      y: y + 11.5,
       text: "5",
     },
     {
-      x: this.sacralCentreCoord.text14coordinates.x,
-      y: this.sacralCentreCoord.text14coordinates.y,
+      x: x + 34,
+      y: y + 11.5,
       text: "14",
     },
     {
-      x: this.sacralCentreCoord.text29coordinates.x,
-      y: this.sacralCentreCoord.text29coordinates.y,
+      x: x + 56,
+      y: y + 11.5,
       text: `29`,
     },
 
     {
-      x: this.sacralCentreCoord.text42coordinates.x,
-      y: this.sacralCentreCoord.text42coordinates.y,
+      x: x + 12,
+      y: 554.75,
       text: "42",
     },
     {
-      x: this.sacralCentreCoord.text3coordinates.x + this.styles.size / 4,
-      y: this.sacralCentreCoord.text3coordinates.y,
+      x: x + 37,
+      y: y + 69.5,
       text: "3",
     },
     {
-      x: this.sacralCentreCoord.text9coordinates.x + this.styles.size / 4,
-      y: this.sacralCentreCoord.text9coordinates.y,
+      x: x + 59,
+      y: y + 69.5,
       text: "9",
     },
 
     {
-      x: this.sacralCentreCoord.text34coordinates.x,
-      y: this.sacralCentreCoord.text34coordinates.y,
+      x: x + 3,
+      y: 509.75,
       text: "34",
     },
     {
-      x: this.sacralCentreCoord.text27coordinates.x,
-      y: this.sacralCentreCoord.text27coordinates.y,
+      x: x + 3,
+      y: y + 49.5,
       text: "27",
     },
     {
-      x: this.sacralCentreCoord.text59coordinates.x,
-      y: this.sacralCentreCoord.text59coordinates.y,
+      x: x + 62,
+      y: y + 49.5,
       text: "59",
     },
   ];
 
-  this.sacralCentreCoord.centreGroup = svg.append("g");
+
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.sacralCentreCoord.centreGroup,
+    centreGroup,
     sacralCentreData,
     sacralTextData,
     fill,
     "#F59713"
   );
 };
-
-DrawFormulaClass.prototype.drawRootCentre = function (fill) {
+DrawFormulaClass.prototype.drawRoot340 = function (fill) {
+  let x = 125
+  let y = 587.75
   const rootCentreData = [
-    { x: this.rootCentreCoord.x, y: this.rootCentreCoord.y },
+    { x: x, y: y },
     {
-      x: this.rootCentreCoord.x + this.width_of_1_centre,
-      y: this.rootCentreCoord.y,
+      x: x + 80,
+      y: y,
     },
     {
-      x: this.rootCentreCoord.x + this.width_of_1_centre,
-      y: this.rootCentreCoord.y + this.height_of_1_centre,
+      x: x + 80,
+      y: y + 75.5,
     },
     {
-      x: this.rootCentreCoord.x,
-      y: this.rootCentreCoord.y + this.height_of_1_centre,
+      x: x,
+      y: y + 75.5,
     },
-    { x: this.rootCentreCoord.x, y: this.rootCentreCoord.y },
+    { x: x, y: y },
   ];
-
   const rootTextData = [
     {
-      x: this.rootCentreCoord.text53coordinates.x,
-      y: this.rootCentreCoord.text53coordinates.y,
+      x: x + 12,
+      y: y + 12.5,
       text: "53",
     },
     {
-      x: this.rootCentreCoord.text60coordinates.x,
-      y: this.rootCentreCoord.text60coordinates.y,
+      x: x + 36,
+      y: y + 12.5,
       text: "60",
     },
     {
-      x: this.rootCentreCoord.text52coordinates.x,
-      y: this.rootCentreCoord.text52coordinates.y,
+      x: x + 56,
+      y: y + 12.5,
       text: `52`,
     },
 
     {
-      x: this.rootCentreCoord.text54coordinates.x,
-      y: this.rootCentreCoord.text54coordinates.y,
+      x: x + 6,
+      y: 617.75,
       text: "54",
     },
     {
-      x: this.rootCentreCoord.text38coordinates.x,
-      y: this.rootCentreCoord.text38coordinates.y,
+      x: x + 6,
+      y: y + 48.5,
       text: "38",
     },
     {
-      x: this.rootCentreCoord.text58coordinates.x,
-      y: this.rootCentreCoord.text58coordinates.y,
+      x: x + 6,
+      y: y + 73.5,
       text: "58",
     },
 
     {
-      x: this.rootCentreCoord.text19coordinates.x,
-      y: this.rootCentreCoord.text19coordinates.y,
+      x: x + 62,
+      y: y + 28.5,
       text: "19",
     },
     {
-      x: this.rootCentreCoord.text39coordinates.x,
-      y: this.rootCentreCoord.text39coordinates.y,
+      x: x + 62,
+      y: y + 43.5,
       text: "39",
     },
     {
-      x: this.rootCentreCoord.text41coordinates.x,
-      y: this.rootCentreCoord.text41coordinates.y,
+      x: x + 62,
+      y: y + 72.5,
       text: "41",
     },
   ];
 
-  this.rootCentreCoord.centreGroup = svg.append("g");
+
+
+  let centreGroup = svg.append("g");
   this.drawGenerator(
-    this.rootCentreCoord.centreGroup,
+    centreGroup,
     rootCentreData,
     rootTextData,
     fill,
@@ -4401,87 +4412,57 @@ DrawFormulaClass.prototype.drawRootCentre = function (fill) {
   );
 };
 
-
-
-// console.log(this.spleenCentreCoord.text48coordinates.x, this.spleenCentreCoord.text48coordinates.y);
-// console.log(this.spleenCentreCoord.text57coordinates.x, this.spleenCentreCoord.text57coordinates.y);
-// console.log(this.spleenCentreCoord.text44coordinates.x, this.spleenCentreCoord.text44coordinates.y);
-// console.log(this.spleenCentreCoord.text50coordinates.x, this.spleenCentreCoord.text50coordinates.y);
-// console.log(this.spleenCentreCoord.text32coordinates.x, this.spleenCentreCoord.text32coordinates.y);
-// console.log(this.spleenCentreCoord.text28coordinates.x, this.spleenCentreCoord.text28coordinates.y);
-// console.log(this.spleenCentreCoord.text18coordinates.x, this.spleenCentreCoord.text18coordinates.y);
-
-// body_formula.js: 555 5 466.25
-// body_formula.js: 556 23 478.25
-
-// body_formula.js: 557 53 496.25
-
-// body_formula.js: 558 77 508.25
-
-// body_formula.js: 559 49.400000000000006 524.75
-// body_formula.js: 560 29 536.75
-// body_formula.js: 561 5 548.75
-
-
-
-
-
 DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
-
   const x = 5
   const y = 448.25
-
   const spleenCentreData = [
     { x: x, y: y },
     {
       x: x + 96,
-      y: y + 504.5 - 448.25,
+      y: y + 56.25,
     },
     {
       x: x,
-      y: y + 560.75 - 448.25,
+      y: y + 112.5,
     },
     { x: x, y: y },
   ];
-
-  // console.log(spleenCentreData)
-
   const spleenTextData = [
     {
       x: x,
-      y: y + 466.25 - 448.25,
+      y: y + 18,
       text: "48",
     },
     {
       x: x + 18,
-      y: y + 478.25 - 448.25,
+      y: y + 30,
       text: "57",
     },
     {
       x: x + 48,
-      y: y + 496.25 - 448.25,
+      y: y + 48,
       text: "44",
     },
 
     {
       x: x + 72,
-      y: y + 508.25 - 448.25,
+      y: y + 60,
       text: "50",
     },
     {
       x: x + 44.4,
-      y: y + 524.75 - 448.25,
+      y: y + 76.5,
       text: "32",
     },
     {
       x: x + 24,
-      y: y + 536.75 - 448.25,
+      y: y + 88.5,
       text: "28",
     },
 
     {
       x: x,
-      y: y + 548.75 - 448.25,
+      y: y + 100.5,
       text: "18",
     },
   ];
@@ -4496,61 +4477,57 @@ DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
   );
 };
 DrawFormulaClass.prototype.drawEmo340 = function (fill) {
-
-
-
-  let x = 545
+  let x = 335
   let y = 448.25
-
   const emoCentreData = [
     { x: x, y: y },
     {
       x: x - 96,
-      y: y + 504.5 - 448.25,
+      y: y + 56.25,
     },
     {
       x: x,
-      y: y + 560 - 448.25,
+      y: y + 111.75,
     },
     { x: x, y },
   ];
 
   const emoTextData = [
     {
-      x: x + 456 - 545,
-      y: y + 508.25 - 448.25,
+      x: x - 89,
+      y: y + 60,
       text: "6",
     },
     {
-      x: x + 485 - 545,
-      y: y + 496.25 - 448.25,
+      x: x - 60,
+      y: y + 48,
       text: "37",
     },
     {
-      x: x + 509 - 545,
-      y: y + 478.25 - 448.25,
+      x: x - 36,
+      y: y + 30,
       text: "22",
     },
 
     {
-      x: x + 528.2 - 545,
-      y: y + 466.25 - 448.25,
+      x: x - 16.8,
+      y: y + 18,
       text: "36",
     },
     {
-      x: x + 477 - 545,
-      y: y + 520.25 - 448.25,
+      x: x - 68,
+      y: y + 72,
       text: "49",
     },
     {
-      x: x + 501 - 545,
-      y: y + 532.25 - 448.25,
+      x: x - 44,
+      y: y + 84,
       text: "55",
     },
 
     {
-      x: x + 528.2 - 545,
-      y: y + 548.75 - 448.25,
+      x: x - 16.8,
+      y: y + 100.5,
       text: "30",
     },
   ];
@@ -4566,20 +4543,17 @@ DrawFormulaClass.prototype.drawEmo340 = function (fill) {
   );
 };
 DrawFormulaClass.prototype.drawEgo340 = function (fill) {
-
-  let x = 388.5
+  let x = 265
   let y = 362
-
-
   const egoCentreData = [
     { x: x, y: y },
     {
-      x: x + 408.5 - 388.5,
-      y: y + 430.1818181818182 - 362,
+      x: x + 20,
+      y: y + 68,
     },
     {
-      x: x + 321.8333333333333 - 388.5,
-      y: y + 412 - 362,
+      x: x - 67,
+      y: y + 50,
     },
     { x: x, y: y },
   ];
@@ -4588,24 +4562,24 @@ DrawFormulaClass.prototype.drawEgo340 = function (fill) {
 
   const egoTextData = [
     {
-      x: 376.5,
-      y: 378.8,
+      x: x - 12,
+      y: y + 18.8,
       text: "21",
     },
     {
-      x: 358.5,
-      y: 392,
+      x: x - 30,
+      y: y + 30,
       text: "51",
     },
     {
-      x: 337.5,
-      y: 410,
+      x: x - 51,
+      y: y + 48,
       text: "26",
     },
 
     {
-      x: 385.5,
-      y: 422,
+      x: x - 3,
+      y: y + 60,
       text: "40",
     },
   ];
@@ -4665,24 +4639,23 @@ DrawFormulaClass.prototype.drawWhiteFormula = function () {
 
   this.drawWhiteIntegration();
 
-  this.drawHeadCentre("white");
-  this.drawAjnaCentre("white");
-  this.drawThroatCentre("white");
-  this.drawGCentre("white");
-  this.drawSacralCentre("white");
-  this.drawRootCentre("white");
+  this.drawHead340("white");
+  this.drawAjna340("white");
+  this.drawThroat340("white");
+  this.drawG340("white");
+  this.drawSacral340("white");
+  this.drawRoot340("white");
   this.drawSpleen340("white");
   this.drawEmo340("white");
   this.drawEgo340("white");
 };
 
-
 //PERSONALITY texts on screen
 DrawFormulaClass.prototype.draw_pers_text = function () {
   let planet_text = "";
 
-  let pers_x = 460;
-  let pers_y = 35;
+  let pers_x = 335;
+  let pers_y = 15;
 
   // console.log(pers_x, pers_y);
 
@@ -4750,13 +4723,11 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
   pers_y += 20;
 };
-
-
 //DESIGN texts on screen
 DrawFormulaClass.prototype.draw_des_text = function () {
   //DESIGN
-  let des_x = 160;
-  let des_y = 35;
+  let des_x = 70;
+  let des_y = 15;
 
   // console.log(des_x, des_y)
 
@@ -4838,8 +4809,6 @@ DrawFormulaClass.prototype.draw_des_text = function () {
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 };
-
-
 
 //V2 2024
 DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
@@ -5263,12 +5232,12 @@ DrawFormulaClass.prototype.draw_Body = function () {
     this.drawIntegration(int_gates);
   }
 
-  centres.head ? this.drawHeadCentre() : this.drawHeadCentre("white");
-  centres.ajna ? this.drawAjnaCentre() : this.drawAjnaCentre("white");
-  centres.throat ? this.drawThroatCentre() : this.drawThroatCentre("white");
-  centres.g ? this.drawGCentre() : this.drawGCentre("white");
-  centres.sacral ? this.drawSacralCentre() : this.drawSacralCentre("white");
-  centres.root ? this.drawRootCentre() : this.drawRootCentre("white");
+  centres.head ? this.drawHead340() : this.drawHead340("white");
+  centres.ajna ? this.drawAjna340() : this.drawAjna340("white");
+  centres.throat ? this.drawThroat340() : this.drawThroat340("white");
+  centres.g ? this.drawG340() : this.drawG340("white");
+  centres.sacral ? this.drawSacral340() : this.drawSacral340("white");
+  centres.root ? this.drawRoot340() : this.drawRoot340("white");
   centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
   centres.ego ? this.drawEgo340() : this.drawEgo340("white");
   centres.emo ? this.drawEmo340() : this.drawEmo340("white");
@@ -5648,12 +5617,12 @@ DrawFormulaClass.prototype.draw_Pers = function () {
     this.drawIntegration(int_gates);
   }
 
-  centres.head ? this.drawHeadCentre() : this.drawHeadCentre("white");
-  centres.ajna ? this.drawAjnaCentre() : this.drawAjnaCentre("white");
-  centres.throat ? this.drawThroatCentre() : this.drawThroatCentre("white");
-  centres.g ? this.drawGCentre() : this.drawGCentre("white");
-  centres.sacral ? this.drawSacralCentre() : this.drawSacralCentre("white");
-  centres.root ? this.drawRootCentre() : this.drawRootCentre("white");
+  centres.head ? this.drawHead340() : this.drawHead340("white");
+  centres.ajna ? this.drawAjna340() : this.drawAjna340("white");
+  centres.throat ? this.drawThroat340() : this.drawThroat340("white");
+  centres.g ? this.drawG340() : this.drawG340("white");
+  centres.sacral ? this.drawSacral340() : this.drawSacral340("white");
+  centres.root ? this.drawRoot340() : this.drawRoot340("white");
   centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
   centres.ego ? this.drawEgo340() : this.drawEgo340("white");
   centres.emo ? this.drawEmo340() : this.drawEmo340("white");
@@ -6033,12 +6002,12 @@ DrawFormulaClass.prototype.draw_Des = function () {
     this.drawIntegration(int_gates);
   }
 
-  centres.head ? this.drawHeadCentre() : this.drawHeadCentre("white");
-  centres.ajna ? this.drawAjnaCentre() : this.drawAjnaCentre("white");
-  centres.throat ? this.drawThroatCentre() : this.drawThroatCentre("white");
-  centres.g ? this.drawGCentre() : this.drawGCentre("white");
-  centres.sacral ? this.drawSacralCentre() : this.drawSacralCentre("white");
-  centres.root ? this.drawRootCentre() : this.drawRootCentre("white");
+  centres.head ? this.drawHead340() : this.drawHead340("white");
+  centres.ajna ? this.drawAjna340() : this.drawAjna340("white");
+  centres.throat ? this.drawThroat340() : this.drawThroat340("white");
+  centres.g ? this.drawG340() : this.drawG340("white");
+  centres.sacral ? this.drawSacral340() : this.drawSacral340("white");
+  centres.root ? this.drawRoot340() : this.drawRoot340("white");
   centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
   centres.ego ? this.drawEgo340() : this.drawEgo340("white");
   centres.emo ? this.drawEmo340() : this.drawEmo340("white");
