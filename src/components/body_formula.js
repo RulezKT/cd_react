@@ -618,104 +618,72 @@ DrawFormulaClass.prototype.init = function () {
   };
 };
 
+
 DrawFormulaClass.prototype.drawWhiteIntegration = function () {
-  const data = {
-    top_left_x: this.throatCentreCoord.text20coordinates.x,
-    top_left_y: this.throatCentreCoord.text20coordinates.y,
 
-    bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-    width: 10,
-  };
-
-  data.temp_width = data.bottom_left_x - data.top_left_x;
-  data.temp_height = data.bottom_left_y - data.top_left_y;
+  const x = 128;
+  const y = 246;
 
   let points = [
     {
-      x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-      y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+      x: x,
+      y: y,
     },
     {
-      x: this.spleenCentreCoord.text57coordinates.x,
-      y: this.spleenCentreCoord.text57coordinates.y,
+      x: x - 103,
+      y: y + 230,
     },
     {
-      x: this.spleenCentreCoord.text57coordinates.x + data.width,
-      y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+      x: x - 93,
+      y: y + 236,
     },
     {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.width +
-        data.temp_height / 3.2,
-      y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-    },
-
-    {
-      x: this.sacralCentreCoord.text34coordinates.x,
-      y: this.sacralCentreCoord.text34coordinates.y,
+      x: x - 67,
+      y: y + 175,
     },
     {
-      x: this.sacralCentreCoord.text34coordinates.x + data.width,
-      y: this.sacralCentreCoord.text34coordinates.y - data.width,
+      x: x - 3,
+      y: y + 261.8,
     },
 
     {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 -
-        data.width * 2.3,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width,
+      x: x + 7,
+      y: y + 258,
+    },
+    {
+      x: x - 61,
+      y: y + 160,
+    },
+    {
+      x: x - 37,
+      y: y + 110,
+    },
+    {
+      x: x - 33,
+      y: y + 102,
+    },
+    {
+      x: x + 8,
+      y: y + 118,
+    },
+
+
+    {
+      x: x - 31,
+      y: y + 92,
     },
 
     {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 12,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-    },
-
-    {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y,
+      x: x - 4,
+      y: y + 30,
     },
     {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y - data.width,
-    },
-
-    {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 8,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10 -
-        data.width,
-    },
-
-    {
-      x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-      y: this.throatCentreCoord.text20coordinates.y,
-    },
-    {
-      x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-      y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+      x: x,
+      y: y,
     },
   ];
+
+
 
   svg
     .append("path")
@@ -3112,71 +3080,73 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
 };
 
 DrawFormulaClass.prototype.draw_64_47 = function (gate, type) {
-  const data = {
-    top_left_x: this.headCentreCoord.text64coordinates.x + 2,
-    top_left_y: this.headCentreCoord.text64coordinates.y - 5,
+  const x = 140;
+  const y = 80;
 
-    bottom_left_x: this.ajnaCentreCoord.text47coordinates.x + 2,
-    bottom_left_y: this.ajnaCentreCoord.text47coordinates.y - 5,
+  const length = 24
+
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
     type: type,
   };
-
   if (gate === 0) data.gate = "both";
   if (gate === 64) data.gate = "top";
   if (gate === 47) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
 
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_61_24 = function (gate, type) {
-  const data = {
-    top_left_x: this.headCentreCoord.text61coordinates.x,
-    top_left_y: this.headCentreCoord.text61coordinates.y - 5,
+  const x = 160
+  const y = 80
+  const length = 24;
 
-    bottom_left_x: this.ajnaCentreCoord.text24coordinates.x,
-    bottom_left_y: this.ajnaCentreCoord.text24coordinates.y - 5,
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
+
 
   if (gate === 0) data.gate = "both";
   if (gate === 61) data.gate = "top";
   if (gate === 24) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
 
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_63_4 = function (gate, type) {
-  const data = {
-    top_left_x: this.headCentreCoord.text63coordinates.x,
-    top_left_y: this.headCentreCoord.text63coordinates.y - 5,
+  const x = 182
+  const y = 80
+  const length = 24;
 
-    bottom_left_x: this.ajnaCentreCoord.text4coordinates.x,
-    bottom_left_y: this.ajnaCentreCoord.text4coordinates.y - 5,
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3184,24 +3154,24 @@ DrawFormulaClass.prototype.draw_63_4 = function (gate, type) {
   if (gate === 63) data.gate = "top";
   if (gate === 4) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_17_62 = function (gate, type) {
-  const data = {
-    top_left_x: this.ajnaCentreCoord.text17coordinates.x + this.styles.size / 4,
-    top_left_y: this.ajnaCentreCoord.text17coordinates.y,
 
-    bottom_left_x: this.throatCentreCoord.text62coordinates.x,
-    bottom_left_y: this.throatCentreCoord.text62coordinates.y,
+
+  const x = 140;
+  const y = 138;
+
+  const length = 62
+
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3212,27 +3182,23 @@ DrawFormulaClass.prototype.draw_17_62 = function (gate, type) {
   if (gate === 17) data.gate = "top";
   if (gate === 62) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_43_23 = function (gate, type) {
-  const data = {
-    top_left_x: this.ajnaCentreCoord.text43coordinates.x + this.styles.size / 8,
-    top_left_y: this.ajnaCentreCoord.text43coordinates.y,
+  const x = 160
+  const y = 170
+  const length = 30;
 
-    bottom_left_x: this.throatCentreCoord.text23coordinates.x,
-    bottom_left_y: this.throatCentreCoord.text23coordinates.y,
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3243,21 +3209,22 @@ DrawFormulaClass.prototype.draw_43_23 = function (gate, type) {
   const width = data.bottom_left_x - data.top_left_x;
   const height = data.bottom_left_y - data.top_left_y;
 
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_11_56 = function (gate, type) {
-  const data = {
-    top_left_x: this.ajnaCentreCoord.text11coordinates.x + this.styles.size / 4,
-    top_left_y: this.ajnaCentreCoord.text11coordinates.y,
+  const x = 182;
+  const y = 138;
 
-    bottom_left_x: this.throatCentreCoord.text56coordinates.x,
-    bottom_left_y: this.throatCentreCoord.text56coordinates.y,
+  const length = 62
+
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3268,52 +3235,52 @@ DrawFormulaClass.prototype.draw_11_56 = function (gate, type) {
   if (gate === 11) data.gate = "top";
   if (gate === 56) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
 
   data.rotation = NaN;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_18_58 = function (gate, type) {
-  const data = {
-    top_left_x: this.spleenCentreCoord.text18coordinates.x,
-    top_left_y: this.spleenCentreCoord.text18coordinates.y,
 
-    bottom_left_x: this.rootCentreCoord.text58coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text58coordinates.y,
+  const x = 5;
+  const y = 555;
+
+  const length = 160
+
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
     type: type,
   };
 
+
   if (gate === 0) data.gate = "both";
   if (gate === 18) data.gate = "top";
   if (gate === 58) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
 
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -65;
+  data.rotation = -49;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_28_38 = function (gate, type) {
-  const data = {
-    top_left_x: this.spleenCentreCoord.text28coordinates.x,
-    top_left_y: this.spleenCentreCoord.text28coordinates.y,
+  const x = 20;
+  const y = 535;
 
-    bottom_left_x: this.rootCentreCoord.text38coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text38coordinates.y,
+  const length = 160
+
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3324,52 +3291,49 @@ DrawFormulaClass.prototype.draw_28_38 = function (gate, type) {
   if (gate === 28) data.gate = "top";
   if (gate === 38) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -65;
+  data.rotation = -46;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_32_54 = function (gate, type) {
-  const data = {
-    top_left_x: this.spleenCentreCoord.text32coordinates.x,
-    top_left_y: this.spleenCentreCoord.text32coordinates.y,
+  const x = 30;
+  const y = 500;
 
-    bottom_left_x: this.rootCentreCoord.text54coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text54coordinates.y,
+  const length = 160
+
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
     type: type,
   };
 
+
   if (gate === 0) data.gate = "both";
   if (gate === 32) data.gate = "top";
   if (gate === 54) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -65;
+  data.rotation = -42;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_50_27 = function (gate, type) {
-  const data = {
-    top_left_x: this.spleenCentreCoord.text50coordinates.x,
-    top_left_y: this.spleenCentreCoord.text50coordinates.y,
+  const x = 85;
+  const y = 510;
 
-    bottom_left_x: this.sacralCentreCoord.text27coordinates.x,
-    bottom_left_y: this.sacralCentreCoord.text27coordinates.y,
+  const length = 50
+
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3380,24 +3344,24 @@ DrawFormulaClass.prototype.draw_50_27 = function (gate, type) {
   if (gate === 50) data.gate = "top";
   if (gate === 27) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
 
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -80;
+  data.rotation = -59;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_30_41 = function (gate, type) {
-  const data = {
-    top_left_x: this.emoCentreCoord.text30coordinates.x + this.styles.size,
-    top_left_y: this.emoCentreCoord.text30coordinates.y - this.styles.size,
 
-    bottom_left_x: this.rootCentreCoord.text41coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text41coordinates.y,
+  const x = 330;
+  const y = 550;
+
+  const length = 170
+
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3408,54 +3372,47 @@ DrawFormulaClass.prototype.draw_30_41 = function (gate, type) {
   if (gate === 30) data.gate = "top";
   if (gate === 41) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length =
-    Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) - this.styles.size;
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = 65;
+  data.rotation = 52;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_55_39 = function (gate, type) {
-  const data = {
-    top_left_x: this.emoCentreCoord.text55coordinates.x + this.styles.size,
-    top_left_y: this.emoCentreCoord.text55coordinates.y - this.styles.size / 2,
+  const x = 310;
+  const y = 535;
 
-    bottom_left_x: this.rootCentreCoord.text39coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text39coordinates.y,
+  const length = 150
+
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
     type: type,
   };
-
   if (gate === 0) data.gate = "both";
   if (gate === 55) data.gate = "top";
   if (gate === 39) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length =
-    Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) - this.styles.size;
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = 65;
+  data.rotation = 48;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_49_19 = function (gate, type) {
-  const data = {
-    top_left_x: this.emoCentreCoord.text49coordinates.x + this.styles.size,
-    top_left_y: this.emoCentreCoord.text49coordinates.y - this.styles.size / 2,
+  const x = 310;
+  const y = 505;
 
-    bottom_left_x: this.rootCentreCoord.text19coordinates.x,
-    bottom_left_y: this.rootCentreCoord.text19coordinates.y,
+  const length = 150
+
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3466,25 +3423,23 @@ DrawFormulaClass.prototype.draw_49_19 = function (gate, type) {
   if (gate === 49) data.gate = "top";
   if (gate === 19) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
 
-  const length =
-    Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) - this.styles.size;
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = 65;
+  data.rotation = 48;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_6_59 = function (gate, type) {
-  const data = {
-    top_left_x: this.emoCentreCoord.text6coordinates.x + this.styles.size,
-    top_left_y: this.emoCentreCoord.text6coordinates.y - this.styles.size / 2,
+  const x = 248;
+  const y = 502;
 
-    bottom_left_x: this.sacralCentreCoord.text59coordinates.x,
-    bottom_left_y: this.sacralCentreCoord.text59coordinates.y,
+  const length = 70
+
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
@@ -3495,27 +3450,24 @@ DrawFormulaClass.prototype.draw_6_59 = function (gate, type) {
   if (gate === 6) data.gate = "top";
   if (gate === 59) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
 
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = 80;
+  data.rotation = 60;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_40_37 = function (gate, type) {
-  const data = {
-    top_left_x: this.egoCentreCoord.text40coordinates.x + this.styles.size / 2,
-    top_left_y: this.egoCentreCoord.text40coordinates.y,
+  const x = 262
+  const y = 435
+  const length = 50;
 
-    bottom_left_x: this.emoCentreCoord.text37coordinates.x,
-    bottom_left_y: this.emoCentreCoord.text37coordinates.y,
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3523,28 +3475,26 @@ DrawFormulaClass.prototype.draw_40_37 = function (gate, type) {
   if (gate === 40) data.gate = "top";
   if (gate === 37) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
   data.bottom_left_x = data.top_left_x;
   data.bottom_left_y = data.top_left_y + length;
 
-  data.rotation = -52;
+  data.rotation = -15;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_12_22 = function (gate, type) {
+  const x = 196
+  const y = 227
+  const length = 270;
+
   const data = {
     top_left_x:
-      this.throatCentreCoord.text12coordinates.x + this.styles.size / 2,
-    top_left_y: this.throatCentreCoord.text12coordinates.y,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.emoCentreCoord.text22coordinates.x,
-    bottom_left_y: this.emoCentreCoord.text22coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3552,28 +3502,23 @@ DrawFormulaClass.prototype.draw_12_22 = function (gate, type) {
   if (gate === 12) data.gate = "top";
   if (gate === 22) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -42;
+  data.rotation = -26;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_35_36 = function (gate, type) {
+  const x = 205
+  const y = 215
+  const length = 270;
+
   const data = {
     top_left_x:
-      this.throatCentreCoord.text35coordinates.x + this.styles.size / 2,
-    top_left_y: this.throatCentreCoord.text35coordinates.y - this.styles.size,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.emoCentreCoord.text36coordinates.x,
-    bottom_left_y: this.emoCentreCoord.text36coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3581,27 +3526,24 @@ DrawFormulaClass.prototype.draw_35_36 = function (gate, type) {
   if (gate === 35) data.gate = "top";
   if (gate === 36) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
 
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -42;
+  data.rotation = -26;
   this.draw_vertical_channel_with_rotation(data);
-};
+}; 0
 DrawFormulaClass.prototype.draw_45_21 = function (gate, type) {
-  const data = {
-    top_left_x: this.throatCentreCoord.text45coordinates.x,
-    top_left_y: this.throatCentreCoord.text45coordinates.y,
+  const x = 200
+  const y = 280
+  const length = 120;
 
-    bottom_left_x: this.egoCentreCoord.text21coordinates.x,
-    bottom_left_y: this.egoCentreCoord.text21coordinates.y,
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3609,27 +3551,23 @@ DrawFormulaClass.prototype.draw_45_21 = function (gate, type) {
   if (gate === 45) data.gate = "top";
   if (gate === 21) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -35;
+  data.rotation = -26;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_25_51 = function (gate, type) {
-  const data = {
-    top_left_x: this.gCentreCoord.text25coordinates.x,
-    top_left_y: this.gCentreCoord.text25coordinates.y,
+  const x = 210
+  const y = 360
+  const length = 45;
 
-    bottom_left_x: this.egoCentreCoord.text51coordinates.x,
-    bottom_left_y: this.egoCentreCoord.text51coordinates.y,
+  const data = {
+    top_left_x:
+      x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
-
     type: type,
   };
 
@@ -3637,73 +3575,62 @@ DrawFormulaClass.prototype.draw_25_51 = function (gate, type) {
   if (gate === 25) data.gate = "top";
   if (gate === 51) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = -55;
+  data.rotation = -30;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_26_44 = function (gate, type) {
-  const data = {
-    top_left_x: this.egoCentreCoord.text26coordinates.x + this.styles.size / 2,
-    top_left_y: this.egoCentreCoord.text26coordinates.y - this.styles.size / 2,
+  const x = 210;
+  const y = 414;
 
-    bottom_left_x: this.spleenCentreCoord.text44coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text44coordinates.y,
+  const length = 160
+
+
+  const data = {
+    top_left_x: x,
+    top_left_y: y,
+
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
     type: type,
   };
+
 
   if (gate === 0) data.gate = "both";
   if (gate === 26) data.gate = "top";
   if (gate === 44) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = 73;
+  data.rotation = 64;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_16_48 = function (gate, type) {
+
+  const x = 129;
+  const y = 200;
+
+  let length = 280;
+
   const data = {
     top_left_x:
-      this.throatCentreCoord.text16coordinates.x + this.styles.size / 2,
-    top_left_y: this.throatCentreCoord.text16coordinates.y - this.styles.size,
+      x,
+    top_left_y: y,
 
-    bottom_left_x: this.spleenCentreCoord.text48coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text48coordinates.y,
+    bottom_left_x: x,
+    bottom_left_y: y + length,
 
     width: 10,
 
     type: type,
   };
 
+
   if (gate === 0) data.gate = "both";
   if (gate === 16) data.gate = "top";
   if (gate === 48) data.gate = "bottom";
 
-  const width = data.bottom_left_x - data.top_left_x;
-  const height = data.bottom_left_y - data.top_left_y;
-
-  const length =
-    Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) - this.styles.size;
-
-  data.bottom_left_x = data.top_left_x;
-  data.bottom_left_y = data.top_left_y + length;
-
-  data.rotation = 44;
+  data.rotation = 26;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_42_53 = function (gate, type) {
@@ -3839,7 +3766,7 @@ DrawFormulaClass.prototype.draw_2_14 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_46_29 = function (gate, type) {
 
-  let x = 182
+  let x = 180
   let y = 380
 
   let length = 110;
@@ -4107,8 +4034,8 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
 
   const throatTextData = [
     {
-      x: x + 12,
-      y: y + 12,
+      x: x + 14,
+      y: y + 11,
       text: "62",
     },
     {
@@ -4139,8 +4066,8 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
 
     {
-      x: x + 68,
-      y: y + 24,
+      x: x + 72,
+      y: y + 18,
       text: "35",
     },
     {
@@ -4149,19 +4076,19 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
       text: "12",
     },
     {
-      x: x + 68,
-      y: y + 63,
+      x: x + 73,
+      y: y + 78,
       text: "45",
     },
 
     {
       x: x,
-      y: y + 30,
+      y: y + 15,
       text: "16",
     },
     {
       x: x,
-      y: y + 54,
+      y: y + 64,
       text: "20",
     },
   ];
@@ -4369,12 +4296,12 @@ DrawFormulaClass.prototype.drawRoot340 = function (fill) {
 
     {
       x: x + 6,
-      y: 617.75,
+      y: 610.75,
       text: "54",
     },
     {
       x: x + 6,
-      y: y + 48.5,
+      y: y + 54.5,
       text: "38",
     },
     {
@@ -4390,7 +4317,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (fill) {
     },
     {
       x: x + 62,
-      y: y + 43.5,
+      y: y + 50,
       text: "39",
     },
     {
@@ -4504,30 +4431,30 @@ DrawFormulaClass.prototype.drawEmo340 = function (fill) {
       text: "37",
     },
     {
-      x: x - 36,
-      y: y + 30,
+      x: x - 26,
+      y: y + 28,
       text: "22",
     },
 
     {
-      x: x - 16.8,
+      x: x - 15,
       y: y + 18,
       text: "36",
     },
     {
-      x: x - 68,
-      y: y + 72,
+      x: x - 54,
+      y: y + 80,
       text: "49",
     },
     {
-      x: x - 44,
-      y: y + 84,
+      x: x - 30,
+      y: y + 95,
       text: "55",
     },
 
     {
-      x: x - 16.8,
-      y: y + 100.5,
+      x: x - 14,
+      y: y + 104,
       text: "30",
     },
   ];
@@ -4543,8 +4470,8 @@ DrawFormulaClass.prototype.drawEmo340 = function (fill) {
   );
 };
 DrawFormulaClass.prototype.drawEgo340 = function (fill) {
-  let x = 265
-  let y = 362
+  let x = 263
+  let y = 374
   const egoCentreData = [
     { x: x, y: y },
     {

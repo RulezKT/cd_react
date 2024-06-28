@@ -42,7 +42,7 @@ function App() {
           calc={calcType.calcType} />
       </div>
       <div className="flex  w-full flex-row justify-start items-start space-x-0 space-y-0">
-        <div className="w-full flex  flex-col md:flex-row  ">
+        <div className="w-full flex  flex-col md:flex-row  m-10">
           <BodyGraph
             data={cdInfo.cdInfo}
             chart={typeOfChart.typeOfChart}
