@@ -692,1381 +692,1530 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
     .attr("fill", "white");
 };
 
-DrawFormulaClass.prototype.draw_20_57_Integration = function (data) {
-  let points = [];
-  let mixed_line = NaN;
-
-  //drawing the whole channel
-  if (data.gate === "both") {
-    points = [
-      {
-        x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-        y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-      },
-      {
-        x: this.spleenCentreCoord.text57coordinates.x,
-        y: this.spleenCentreCoord.text57coordinates.y,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.width,
-        y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-      },
-
-      {
-        x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-        y: this.throatCentreCoord.text20coordinates.y,
-      },
-      {
-        x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-        y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-      },
-    ];
-
-    if (data.type === "both") {
-      mixed_line = svg.append("g");
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "red");
-
-      points = [
-        {
-          x:
-            this.throatCentreCoord.text20coordinates.x +
-            this.styles.size / 2 +
-            data.half_width * 1.4,
-          y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-        },
-        {
-          x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-          y: this.spleenCentreCoord.text57coordinates.y,
-        },
-
-        {
-          x: this.spleenCentreCoord.text57coordinates.x + data.width,
-          y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-        },
-
-        {
-          x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-          y: this.throatCentreCoord.text20coordinates.y,
-        },
-
-        {
-          x:
-            this.throatCentreCoord.text20coordinates.x +
-            this.styles.size / 2 +
-            data.half_width,
-          y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-        },
-      ];
-
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "black");
-
-      mixed_line.attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-    } else {
-      svg
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", data.type)
-        .attr(
-          "transform",
-          `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-        );
-    }
-  }
-
-  if (data.gate === "top") {
-    points = [
-      {
-        x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-        y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 7.5,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 7 -
-          data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 5,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 7 -
-          data.width,
-      },
-
-      {
-        x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-        y: this.throatCentreCoord.text20coordinates.y,
-      },
-      {
-        x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-        y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-      },
-    ];
-
-    if (data.type === "both") {
-      mixed_line = svg.append("g");
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "red");
-
-      points = [
-        {
-          x:
-            this.throatCentreCoord.text20coordinates.x +
-            this.styles.size / 2 +
-            data.half_width * 1.4,
-          y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 +
-            data.temp_height / 7.5 +
-            data.half_width * 1.4,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width -
-            (data.temp_height * 2) / 7 -
-            data.width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 +
-            data.temp_height / 5,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width -
-            (data.temp_height * 2) / 7 -
-            data.width,
-        },
-
-        {
-          x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-          y: this.throatCentreCoord.text20coordinates.y,
-        },
-        {
-          x:
-            this.throatCentreCoord.text20coordinates.x +
-            this.styles.size / 2 +
-            data.half_width * 1.4,
-          y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-        },
-      ];
-
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "black");
-
-      mixed_line.attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-    } else {
-      svg
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", data.type)
-        .attr(
-          "transform",
-          `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-        );
-    }
-  }
-
-  if (data.gate === "bottom") {
-    points = [
-      {
-        x: this.spleenCentreCoord.text57coordinates.x,
-        y: this.spleenCentreCoord.text57coordinates.y,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.width,
-        y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.width +
-          data.temp_height / 3.7,
-        y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 4,
-        y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x,
-        y: this.spleenCentreCoord.text57coordinates.y,
-      },
-    ];
-
-    if (data.type === "both") {
-      mixed_line = svg.append("g");
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "red");
-
-      points = [
-        {
-          x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-          y: this.spleenCentreCoord.text57coordinates.y,
-        },
-
-        {
-          x: this.spleenCentreCoord.text57coordinates.x + data.width,
-          y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.width +
-            data.temp_height / 3.7,
-          y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 4 +
-            data.half_width * 1.4,
-          y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-        },
-
-        {
-          x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-          y: this.spleenCentreCoord.text57coordinates.y,
-        },
-      ];
-
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "black");
-
-      mixed_line.attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-    } else {
-      svg
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", data.type)
-        .attr(
-          "transform",
-          `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-        );
-    }
-  }
-};
-
-DrawFormulaClass.prototype.draw_57_34_Integration = function (data) {
-  let points = [];
-  let mixed_line = NaN;
-
-  //drawing the whole channel
-
-  points = [
-    {
-      x: this.sacralCentreCoord.text34coordinates.x,
-      y: this.sacralCentreCoord.text34coordinates.y,
-    },
-    {
-      x: this.sacralCentreCoord.text34coordinates.x + data.width,
-      y: this.sacralCentreCoord.text34coordinates.y - data.width,
-    },
-
-    {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        data.width,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 2.7 -
-        data.width,
-    },
-
-    {
-      x: this.spleenCentreCoord.text57coordinates.x,
-      y: this.spleenCentreCoord.text57coordinates.y,
-    },
-    {
-      x: this.spleenCentreCoord.text57coordinates.x + data.width,
-      y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-    },
-    {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.width +
-        data.temp_height / 3.2,
-      y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-    },
-
-    {
-      x: this.sacralCentreCoord.text34coordinates.x,
-      y: this.sacralCentreCoord.text34coordinates.y,
-    },
-  ];
-
-  if (data.type === "both") {
-    mixed_line = svg.append("g");
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "red");
-
-    points = [
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-      {
-        x: this.sacralCentreCoord.text34coordinates.x + data.width,
-        y: this.sacralCentreCoord.text34coordinates.y - data.half_width * 0.8,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 3.2 +
-          data.width,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 2.7 -
-          data.half_width * 0.8,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-        y: this.spleenCentreCoord.text57coordinates.y,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.width,
-        y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-      },
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.width +
-          data.temp_height / 3.2,
-        y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-      },
-
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-    ];
-
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "black");
-
-    mixed_line.attr(
-      "transform",
-      `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-    );
-  } else {
-    svg
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", data.type)
-      .attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-  }
-};
-
-DrawFormulaClass.prototype.draw_57_10_Integration = function (data) {
-  let points = [];
-  let mixed_line = NaN;
-
-  //drawing the whole channel
-
-  points = [
-    {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y,
-    },
-    {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y - data.width,
-    },
-
-    {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 8 -
-        data.width * 1.6,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10 -
-        data.width,
-    },
-
-    {
-      x: this.spleenCentreCoord.text57coordinates.x,
-      y: this.spleenCentreCoord.text57coordinates.y,
-    },
-    {
-      x: this.spleenCentreCoord.text57coordinates.x + data.width,
-      y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-    },
-
-    {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 12,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-    },
-
-    {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y,
-    },
-  ];
-
-  if (data.type === "both") {
-    mixed_line = svg.append("g");
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "red");
-
-    points = [
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y,
-      },
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y - data.half_width * 0.8,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 8 -
-          data.width * 1.6,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10 -
-          data.half_width * 0.8,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-        y: this.spleenCentreCoord.text57coordinates.y,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.width,
-        y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 12,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10,
-      },
-
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y,
-      },
-    ];
-
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "black");
-
-    mixed_line.attr(
-      "transform",
-      `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-    );
-  } else {
-    svg
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", data.type)
-      .attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-  }
-};
-
-DrawFormulaClass.prototype.draw_10_34_Integration = function (data) {
-  let points = [];
-  let mixed_line = NaN;
-
-  //drawing the whole channel
-  if (data.gate === "both") {
-    points = [
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-      {
-        x: this.sacralCentreCoord.text34coordinates.x + data.width,
-        y: this.sacralCentreCoord.text34coordinates.y - data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 -
-          data.width * 2.3,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 12,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10,
-      },
-
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y,
-      },
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y - data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 18,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10 -
-          data.width,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 3.2,
-        y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-      },
-
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-    ];
-
-    if (data.type === "both") {
-      mixed_line = svg.append("g");
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "red");
-
-      points = [
-        {
-          x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-          y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-        },
-        {
-          x: this.sacralCentreCoord.text34coordinates.x + data.width,
-          y: this.sacralCentreCoord.text34coordinates.y - data.width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 -
-            data.width * 2.3,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 +
-            data.temp_height / 12,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width -
-            (data.temp_height * 2) / 10,
-        },
-
-        {
-          x: this.gCentreCoord.text10coordinates.x,
-          y: this.gCentreCoord.text10coordinates.y,
-        },
-        {
-          x: this.gCentreCoord.text10coordinates.x,
-          y:
-            this.gCentreCoord.text10coordinates.y -
-            data.width +
-            data.half_width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 +
-            data.temp_height / 18 +
-            data.half_width,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width -
-            (data.temp_height * 2) / 10 -
-            data.width +
-            data.half_width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 3.2 +
-            data.half_width * 2,
-          y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-        },
-
-        {
-          x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-          y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-        },
-      ];
-
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "black");
-
-      mixed_line.attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-    } else {
-      svg
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", data.type)
-        .attr(
-          "transform",
-          `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-        );
-    }
-  }
-
-  if (data.gate === "top") {
-    points = [
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y,
-      },
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y - data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 5,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10 -
-          data.width,
-      },
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 5,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10,
-      },
-
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y,
-      },
-    ];
-
-    if (data.type === "both") {
-      mixed_line = svg.append("g");
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "red");
-
-      points = [
-        {
-          x: this.gCentreCoord.text10coordinates.x,
-          y: this.gCentreCoord.text10coordinates.y,
-        },
-        {
-          x: this.gCentreCoord.text10coordinates.x,
-          y:
-            this.gCentreCoord.text10coordinates.y -
-            data.width +
-            data.half_width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 +
-            data.temp_height / 5,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width -
-            (data.temp_height * 2) / 10 -
-            data.width +
-            data.half_width,
-        },
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 +
-            data.temp_height / 5,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width -
-            (data.temp_height * 2) / 10,
-        },
-
-        {
-          x: this.gCentreCoord.text10coordinates.x,
-          y: this.gCentreCoord.text10coordinates.y,
-        },
-      ];
-
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "black");
-
-      mixed_line.attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-    } else {
-      svg
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", data.type)
-        .attr(
-          "transform",
-          `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-        );
-    }
-  }
-
-  if (data.gate === "bottom") {
-    points = [
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-      {
-        x: this.sacralCentreCoord.text34coordinates.x + data.width,
-        y: this.sacralCentreCoord.text34coordinates.y - data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 -
-          data.width * 2.3,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.width +
-          data.temp_height / 3.2,
-        y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-      },
-
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-    ];
-
-    if (data.type === "both") {
-      mixed_line = svg.append("g");
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "red");
-
-      points = [
-        {
-          x: this.sacralCentreCoord.text34coordinates.x,
-          y: this.sacralCentreCoord.text34coordinates.y,
-        },
-        {
-          x:
-            this.sacralCentreCoord.text34coordinates.x +
-            data.width -
-            data.half_width,
-          y:
-            this.sacralCentreCoord.text34coordinates.y -
-            data.width +
-            data.half_width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 -
-            data.width * 2.3 -
-            data.half_width,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width +
-            data.half_width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.width +
-            data.temp_height / 3.2,
-          y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-        },
-
-        {
-          x: this.sacralCentreCoord.text34coordinates.x,
-          y: this.sacralCentreCoord.text34coordinates.y,
-        },
-      ];
-
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "black");
-
-      mixed_line.attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-    } else {
-      svg
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", data.type)
-        .attr(
-          "transform",
-          `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-        );
-    }
-  }
-};
-
-DrawFormulaClass.prototype.draw_20_34_Integration = function (data) {
-  let points = [];
-  let mixed_line = NaN;
-
-  //drawing the whole channel
-  if (data.gate === "both") {
-    points = [
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-      {
-        x: this.sacralCentreCoord.text34coordinates.x + data.width,
-        y: this.sacralCentreCoord.text34coordinates.y - data.width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 -
-          data.width * 2.3,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width,
-      },
-
-      {
-        x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-        y: this.throatCentreCoord.text20coordinates.y,
-      },
-      {
-        x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-        y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-      },
-
-      {
-        x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 3.2,
-        y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-      },
-
-      {
-        x: this.sacralCentreCoord.text34coordinates.x,
-        y: this.sacralCentreCoord.text34coordinates.y,
-      },
-    ];
-
-    if (data.type === "both") {
-      mixed_line = svg.append("g");
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "red");
-
-      points = [
-        {
-          x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-          y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-        },
-        {
-          x: this.sacralCentreCoord.text34coordinates.x + data.width,
-          y: this.sacralCentreCoord.text34coordinates.y - data.width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 2 -
-            data.width * 2.3,
-          y:
-            this.spleenCentreCoord.text57coordinates.y +
-            data.temp_width / 3 -
-            data.width,
-        },
-
-        {
-          x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-          y: this.throatCentreCoord.text20coordinates.y,
-        },
-        {
-          x:
-            this.throatCentreCoord.text20coordinates.x +
-            this.styles.size / 2 +
-            data.half_width / 2,
-          y:
-            this.throatCentreCoord.text20coordinates.y -
-            this.styles.size / 2 +
-            data.half_width,
-        },
-
-        {
-          x:
-            this.spleenCentreCoord.text57coordinates.x +
-            data.temp_height / 3.2 +
-            data.half_width * 2,
-          y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-        },
-
-        {
-          x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-          y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-        },
-      ];
-
-      mixed_line
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", "black");
-
-      mixed_line.attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-    } else {
-      svg
-        .append("path")
-        .attr("d", this.lineFunction(points))
-        .attr("stroke", "black")
-        .attr("fill", data.type)
-        .attr(
-          "transform",
-          `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-        );
-    }
-  }
-};
-
-DrawFormulaClass.prototype.draw_20_10_Integration = function (data) {
-  let points = [];
-  let mixed_line = NaN;
-
-  //drawing the whole channel
-
-  points = [
-    {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y,
-    },
-    {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y - data.width,
-    },
-
-    {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 8,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10 -
-        data.width,
-    },
-
-    {
-      x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-      y: this.throatCentreCoord.text20coordinates.y,
-    },
-    {
-      x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-      y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-    },
-
-    {
-      x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 12 -
-        data.width * 1.6,
-      y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-    },
-
-    {
-      x: this.gCentreCoord.text10coordinates.x,
-      y: this.gCentreCoord.text10coordinates.y,
-    },
-  ];
-
-  if (data.type === "both") {
-    mixed_line = svg.append("g");
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "red");
-
-    points = [
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y,
-      },
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y - data.half_width,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 8 -
-          data.width * 1.4,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10 -
-          data.half_width,
-      },
-
-      {
-        x:
-          this.throatCentreCoord.text20coordinates.x +
-          data.width * 1.5 -
-          data.half_width * 0.8,
-        y: this.throatCentreCoord.text20coordinates.y - data.half_width * 0.8,
-      },
-      {
-        x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-        y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-      },
-
-      {
-        x:
-          this.spleenCentreCoord.text57coordinates.x +
-          data.temp_height / 2 +
-          data.temp_height / 12 -
-          data.width * 1.6,
-        y:
-          this.spleenCentreCoord.text57coordinates.y +
-          data.temp_width / 3 -
-          data.width -
-          (data.temp_height * 2) / 10,
-      },
-
-      {
-        x: this.gCentreCoord.text10coordinates.x,
-        y: this.gCentreCoord.text10coordinates.y,
-      },
-    ];
-
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "black");
-
-    mixed_line.attr(
-      "transform",
-      `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-    );
-  } else {
-    svg
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", data.type)
-      .attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-  }
-};
+// DrawFormulaClass.prototype.draw_20_57_Integration = function (data) {
+//   let points = [];
+//   let mixed_line = NaN;
+
+//   //drawing the whole channel
+//   if (data.gate === "both") {
+//     points = [
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//       },
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x,
+//         y: this.spleenCentreCoord.text57coordinates.y,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//       },
+
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//         y: this.throatCentreCoord.text20coordinates.y,
+//       },
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//       },
+//     ];
+
+//     if (data.type === "both") {
+//       mixed_line = svg.append("g");
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "red");
+
+//       points = [
+//         {
+//           x:
+//             this.throatCentreCoord.text20coordinates.x +
+//             this.styles.size / 2 +
+//             data.half_width * 1.4,
+//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//         },
+//         {
+//           x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
+//           y: this.spleenCentreCoord.text57coordinates.y,
+//         },
+
+//         {
+//           x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//           y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//         },
+
+//         {
+//           x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//           y: this.throatCentreCoord.text20coordinates.y,
+//         },
+
+//         {
+//           x:
+//             this.throatCentreCoord.text20coordinates.x +
+//             this.styles.size / 2 +
+//             data.half_width,
+//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//         },
+//       ];
+
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "black");
+
+//       mixed_line.attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//     } else {
+//       svg
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", data.type)
+//         .attr(
+//           "transform",
+//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//         );
+//     }
+//   }
+
+//   if (data.gate === "top") {
+//     points = [
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 7.5,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 7 -
+//           data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 5,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 7 -
+//           data.width,
+//       },
+
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//         y: this.throatCentreCoord.text20coordinates.y,
+//       },
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//       },
+//     ];
+
+//     if (data.type === "both") {
+//       mixed_line = svg.append("g");
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "red");
+
+//       points = [
+//         {
+//           x:
+//             this.throatCentreCoord.text20coordinates.x +
+//             this.styles.size / 2 +
+//             data.half_width * 1.4,
+//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 +
+//             data.temp_height / 7.5 +
+//             data.half_width * 1.4,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width -
+//             (data.temp_height * 2) / 7 -
+//             data.width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 +
+//             data.temp_height / 5,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width -
+//             (data.temp_height * 2) / 7 -
+//             data.width,
+//         },
+
+//         {
+//           x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//           y: this.throatCentreCoord.text20coordinates.y,
+//         },
+//         {
+//           x:
+//             this.throatCentreCoord.text20coordinates.x +
+//             this.styles.size / 2 +
+//             data.half_width * 1.4,
+//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//         },
+//       ];
+
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "black");
+
+//       mixed_line.attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//     } else {
+//       svg
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", data.type)
+//         .attr(
+//           "transform",
+//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//         );
+//     }
+//   }
+
+//   if (data.gate === "bottom") {
+//     points = [
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x,
+//         y: this.spleenCentreCoord.text57coordinates.y,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.width +
+//           data.temp_height / 3.7,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 4,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x,
+//         y: this.spleenCentreCoord.text57coordinates.y,
+//       },
+//     ];
+
+//     if (data.type === "both") {
+//       mixed_line = svg.append("g");
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "red");
+
+//       points = [
+//         {
+//           x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
+//           y: this.spleenCentreCoord.text57coordinates.y,
+//         },
+
+//         {
+//           x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//           y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.width +
+//             data.temp_height / 3.7,
+//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 4 +
+//             data.half_width * 1.4,
+//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
+//         },
+
+//         {
+//           x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
+//           y: this.spleenCentreCoord.text57coordinates.y,
+//         },
+//       ];
+
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "black");
+
+//       mixed_line.attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//     } else {
+//       svg
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", data.type)
+//         .attr(
+//           "transform",
+//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//         );
+//     }
+//   }
+// };
+
+// DrawFormulaClass.prototype.draw_57_34_Integration = function (data) {
+//   let points = [];
+//   let mixed_line = NaN;
+
+//   //drawing the whole channel
+
+//   points = [
+//     {
+//       x: this.sacralCentreCoord.text34coordinates.x,
+//       y: this.sacralCentreCoord.text34coordinates.y,
+//     },
+//     {
+//       x: this.sacralCentreCoord.text34coordinates.x + data.width,
+//       y: this.sacralCentreCoord.text34coordinates.y - data.width,
+//     },
+
+//     {
+//       x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 3.2 +
+//         data.width,
+//       y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 2.7 -
+//         data.width,
+//     },
+
+//     {
+//       x: this.spleenCentreCoord.text57coordinates.x,
+//       y: this.spleenCentreCoord.text57coordinates.y,
+//     },
+//     {
+//       x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//       y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//     },
+//     {
+//       x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.width +
+//         data.temp_height / 3.2,
+//       y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
+//     },
+
+//     {
+//       x: this.sacralCentreCoord.text34coordinates.x,
+//       y: this.sacralCentreCoord.text34coordinates.y,
+//     },
+//   ];
+
+//   if (data.type === "both") {
+//     mixed_line = svg.append("g");
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "red");
+
+//     points = [
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
+//         y: this.sacralCentreCoord.text34coordinates.y - data.half_width * 0.8,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 3.2 +
+//           data.width,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 2.7 -
+//           data.half_width * 0.8,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
+//         y: this.spleenCentreCoord.text57coordinates.y,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//       },
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.width +
+//           data.temp_height / 3.2,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
+//       },
+
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//     ];
+
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "black");
+
+//     mixed_line.attr(
+//       "transform",
+//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//     );
+//   } else {
+//     svg
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", data.type)
+//       .attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//   }
+// };
+
+// DrawFormulaClass.prototype.draw_57_10_Integration = function (data) {
+//   let points = [];
+//   let mixed_line = NaN;
+
+//   //drawing the whole channel
+
+//   points = [
+//     {
+//       x: this.gCentreCoord.text10coordinates.x,
+//       y: this.gCentreCoord.text10coordinates.y,
+//     },
+//     {
+//       x: this.gCentreCoord.text10coordinates.x,
+//       y: this.gCentreCoord.text10coordinates.y - data.width,
+//     },
+
+//     {
+//       x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 2 +
+//         data.temp_height / 8 -
+//         data.width * 1.6,
+//       y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 3 -
+//         data.width -
+//         (data.temp_height * 2) / 10 -
+//         data.width,
+//     },
+
+//     {
+//       x: this.spleenCentreCoord.text57coordinates.x,
+//       y: this.spleenCentreCoord.text57coordinates.y,
+//     },
+//     {
+//       x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//       y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//     },
+
+//     {
+//       x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 2 +
+//         data.temp_height / 12,
+//       y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 3 -
+//         data.width -
+//         (data.temp_height * 2) / 10,
+//     },
+
+//     {
+//       x: this.gCentreCoord.text10coordinates.x,
+//       y: this.gCentreCoord.text10coordinates.y,
+//     },
+//   ];
+
+//   if (data.type === "both") {
+//     mixed_line = svg.append("g");
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "red");
+
+//     points = [
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y,
+//       },
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y - data.half_width * 0.8,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 8 -
+//           data.width * 1.6,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10 -
+//           data.half_width * 0.8,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
+//         y: this.spleenCentreCoord.text57coordinates.y,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 12,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10,
+//       },
+
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y,
+//       },
+//     ];
+
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "black");
+
+//     mixed_line.attr(
+//       "transform",
+//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//     );
+//   } else {
+//     svg
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", data.type)
+//       .attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//   }
+// };
+
+// DrawFormulaClass.prototype.draw_10_34_Integration = function (data) {
+//   let points = [];
+//   let mixed_line = NaN;
+
+//   //drawing the whole channel
+//   if (data.gate === "both") {
+//     points = [
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
+//         y: this.sacralCentreCoord.text34coordinates.y - data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 -
+//           data.width * 2.3,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 12,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10,
+//       },
+
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y,
+//       },
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y - data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 18,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10 -
+//           data.width,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 3.2,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
+//       },
+
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//     ];
+
+//     if (data.type === "both") {
+//       mixed_line = svg.append("g");
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "red");
+
+//       points = [
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
+//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
+//         },
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x + data.width,
+//           y: this.sacralCentreCoord.text34coordinates.y - data.width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 -
+//             data.width * 2.3,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 +
+//             data.temp_height / 12,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width -
+//             (data.temp_height * 2) / 10,
+//         },
+
+//         {
+//           x: this.gCentreCoord.text10coordinates.x,
+//           y: this.gCentreCoord.text10coordinates.y,
+//         },
+//         {
+//           x: this.gCentreCoord.text10coordinates.x,
+//           y:
+//             this.gCentreCoord.text10coordinates.y -
+//             data.width +
+//             data.half_width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 +
+//             data.temp_height / 18 +
+//             data.half_width,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width -
+//             (data.temp_height * 2) / 10 -
+//             data.width +
+//             data.half_width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 3.2 +
+//             data.half_width * 2,
+//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
+//         },
+
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
+//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
+//         },
+//       ];
+
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "black");
+
+//       mixed_line.attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//     } else {
+//       svg
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", data.type)
+//         .attr(
+//           "transform",
+//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//         );
+//     }
+//   }
+
+//   if (data.gate === "top") {
+//     points = [
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y,
+//       },
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y - data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 5,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10 -
+//           data.width,
+//       },
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 5,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10,
+//       },
+
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y,
+//       },
+//     ];
+
+//     if (data.type === "both") {
+//       mixed_line = svg.append("g");
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "red");
+
+//       points = [
+//         {
+//           x: this.gCentreCoord.text10coordinates.x,
+//           y: this.gCentreCoord.text10coordinates.y,
+//         },
+//         {
+//           x: this.gCentreCoord.text10coordinates.x,
+//           y:
+//             this.gCentreCoord.text10coordinates.y -
+//             data.width +
+//             data.half_width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 +
+//             data.temp_height / 5,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width -
+//             (data.temp_height * 2) / 10 -
+//             data.width +
+//             data.half_width,
+//         },
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 +
+//             data.temp_height / 5,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width -
+//             (data.temp_height * 2) / 10,
+//         },
+
+//         {
+//           x: this.gCentreCoord.text10coordinates.x,
+//           y: this.gCentreCoord.text10coordinates.y,
+//         },
+//       ];
+
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "black");
+
+//       mixed_line.attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//     } else {
+//       svg
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", data.type)
+//         .attr(
+//           "transform",
+//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//         );
+//     }
+//   }
+
+//   if (data.gate === "bottom") {
+//     points = [
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
+//         y: this.sacralCentreCoord.text34coordinates.y - data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 -
+//           data.width * 2.3,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.width +
+//           data.temp_height / 3.2,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
+//       },
+
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//     ];
+
+//     if (data.type === "both") {
+//       mixed_line = svg.append("g");
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "red");
+
+//       points = [
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x,
+//           y: this.sacralCentreCoord.text34coordinates.y,
+//         },
+//         {
+//           x:
+//             this.sacralCentreCoord.text34coordinates.x +
+//             data.width -
+//             data.half_width,
+//           y:
+//             this.sacralCentreCoord.text34coordinates.y -
+//             data.width +
+//             data.half_width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 -
+//             data.width * 2.3 -
+//             data.half_width,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width +
+//             data.half_width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.width +
+//             data.temp_height / 3.2,
+//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
+//         },
+
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x,
+//           y: this.sacralCentreCoord.text34coordinates.y,
+//         },
+//       ];
+
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "black");
+
+//       mixed_line.attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//     } else {
+//       svg
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", data.type)
+//         .attr(
+//           "transform",
+//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//         );
+//     }
+//   }
+// };
+
+// DrawFormulaClass.prototype.draw_20_34_Integration = function (data) {
+//   let points = [];
+//   let mixed_line = NaN;
+
+//   // console.log("inside")
+
+//   //drawing the whole channel
+//   if (data.gate === "both") {
+//     points = [
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
+//         y: this.sacralCentreCoord.text34coordinates.y - data.width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 -
+//           data.width * 2.3,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width,
+//       },
+
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//         y: this.throatCentreCoord.text20coordinates.y,
+//       },
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//       },
+
+//       {
+//         x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 3.2,
+//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
+//       },
+
+//       {
+//         x: this.sacralCentreCoord.text34coordinates.x,
+//         y: this.sacralCentreCoord.text34coordinates.y,
+//       },
+//     ];
+
+//     // console.log(points)
+//     if (data.type === "both") {
+//       mixed_line = svg.append("g");
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "red");
+
+//       points = [
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
+//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
+//         },
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x + data.width,
+//           y: this.sacralCentreCoord.text34coordinates.y - data.width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 2 -
+//             data.width * 2.3,
+//           y:
+//             this.spleenCentreCoord.text57coordinates.y +
+//             data.temp_width / 3 -
+//             data.width,
+//         },
+
+//         {
+//           x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//           y: this.throatCentreCoord.text20coordinates.y,
+//         },
+//         {
+//           x:
+//             this.throatCentreCoord.text20coordinates.x +
+//             this.styles.size / 2 +
+//             data.half_width / 2,
+//           y:
+//             this.throatCentreCoord.text20coordinates.y -
+//             this.styles.size / 2 +
+//             data.half_width,
+//         },
+
+//         {
+//           x:
+//             this.spleenCentreCoord.text57coordinates.x +
+//             data.temp_height / 3.2 +
+//             data.half_width * 2,
+//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
+//         },
+
+//         {
+//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
+//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
+//         },
+//       ];
+
+//       mixed_line
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", "black");
+
+//       mixed_line.attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//     } else {
+//       svg
+//         .append("path")
+//         .attr("d", this.lineFunction(points))
+//         .attr("stroke", "black")
+//         .attr("fill", data.type)
+//         .attr(
+//           "transform",
+//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//         );
+//     }
+//   }
+// };
+
+// DrawFormulaClass.prototype.draw_20_10_Integration = function (data) {
+//   let points = [];
+//   let mixed_line = NaN;
+
+//   //drawing the whole channel
+
+//   points = [
+//     {
+//       x: this.gCentreCoord.text10coordinates.x,
+//       y: this.gCentreCoord.text10coordinates.y,
+//     },
+//     {
+//       x: this.gCentreCoord.text10coordinates.x,
+//       y: this.gCentreCoord.text10coordinates.y - data.width,
+//     },
+
+//     {
+//       x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 2 +
+//         data.temp_height / 8,
+//       y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 3 -
+//         data.width -
+//         (data.temp_height * 2) / 10 -
+//         data.width,
+//     },
+
+//     {
+//       x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//       y: this.throatCentreCoord.text20coordinates.y,
+//     },
+//     {
+//       x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//       y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//     },
+
+//     {
+//       x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 2 +
+//         data.temp_height / 12 -
+//         data.width * 1.6,
+//       y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 3 -
+//         data.width -
+//         (data.temp_height * 2) / 10,
+//     },
+
+//     {
+//       x: this.gCentreCoord.text10coordinates.x,
+//       y: this.gCentreCoord.text10coordinates.y,
+//     },
+//   ];
+
+//   if (data.type === "both") {
+//     mixed_line = svg.append("g");
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "red");
+
+//     points = [
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y,
+//       },
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y - data.half_width,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 8 -
+//           data.width * 1.4,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10 -
+//           data.half_width,
+//       },
+
+//       {
+//         x:
+//           this.throatCentreCoord.text20coordinates.x +
+//           data.width * 1.5 -
+//           data.half_width * 0.8,
+//         y: this.throatCentreCoord.text20coordinates.y - data.half_width * 0.8,
+//       },
+//       {
+//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+//       },
+
+//       {
+//         x:
+//           this.spleenCentreCoord.text57coordinates.x +
+//           data.temp_height / 2 +
+//           data.temp_height / 12 -
+//           data.width * 1.6,
+//         y:
+//           this.spleenCentreCoord.text57coordinates.y +
+//           data.temp_width / 3 -
+//           data.width -
+//           (data.temp_height * 2) / 10,
+//       },
+
+//       {
+//         x: this.gCentreCoord.text10coordinates.x,
+//         y: this.gCentreCoord.text10coordinates.y,
+//       },
+//     ];
+
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "black");
+
+//     mixed_line.attr(
+//       "transform",
+//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//     );
+//   } else {
+//     svg
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", data.type)
+//       .attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//   }
+// };
+
+// DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
+
+//   // console.log("inside 20 integration")
+//   let points = [];
+//   let mixed_line = NaN;
+
+//   const data = {
+//     top_left_x: this.throatCentreCoord.text20coordinates.x,
+//     top_left_y: this.throatCentreCoord.text20coordinates.y,
+
+//     bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
+//     bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
+
+//     width: 10,
+//   };
+//   data.temp_width = data.bottom_left_x - data.top_left_x;
+//   data.temp_height = data.bottom_left_y - data.top_left_y;
+
+//   data.half_width = data.width / 2;
+
+//   data.type = type;
+
+//   let i = variation;
+
+//   let rectangle20_var = [
+//     //empty for the future
+//     {},
+//     //variation - 1.drawing to 34th
+//     {
+//       top_left_x:
+//         this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//       top_left_y:
+//         this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+
+//       bottom_left_x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 3.2 +
+//         this.styles.size / 12,
+//       bottom_left_y:
+//         this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
+
+//       bottom_right_x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 3.2 +
+//         data.width +
+//         this.styles.size / 20,
+//       bottom_right_y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 2.7 +
+//         data.width * 0.7 +
+//         this.styles.size / 20,
+
+//       top_right_x:
+//         this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//       top_right_y: this.throatCentreCoord.text20coordinates.y,
+//     },
+
+//     //variation - 2.drawing to 10th
+//     {
+//       top_left_x:
+//         this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
+//       top_left_y:
+//         this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
+
+//       bottom_left_x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 2 +
+//         data.temp_height / 8 -
+//         data.width * 2.6,
+//       bottom_left_y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 3 -
+//         data.width -
+//         (data.temp_height * 2) / 10,
+
+//       bottom_right_x:
+//         this.spleenCentreCoord.text57coordinates.x +
+//         data.temp_height / 2 +
+//         data.temp_height / 12,
+//       bottom_right_y:
+//         this.spleenCentreCoord.text57coordinates.y +
+//         data.temp_width / 3 -
+//         data.width -
+//         (data.temp_height * 2) / 10,
+
+//       top_right_x:
+//         this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
+//       top_right_y: this.throatCentreCoord.text20coordinates.y,
+//     },
+//   ];
+
+//   //variation - 1.drawing half to 34th
+//   rectangle20_var[1].top_left_half_x =
+//     rectangle20_var[1].top_left_x + data.half_width * 0.7;
+//   rectangle20_var[1].top_left_half_y =
+//     rectangle20_var[1].top_left_y + data.half_width * 0.7;
+//   rectangle20_var[1].bottom_left_half_x =
+//     rectangle20_var[1].bottom_left_x + data.half_width * 0.7;
+//   rectangle20_var[1].bottom_left_half_y =
+//     rectangle20_var[1].bottom_left_y + data.half_width * 0.5;
+//   rectangle20_var[1].bottom_right_half_x = rectangle20_var[1].bottom_right_x;
+//   rectangle20_var[1].bottom_right_half_y = rectangle20_var[1].bottom_right_y;
+//   rectangle20_var[1].top_right_half_x = rectangle20_var[1].top_right_x;
+//   rectangle20_var[1].top_right_half_y = rectangle20_var[1].top_right_y;
+
+//   //variation - 2.drawing half to 10th
+//   rectangle20_var[2].top_left_half_x =
+//     rectangle20_var[2].top_left_x + data.half_width * 0.7;
+//   rectangle20_var[2].top_left_half_y =
+//     rectangle20_var[2].top_left_y + data.half_width * 0.7;
+//   rectangle20_var[2].bottom_left_half_x =
+//     rectangle20_var[2].bottom_left_x + data.half_width * 1.2;
+//   rectangle20_var[2].bottom_left_half_y = rectangle20_var[2].bottom_left_y;
+//   rectangle20_var[2].bottom_right_half_x = rectangle20_var[2].bottom_right_x;
+//   rectangle20_var[2].bottom_right_half_y = rectangle20_var[2].bottom_right_y;
+//   rectangle20_var[2].top_right_half_x = rectangle20_var[2].top_right_x;
+//   rectangle20_var[2].top_right_half_y = rectangle20_var[2].top_right_y;
+
+
+//   console.log(rectangle20_var)
+
+
+//   points = [
+//     {
+//       x: rectangle20_var[i].top_left_x,
+//       y: rectangle20_var[i].top_left_y,
+//     },
+
+//     {
+//       x: rectangle20_var[i].bottom_left_x,
+//       y: rectangle20_var[i].bottom_left_y,
+//     },
+
+//     {
+//       x: rectangle20_var[i].bottom_right_x,
+//       y: rectangle20_var[i].bottom_right_y,
+//     },
+
+//     {
+//       x: rectangle20_var[i].top_right_x,
+//       y: rectangle20_var[i].top_right_y,
+//     },
+//     {
+//       x: rectangle20_var[i].top_left_x,
+//       y: rectangle20_var[i].top_left_y,
+//     },
+//   ];
+
+//   if (data.type === "both") {
+//     mixed_line = svg.append("g");
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "red");
+
+//     points = [
+//       {
+//         x: rectangle20_var[i].top_left_half_x,
+//         y: rectangle20_var[i].top_left_half_y,
+//       },
+
+//       {
+//         x: rectangle20_var[i].bottom_left_half_x,
+//         y: rectangle20_var[i].bottom_left_half_y,
+//       },
+
+//       {
+//         x: rectangle20_var[i].bottom_right_half_x,
+//         y: rectangle20_var[i].bottom_right_half_y,
+//       },
+
+//       {
+//         x: rectangle20_var[i].top_right_half_x,
+//         y: rectangle20_var[i].top_right_half_y,
+//       },
+//       {
+//         x: rectangle20_var[i].top_left_half_x,
+//         y: rectangle20_var[i].top_left_half_y,
+//       },
+//     ];
+
+//     mixed_line
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", "black");
+
+//     mixed_line.attr(
+//       "transform",
+//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//     );
+//   } else {
+//     svg
+//       .append("path")
+//       .attr("d", this.lineFunction(points))
+//       .attr("stroke", "black")
+//       .attr("fill", data.type)
+//       .attr(
+//         "transform",
+//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+//       );
+//   }
+// };
 
 //type - black, red or 'both'
 // variation - 1.drawing to 34th 2.drawing to 10th
 DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
+
+  // console.log("inside 20 integration")
   let points = [];
   let mixed_line = NaN;
-
-  const data = {
-    top_left_x: this.throatCentreCoord.text20coordinates.x,
-    top_left_y: this.throatCentreCoord.text20coordinates.y,
-
-    bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-    width: 10,
-  };
-  data.temp_width = data.bottom_left_x - data.top_left_x;
-  data.temp_height = data.bottom_left_y - data.top_left_y;
-
-  data.half_width = data.width / 2;
-
-  data.type = type;
-
   let i = variation;
-
   let rectangle20_var = [
     //empty for the future
     {},
     //variation - 1.drawing to 34th
     {
-      top_left_x:
-        this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-      top_left_y:
-        this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
 
-      bottom_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        this.styles.size / 12,
-      bottom_left_y:
-        this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-
-      bottom_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        data.width +
-        this.styles.size / 20,
-      bottom_right_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 2.7 +
-        data.width * 0.7 +
-        this.styles.size / 20,
-
-      top_right_x:
-        this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-      top_right_y: this.throatCentreCoord.text20coordinates.y,
     },
 
     //variation - 2.drawing to 10th
     {
-      top_left_x:
-        this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-      top_left_y:
-        this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
 
-      bottom_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 8 -
-        data.width * 2.6,
-      bottom_left_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-
-      bottom_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 12,
-      bottom_right_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-
-      top_right_x:
-        this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-      top_right_y: this.throatCentreCoord.text20coordinates.y,
     },
   ];
+
+  let rotation = -18.5;
+  // let width = 10;
+
+
+  const x = 127;
+  const y = 248;
+
+  const length1 = 126;
+  const length2 = 106.4;
+
+  let top_right_x = x + 9
+  let top_right_y = y + 6
+
+
+  let top_left_half_x = x + 3.5;
+  let top_left_half_y = y + 3.5;
 
   //variation - 1.drawing half to 34th
-  rectangle20_var[1].top_left_half_x =
-    rectangle20_var[1].top_left_x + data.half_width * 0.7;
-  rectangle20_var[1].top_left_half_y =
-    rectangle20_var[1].top_left_y + data.half_width * 0.7;
-  rectangle20_var[1].bottom_left_half_x =
-    rectangle20_var[1].bottom_left_x + data.half_width * 0.7;
-  rectangle20_var[1].bottom_left_half_y =
-    rectangle20_var[1].bottom_left_y + data.half_width * 0.5;
-  rectangle20_var[1].bottom_right_half_x = rectangle20_var[1].bottom_right_x;
-  rectangle20_var[1].bottom_right_half_y = rectangle20_var[1].bottom_right_y;
-  rectangle20_var[1].top_right_half_x = rectangle20_var[1].top_right_x;
-  rectangle20_var[1].top_right_half_y = rectangle20_var[1].top_right_y;
+  rectangle20_var[1].bottom_right_y = y + length1;
+  rectangle20_var[1].bottom_left_half_y = y + length1;
+  rectangle20_var[1].bottom_left_y = y + length1;
+
+  rectangle20_var[1].bottom_right_x = x - 102;
+  rectangle20_var[1].bottom_left_x = x - 112;
+  rectangle20_var[1].bottom_left_half_x = x - 138;
 
   //variation - 2.drawing half to 10th
-  rectangle20_var[2].top_left_half_x =
-    rectangle20_var[2].top_left_x + data.half_width * 0.7;
-  rectangle20_var[2].top_left_half_y =
-    rectangle20_var[2].top_left_y + data.half_width * 0.7;
-  rectangle20_var[2].bottom_left_half_x =
-    rectangle20_var[2].bottom_left_x + data.half_width * 1.2;
-  rectangle20_var[2].bottom_left_half_y = rectangle20_var[2].bottom_left_y;
-  rectangle20_var[2].bottom_right_half_x = rectangle20_var[2].bottom_right_x;
-  rectangle20_var[2].bottom_right_half_y = rectangle20_var[2].bottom_right_y;
-  rectangle20_var[2].top_right_half_x = rectangle20_var[2].top_right_x;
-  rectangle20_var[2].top_right_half_y = rectangle20_var[2].top_right_y;
+  rectangle20_var[2].bottom_right_y = y + length2;
+  rectangle20_var[2].bottom_left_half_y = y + length2;
+  rectangle20_var[2].bottom_left_y = y + length2;
+
+  rectangle20_var[2].bottom_right_x = x - 82.2;
+  rectangle20_var[2].bottom_left_half_x = x - 93;
+  rectangle20_var[2].bottom_left_x = x - 99;
+
+
 
   points = [
     {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
+      x: x,
+      y: y,
     },
 
     {
@@ -2080,16 +2229,16 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
     },
 
     {
-      x: rectangle20_var[i].top_right_x,
-      y: rectangle20_var[i].top_right_y,
+      x: top_right_x,
+      y: top_right_y,
     },
     {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
+      x: x,
+      y: y,
     },
   ];
 
-  if (data.type === "both") {
+  if (type === "both") {
     mixed_line = svg.append("g");
     mixed_line
       .append("path")
@@ -2099,8 +2248,8 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
 
     points = [
       {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
+        x: top_left_half_x,
+        y: top_left_half_y,
       },
 
       {
@@ -2109,17 +2258,17 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
       },
 
       {
-        x: rectangle20_var[i].bottom_right_half_x,
-        y: rectangle20_var[i].bottom_right_half_y,
+        x: rectangle20_var[i].bottom_right_x,
+        y: rectangle20_var[i].bottom_right_y,
       },
 
       {
-        x: rectangle20_var[i].top_right_half_x,
-        y: rectangle20_var[i].top_right_half_y,
+        x: top_right_x,
+        y: top_right_y,
       },
       {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
+        x: top_left_half_x,
+        y: top_left_half_y,
       },
     ];
 
@@ -2131,371 +2280,17 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
 
     mixed_line.attr(
       "transform",
-      `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+      `rotate(${rotation || 0}, ${x},${y})`
     );
   } else {
     svg
       .append("path")
       .attr("d", this.lineFunction(points))
       .attr("stroke", "black")
-      .attr("fill", data.type)
+      .attr("fill", type)
       .attr(
         "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-  }
-};
-
-//type - black, red or 'both'
-// variation - 1.drawing to 34th 2.drawing to 10th
-DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
-  let points = [];
-  let mixed_line = NaN;
-
-  const data = {
-    top_left_x: this.throatCentreCoord.text20coordinates.x,
-    top_left_y: this.throatCentreCoord.text20coordinates.y,
-
-    bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-    width: 10,
-  };
-  data.temp_width = data.bottom_left_x - data.top_left_x;
-  data.temp_height = data.bottom_left_y - data.top_left_y;
-
-  data.half_width = data.width / 2;
-
-  data.type = type;
-
-  let i = variation;
-
-  //variation - 1.drawing to 34th
-  let rectangle20_var = [
-    //empty for the future
-    {},
-    //variation - 1.drawing to 34th
-    {
-      top_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        this.styles.size / 12,
-      top_left_y:
-        this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-
-      top_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        data.width +
-        this.styles.size / 20,
-      top_right_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 2.7 +
-        data.width * 0.7 +
-        this.styles.size / 20,
-
-      bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-      bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-      bottom_right_x:
-        this.spleenCentreCoord.text57coordinates.x + data.half_width * 3,
-      bottom_right_y: this.spleenCentreCoord.text57coordinates.y,
-    },
-
-    //variation - 2.drawing to 10th
-    {
-      top_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 8 -
-        data.width * 2.5,
-      top_left_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-
-      top_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 12,
-      top_right_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-
-      bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-      bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-      bottom_right_x:
-        this.spleenCentreCoord.text57coordinates.x + data.half_width * 3,
-      bottom_right_y: this.spleenCentreCoord.text57coordinates.y,
-    },
-  ];
-
-  //variation - 1.drawing half to 34th
-  rectangle20_var[1].top_left_half_x =
-    rectangle20_var[1].top_left_x + data.half_width * 0.7;
-  rectangle20_var[1].top_left_half_y =
-    rectangle20_var[1].top_left_y + data.half_width * 0.7;
-  rectangle20_var[1].bottom_left_half_x =
-    rectangle20_var[1].bottom_left_x + data.half_width * 0.7;
-  rectangle20_var[1].bottom_left_half_y =
-    rectangle20_var[1].bottom_left_y + data.half_width * 0.5;
-  rectangle20_var[1].bottom_right_half_x = rectangle20_var[1].bottom_right_x;
-  rectangle20_var[1].bottom_right_half_y = rectangle20_var[1].bottom_right_y;
-  rectangle20_var[1].top_right_half_x = rectangle20_var[1].top_right_x;
-  rectangle20_var[1].top_right_half_y = rectangle20_var[1].top_right_y;
-
-  //variation - 2.drawing half to 10th
-  rectangle20_var[2].top_left_half_x =
-    rectangle20_var[2].top_left_x + data.half_width;
-  rectangle20_var[2].top_left_half_y =
-    rectangle20_var[2].top_left_y + data.half_width * 0.2;
-  rectangle20_var[2].bottom_left_half_x =
-    rectangle20_var[2].bottom_left_x + data.half_width * 1.2;
-  rectangle20_var[2].bottom_left_half_y = rectangle20_var[2].bottom_left_y;
-  rectangle20_var[2].bottom_right_half_x = rectangle20_var[2].bottom_right_x;
-  rectangle20_var[2].bottom_right_half_y = rectangle20_var[2].bottom_right_y;
-  rectangle20_var[2].top_right_half_x = rectangle20_var[2].top_right_x;
-  rectangle20_var[2].top_right_half_y = rectangle20_var[2].top_right_y;
-
-  points = [
-    {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
-    },
-
-    {
-      x: rectangle20_var[i].bottom_left_x,
-      y: rectangle20_var[i].bottom_left_y,
-    },
-
-    {
-      x: rectangle20_var[i].bottom_right_x,
-      y: rectangle20_var[i].bottom_right_y,
-    },
-
-    {
-      x: rectangle20_var[i].top_right_x,
-      y: rectangle20_var[i].top_right_y,
-    },
-    {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
-    },
-  ];
-
-  if (data.type === "both") {
-    mixed_line = svg.append("g");
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "red");
-
-    points = [
-      {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].bottom_left_half_x,
-        y: rectangle20_var[i].bottom_left_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].bottom_right_half_x,
-        y: rectangle20_var[i].bottom_right_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].top_right_half_x,
-        y: rectangle20_var[i].top_right_half_y,
-      },
-      {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
-      },
-    ];
-
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "black");
-
-    mixed_line.attr(
-      "transform",
-      `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-    );
-  } else {
-    svg
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", data.type)
-      .attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-      );
-  }
-};
-
-//type - black, red or 'both'
-// variation always drawing to 10th
-DrawFormulaClass.prototype.draw_10_Integration = function (type) {
-  let points = [];
-  let mixed_line = NaN;
-
-  const data = {
-    top_left_x: this.throatCentreCoord.text20coordinates.x,
-    top_left_y: this.throatCentreCoord.text20coordinates.y,
-
-    bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-    width: 10,
-  };
-  data.temp_width = data.bottom_left_x - data.top_left_x;
-  data.temp_height = data.bottom_left_y - data.top_left_y;
-
-  data.half_width = data.width / 2;
-
-  data.type = type;
-
-  let i = 1;
-
-  //variation - 1.drawing to 34th
-  let rectangle20_var = [
-    //empty for the future
-    {},
-
-    //drawing to 10th
-    {
-      top_left_x: this.gCentreCoord.text10coordinates.x,
-      top_left_y: this.gCentreCoord.text10coordinates.y,
-
-      top_right_x: this.gCentreCoord.text10coordinates.x,
-      top_right_y: this.gCentreCoord.text10coordinates.y - data.width,
-
-      bottom_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.width / 3,
-      bottom_left_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-
-      bottom_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 18,
-      bottom_right_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10 -
-        data.width,
-    },
-  ];
-  //drawing half to 10th
-  rectangle20_var[1].top_left_half_x = rectangle20_var[1].top_left_x;
-  rectangle20_var[1].top_left_half_y = rectangle20_var[1].top_left_y;
-  rectangle20_var[1].top_right_half_x = rectangle20_var[1].top_right_x;
-  rectangle20_var[1].top_right_half_y =
-    rectangle20_var[1].top_right_y + data.half_width;
-
-  rectangle20_var[1].bottom_right_half_x =
-    rectangle20_var[1].bottom_right_x - data.half_width;
-  rectangle20_var[1].bottom_right_half_y =
-    rectangle20_var[1].bottom_right_y + data.half_width;
-  rectangle20_var[1].bottom_left_half_x = rectangle20_var[1].bottom_left_x;
-  rectangle20_var[1].bottom_left_half_y = rectangle20_var[1].bottom_left_y;
-
-  points = [
-    {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
-    },
-
-    {
-      x: rectangle20_var[i].bottom_left_x,
-      y: rectangle20_var[i].bottom_left_y,
-    },
-
-    {
-      x: rectangle20_var[i].bottom_right_x,
-      y: rectangle20_var[i].bottom_right_y,
-    },
-
-    {
-      x: rectangle20_var[i].top_right_x,
-      y: rectangle20_var[i].top_right_y,
-    },
-    {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
-    },
-  ];
-
-  if (data.type === "both") {
-    mixed_line = svg.append("g");
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "red");
-
-    points = [
-      {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].bottom_left_half_x,
-        y: rectangle20_var[i].bottom_left_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].bottom_right_half_x,
-        y: rectangle20_var[i].bottom_right_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].top_right_half_x,
-        y: rectangle20_var[i].top_right_half_y,
-      },
-      {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
-      },
-    ];
-
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "black");
-
-    mixed_line.attr(
-      "transform",
-      `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-    );
-  } else {
-    svg
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", data.type)
-      .attr(
-        "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+        `rotate(${rotation || 0}, ${x},${y})`
       );
   }
 };
@@ -2506,21 +2301,7 @@ DrawFormulaClass.prototype.draw_34_Integration = function (type, variation) {
   let points = [];
   let mixed_line = NaN;
 
-  const data = {
-    top_left_x: this.throatCentreCoord.text20coordinates.x,
-    top_left_y: this.throatCentreCoord.text20coordinates.y,
-
-    bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-    width: 10,
-  };
-  data.temp_width = data.bottom_left_x - data.top_left_x;
-  data.temp_height = data.bottom_left_y - data.top_left_y;
-
-  data.half_width = data.width / 2;
-
-  data.type = type;
+  let rotation = 17;
 
   let i = variation;
 
@@ -2529,126 +2310,69 @@ DrawFormulaClass.prototype.draw_34_Integration = function (type, variation) {
     {},
 
     //variation - 1.drawing to 34th
-    {
-      top_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        this.styles.size / 12,
-      top_left_y:
-        this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-
-      top_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        data.width +
-        this.styles.size / 20,
-      top_right_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 2.7 +
-        data.width * 0.7 +
-        this.styles.size / 20 -
-        data.width * 1.8,
-
-      bottom_left_x: this.sacralCentreCoord.text34coordinates.x,
-      bottom_left_y: this.sacralCentreCoord.text34coordinates.y,
-
-      bottom_right_x: this.sacralCentreCoord.text34coordinates.x + data.width,
-      bottom_right_y: this.sacralCentreCoord.text34coordinates.y - data.width,
-    },
+    {},
 
     //variation - 2.drawing to 10th
-    {
-      top_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 8 -
-        data.width * 2.6,
-      top_left_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-
-      top_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 2 +
-        data.temp_height / 12,
-      top_right_y:
-        this.spleenCentreCoord.text57coordinates.y +
-        data.temp_width / 3 -
-        data.width -
-        (data.temp_height * 2) / 10,
-
-      middle_right_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        this.styles.size / 12 +
-        data.width * 2,
-      middle_right_y:
-        this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-
-      middle_left_x:
-        this.spleenCentreCoord.text57coordinates.x +
-        data.temp_height / 3.2 +
-        this.styles.size / 12,
-      middle_left_y:
-        this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-
-      bottom_left_x: this.sacralCentreCoord.text34coordinates.x,
-      bottom_left_y: this.sacralCentreCoord.text34coordinates.y,
-
-      bottom_right_x: this.sacralCentreCoord.text34coordinates.x + data.width,
-      bottom_right_y: this.sacralCentreCoord.text34coordinates.y - data.width,
-    },
+    {},
   ];
 
+  let x = 60
+  let y = 420
+
+  // type = "both"
+
   //variation - 1.drawing half to 34th
-  rectangle20_var[1].top_left_half_x = rectangle20_var[1].top_left_x;
-  rectangle20_var[1].top_left_half_y = rectangle20_var[1].top_left_y;
-
-  rectangle20_var[1].middle_left_x = rectangle20_var[1].top_left_x;
-  rectangle20_var[1].middle_left_y = rectangle20_var[1].top_left_y;
-  rectangle20_var[1].middle_left_half_x = rectangle20_var[1].top_left_half_x;
-  rectangle20_var[1].middle_left_half_y = rectangle20_var[1].top_left_half_y;
-
-  rectangle20_var[1].bottom_left_half_x =
-    rectangle20_var[1].bottom_left_x + data.half_width * 0.7;
-  rectangle20_var[1].bottom_left_half_y =
-    rectangle20_var[1].bottom_left_y + data.half_width * 0.5;
-  rectangle20_var[1].bottom_right_half_x =
-    rectangle20_var[1].bottom_right_x - data.half_width;
-  rectangle20_var[1].bottom_right_half_y =
-    rectangle20_var[1].bottom_right_y + data.half_width;
-
-  rectangle20_var[1].middle_right_x = rectangle20_var[1].bottom_right_x;
-  rectangle20_var[1].middle_right_y = rectangle20_var[1].bottom_right_y;
-  rectangle20_var[1].middle_right_half_x =
-    rectangle20_var[1].bottom_right_half_x;
-  rectangle20_var[1].middle_right_half_y =
-    rectangle20_var[1].bottom_right_half_y;
-
-  rectangle20_var[1].top_right_half_x =
-    rectangle20_var[1].top_right_x - data.half_width;
-  rectangle20_var[1].top_right_half_y =
-    rectangle20_var[1].top_right_y + data.half_width;
+  rectangle20_var[1].top_left_x = x;
+  rectangle20_var[1].top_left_y = y;
+  rectangle20_var[1].top_left_half_x = x;
+  rectangle20_var[1].top_left_half_y = y;
+  rectangle20_var[1].middle_left_x = x;
+  rectangle20_var[1].middle_left_y = y;
+  rectangle20_var[1].middle_left_half_x = x;
+  rectangle20_var[1].middle_left_half_y = y;
+  rectangle20_var[1].top_right_x = x + 10;
+  rectangle20_var[1].top_right_y = y - 10.5;
+  rectangle20_var[1].top_right_half_x = x - 5;
+  rectangle20_var[1].top_right_half_y = y + 5.5;
+  rectangle20_var[1].middle_right_x = x + 149;
+  rectangle20_var[1].middle_right_y = y + 98.5;
+  rectangle20_var[1].middle_right_half_x = x + 144;
+  rectangle20_var[1].middle_right_half_y = y + 103.5;
+  rectangle20_var[1].bottom_left_x = x + 139;
+  rectangle20_var[1].bottom_left_y = y + 108.5;
+  rectangle20_var[1].bottom_right_x = x + 149;
+  rectangle20_var[1].bottom_right_y = y + 98.5;
+  rectangle20_var[1].bottom_left_half_x = x + 142.5;
+  rectangle20_var[1].bottom_left_half_y = y + 110.5;
+  rectangle20_var[1].bottom_right_half_x = x + 144;
+  rectangle20_var[1].bottom_right_half_y = y + 103.5;
 
   //variation - 2.drawing half to 10th
-  rectangle20_var[2].top_left_half_x =
-    rectangle20_var[2].top_left_x + data.half_width * 1.4;
-  rectangle20_var[2].top_left_half_y = rectangle20_var[2].top_left_y;
-  rectangle20_var[2].middle_left_half_x =
-    rectangle20_var[2].middle_left_x + data.half_width * 1.8;
-  rectangle20_var[2].middle_left_half_y = rectangle20_var[2].middle_left_y;
-  rectangle20_var[2].bottom_left_half_x =
-    rectangle20_var[2].bottom_left_x + data.half_width;
-  rectangle20_var[2].bottom_left_half_y =
-    rectangle20_var[2].bottom_left_y - data.half_width;
-  rectangle20_var[2].bottom_right_half_x = rectangle20_var[2].bottom_right_x;
-  rectangle20_var[2].bottom_right_half_y = rectangle20_var[2].bottom_right_y;
-  rectangle20_var[2].middle_right_half_x = rectangle20_var[2].middle_right_x;
-  rectangle20_var[2].middle_right_half_y = rectangle20_var[2].middle_right_y;
-  rectangle20_var[2].top_right_half_x = rectangle20_var[2].top_right_x;
-  rectangle20_var[2].top_right_half_y = rectangle20_var[2].top_right_y;
+  rectangle20_var[2].middle_left_x = x;
+  rectangle20_var[2].middle_left_y = y;
+  rectangle20_var[2].top_left_x = x + 43;
+  rectangle20_var[2].top_left_y = y + 47;
+  rectangle20_var[2].top_right_x = x + 60;
+  rectangle20_var[2].top_right_y = y + 47;
+  rectangle20_var[2].top_left_half_x = x + 50;
+  rectangle20_var[2].top_left_half_y = y + 47;
+  rectangle20_var[2].top_right_half_x = x + 60;
+  rectangle20_var[2].top_right_half_y = y + 47;
+  rectangle20_var[2].middle_left_half_x = x + 10;
+  rectangle20_var[2].middle_left_half_y = y;
+  rectangle20_var[2].middle_right_x = x + 20;
+  rectangle20_var[2].middle_right_y = y;
+  rectangle20_var[2].middle_right_half_x = x + 20;
+  rectangle20_var[2].middle_right_half_y = y;
+  rectangle20_var[2].bottom_left_x = x + 139;
+  rectangle20_var[2].bottom_left_y = y + 108.5;
+  rectangle20_var[2].bottom_right_x = x + 149;
+  rectangle20_var[2].bottom_right_y = y + 98.5;
+  rectangle20_var[2].bottom_left_half_x = x + 144;
+  rectangle20_var[2].bottom_left_half_y = y + 103.5;
+  rectangle20_var[2].bottom_right_half_x = x + 149;
+  rectangle20_var[2].bottom_right_half_y = y + 98.5;
+
 
   points = [
     {
@@ -2686,7 +2410,7 @@ DrawFormulaClass.prototype.draw_34_Integration = function (type, variation) {
     },
   ];
 
-  if (data.type === "both") {
+  if (type === "both") {
     mixed_line = svg.append("g");
     mixed_line
       .append("path")
@@ -2739,20 +2463,244 @@ DrawFormulaClass.prototype.draw_34_Integration = function (type, variation) {
 
     mixed_line.attr(
       "transform",
-      `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+      `rotate(${rotation || 0}, ${x},${y})`
     );
   } else {
     svg
       .append("path")
       .attr("d", this.lineFunction(points))
       .attr("stroke", "black")
-      .attr("fill", data.type)
+      .attr("fill", type)
       .attr(
         "transform",
-        `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
+        `rotate(${rotation || 0}, ${x},${y})`
       );
   }
 };
+
+
+//type - black, red or 'both'
+// variation - 1.drawing to 34th 2.drawing to 10th
+DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
+  let points = [];
+
+
+  let rotation = 32
+
+  let i = variation;
+
+  //variation - 1.drawing to 34th
+  let rectangle20_var = [
+    //empty for the future
+    {},
+    //variation - 1.drawing to 34th
+    {},
+
+    //variation - 2.drawing to 10th
+    {},
+  ];
+
+  // for tests
+  // console.log("inside 57 integration")
+  // type = "both"
+  // variation = 1
+
+
+  const x = 31;
+  const y = 464;
+
+  const width = 10;
+  const half_width = width / 2;
+
+  const length1 = 52;
+  const length2 = 143;
+
+
+  //variation - 1.drawing half to 34th
+
+
+  rectangle20_var[1].bottom_left_x = x - 7;
+  rectangle20_var[1].bottom_left_y = y - length1;
+  rectangle20_var[1].bottom_right_x = x + 3;
+  rectangle20_var[1].bottom_right_y = y - length1;
+
+
+  rectangle20_var[1].bottom_left_half_x = x - 7;
+  rectangle20_var[1].bottom_left_half_y = y - length1;
+  rectangle20_var[1].bottom_right_half_x = x - 2;
+  rectangle20_var[1].bottom_right_half_y = y - length1;
+
+  //variation - 2.drawing half to 10th
+
+
+  rectangle20_var[2].bottom_left_x = x - 20;
+  rectangle20_var[2].bottom_left_y = y - length2 + 1;
+  rectangle20_var[2].bottom_right_x = x - 9;
+  rectangle20_var[2].bottom_right_y = y - length2;
+
+
+  rectangle20_var[2].bottom_left_half_x = x - 20;
+  rectangle20_var[2].bottom_left_half_y = y - length2;
+  rectangle20_var[2].bottom_right_half_x = x - 15;
+  rectangle20_var[2].bottom_right_half_y = y - length2;
+
+
+
+  points = [
+    {
+      x: x,
+      y: y,
+    },
+
+    {
+      x: rectangle20_var[i].bottom_left_x,
+      y: rectangle20_var[i].bottom_left_y,
+    },
+
+    {
+      x: rectangle20_var[i].bottom_right_x,
+      y: rectangle20_var[i].bottom_right_y,
+    },
+
+    {
+      x: x + width,
+      y: y,
+    },
+    {
+      x: x,
+      y: y,
+    },
+  ];
+
+  if (type === "both") {
+    let mixed_line = svg.append("g");
+    mixed_line
+      .append("path")
+      .attr("d", this.lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "red");
+
+    points = [
+      {
+        x: x,
+        y: y,
+      },
+
+      {
+        x: rectangle20_var[i].bottom_left_half_x,
+        y: rectangle20_var[i].bottom_left_half_y,
+      },
+
+      {
+        x: rectangle20_var[i].bottom_right_half_x,
+        y: rectangle20_var[i].bottom_right_half_y,
+      },
+
+      {
+        x: x + half_width,
+        y: y,
+      },
+      {
+        x: x,
+        y: y,
+      },
+    ];
+
+    mixed_line
+      .append("path")
+      .attr("d", this.lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "black");
+
+    mixed_line.attr(
+      "transform",
+      `rotate(${rotation || 0}, ${x},${y})`
+    );
+  } else {
+    svg
+      .append("path")
+      .attr("d", this.lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", type)
+      .attr(
+        "transform",
+        `rotate(${rotation || 0}, ${x},${y})`
+      );
+  }
+};
+
+//type - black, red or 'both'
+// variation always drawing to 10th
+DrawFormulaClass.prototype.draw_10_Integration = function (type) {
+
+  const x = 126.5
+  const y = 360
+
+  const width = 10;
+  const half_width = width / 2;
+  const length = 35;
+  const rotation = 22;
+
+  let points = [
+    {
+      x: x,
+      y: y,
+    },
+
+    {
+      x: x - length,
+      y: y,
+    },
+
+    {
+      x: x - length,
+      y: y - width,
+    },
+
+    {
+      x: x,
+      y: y - width,
+    },
+    {
+      x: x,
+      y: y,
+    },
+  ];
+
+  if (type === "both") {
+    let mixed_line = svg.append("g");
+    mixed_line
+      .append("path")
+      .attr("d", this.lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "red");
+
+    points[2].y = y - half_width
+    points[3].y = y - half_width
+
+    mixed_line
+      .append("path")
+      .attr("d", this.lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "black");
+
+    mixed_line.attr(
+      "transform",
+      `rotate(${rotation || 0}, ${x},${y})`
+    );
+  } else {
+    svg
+      .append("path")
+      .attr("d", this.lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", type)
+      .attr(
+        "transform",
+        `rotate(${rotation || 0}, ${x},${y})`
+      );
+  }
+};
+
 
 //Если в контуре интеграции активизировано больше чем 1 ворота, то там будут только каналы, ворота рисовать не надо
 //type - 'both', 'red', 'black'
