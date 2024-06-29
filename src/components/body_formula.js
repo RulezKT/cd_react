@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { appendText, appendTextPlanets } from "./auxiliary_fns.ts";
+import { lineFunction, appendText, appendTextPlanets } from "./auxiliary_fns.ts";
 
 export const SSB = 0;
 export const MERCURY = 1;
@@ -96,10 +96,7 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
     .attr("fill", "#D3D3D3")
     .attr("stroke", "#000000");
 
-  this.lineFunction = d3
-    .line()
-    .x((d) => d.x)
-    .y((d) => d.y);
+  //рисуем планеты
 
   this.radius = 25;
 
@@ -687,7 +684,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
   svg
     .append("path")
-    .attr("d", this.lineFunction(points))
+    .attr("d", lineFunction(points))
     .attr("stroke", "black")
     .attr("fill", "white");
 };
@@ -727,7 +724,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //       mixed_line = svg.append("g");
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "red");
 
@@ -765,7 +762,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "black");
 
@@ -776,7 +773,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     } else {
 //       svg
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", data.type)
 //         .attr(
@@ -833,7 +830,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //       mixed_line = svg.append("g");
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "red");
 
@@ -888,7 +885,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "black");
 
@@ -899,7 +896,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     } else {
 //       svg
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", data.type)
 //         .attr(
@@ -944,7 +941,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //       mixed_line = svg.append("g");
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "red");
 
@@ -983,7 +980,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "black");
 
@@ -994,7 +991,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     } else {
 //       svg
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", data.type)
 //         .attr(
@@ -1058,7 +1055,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     mixed_line = svg.append("g");
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "red");
 
@@ -1108,7 +1105,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "black");
 
@@ -1119,7 +1116,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //   } else {
 //     svg
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", data.type)
 //       .attr(
@@ -1190,7 +1187,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     mixed_line = svg.append("g");
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "red");
 
@@ -1248,7 +1245,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "black");
 
@@ -1259,7 +1256,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //   } else {
 //     svg
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", data.type)
 //       .attr(
@@ -1345,7 +1342,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //       mixed_line = svg.append("g");
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "red");
 
@@ -1425,7 +1422,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "black");
 
@@ -1436,7 +1433,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     } else {
 //       svg
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", data.type)
 //         .attr(
@@ -1491,7 +1488,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //       mixed_line = svg.append("g");
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "red");
 
@@ -1541,7 +1538,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "black");
 
@@ -1552,7 +1549,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     } else {
 //       svg
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", data.type)
 //         .attr(
@@ -1602,7 +1599,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //       mixed_line = svg.append("g");
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "red");
 
@@ -1651,7 +1648,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "black");
 
@@ -1662,7 +1659,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     } else {
 //       svg
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", data.type)
 //         .attr(
@@ -1727,7 +1724,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //       mixed_line = svg.append("g");
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "red");
 
@@ -1783,7 +1780,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //       mixed_line
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", "black");
 
@@ -1794,7 +1791,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     } else {
 //       svg
 //         .append("path")
-//         .attr("d", this.lineFunction(points))
+//         .attr("d", lineFunction(points))
 //         .attr("stroke", "black")
 //         .attr("fill", data.type)
 //         .attr(
@@ -1866,7 +1863,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     mixed_line = svg.append("g");
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "red");
 
@@ -1927,7 +1924,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "black");
 
@@ -1938,7 +1935,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //   } else {
 //     svg
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", data.type)
 //       .attr(
@@ -2100,7 +2097,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //     mixed_line = svg.append("g");
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "red");
 
@@ -2132,7 +2129,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
 //     mixed_line
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", "black");
 
@@ -2143,7 +2140,7 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //   } else {
 //     svg
 //       .append("path")
-//       .attr("d", this.lineFunction(points))
+//       .attr("d", lineFunction(points))
 //       .attr("stroke", "black")
 //       .attr("fill", data.type)
 //       .attr(
@@ -2160,7 +2157,7 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
   // console.log("inside 20 integration")
   let points = [];
   let mixed_line = NaN;
-  let i = variation;
+
   let rectangle20_var = [
     //empty for the future
     {},
@@ -2176,39 +2173,44 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
   ];
 
   let rotation = -18.5;
-  // let width = 10;
+
 
 
   const x = 127;
   const y = 248;
 
   const length1 = 126;
-  const length2 = 106.4;
+  const length2 = 76;
 
-  let top_right_x = x + 9
-  let top_right_y = y + 6
+  const width = 10;
+
+  let i = variation;
 
 
   let top_left_half_x = x + 3.5;
   let top_left_half_y = y + 3.5;
 
   //variation - 1.drawing half to 34th
-  rectangle20_var[1].bottom_right_y = y + length1;
-  rectangle20_var[1].bottom_left_half_y = y + length1;
-  rectangle20_var[1].bottom_left_y = y + length1;
+  rectangle20_var[1].bottom_right_x = x - 118;
+  rectangle20_var[1].bottom_right_y = y + length1 + 18;
+  rectangle20_var[1].bottom_left_x = x - 122;
+  rectangle20_var[1].bottom_left_y = y + length1 + 6;
+  rectangle20_var[1].bottom_left_half_x = x - 120;
+  rectangle20_var[1].bottom_left_half_y = y + length1 + 12;
 
-  rectangle20_var[1].bottom_right_x = x - 102;
-  rectangle20_var[1].bottom_left_x = x - 112;
-  rectangle20_var[1].bottom_left_half_x = x - 138;
 
   //variation - 2.drawing half to 10th
-  rectangle20_var[2].bottom_right_y = y + length2;
-  rectangle20_var[2].bottom_left_half_y = y + length2;
+  rectangle20_var[2].bottom_right_x = x - 62;
+  rectangle20_var[2].bottom_right_y = y + length2 + 8;
+
+  rectangle20_var[2].bottom_left_half_x = x - 66
+  rectangle20_var[2].bottom_left_half_y = y + length2 + 4;
+
+
+  rectangle20_var[2].bottom_left_x = x - 70 + 1;
   rectangle20_var[2].bottom_left_y = y + length2;
 
-  rectangle20_var[2].bottom_right_x = x - 82.2;
-  rectangle20_var[2].bottom_left_half_x = x - 93;
-  rectangle20_var[2].bottom_left_x = x - 99;
+
 
 
 
@@ -2229,8 +2231,8 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
     },
 
     {
-      x: top_right_x,
-      y: top_right_y,
+      x: x + width + 5,
+      y: y,
     },
     {
       x: x,
@@ -2242,7 +2244,7 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
     mixed_line = svg.append("g");
     mixed_line
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", "red");
 
@@ -2263,8 +2265,8 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
       },
 
       {
-        x: top_right_x,
-        y: top_right_y,
+        x: x + 9,
+        y: y + 6,
       },
       {
         x: top_left_half_x,
@@ -2274,7 +2276,7 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
 
     mixed_line
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", "black");
 
@@ -2285,7 +2287,7 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
   } else {
     svg
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", type)
       .attr(
@@ -2295,276 +2297,29 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
   }
 };
 
-//type - black, red or 'both'
-// variation - 1.drawing to 34th 2.drawing to 10th
-DrawFormulaClass.prototype.draw_34_Integration = function (type, variation) {
-  let points = [];
-  let mixed_line = NaN;
 
+function draw34short(type) {
+  //variation - 1.drawing from start to the end of 34th
   let rotation = 17;
+  let x = 54
+  let y = 410
 
-  let i = variation;
-
-  let rectangle20_var = [
-    //empty for the future
-    {},
-
-    //variation - 1.drawing to 34th
-    {},
-
-    //variation - 2.drawing to 10th
-    {},
-  ];
-
-  let x = 60
-  let y = 420
-
-  // type = "both"
-
-  //variation - 1.drawing half to 34th
-  rectangle20_var[1].top_left_x = x;
-  rectangle20_var[1].top_left_y = y;
-  rectangle20_var[1].top_left_half_x = x;
-  rectangle20_var[1].top_left_half_y = y;
-  rectangle20_var[1].middle_left_x = x;
-  rectangle20_var[1].middle_left_y = y;
-  rectangle20_var[1].middle_left_half_x = x;
-  rectangle20_var[1].middle_left_half_y = y;
-  rectangle20_var[1].top_right_x = x + 10;
-  rectangle20_var[1].top_right_y = y - 10.5;
-  rectangle20_var[1].top_right_half_x = x - 5;
-  rectangle20_var[1].top_right_half_y = y + 5.5;
-  rectangle20_var[1].middle_right_x = x + 149;
-  rectangle20_var[1].middle_right_y = y + 98.5;
-  rectangle20_var[1].middle_right_half_x = x + 144;
-  rectangle20_var[1].middle_right_half_y = y + 103.5;
-  rectangle20_var[1].bottom_left_x = x + 139;
-  rectangle20_var[1].bottom_left_y = y + 108.5;
-  rectangle20_var[1].bottom_right_x = x + 149;
-  rectangle20_var[1].bottom_right_y = y + 98.5;
-  rectangle20_var[1].bottom_left_half_x = x + 142.5;
-  rectangle20_var[1].bottom_left_half_y = y + 110.5;
-  rectangle20_var[1].bottom_right_half_x = x + 144;
-  rectangle20_var[1].bottom_right_half_y = y + 103.5;
-
-  //variation - 2.drawing half to 10th
-  rectangle20_var[2].middle_left_x = x;
-  rectangle20_var[2].middle_left_y = y;
-  rectangle20_var[2].top_left_x = x + 43;
-  rectangle20_var[2].top_left_y = y + 47;
-  rectangle20_var[2].top_right_x = x + 60;
-  rectangle20_var[2].top_right_y = y + 47;
-  rectangle20_var[2].top_left_half_x = x + 50;
-  rectangle20_var[2].top_left_half_y = y + 47;
-  rectangle20_var[2].top_right_half_x = x + 60;
-  rectangle20_var[2].top_right_half_y = y + 47;
-  rectangle20_var[2].middle_left_half_x = x + 10;
-  rectangle20_var[2].middle_left_half_y = y;
-  rectangle20_var[2].middle_right_x = x + 20;
-  rectangle20_var[2].middle_right_y = y;
-  rectangle20_var[2].middle_right_half_x = x + 20;
-  rectangle20_var[2].middle_right_half_y = y;
-  rectangle20_var[2].bottom_left_x = x + 139;
-  rectangle20_var[2].bottom_left_y = y + 108.5;
-  rectangle20_var[2].bottom_right_x = x + 149;
-  rectangle20_var[2].bottom_right_y = y + 98.5;
-  rectangle20_var[2].bottom_left_half_x = x + 144;
-  rectangle20_var[2].bottom_left_half_y = y + 103.5;
-  rectangle20_var[2].bottom_right_half_x = x + 149;
-  rectangle20_var[2].bottom_right_half_y = y + 98.5;
-
-
-  points = [
+  let points = [
     {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
-    },
-
-    {
-      x: rectangle20_var[i].middle_left_x,
-      y: rectangle20_var[i].middle_left_y,
-    },
-
-    {
-      x: rectangle20_var[i].bottom_left_x,
-      y: rectangle20_var[i].bottom_left_y,
-    },
-
-    {
-      x: rectangle20_var[i].bottom_right_x,
-      y: rectangle20_var[i].bottom_right_y,
-    },
-
-    {
-      x: rectangle20_var[i].middle_right_x,
-      y: rectangle20_var[i].middle_right_y,
-    },
-
-    {
-      x: rectangle20_var[i].top_right_x,
-      y: rectangle20_var[i].top_right_y,
-    },
-    {
-      x: rectangle20_var[i].top_left_x,
-      y: rectangle20_var[i].top_left_y,
-    },
-  ];
-
-  if (type === "both") {
-    mixed_line = svg.append("g");
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "red");
-
-    points = [
-      {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].middle_left_half_x,
-        y: rectangle20_var[i].middle_left_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].bottom_left_half_x,
-        y: rectangle20_var[i].bottom_left_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].bottom_right_half_x,
-        y: rectangle20_var[i].bottom_right_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].middle_right_half_x,
-        y: rectangle20_var[i].middle_right_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].top_right_half_x,
-        y: rectangle20_var[i].top_right_half_y,
-      },
-
-      {
-        x: rectangle20_var[i].top_left_half_x,
-        y: rectangle20_var[i].top_left_half_y,
-      },
-    ];
-
-    mixed_line
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", "black");
-
-    mixed_line.attr(
-      "transform",
-      `rotate(${rotation || 0}, ${x},${y})`
-    );
-  } else {
-    svg
-      .append("path")
-      .attr("d", this.lineFunction(points))
-      .attr("stroke", "black")
-      .attr("fill", type)
-      .attr(
-        "transform",
-        `rotate(${rotation || 0}, ${x},${y})`
-      );
-  }
-};
-
-
-//type - black, red or 'both'
-// variation - 1.drawing to 34th 2.drawing to 10th
-DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
-  let points = [];
-
-
-  let rotation = 32
-
-  let i = variation;
-
-  //variation - 1.drawing to 34th
-  let rectangle20_var = [
-    //empty for the future
-    {},
-    //variation - 1.drawing to 34th
-    {},
-
-    //variation - 2.drawing to 10th
-    {},
-  ];
-
-  // for tests
-  // console.log("inside 57 integration")
-  // type = "both"
-  // variation = 1
-
-
-  const x = 31;
-  const y = 464;
-
-  const width = 10;
-  const half_width = width / 2;
-
-  const length1 = 52;
-  const length2 = 143;
-
-
-  //variation - 1.drawing half to 34th
-
-
-  rectangle20_var[1].bottom_left_x = x - 7;
-  rectangle20_var[1].bottom_left_y = y - length1;
-  rectangle20_var[1].bottom_right_x = x + 3;
-  rectangle20_var[1].bottom_right_y = y - length1;
-
-
-  rectangle20_var[1].bottom_left_half_x = x - 7;
-  rectangle20_var[1].bottom_left_half_y = y - length1;
-  rectangle20_var[1].bottom_right_half_x = x - 2;
-  rectangle20_var[1].bottom_right_half_y = y - length1;
-
-  //variation - 2.drawing half to 10th
-
-
-  rectangle20_var[2].bottom_left_x = x - 20;
-  rectangle20_var[2].bottom_left_y = y - length2 + 1;
-  rectangle20_var[2].bottom_right_x = x - 9;
-  rectangle20_var[2].bottom_right_y = y - length2;
-
-
-  rectangle20_var[2].bottom_left_half_x = x - 20;
-  rectangle20_var[2].bottom_left_half_y = y - length2;
-  rectangle20_var[2].bottom_right_half_x = x - 15;
-  rectangle20_var[2].bottom_right_half_y = y - length2;
-
-
-
-  points = [
-    {
-      x: x,
+      x: x + 1,
       y: y,
     },
-
     {
-      x: rectangle20_var[i].bottom_left_x,
-      y: rectangle20_var[i].bottom_left_y,
+      x: x + 139,
+      y: y + 108.5,
     },
-
     {
-      x: rectangle20_var[i].bottom_right_x,
-      y: rectangle20_var[i].bottom_right_y,
+      x: x + 144,
+      y: y + 96.5,
     },
-
     {
-      x: x + width,
-      y: y,
+      x: x + 2 + 1,
+      y: y - 15,
     },
     {
       x: x,
@@ -2576,39 +2331,43 @@ DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
     let mixed_line = svg.append("g");
     mixed_line
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", "red");
 
     points = [
       {
-        x: x,
-        y: y,
+        x: x + 1 + 1,
+        y: y - 8,
+      },
+
+
+      {
+        x: x + 144,
+        y: y + 103.5,
       },
 
       {
-        x: rectangle20_var[i].bottom_left_half_x,
-        y: rectangle20_var[i].bottom_left_half_y,
+        x: x + 144,
+        y: y + 96.5,
+      },
+
+
+      {
+        x: x + 2 + 1,
+        y: y - 15,
       },
 
       {
-        x: rectangle20_var[i].bottom_right_half_x,
-        y: rectangle20_var[i].bottom_right_half_y,
+        x: x + 1,
+        y: y - 8,
       },
 
-      {
-        x: x + half_width,
-        y: y,
-      },
-      {
-        x: x,
-        y: y,
-      },
     ];
 
     mixed_line
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", "black");
 
@@ -2619,7 +2378,7 @@ DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
   } else {
     svg
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", type)
       .attr(
@@ -2627,14 +2386,370 @@ DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
         `rotate(${rotation || 0}, ${x},${y})`
       );
   }
+
+}
+
+function draw34long(type) {
+  //variation - 1.drawing from start to the 10th
+  let rotation = 17;
+  let x = 54
+  let y = 410
+
+  let points = [
+    {
+      x: x,
+      y: y,
+    },
+    {
+      x: x + 139,
+      y: y + 108.5,
+    },
+    {
+      x: x + 144,
+      y: y + 96.5,
+    },
+    {
+      x: x + 12,
+      y: y - 15,
+    },
+    // long part
+    {
+
+      x: x + 22,
+      y: y - 81,
+
+    },
+
+    {
+      x: x + 12,
+      y: y - 84,
+
+    },
+
+
+    // end of long part
+    {
+      x: x,
+      y: y,
+    },
+  ];
+
+  if (type === "both") {
+    let mixed_line = svg.append("g");
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "red");
+
+    points = [
+      {
+        x: x + 6,
+        y: y - 6,
+      },
+
+
+      {
+        x: x + 144,
+        y: y + 105,
+      },
+
+      {
+        x: x + 144,
+        y: y + 94,
+      },
+
+
+      {
+        x: x + 12,
+        y: y - 15,
+      },
+      // long part
+
+      {
+
+        x: x + 21,
+        y: y - 81,
+
+      },
+
+
+      {
+        x: x + 17,
+        y: y - 82,
+
+      },
+
+      // end of long part
+      {
+        x: x + 6,
+        y: y - 6,
+      },
+
+    ];
+
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "black");
+
+    mixed_line.attr(
+      "transform",
+      `rotate(${rotation || 0}, ${x},${y})`
+    );
+  } else {
+    svg
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", type)
+      .attr(
+        "transform",
+        `rotate(${rotation || 0}, ${x},${y})`
+      );
+  }
+
+}
+
+//type - black, red or 'both'
+// variation - 1.drawing to 34th 2.drawing to 10th
+DrawFormulaClass.prototype.draw_34_Integration = function (type, variation) {
+
+  if (variation === 1) {
+    draw34short(type)
+    return
+  }
+
+  if (variation === 2) {
+    draw34long(type)
+    return
+  }
+
+};
+
+function draw57short(type) {
+  //variation - 1.drawing to the end of 57th
+
+  let points = [];
+  let rotation = 30
+
+  const x = 32;
+  const y = 463;
+
+  const width = 10;
+  const half_width = width / 2;
+
+  const length1 = 68;
+
+  points = [
+    {
+      x: x,
+      y: y,
+    },
+
+    {
+      x: x - 7,
+      y: y - length1 - 2,
+    },
+
+    {
+      x: x + 3,
+      y: y - length1 + 2,
+    },
+
+    {
+      x: x + width + 1,
+      y: y + 6,
+    },
+    {
+      x: x,
+      y: y,
+    },
+  ];
+
+  if (type === "both") {
+    let mixed_line = svg.append("g");
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "red");
+
+
+
+    points = [
+      {
+        x: x + 5,
+        y: y,
+      },
+
+      {
+        x: x - 7 + 5,
+        y: y - length1 - 2,
+      },
+
+      {
+        x: x - 2 + 5,
+        y: y - length1,
+      },
+
+      {
+        x: x + half_width + 5,
+        y: y + 2,
+      },
+      {
+        x: x + 5,
+        y: y,
+      },
+    ];
+
+
+
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "black");
+
+    mixed_line.attr(
+      "transform",
+      `rotate(${rotation || 0}, ${x},${y})`
+    );
+  } else {
+    svg
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", type)
+      .attr(
+        "transform",
+        `rotate(${rotation || 0}, ${x},${y})`
+      );
+  }
+}
+function draw57long(type) {
+  //variation - 2.drawing to 10th
+
+  let points = [];
+  let rotation = 27
+
+  const x = 32;
+  const y = 463;
+
+  const width = 10;
+  const half_width = width / 2;
+
+  const length1 = 141;
+
+  points = [
+    {
+      x: x,
+      y: y,
+    },
+
+    {
+      x: x - 7,
+      y: y - length1,
+    },
+
+    {
+      x: x + 3,
+      y: y - length1 + 2,
+    },
+
+    {
+      x: x + width + 1,
+      y: y + 6,
+    },
+    {
+      x: x,
+      y: y,
+    },
+  ];
+
+  if (type === "both") {
+    let mixed_line = svg.append("g");
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "red");
+
+
+    points = [
+      {
+        x: x + 5,
+        y: y + 2,
+      },
+
+      {
+        x: x - 7 + 5,
+        y: y - length1,
+      },
+
+      {
+        x: x - 2 + 5,
+        y: y - length1 + 2,
+      },
+
+      {
+        x: x + half_width + 5,
+        y: y + 2,
+      },
+      {
+        x: x + 5,
+        y: y + 2,
+      },
+    ];
+
+
+
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "black");
+
+    mixed_line.attr(
+      "transform",
+      `rotate(${rotation || 0}, ${x},${y})`
+    );
+  } else {
+    svg
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", type)
+      .attr(
+        "transform",
+        `rotate(${rotation || 0}, ${x},${y})`
+      );
+  }
+}
+
+//type - black, red or 'both'
+// variation - 1.drawing to 34th 2.drawing to 10th
+DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
+
+
+  if (variation === 1) {
+    draw57short(type)
+    return
+  }
+
+  if (variation === 2) {
+    draw57long(type)
+    return
+  }
 };
 
 //type - black, red or 'both'
 // variation always drawing to 10th
 DrawFormulaClass.prototype.draw_10_Integration = function (type) {
 
-  const x = 126.5
-  const y = 360
+  const x = 116.5
+  const y = 357
 
   const width = 10;
   const half_width = width / 2;
@@ -2671,7 +2786,7 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
     let mixed_line = svg.append("g");
     mixed_line
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", "red");
 
@@ -2680,7 +2795,7 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
 
     mixed_line
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", "black");
 
@@ -2691,7 +2806,7 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
   } else {
     svg
       .append("path")
-      .attr("d", this.lineFunction(points))
+      .attr("d", lineFunction(points))
       .attr("stroke", "black")
       .attr("fill", type)
       .attr(
@@ -2705,6 +2820,7 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
 //Если в контуре интеграции активизировано больше чем 1 ворота, то там будут только каналы, ворота рисовать не надо
 //type - 'both', 'red', 'black'
 DrawFormulaClass.prototype.drawIntegration = function (int_gates) {
+
   const data = {
     top_left_x: this.throatCentreCoord.text20coordinates.x,
     top_left_y: this.throatCentreCoord.text20coordinates.y,
@@ -2889,7 +3005,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
       mixed_line = svg.append("g");
       mixed_line
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", "red");
 
@@ -2903,7 +3019,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
 
       mixed_line
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", "black");
 
@@ -2914,7 +3030,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
     } else {
       svg
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", data.type)
         .attr(
@@ -2937,7 +3053,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
       mixed_line = svg.append("g");
       mixed_line
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", "red");
 
@@ -2954,7 +3070,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
 
       mixed_line
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", "black");
 
@@ -2965,7 +3081,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
     } else {
       svg
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", data.type)
         .attr(
@@ -2988,7 +3104,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
       mixed_line = svg.append("g");
       mixed_line
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", "red");
 
@@ -3005,7 +3121,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
 
       mixed_line
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", "black");
 
@@ -3016,7 +3132,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
     } else {
       svg
         .append("path")
-        .attr("d", this.lineFunction(points))
+        .attr("d", lineFunction(points))
         .attr("stroke", "black")
         .attr("fill", data.type)
         .attr(
@@ -3832,7 +3948,7 @@ DrawFormulaClass.prototype.drawGenerator = function (
 
   centre_group
     .append("path")
-    .attr("d", this.lineFunction(centre_data))
+    .attr("d", lineFunction(centre_data))
     .attr("stroke", tmp_stroke)
     .attr("fill", fill || stroke);
 
