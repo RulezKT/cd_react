@@ -42,14 +42,25 @@ function App() {
           calc={calcType.calcType} />
       </div>
       <div className="flex  w-full flex-row justify-start items-start space-x-0 space-y-0">
-        <div className="w-full flex  flex-col md:flex-row  m-10">
-          <BodyGraph
-            data={cdInfo.cdInfo}
-            chart={typeOfChart.typeOfChart}
-            calc={calcType.calcType}
-          />
+        <div className="w-full flex  flex-col md:flex-row  ">
+          <div className="order-1 md:order-1 lg:order-2">
+            <BodyGraph
+              data={cdInfo.cdInfo}
+              chart={typeOfChart.typeOfChart}
+              calc={calcType.calcType}
+            />
+          </div>
 
-          <div className="TechInfo w-full">
+          <div className="TechInfo w-80 order-2 md:order-2 lg:order-3">
+            <FullTechInfo data={cdInfo.cdInfo} />
+
+          </div>
+
+          <div className="TechInfo w-80 invisible order-3 lg:visible lg:order-1">
+            <FullTechInfo data={cdInfo.cdInfo} />
+
+          </div>
+          <div className="TechInfo w-80 invisible order-4 2xl:visible lg:order-4">
             <FullTechInfo data={cdInfo.cdInfo} />
 
           </div>
