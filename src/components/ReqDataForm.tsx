@@ -31,6 +31,7 @@ import { CDinfo } from "@/lib/cd_consts";
 import { Select } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { set } from "date-fns";
+import { TypeOfChartRadio } from "./TypeOfChartRadio";
 
 
 
@@ -313,26 +314,11 @@ export function ReqDataForm() {
     );
   }
 
-  const onSubmit2: SubmitHandler<IForm> = (data) => { console.log(data); }
-  const emailError = formState.errors.email?.message;
-
-  interface IForm {
-    name: string;
-    email: string;
-    message: string;
-  }
-
-  const dateFormat = 'YYYY-MM-DD HH:mm';
+  // const dateFormat = 'YYYY-MM-DD HH:mm';
 
   return (
-    <div className="flex flex-col">
-
-
-
-
-
-
-      <div className="flex flex-row justify-between items-center  ">
+    <div   >
+      <div className="flex flex-row md:justify-between md:items-center ">
         <Input
           autoFocus={true}
           className="w-28"
@@ -369,14 +355,13 @@ export function ReqDataForm() {
         />
 
 
-        <Checkbox onChange={onUtcChange}>UTC</Checkbox>
+
 
       </div>
-      <div className="flex flex-row justify-between items-center  ">
 
-
+      <div className="flex flex-row   items-center  ">
         <Autocomplete
-          className={` w-34 h-8 border-2 rounded ${placeState ? "border-green-100" : "border-red-500"}`}
+          className={` w-34 h-8 border-2 rounded  ${placeState ? "border-green-100" : "border-red-500"} ${utc === "local" ? "visible" : "invisible"}`}
           required={utc === "local" ? true : false}
           disabled={utc === "utc" ? true : false}
           placeholder="Birth Place"
@@ -431,6 +416,11 @@ export function ReqDataForm() {
           }}
         />
 
+
+
+        <Checkbox onChange={onUtcChange}>UTC</Checkbox>
+      </div>
+      <div className="flex flex-row">
         <Button type="primary" htmlType="submit" onClick={onSubmit}>
           Calculate
         </Button>
@@ -452,13 +442,15 @@ export function ReqDataForm() {
             value: `${index}`,
           }))}
         />
+
+
       </div>
-      <div className="flex flex-row w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
+      {/* <div className="flex flex-row w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
         <p>
           Choose your nickname, date and time. If you know your UTC time, check
           the box. Otherwise choose your birth place.
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }

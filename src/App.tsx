@@ -22,8 +22,8 @@ function App() {
   return (
 
 
-    <div className="flex w-full flex-col space-y-0 mt-1 px-1">
-      <div className="flex flex-row justify-center items-center space-x-2 space-y-2">
+    <div className="flex w-full flex-col space-y-0 mt-1 px-1 ">
+      <div className="flex flex-row  space-x-2 space-y-2  justify-start items-start md:justify-between md:items-center md:w-full">
         <ReqDataForm />
       </div>
       <div className="flex flex-row justify-center items-center space-x-2 space-y-0 m-0">
@@ -52,16 +52,16 @@ function App() {
           </div>
 
           <div className="TechInfo w-80 order-2 md:order-2 lg:order-3">
-            <FullTechInfo data={cdInfo.cdInfo} />
+            <FullTechInfo data={cdInfo.cdInfo} calc={calcType.calcType} />
 
           </div>
 
           <div className="TechInfo w-80 invisible order-3 lg:visible lg:order-1">
-            <FullTechInfo data={cdInfo.cdInfo} />
+            <FullTechInfo data={cdInfo.cdInfo} calc={calcType.calcType} />
 
           </div>
           <div className="TechInfo w-80 invisible order-4 2xl:visible lg:order-4">
-            <FullTechInfo data={cdInfo.cdInfo} />
+            <FullTechInfo data={cdInfo.cdInfo} calc={calcType.calcType} />
 
           </div>
         </div>

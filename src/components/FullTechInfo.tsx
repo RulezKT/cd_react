@@ -3,6 +3,7 @@ import { MOON, NORTHNODE, SUN, EARTH, SOUTHNODE, MERCURY, VENUS, JUPITER, MARS, 
 export const FullTechInfo = (props) => {
 
     const cdInfo = props.data;
+    const calc = props.calc;
 
     const loc = cdInfo.time.pers_time_utc;
     const loc_time = `${loc.day}.${loc.month}.${loc.year} ${loc.hours}:${loc.minutes}`;
@@ -20,8 +21,189 @@ export const FullTechInfo = (props) => {
     const motivString: string = `P.Sun c/t: ${cdInfo.hd.personality.planets_data[SUN].color}.${cdInfo.hd.personality.planets_data[SUN].tone}  Motivation: ${cdInfo.hd.specialInfo.motivation} Mind: ${cdInfo.hd.specialInfo.mind}`;
     const motiveString2: string = `P.Nodes c/t: ${cdInfo.hd.personality.planets_data[NORTHNODE].color}.${cdInfo.hd.personality.planets_data[NORTHNODE].tone}`;
 
+    const nutrStringShort: string = `${cdInfo.hd.specialInfo.nutr_type}.${cdInfo.hd.specialInfo.cognition}.${cdInfo.hd.specialInfo.theme}.${cdInfo.hd.specialInfo.environment}`;
 
     const nutrString: string = `D.Sun c/t:  ${cdInfo.hd.design.planets_data[SUN].color}.${cdInfo.hd.design.planets_data[SUN].tone} Nutrition: ${cdInfo.hd.specialInfo.nutr_type}  Cognition: ${cdInfo.hd.specialInfo.cognition} Theme: ${cdInfo.hd.specialInfo.theme} D.Nodes c/t: ${cdInfo.hd.design.planets_data[NORTHNODE].color}.${cdInfo.hd.design.planets_data[NORTHNODE].tone} Environment: ${cdInfo.hd.specialInfo.environment} `;
+
+
+
+
+    let typeProfDef: string = "";
+
+
+    // console.log("Calc type", calc)
+    if (calc === "full") {
+
+
+        let type_text = `${cdInfo.hd.generalInfo.type}`;
+        switch (type_text) {
+            case "Reflector":
+                type_text = "R";
+                break;
+            case "Manifestor":
+                type_text = "M";
+                break;
+            case "Generator":
+                type_text = "G";
+                break;
+            case "Manifesting Generator":
+                type_text = "MG";
+                break;
+
+            case "Projector":
+                type_text = "P";
+                break;
+
+            default:
+                type_text = "??";
+                break;
+        }
+
+        let definition = `${cdInfo.hd.generalInfo.definition}`;
+
+        switch (definition) {
+
+
+            case "No Definition":
+                definition = "No";
+                break;
+            case "Single Definition":
+                definition = "Single";
+                break;
+            case "Split Definition":
+                definition = "Split";
+                break;
+            case "Triple Split Definition":
+                definition = "Triple";
+                break;
+            case "Quadruple Split Definition":
+                definition = "Quad";
+                break;
+
+            default:
+                definition = "???";
+                break;
+        }
+
+
+
+        typeProfDef = `${type_text}.${cdInfo.hd.specialInfo.profile}.${cdInfo.hd.generalInfo.authority}.${definition}`;
+    } else if (calc === "personality") {
+        let type_text = `${cdInfo.hd.personality.generalInfo.type}`;
+        switch (type_text) {
+            case "Reflector":
+                type_text = "R";
+                break;
+            case "Manifestor":
+                type_text = "M";
+                break;
+            case "Generator":
+                type_text = "G";
+                break;
+            case "Manifesting Generator":
+                type_text = "MG";
+                break;
+
+            case "Projector":
+                type_text = "P";
+                break;
+
+            default:
+                type_text = "??";
+                break;
+        }
+
+
+        let definition = `${cdInfo.hd.personality.generalInfo.definition}`;
+
+        switch (definition) {
+
+
+            case "No Definition":
+                definition = "No";
+                break;
+            case "Single Definition":
+                definition = "Single";
+                break;
+            case "Split Definition":
+                definition = "Split";
+                break;
+            case "Triple Split Definition":
+                definition = "Triple";
+                break;
+            case "Quadruple Split Definition":
+                definition = "Quad";
+                break;
+
+            default:
+                definition = "???";
+                break;
+        }
+
+
+        typeProfDef = `${type_text}.${cdInfo.hd.specialInfo.profile}.${cdInfo.hd.personality.generalInfo.authority}.${definition}`;
+
+
+    } else if (calc === "design") {
+
+
+        let type_text = `${cdInfo.hd.design.generalInfo.type}`;
+        switch (type_text) {
+            case "Reflector":
+                type_text = "R";
+                break;
+            case "Manifestor":
+                type_text = "M";
+                break;
+            case "Generator":
+                type_text = "G";
+                break;
+            case "Manifesting Generator":
+                type_text = "MG";
+                break;
+
+            case "Projector":
+                type_text = "P";
+                break;
+
+            default:
+                type_text = "??";
+                break;
+        }
+
+
+        let definition = `${cdInfo.hd.design.generalInfo.definition}`;
+
+        switch (definition) {
+
+
+            case "No Definition":
+                definition = "No";
+                break;
+            case "Single Definition":
+                definition = "Single";
+                break;
+            case "Split Definition":
+                definition = "Split";
+                break;
+            case "Triple Split Definition":
+                definition = "Triple";
+                break;
+            case "Quadruple Split Definition":
+                definition = "Quad";
+                break;
+
+            default:
+                definition = "???";
+                break;
+        }
+
+
+        typeProfDef = `${type_text}.${cdInfo.hd.specialInfo.profile}.${cdInfo.hd.design.generalInfo.authority}.${definition}`;
+
+
+    }
+
 
     const transfString: string = ` Motiv.transference: ${cdInfo.hd.specialInfo.motivation_transf} Mind transference ${cdInfo.hd.specialInfo.mind_transf}  Perspective transference ${cdInfo.hd.specialInfo.perspective_transf}  View transference ${cdInfo.hd.specialInfo.view_transf} `;
 
@@ -132,10 +314,11 @@ export const FullTechInfo = (props) => {
         <div className="TechInfo w-full">
             This is full tech info  page
             <p> {timeString}</p>
-            <p> {varCrossString}</p >
+            <p> {nutrStringShort}</p>
+            <p> {nutrString}</p>
+            <p> {typeProfDef}.{varCrossString}</p>
             <p> {motivString}</p >
             <p> {motiveString2}</p >
-            <p> {nutrString}</p >
             <p> {transfString}</p >
             <p> {transf2String}</p >
             <p> {transf3String}</p >
