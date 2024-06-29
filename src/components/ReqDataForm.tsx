@@ -30,6 +30,7 @@ import { CDinfo } from "@/lib/cd_consts";
 
 import { Select } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { set } from "date-fns";
 
 
 
@@ -65,7 +66,7 @@ export function ReqDataForm() {
   const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
   //   const [time, setTime] = useState<Dayjs>(dateTime);
   //   const [date, setDate] = useState<Dayjs>(dateTime);
-
+  const [placeState, setPlaceState] = useState(false);
 
 
   // But if you just want an answer for the maximum bounds for Google Maps:
@@ -89,8 +90,13 @@ export function ReqDataForm() {
   function onUtcChange(e: CheckboxChangeEvent) {
     if (e.target.checked) {
       setUTC("utc");
+      setPlaceState(true);
     } else {
       setUTC("local");
+      if (place.name === "" || place.latitude === 90 || place.longitude === 200) {
+        setPlaceState(false);
+      }
+
     }
     // console.log(`checked = ${e.target.checked}`);
   }
@@ -180,6 +186,7 @@ export function ReqDataForm() {
     calcType.set("personality");
 
     setUTC("local");
+    setPlaceState(false);
 
     const reqData: ReqData = {
       name: "Transits",
@@ -203,11 +210,12 @@ export function ReqDataForm() {
 
   async function onSubmit() {
 
-    if (utc === "local" && place.name === "" && place.latitude === 90 && place.longitude === 200) {
-
+    if (utc === "local" && (place.name === "" || place.latitude === 90 || place.longitude === 200)) {
+      setPlaceState(false);
       return;
     }
 
+    setPlaceState(true);
     // console.log(last10)
     typeOfChart.set("bodygraph");
     calcType.set("full");
@@ -321,48 +329,6 @@ export function ReqDataForm() {
 
 
 
-      <form onSubmit={handleSubmit(onSubmit2)} className="w-full mt-16 px-5">
-        <input type="text" placeholder="Name" {...register('name', { required: "this field is required", })} />
-        <input type="email" placeholder="email" {...register('email', {
-          required: "this field is required",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-            message: "invalid email address"
-          }
-        })} />
-        {emailError && <p className="text-red-900">{emailError}</p>}
-        <textarea name="message" placeholder="Message"></textarea>
-
-        <DatePicker
-          format={{
-            format: dateFormat,
-            type: 'mask',
-
-          }}
-          components={{
-
-          }}
-          showNow={false}
-        // minDate={dayjs('2019-08-01 00:00', dateFormat)}
-        // maxDate={dayjs('2020-10-31 00:00', dateFormat)}
-        // onChange={onChange}
-        />
-
-
-
-
-
-
-
-
-        <button type="submit">Send</button>
-
-
-
-      </form>
-
-
-
 
 
 
@@ -410,7 +376,7 @@ export function ReqDataForm() {
 
 
         <Autocomplete
-          className=" w-34 h-8 rounded"
+          className={` w-34 h-8 border-2 rounded ${placeState ? "border-green-100" : "border-red-500"}`}
           required={utc === "local" ? true : false}
           disabled={utc === "utc" ? true : false}
           placeholder="Birth Place"
@@ -440,6 +406,7 @@ export function ReqDataForm() {
                     latitude: lat,
                     longitude: lng,
                   });
+                  setPlaceState(true);
 
                   // console.log(time.hour());
                   // console.log(time.minute());
