@@ -26,9 +26,9 @@ function App() {
       <div className="flex flex-row  space-x-2 space-y-2  justify-start items-start md:justify-between md:items-center md:w-full">
         <ReqDataForm />
       </div>
-      <div className="flex flex-row justify-center items-center space-x-2 space-y-0 m-0">
+      {/* <div className="flex flex-row justify-center items-center space-x-2 space-y-0 m-0">
         <TypeOfChartRadio />
-      </div>
+      </div> */}
       <div className="flex flex-row justify-center items-center space-x-2 space-y-0 m-2 h-6">
 
         <div className="flex flex-row justify-center items-center space-y-0 m-0">

@@ -321,9 +321,9 @@ export function ReqDataForm() {
       <div className="flex flex-row md:justify-between md:items-center ">
         <Input
           autoFocus={true}
-          className="w-28"
+          className="w-24"
           placeholder="Nickname"
-          prefix={<UserOutlined />}
+          // prefix={<UserOutlined />}
           onChange={(e) => setNameValue(e.target.value)}
           value={nameValue}
         />
@@ -333,6 +333,7 @@ export function ReqDataForm() {
           required={true}
           className="w-32"
           value={dateTime}
+          allowClear={false}
           onChange={onDateChange}
           placeholder="select date"
           maxDate={dayjs('2100-01-01')}
@@ -352,16 +353,19 @@ export function ReqDataForm() {
           value={dateTime}
           onChange={onTimeChange}
           format={timeFormat}
+          allowClear={false}
         />
 
 
-
-
+        <div className="flex flex-col   items-center  ">
+          <label htmlFor="utc">UTC</label>
+          <Checkbox id="utc" onChange={onUtcChange}></Checkbox>
+        </div>
       </div>
 
       <div className="flex flex-row   items-center  ">
-        <Autocomplete
-          className={` w-34 h-8 border-2 rounded  ${placeState ? "border-green-100" : "border-red-500"} ${utc === "local" ? "visible" : "invisible"}`}
+        {(utc === "local") && <Autocomplete
+          className={` w-34 h-8 border-2 rounded  ${placeState ? "border-green-100" : "border-red-500"}`}
           required={utc === "local" ? true : false}
           disabled={utc === "utc" ? true : false}
           placeholder="Birth Place"
@@ -414,16 +418,16 @@ export function ReqDataForm() {
             );
             // console.log(place);
           }}
-        />
+        />}
 
 
-
-        <Checkbox onChange={onUtcChange}>UTC</Checkbox>
-      </div>
-      <div className="flex flex-row">
         <Button type="primary" htmlType="submit" onClick={onSubmit}>
           Calculate
         </Button>
+
+      </div>
+      <div className="flex flex-row">
+
 
         <Select
           showSearch
@@ -442,7 +446,9 @@ export function ReqDataForm() {
             value: `${index}`,
           }))}
         />
-
+        <div className="flex flex-row justify-center items-center space-x-2 space-y-0 m-0">
+          <TypeOfChartRadio />
+        </div>
 
       </div>
       {/* <div className="flex flex-row w-full justify-center items-center h-auto text-gray-500 text-base font-extralight">
