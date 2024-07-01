@@ -84,3 +84,39 @@ export const appendTextPlanets = (
 
 
 };
+
+
+export const defShorten = (def: string): string => {
+  switch (def) {
+    case "No Definition":
+      return "No";
+    case "Single Definition":
+      return "Single";
+    case "Split Definition":
+      return "Split";
+    case "Triple Split Definition":
+      return "Triple";
+    case "Quadruple Split Definition":
+      return "Quad";
+    default:
+      return "???";
+  }
+}
+export const typeShorten = (type: string): string => {
+  switch (type) {
+    case "Reflector":
+      return "R";
+    case "Manifestor":
+      return "M";
+    case "Generator":
+      return "G";
+    case "Manifesting Generator":
+      return "MG";
+    case "Projector":
+      return "P";
+    default:
+      return "??";
+  }
+}
+
+

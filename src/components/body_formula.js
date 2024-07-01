@@ -1,5 +1,6 @@
 import * as d3 from "d3";
-import { lineFunction, appendText, appendTextPlanets } from "./auxiliary_fns.ts";
+import { lineFunction, appendText, appendTextPlanets, defShorten, typeShorten } from "@/lib/auxiliary_fns.ts";
+
 
 export const SSB = 0;
 export const MERCURY = 1;
@@ -4731,6 +4732,7 @@ DrawFormulaClass.prototype.draw_des_text = function () {
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 20;
 
+
   planet_text = `${this.des_earth_short.hex}-.${this.des_earth_short.line} - ${this.des_earth_short.direction}${this.des_earth_short.power}- -🌎`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
   des_y += 25;
@@ -4838,6 +4840,60 @@ DrawFormulaClass.prototype.draw_Body = function () {
 
   this.draw_pers_text();
   this.draw_des_text();
+
+  let pers_x = 100;
+  let pers_y = 15;
+
+  // console.log(pers_x, pers_y);
+  let planet_text = `${this.data_formula.name.slice(0, 10)}`;
+  appendText(svg, pers_x, pers_y, planet_text, "blue", "start", 12);
+  pers_x += 75;
+
+  const loc = this.data_formula.time.pers_time_utc;
+  const loc_time_str = `${loc.day}.${loc.month}.${loc.year} ${loc.hours}:${loc.minutes}`
+  appendText(svg, pers_x, pers_y, loc_time_str, "blue", "start", 10);
+
+
+
+  pers_x = 270;
+  pers_y = 640;
+  let cross_text = `${this.data_formula.hd.specialInfo.cross.first}/${this.data_formula.hd.specialInfo.cross.second}|${this.data_formula.hd.specialInfo.cross.third}/${this.data_formula.hd.specialInfo.cross.fourth}`;
+  appendText(svg, pers_x, pers_y, cross_text, "blue", "start", 12);
+
+  pers_y = 660;
+  pers_x = 280;
+  let variable = `${this.data_formula.hd.specialInfo.variable}`;
+  appendText(svg, pers_x, pers_y, variable, "blue", "start", 12);
+
+
+  pers_y = 660;
+  pers_x = 2;
+  let type_text = typeShorten(this.data_formula.hd.generalInfo.type);
+  let definition = defShorten(this.data_formula.hd.generalInfo.definition);
+  let typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
+  appendText(svg, pers_x, pers_y, typeProfDef, "black", "start", 12);
+
+
+  // let typeProfDef = "";
+  // let type_text = ""
+  // let definition = ""
+  // if (calc === "full") {
+  //   type_text = typeShorten(this.data_formula.hd.generalInfo.type);
+  //   definition = defShorten(this.data_formula.hd.generalInfo.definition);
+  //   typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
+  // } else if (calc === "personality") {
+  //   type_text = typeShorten(this.data_formula.hd.personality.generalInfo.type);
+  //   definition = defShorten(this.data_formula.hd.personality.generalInfo.definition);
+  //   typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.personality.generalInfo.authority}.${definition}`;
+  // } else if (calc === "design") {
+
+  //   type_text = typeShorten(this.data_formula.hd.design.generalInfo.type);
+  //   definition = defShorten(this.data_formula.hd.design.generalInfo.definition);
+  //   typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.design.generalInfo.authority}.${definition}`
+
+  // }
+
+
 
 
   let gates = [];

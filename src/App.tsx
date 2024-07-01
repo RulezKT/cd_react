@@ -9,6 +9,7 @@ import { CalcTypeRadio } from "./components/CalcTypeRadio";
 import { UseCalcType, useCalcType } from "./components/calcType";
 import { FullTechInfo } from "./components/FullTechInfo";
 import { ShortInfo } from "./components/ShortInfo";
+import { PlanetsInfo } from "./components/PlanetsInfo";
 
 
 
@@ -36,11 +37,11 @@ function App() {
         </div>
       </div>
 
-      <div className="flex  justify-center items-center text-black text-base font-extralight space-x-2 space-y-0 m-0">
+      {/* <div className="flex  justify-center items-center text-black text-base font-extralight space-x-2 space-y-0 m-0">
         <ShortInfo data={cdInfo.cdInfo}
           chart={typeOfChart.typeOfChart}
           calc={calcType.calcType} />
-      </div>
+      </div> */}
       <div className="flex  w-full flex-row justify-start items-start space-x-0 space-y-0">
         <div className="w-full flex  flex-col md:flex-row  ">
           <div className="order-1 md:order-1 lg:order-2">
@@ -56,8 +57,8 @@ function App() {
 
           </div>
 
-          <div className="TechInfo w-80 invisible order-3 lg:visible lg:order-1">
-            <FullTechInfo data={cdInfo.cdInfo} calc={calcType.calcType} />
+          <div className="TechInfo w-80  order-3  lg:order-1">
+            <PlanetsInfo data={cdInfo.cdInfo} />
 
           </div>
           <div className="TechInfo w-80 invisible order-4 2xl:visible lg:order-4">

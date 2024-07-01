@@ -8,11 +8,20 @@ import { Button, DatePicker } from "antd";
 
 import { Checkbox } from "antd";
 
-import { TimePicker } from "antd";
+// import { TimePicker } from "antd";
+
+
 import type { Dayjs } from "dayjs";
 import dayjs from "dayjs";
 
-import { UserOutlined } from "@ant-design/icons";
+
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+// import 'react-clock/dist/Clock.css';
+import { Value } from 'node_modules/react-time-picker/dist/esm/shared/types';
+
+
+
 import { Input } from "antd";
 
 import Autocomplete from "react-google-autocomplete";
@@ -29,10 +38,10 @@ import { fetchData } from "./FetchData";
 import { CDinfo } from "@/lib/cd_consts";
 
 import { Select } from "antd";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { set } from "date-fns";
-import { TypeOfChartRadio } from "./TypeOfChartRadio";
 
+import { TypeOfChartRadio } from "./TypeOfChartRadio";
+import { MyTimePicker } from "./MyTimePicker";
+import { time } from "console";
 
 
 type TimeZone = {
@@ -51,9 +60,6 @@ type Place = {
 
 export function ReqDataForm() {
 
-  const { register, handleSubmit, formState } = useForm<IForm>({
-    mode: "onChange",
-  });
 
   const timeFormat = "HH:mm";
   const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
@@ -69,6 +75,10 @@ export function ReqDataForm() {
   //   const [date, setDate] = useState<Dayjs>(dateTime);
   const [placeState, setPlaceState] = useState(false);
 
+  const [visibState, setVisibState] = useState(false);
+
+  const [hour, setHour] = useState<number>(10);
+  const [minutes, setMinutes] = useState<number>(10);
 
   // But if you just want an answer for the maximum bounds for Google Maps:
   //   Latitude: -85 to + 85(actually - 85.05115 for some reason)
@@ -121,22 +131,90 @@ export function ReqDataForm() {
     // console.log(tempDate);
   };
 
-  const onTimeChange = (time: Dayjs) => {
-    const tempTime = time
+
+
+
+
+  const onChangeHour = (e) => {
+
+    // const time_arr = e.split(":");
+
+    // const tempTime = dateTime
+    //   .year(dateTime.year())
+    //   .month(dateTime.month())
+    //   .date(dateTime.date())
+    //   .hour(time_arr[0] ? parseInt(time_arr[0]) : 0)
+    //   .minute(time_arr[1] ? parseInt(time_arr[1]) : 0)
+    //   .second(0)
+    //   .millisecond(0);
+
+    // setDateTime(tempTime);
+
+    // setMyTime(e);
+
+    // setTime(time);
+
+    setHour(e.target.value);
+
+
+
+    const tempTime = dateTime
       .year(dateTime.year())
       .month(dateTime.month())
       .date(dateTime.date())
-      .hour(time.hour())
-      .minute(time.minute())
+      .hour(e.target.value)
+      .minute(dateTime.minute())
       .second(0)
       .millisecond(0);
 
     setDateTime(tempTime);
 
+
+
+
+    // setHour(parseInt(e.target.value));
+    // console.log(e.target.value);
+    // console.log(typeof e.target.value);
+  };
+
+  const onChangeMinutes = (e) => {
+
+    // const time_arr = e.split(":");
+
+    // const tempTime = dateTime
+    //   .year(dateTime.year())
+    //   .month(dateTime.month())
+    //   .date(dateTime.date())
+    //   .hour(time_arr[0] ? parseInt(time_arr[0]) : 0)
+    //   .minute(time_arr[1] ? parseInt(time_arr[1]) : 0)
+    //   .second(0)
+    //   .millisecond(0);
+
+    // setDateTime(tempTime);
+
+    // setMyTime(e);
+
     // setTime(time);
 
-    // console.log(tempTime);
+
+    setMinutes(e.target.value);
+
+    const tempTime = dateTime
+      .year(dateTime.year())
+      .month(dateTime.month())
+      .date(dateTime.date())
+      .hour(dateTime.hour())
+      .minute(e.target.value)
+      .second(0)
+      .millisecond(0);
+
+    setDateTime(tempTime);
+
+    // setHour(parseInt(e.target.value));
+    // console.log(e.target.value);
+    // console.log(typeof e.target.value);
   };
+
 
   function setLast10andMenuItems(data: CDinfo[]) {
     setLast10(data);
@@ -181,6 +259,8 @@ export function ReqDataForm() {
     const offset = Math.abs(dayjs().utcOffset() * 60);
 
     setDateTime(d);
+    setHour(d.hour());
+    setMinutes(d.minute());
 
     // setNameValue("Transits");
     typeOfChart.set("bodygraph");
@@ -211,8 +291,12 @@ export function ReqDataForm() {
 
   async function onSubmit() {
 
+
+    visibState ? setVisibState(false) : setVisibState(true);
+
     if (utc === "local" && (place.name === "" || place.latitude === 90 || place.longitude === 200)) {
       setPlaceState(false);
+      setVisibState(true);
       return;
     }
 
@@ -314,11 +398,12 @@ export function ReqDataForm() {
     );
   }
 
-  // const dateFormat = 'YYYY-MM-DD HH:mm';
 
   return (
     <div   >
-      <div className="flex flex-row md:justify-between md:items-center ">
+      {visibState && <div className="flex flex-row my-1 h-8 md:justify-between md:items-center ">
+
+
         <Input
           autoFocus={true}
           className="w-24"
@@ -347,24 +432,120 @@ export function ReqDataForm() {
 
         />
 
-        <TimePicker
-          required={true}
-          className="w-20"
-          value={dateTime}
-          onChange={onTimeChange}
-          format={timeFormat}
-          allowClear={false}
-        />
+
+        <div className="flex flex-row justify-between">
+
+          {/* <TimePicker
+            className='flex w-4'
+            clearIcon={null}
+            clockIcon={null}
+            disableClock={true}
+            format='HH:mm'
+            onChange={onMyTimeChange} value={myTime} /> */}
+
+          <select name="hour" id="hour-select" value={hour} onChange={onChangeHour}>
+            <option value="0">00</option>
+            <option value="1">01</option>
+            <option value="2">02</option>
+            <option value="3">03</option>
+            <option value="4">04</option>
+            <option value="5">05</option>
+            <option value="6">06</option>
+            <option value="7">07</option>
+            <option value="8">08</option>
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+          </select>
+
+          <select name="minutes" id="minutes-select" value={minutes} onChange={onChangeMinutes}>
+            <option value="0">00</option>
+            <option value="1" >01</option>
+            <option value="2">02</option>
+            <option value="3">03</option>
+            <option value="4">04</option>
+            <option value="5">05</option>
+            <option value="6">06</option>
+            <option value="7">07</option>
+            <option value="8">08</option>
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+            <option value="46">46</option>
+            <option value="47">47</option>
+            <option value="48">48</option>
+            <option value="49">49</option>
+            <option value="50">50</option>
+            <option value="51">51</option>
+            <option value="52">52</option>
+            <option value="53">53</option>
+            <option value="54">54</option>
+            <option value="55">55</option>
+            <option value="56">56</option>
+            <option value="57">57</option>
+            <option value="58">58</option>
+            <option value="59">59</option>
+          </select>
 
 
-        <div className="flex flex-col   items-center  ">
-          <label htmlFor="utc">UTC</label>
-          <Checkbox id="utc" onChange={onUtcChange}></Checkbox>
+
+          <div className="flex flex-col  h-8 items-center">
+            <label className="h-3  " htmlFor="utc">UTC</label>
+            <Checkbox className="h-3 my-2" id="utc" defaultChecked={utc == "local" ? false : true} onChange={onUtcChange}></Checkbox>
+          </div>
         </div>
-      </div>
+      </div>}
 
-      <div className="flex flex-row   items-center  ">
-        {(utc === "local") && <Autocomplete
+
+
+      <div className="flex flex-row   items-center ">
+        {visibState && utc == "local" && <Autocomplete
           className={` w-34 h-8 border-2 rounded  ${placeState ? "border-green-100" : "border-red-500"}`}
           required={utc === "local" ? true : false}
           disabled={utc === "utc" ? true : false}

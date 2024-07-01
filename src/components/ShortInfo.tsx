@@ -10,7 +10,7 @@ export const ShortInfo = (props) => {
     const loc_time = `${loc.day}.${loc.month}.${loc.year} ${loc.hours}:${loc.minutes}`;
     // const des = cdInfo.time.des_time;
     // const des_time = `${des.day}.${des.month}.${des.year} ${des.hours}:${des.minutes}`;
-    const timeString: string = `${cdInfo.name.slice(0, 10)} - ${loc_time}`; // Design:${des_time} `;
+    const timeString: string = `${loc_time}`; // Design:${des_time} `;
 
     const nutrString: string = `${cdInfo.hd.specialInfo.nutr_type}.${cdInfo.hd.specialInfo.cognition}.${cdInfo.hd.specialInfo.theme}.${cdInfo.hd.specialInfo.environment}`;
     // | ${cdInfo.hd.specialInfo.motivation}.${cdInfo.hd.specialInfo.mind}`;
@@ -77,7 +77,7 @@ export const ShortInfo = (props) => {
 
 
 
-        typeProfDef = `${type_text}.${cdInfo.hd.specialInfo.profile}.${cdInfo.hd.generalInfo.authority}.${definition}`;
+        typeProfDef = `${type_text}.${cdInfo.hd.specialInfo.profile}.${cdInfo.hd.generalInfo.authority}`;
     } else if (calc === "personality") {
         let type_text = `${cdInfo.hd.personality.generalInfo.type}`;
         switch (type_text) {
@@ -104,7 +104,7 @@ export const ShortInfo = (props) => {
         }
 
 
-        let definition = `${cdInfo.hd.personality.generalInfo.definition}`;
+        let definition = `${cdInfo.hd.personality.generalInfo}`;
 
         switch (definition) {
 
@@ -131,7 +131,7 @@ export const ShortInfo = (props) => {
         }
 
 
-        typeProfDef = `${type_text}.${cdInfo.hd.specialInfo.profile}.${cdInfo.hd.personality.generalInfo.authority}.${definition}`;
+        typeProfDef = `${type_text}.${cdInfo.hd.specialInfo.profile}.${cdInfo.hd.personality.generalInfo.authority}`;
 
 
     } else if (calc === "design") {
@@ -202,10 +202,12 @@ export const ShortInfo = (props) => {
 
     return (
 
-        <div className="ShortInfo w-full">
-            <p> {timeString}</p>
-            {/* <p> {nutrString}</p> */}
-            {/* <p> {typeProfDef}.{varCrossString}</p> */}
+        <div className="ShortInfo flex flex-row w-full">
+
+            <p className="font-extrabold mr-1">{cdInfo.name.slice(0, 10)}</p>
+            <p className="mr-1">{timeString}</p>
+            <p className=" font-extrabold  text-fuchsia-700"> {typeProfDef}</p>
+
 
         </div >
     );

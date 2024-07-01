@@ -6,8 +6,12 @@ import { drawNumerology } from "./numerology.js";
 // const full_width = 3 * 800;
 // const full_height = 2 * 750;
 
-const width = 440; //800;
-const height = 750; //750
+// const width = 440; //800;
+// const height = 750; //750
+
+const width = 340;
+const height = 668;
+
 
 export const Numerology = (props) => {
   const cdInfo = props.data;

@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { appendText } from "./auxiliary_fns.ts";
+import { appendText } from "../lib/auxiliary_fns.ts";
 
 export const drawNumerology = (
   svg: d3.Selection<SVGGElement, unknown, null, undefined>,

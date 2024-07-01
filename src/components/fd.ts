@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { appendText, lineFunction } from "./auxiliary_fns.ts";
+import { appendText, lineFunction } from "../lib/auxiliary_fns.ts";
 import { CDinfo, PlanetsData, PlFdData } from "@/lib/cd_consts.ts";
 import { planetsArr } from "@/lib/cd_consts.ts";
 
