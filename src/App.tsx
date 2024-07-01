@@ -52,12 +52,12 @@ function App() {
             />
           </div>
 
-          <div className="TechInfo w-80 order-2 md:order-2 lg:order-3">
+          <div className="TechInfo w-80 order-2 md:order-2 lg:order-1">
             <FullTechInfo data={cdInfo.cdInfo} calc={calcType.calcType} />
 
           </div>
 
-          <div className="TechInfo w-80  order-3  lg:order-1">
+          <div className="TechInfo w-80  order-3 md:order-3 lg:order-3">
             <PlanetsInfo data={cdInfo.cdInfo} />
 
           </div>

@@ -34,11 +34,23 @@ export const drawNumerology = (
   appendText(svg, num_x, num_y, numerology_text, "black", "start");
   num_y += 30;
 
-  numerology_text = `Matrix code: ${formula.matrix_code}. Soul level now/past life: ${formula.soul_level}/${formula.soul_level_past_life}.`;
+  numerology_text = `Matrix code: ${formula.matrix_code}.`;
   appendText(svg, num_x, num_y, numerology_text, "black", "start");
   num_y += 30;
 
-  numerology_text = `Planetary task: ${formula.planetary_task}. Social task: ${formula.social_task}. Karmic task: ${formula.karmic_task}.`;
+  numerology_text = `Soul level now/past life: ${formula.soul_level}/${formula.soul_level_past_life}.`;
+  appendText(svg, num_x, num_y, numerology_text, "black", "start");
+  num_y += 30;
+
+  numerology_text = `Planetary task: ${formula.planetary_task}.`;
+  appendText(svg, num_x, num_y, numerology_text, "black", "start");
+  num_y += 30;
+
+  numerology_text = `Social task: ${formula.social_task}.`;
+  appendText(svg, num_x, num_y, numerology_text, "black", "start");
+  num_y += 30;
+
+  numerology_text = `Karmic task: ${formula.karmicTask}.`;
   appendText(svg, num_x, num_y, numerology_text, "black", "start");
   num_y += 30;
 

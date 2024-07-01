@@ -2,30 +2,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Button, DatePicker } from "antd";
-
-// import { Dropdown, MenuProps } from "antd";
-// import { DownOutlined } from "@ant-design/icons";
-
 import { Checkbox } from "antd";
-
-// import { TimePicker } from "antd";
-
+import { CheckboxChangeEvent } from "antd/es/checkbox/Checkbox";
+import { Input } from "antd";
+import { Select } from "antd";
 
 import type { Dayjs } from "dayjs";
 import dayjs from "dayjs";
 
-
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
-// import 'react-clock/dist/Clock.css';
-import { Value } from 'node_modules/react-time-picker/dist/esm/shared/types';
-
-
-
-import { Input } from "antd";
-
 import Autocomplete from "react-google-autocomplete";
-import { CheckboxChangeEvent } from "antd/es/checkbox/Checkbox";
 
 import Cookies from "js-cookie";
 
@@ -36,12 +21,8 @@ import { UseCalcType, useCalcType } from "./calcType";
 import { ReqData } from "@/lib/cd_consts";
 import { fetchData } from "./FetchData";
 import { CDinfo } from "@/lib/cd_consts";
-
-import { Select } from "antd";
-
 import { TypeOfChartRadio } from "./TypeOfChartRadio";
-import { MyTimePicker } from "./MyTimePicker";
-import { time } from "console";
+
 
 
 type TimeZone = {
@@ -60,8 +41,6 @@ type Place = {
 
 export function ReqDataForm() {
 
-
-  const timeFormat = "HH:mm";
   const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 
   const cdInfo: UseCdInfo = useCdInfo();
