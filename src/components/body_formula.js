@@ -619,8 +619,8 @@ DrawFormulaClass.prototype.init = function () {
 
 DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
-  const x = 128;
-  const y = 246;
+  const x = 70;
+  const y = 46;
 
   let points = [
     {
@@ -3387,10 +3387,10 @@ DrawFormulaClass.prototype.draw_32_54 = function (gate, type) {
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_50_27 = function (gate, type) {
-  const x = 85;
-  const y = 510;
+  const x = 90;
+  const y = 360;
 
-  const length = 50
+  const length = 34
 
   const data = {
     top_left_x:
@@ -3410,7 +3410,7 @@ DrawFormulaClass.prototype.draw_50_27 = function (gate, type) {
   if (gate === 27) data.gate = "bottom";
 
 
-  data.rotation = -59;
+  data.rotation = -88;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_30_41 = function (gate, type) {
@@ -3494,9 +3494,9 @@ DrawFormulaClass.prototype.draw_49_19 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_6_59 = function (gate, type) {
   const x = 248;
-  const y = 502;
+  const y = 352;
 
-  const length = 70
+  const length = 46
 
 
   const data = {
@@ -3516,7 +3516,7 @@ DrawFormulaClass.prototype.draw_6_59 = function (gate, type) {
   if (gate === 59) data.gate = "bottom";
 
 
-  data.rotation = 60;
+  data.rotation = 88;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_40_37 = function (gate, type) {
@@ -3644,10 +3644,10 @@ DrawFormulaClass.prototype.draw_25_51 = function (gate, type) {
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_26_44 = function (gate, type) {
-  const x = 210;
-  const y = 414;
+  const x = 204;
+  const y = 290;
 
-  const length = 160
+  const length = 170
 
 
   const data = {
@@ -3667,15 +3667,15 @@ DrawFormulaClass.prototype.draw_26_44 = function (gate, type) {
   if (gate === 26) data.gate = "top";
   if (gate === 44) data.gate = "bottom";
 
-  data.rotation = 64;
+  data.rotation = 77.5;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_16_48 = function (gate, type) {
 
-  const x = 129;
-  const y = 200;
+  const x = 120;
+  const y = 130;
 
-  let length = 280;
+  let length = 208;
 
   const data = {
     top_left_x:
@@ -3695,13 +3695,13 @@ DrawFormulaClass.prototype.draw_16_48 = function (gate, type) {
   if (gate === 16) data.gate = "top";
   if (gate === 48) data.gate = "bottom";
 
-  data.rotation = 26;
+  data.rotation = 33;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_42_53 = function (gate, type) {
   let x = 140
-  let y = 551
-  let length = 47;
+  let y = 380
+  let length = 30;
 
   const data = {
     top_left_x:
@@ -3727,8 +3727,8 @@ DrawFormulaClass.prototype.draw_42_53 = function (gate, type) {
 DrawFormulaClass.prototype.draw_3_60 = function (gate, type) {
 
   let x = 161
-  let y = 551
-  let length = 47;
+  let y = 380
+  let length = 30;
 
   const data = {
     top_left_x:
@@ -3754,8 +3754,8 @@ DrawFormulaClass.prototype.draw_3_60 = function (gate, type) {
 DrawFormulaClass.prototype.draw_9_52 = function (gate, type) {
 
   let x = 182
-  let y = 551
-  let length = 47;
+  let y = 380
+  let length = 30;
 
   const data = {
     top_left_x:
@@ -4163,7 +4163,7 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
     {
       x: x + 1,
-      y: y + 34,
+      y: y + 40,
       text: "20",
     },
   ];
@@ -4453,8 +4453,8 @@ DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
       text: "57",
     },
     {
-      x: x + 48,
-      y: y + 48,
+      x: x + 38,
+      y: y + 40,
       text: "44",
     },
 
