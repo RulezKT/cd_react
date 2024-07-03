@@ -3547,9 +3547,9 @@ DrawFormulaClass.prototype.draw_40_37 = function (gate, type) {
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_12_22 = function (gate, type) {
-  const x = 196
-  const y = 227
-  const length = 270;
+  const x = 210
+  const y = 160
+  const length = 200;
 
   const data = {
     top_left_x:
@@ -3567,13 +3567,13 @@ DrawFormulaClass.prototype.draw_12_22 = function (gate, type) {
   if (gate === 12) data.gate = "top";
   if (gate === 22) data.gate = "bottom";
 
-  data.rotation = -26;
+  data.rotation = -32;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_35_36 = function (gate, type) {
-  const x = 205
-  const y = 215
-  const length = 270;
+  const x = 210
+  const y = 135
+  const length = 206;
 
   const data = {
     top_left_x:
@@ -3592,13 +3592,13 @@ DrawFormulaClass.prototype.draw_35_36 = function (gate, type) {
   if (gate === 36) data.gate = "bottom";
 
 
-  data.rotation = -26;
+  data.rotation = -32;
   this.draw_vertical_channel_with_rotation(data);
 }; 0
 DrawFormulaClass.prototype.draw_45_21 = function (gate, type) {
-  const x = 200
-  const y = 280
-  const length = 120;
+  const x = 204
+  const y = 180
+  const length = 86;
 
   const data = {
     top_left_x:
@@ -3616,7 +3616,7 @@ DrawFormulaClass.prototype.draw_45_21 = function (gate, type) {
   if (gate === 45) data.gate = "top";
   if (gate === 21) data.gate = "bottom";
 
-  data.rotation = -26;
+  data.rotation = -24;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_25_51 = function (gate, type) {
@@ -4147,11 +4147,11 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
     {
       x: x + 82,
-      y: y + 30,
+      y: y + 34,
       text: "12",
     },
     {
-      x: x + 84,
+      x: x + 82,
       y: y + 51,
       text: "45",
     },
@@ -4163,7 +4163,7 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
     {
       x: x + 1,
-      y: y + 30,
+      y: y + 34,
       text: "20",
     },
   ];
