@@ -4347,7 +4347,7 @@ DrawFormulaClass.prototype.drawSacral340 = function (fill) {
 };
 DrawFormulaClass.prototype.drawRoot340 = function (fill) {
   let x = 125
-  let y = 587.75
+  let y = 410
   const rootCentreData = [
     { x: x, y: y },
     {
@@ -4383,7 +4383,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (fill) {
 
     {
       x: x + 6,
-      y: 610.75,
+      y: y + 28.5,
       text: "54",
     },
     {
@@ -4428,7 +4428,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (fill) {
 
 DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
   const x = 5
-  const y = 448.25
+  const y = 300
   const spleenCentreData = [
     { x: x, y: y },
     {
