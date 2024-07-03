@@ -46,7 +46,7 @@ export const appendTextPlanets = (
     .attr("y", y)
     .text(text.split("-")[0])
     .attr("font-family", "futura, sans-serif")
-    .attr("font-size", 14)
+    .attr("font-size", 12)
     .attr("font-weight", 700)
     .attr("fill", color || "black")
     .attr("text-anchor", text_anchor || "start")
@@ -54,12 +54,12 @@ export const appendTextPlanets = (
     .append("tspan")
     .style("fill", "blue")
     .text(text.split("-")[1])
-    .attr("font-size", 12)
+    .attr("font-size", 10)
 
     .append("tspan")
     .style("fill", "green")
     .text(text.split("-")[2])
-    .attr("font-size", 10)
+    .attr("font-size", 9)
     .append("tspan")
 
 

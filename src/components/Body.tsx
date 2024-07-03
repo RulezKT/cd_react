@@ -3,7 +3,7 @@ import { DrawFormulaClass } from "./body_formula.js";
 import { useEffect } from "react";
 
 const width = 340;
-const height = 668;
+const height = 490;
 
 export const Body = (props) => {
   const cdInfo = props.data;
