@@ -260,6 +260,7 @@ export function ReqDataForm() {
       place: "",
       latitude: 0,
       longitude: 0,
+      timeZoneId: "",
 
     };
 
@@ -308,6 +309,7 @@ export function ReqDataForm() {
       place: utc === "utc" ? "" : place.name,
       latitude: utc === "utc" ? 0 : place.latitude,
       longitude: utc === "utc" ? 0 : place.longitude,
+      timeZoneId: utc == "utc" ? "" : timeZone.timeZoneId
 
     };
 

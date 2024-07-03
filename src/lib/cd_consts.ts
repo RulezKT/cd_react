@@ -551,6 +551,7 @@ export type ReqData = {
   place: string;
   latitude: number;
   longitude: number;
+  timeZoneId: string;
 
 };
 

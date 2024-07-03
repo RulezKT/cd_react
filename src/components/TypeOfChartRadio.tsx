@@ -27,6 +27,11 @@ export const TypeOfChartRadio = () => {
         <label htmlFor="option-three">FD</label>
       </Radio>
 
+      <Radio value="fdNew" id="option-4">
+        <label htmlFor="option-4">FDnew</label>
+      </Radio>
+
+
 
     </Radio.Group>
   );

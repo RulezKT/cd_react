@@ -2,6 +2,7 @@
 import { Body } from "./Body.js";
 import { Numerology } from "./Numerology.tsx";
 import { Fd } from "./Fd.tsx";
+import { FdNew } from "./FdNew/FdNew.tsx";
 
 export const BodyGraph = (props) => {
   const graph_type = props.chart;
@@ -31,6 +32,9 @@ export const BodyGraph = (props) => {
         return <Numerology data={cdInfo} calc={props.calc} />;
       case "fd":
         return <Fd data={cdInfo} calc={props.calc} />;
+
+      case "fdNew":
+        return <FdNew data={cdInfo} calc={props.calc} />;
 
       default:
         return <Body data={cdInfo} calc={"full"} />;

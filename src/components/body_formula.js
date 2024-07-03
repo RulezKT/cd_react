@@ -3146,7 +3146,7 @@ DrawFormulaClass.prototype.draw_vertical_channel_with_rotation = function (
 
 DrawFormulaClass.prototype.draw_64_47 = function (gate, type) {
   const x = 140;
-  const y = 80;
+  const y = 35;
 
   const length = 24
 
@@ -3173,7 +3173,7 @@ DrawFormulaClass.prototype.draw_64_47 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_61_24 = function (gate, type) {
   const x = 160
-  const y = 80
+  const y = 35
   const length = 24;
 
   const data = {
@@ -3200,7 +3200,7 @@ DrawFormulaClass.prototype.draw_61_24 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_63_4 = function (gate, type) {
   const x = 182
-  const y = 80
+  const y = 35
   const length = 24;
 
   const data = {
@@ -3226,9 +3226,9 @@ DrawFormulaClass.prototype.draw_17_62 = function (gate, type) {
 
 
   const x = 140;
-  const y = 138;
+  const y = 99;
 
-  const length = 62
+  const length = 30
 
   const data = {
     top_left_x:
@@ -3252,7 +3252,7 @@ DrawFormulaClass.prototype.draw_17_62 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_43_23 = function (gate, type) {
   const x = 160
-  const y = 170
+  const y = 99
   const length = 30;
 
   const data = {
@@ -3279,9 +3279,9 @@ DrawFormulaClass.prototype.draw_43_23 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_11_56 = function (gate, type) {
   const x = 182;
-  const y = 138;
+  const y = 99;
 
-  const length = 62
+  const length = 30
 
   const data = {
     top_left_x:
@@ -3858,9 +3858,9 @@ DrawFormulaClass.prototype.draw_46_29 = function (gate, type) {
 DrawFormulaClass.prototype.draw_31_7 = function (gate, type) {
 
   const x = 140;
-  const y = 281;
+  const y = 183;
 
-  const length = 57
+  const length = 30
 
   const data = {
     top_left_x:
@@ -3887,8 +3887,8 @@ DrawFormulaClass.prototype.draw_31_7 = function (gate, type) {
 DrawFormulaClass.prototype.draw_8_1 = function (gate, type) {
 
   const x = 161
-  const y = 281
-  const length = 26;
+  const y = 183
+  const length = 30;
 
   const data = {
     top_left_x:
@@ -3916,8 +3916,8 @@ DrawFormulaClass.prototype.draw_8_1 = function (gate, type) {
 DrawFormulaClass.prototype.draw_33_13 = function (gate, type) {
 
   let x = 182
-  let y = 281
-  let length = 57;
+  let y = 183
+  let length = 30;
   const data = {
     top_left_x: x,
     top_left_y: y,
@@ -3970,36 +3970,40 @@ DrawFormulaClass.prototype.drawGenerator = function (
 };
 
 DrawFormulaClass.prototype.drawHead340 = function (fill) {
-  let x = 165
-  let y = 5
+  let x = 142
+  let y = 10
 
   const headCentreData = [
     { x: x, y: y },
     {
-      x: x + 48,
-      y: y + 75,
+      x: x + 52,
+      y: y
     },
     {
-      x: x - 48,
-      y: y + 75,
+      x: x + 73,
+      y: y + 25,
+    },
+    {
+      x: x - 21,
+      y: y + 25,
     },
     { x: x, y: y },
   ];
 
   const headTextData = [
     {
-      x: x - 28,
-      y: y + 69,
+      x: x - 5,
+      y: y + 20,
       text: "64",
     },
     {
-      x: x - 6,
-      y: y + 69,
+      x: x + 17,
+      y: y + 20,
       text: "61",
     },
     {
-      x: x + 16,
-      y: y + 69,
+      x: x + 39,
+      y: y + 20,
       text: "63",
     },
   ];
@@ -4016,51 +4020,57 @@ DrawFormulaClass.prototype.drawHead340 = function (fill) {
   );
 };
 DrawFormulaClass.prototype.drawAjna340 = function (fill) {
-  let x = 165
-  let y = 177.5
+  let x = 125
+  let y = 99
   const ajnaCentreData = [
     { x: x, y: y },
     {
-      x: x + 52,
-      y: y - 75,
+      x: x + 88,
+      y: y,
     },
     {
-      x: x - 48,
-      y: y - 75,
+      x: x + 88,
+      y: y - 40,
+    },
+
+    {
+      x: x,
+      y: y - 40,
     },
     { x: x, y: y },
   ];
 
   const ajnaTextData = [
     {
-      x: x - 28,
-      y: y - 63,
+      x: x + 12,
+      y: y - 28,
       text: "47",
     },
     {
-      x: x - 6,
-      y: y - 63,
+      x: x + 34,
+      y: y - 28,
       text: "24",
     },
     {
-      x: x - 24,
-      y: y - 38.4,
-      text: `17`,
-    },
-
-    {
-      x: x + 18,
-      y: y - 63,
+      x: x + 59,
+      y: y - 28,
       text: "4",
     },
     {
-      x: x - 6,
-      y: y - 14.4,
+      x: x + 12,
+      y: y - 4,
+      text: `17`,
+    },
+
+
+    {
+      x: x + 34,
+      y: y - 4,
       text: "43",
     },
     {
-      x: x + 14,
-      y: y - 38.5,
+      x: x + 58,
+      y: y - 4,
       text: "11",
     },
   ];
@@ -4076,84 +4086,84 @@ DrawFormulaClass.prototype.drawAjna340 = function (fill) {
 };
 DrawFormulaClass.prototype.drawThroat340 = function (fill) {
 
-  let x = 125
-  let y = 200
+  let x = 119
+  let y = 129
 
 
   const throatCentreData = [
     { x: x, y: y },
     {
-      x: x + 88,
+      x: x + 100,
       y: y,
     },
     {
-      x: x + 88,
-      y: y + 82.5,
+      x: x + 100,
+      y: y + 54,
     },
     {
       x: x,
-      y: y + 82.5,
+      y: y + 54,
     },
     { x: x, y: y },
   ];
 
   const throatTextData = [
     {
-      x: x + 14,
+      x: x + 18,
       y: y + 11,
       text: "62",
     },
     {
-      x: x + 34,
-      y: y + 12,
+      x: x + 39,
+      y: y + 11,
       text: "23",
     },
     {
-      x: x + 56,
-      y: y + 12,
+      x: x + 62,
+      y: y + 11,
       text: `56`,
     },
 
     {
-      x: x + 12,
-      y: y + 81,
+      x: x + 18,
+      y: y + 51,
       text: "31",
     },
     {
-      x: x + 37,
-      y: y + 81,
+      x: x + 43,
+      y: y + 51,
       text: "8",
     },
     {
-      x: x + 56,
-      y: y + 81,
+      x: x + 64,
+      y: y + 51,
       text: "33",
     },
 
     {
-      x: x + 72,
-      y: y + 18,
+      x: x + 82,
+      y: y + 11,
       text: "35",
     },
     {
-      x: x + 68,
-      y: y + 42,
+      x: x + 82,
+      y: y + 34,
       text: "12",
     },
     {
-      x: x + 73,
-      y: y + 78,
+      x: x + 84,
+      y: y + 51,
       text: "45",
     },
 
     {
-      x: x,
-      y: y + 15,
+      x: x + 1,
+      y: y + 11,
       text: "16",
     },
     {
-      x: x,
-      y: y + 64,
+      x: x + 1,
+      y: y + 34,
       text: "20",
     },
   ];
