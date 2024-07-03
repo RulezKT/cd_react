@@ -3780,8 +3780,8 @@ DrawFormulaClass.prototype.draw_9_52 = function (gate, type) {
 DrawFormulaClass.prototype.draw_15_5 = function (gate, type) {
 
   const x = 140
-  const y = 380
-  const length = 110;
+  const y = 263
+  const length = 57;
 
   const data = {
     top_left_x: x,
@@ -3806,8 +3806,8 @@ DrawFormulaClass.prototype.draw_15_5 = function (gate, type) {
 DrawFormulaClass.prototype.draw_2_14 = function (gate, type) {
 
   const x = 160
-  const y = 380
-  const length = 110;
+  const y = 263
+  const length = 57;
 
   const data = {
     top_left_x: x,
@@ -3832,9 +3832,9 @@ DrawFormulaClass.prototype.draw_2_14 = function (gate, type) {
 DrawFormulaClass.prototype.draw_46_29 = function (gate, type) {
 
   let x = 180
-  let y = 380
+  let y = 263
 
-  let length = 110;
+  let length = 57;
 
   const data = {
     top_left_x: x,
@@ -4147,7 +4147,7 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
     {
       x: x + 82,
-      y: y + 34,
+      y: y + 30,
       text: "12",
     },
     {
@@ -4163,7 +4163,7 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
     {
       x: x + 1,
-      y: y + 34,
+      y: y + 30,
       text: "20",
     },
   ];
@@ -4181,65 +4181,77 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
 };
 DrawFormulaClass.prototype.drawG340 = function (fill) {
 
-  let x = 165
-  let y = 302
+  let x = 126
+  let y = 213
   const gCentreData = [
     { x: x, y: y },
+
     {
-      x: x + 60,
-      y: y + 48.75,
+      x: x + 80,
+      y: y,
     },
+
+    {
+      x: x + 90,
+      y: y + 25,
+    },
+
+    {
+      x: x + 80,
+      y: y + 50,
+    },
+
     {
       x: x,
-      y: y + 97.5,
+      y: y + 50,
     },
     {
-      x: x - 60,
-      y: y + 48.75,
+      x: x - 10,
+      y: y + 25,
     },
     { x: x, y: y },
   ];
   const gTextData = [
     {
-      x: x - 25,
-      y: y + 36,
+      x: x + 15,
+      y: y + 12,
       text: "7",
     },
     {
-      x: x - 3,
+      x: x + 36,
       y: y + 12,
       text: "1",
     },
     {
-      x: x + 14,
-      y: y + 36,
+      x: x + 54,
+      y: y + 12,
       text: `13`,
     },
 
     {
-      x: x - 48,
-      y: y + 52.5,
+      x: x - 4,
+      y: y + 30,
       text: "10",
     },
     {
-      x: x + 36,
-      y: y + 52.5,
+      x: x + 70,
+      y: y + 30,
       text: "25",
     },
     {
-      x: x - 28,
-      y: y + 69.75,
+      x: x + 12,
+      y: y + 48,
       text: "15",
     },
 
     {
-      x: x + 16,
-      y: y + 69.75,
+      x: x + 52,
+      y: y + 48,
       text: "46",
     },
     {
-      x: x - 3,
-      y: y + 87.75,
+      x: x + 34,
+      y: y + 48,
       text: "2",
     },
   ];
@@ -4256,7 +4268,7 @@ DrawFormulaClass.prototype.drawG340 = function (fill) {
 };
 DrawFormulaClass.prototype.drawSacral340 = function (fill) {
   let x = 125
-  let y = 485.75
+  let y = 320
   const sacralCentreData = [
     { x: x, y: y },
     {
@@ -4265,11 +4277,11 @@ DrawFormulaClass.prototype.drawSacral340 = function (fill) {
     },
     {
       x: x + 80,
-      y: y + 76.5,
+      y: y + 60,
     },
     {
       x: x,
-      y: y + 76.5,
+      y: y + 60,
     },
     { x: x, y: y },
   ];
@@ -4285,40 +4297,40 @@ DrawFormulaClass.prototype.drawSacral340 = function (fill) {
       text: "14",
     },
     {
-      x: x + 56,
+      x: x + 54,
       y: y + 11.5,
       text: `29`,
     },
 
     {
       x: x + 12,
-      y: 554.75,
+      y: y + 58,
       text: "42",
     },
     {
       x: x + 37,
-      y: y + 69.5,
+      y: y + 58,
       text: "3",
     },
     {
       x: x + 59,
-      y: y + 69.5,
+      y: y + 58,
       text: "9",
     },
 
     {
       x: x + 3,
-      y: 509.75,
+      y: y + 24,
       text: "34",
     },
     {
       x: x + 3,
-      y: y + 49.5,
+      y: y + 44,
       text: "27",
     },
     {
       x: x + 62,
-      y: y + 49.5,
+      y: y + 44,
       text: "59",
     },
   ];
@@ -4480,7 +4492,7 @@ DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
 };
 DrawFormulaClass.prototype.drawEmo340 = function (fill) {
   let x = 335
-  let y = 448.25
+  let y = 300
   const emoCentreData = [
     { x: x, y: y },
     {
@@ -4545,8 +4557,8 @@ DrawFormulaClass.prototype.drawEmo340 = function (fill) {
   );
 };
 DrawFormulaClass.prototype.drawEgo340 = function (fill) {
-  let x = 263
-  let y = 374
+  let x = 250
+  let y = 250
   const egoCentreData = [
     { x: x, y: y },
     {
@@ -4554,7 +4566,7 @@ DrawFormulaClass.prototype.drawEgo340 = function (fill) {
       y: y + 68,
     },
     {
-      x: x - 67,
+      x: x - 57,
       y: y + 50,
     },
     { x: x, y: y },
@@ -4569,12 +4581,12 @@ DrawFormulaClass.prototype.drawEgo340 = function (fill) {
       text: "21",
     },
     {
-      x: x - 30,
-      y: y + 30,
+      x: x - 28,
+      y: y + 34,
       text: "51",
     },
     {
-      x: x - 51,
+      x: x - 40,
       y: y + 48,
       text: "26",
     },
