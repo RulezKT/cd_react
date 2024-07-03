@@ -3620,9 +3620,9 @@ DrawFormulaClass.prototype.draw_45_21 = function (gate, type) {
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_25_51 = function (gate, type) {
-  const x = 210
-  const y = 360
-  const length = 45;
+  const x = 206
+  const y = 250
+  const length = 34;
 
   const data = {
     top_left_x:
