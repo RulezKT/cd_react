@@ -619,61 +619,70 @@ DrawFormulaClass.prototype.init = function () {
 
 DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 
-  const x = 70;
-  const y = 46;
+  const x = 118;
+  const y = 160;
 
   let points = [
     {
       x: x,
       y: y,
     },
+    //57th
     {
-      x: x - 103,
-      y: y + 230,
+      x: x - 90,
+      y: y + 154,
     },
     {
-      x: x - 93,
-      y: y + 236,
+      x: x - 84,
+      y: y + 162,
     },
+    //corner to 34th from downside
     {
-      x: x - 67,
-      y: y + 175,
+      x: x - 64,
+      y: y + 130,
     },
+
+    //34th
     {
-      x: x - 3,
-      y: y + 261.8,
+      x: x + 8,
+      y: y + 182,
     },
 
     {
-      x: x + 7,
-      y: y + 258,
+      x: x + 10,
+      y: y + 174,
     },
+    //corner to 34th from upside
     {
-      x: x - 61,
-      y: y + 160,
+      x: x - 58,
+      y: y + 120,
     },
+
+    //corner to 10th from downside
     {
-      x: x - 37,
-      y: y + 110,
+      x: x - 34,
+      y: y + 76,
     },
+
+    //10 th
     {
-      x: x - 33,
-      y: y + 102,
+      x: x + 8,
+      y: y + 80,
     },
     {
       x: x + 8,
-      y: y + 118,
+      y: y + 70,
     },
 
-
+    //20th
     {
-      x: x - 31,
-      y: y + 92,
+      x: x - 28,
+      y: y + 66,
     },
 
     {
-      x: x - 4,
-      y: y + 30,
+      x: x + 4,
+      y: y + 10,
     },
     {
       x: x,
@@ -3306,10 +3315,10 @@ DrawFormulaClass.prototype.draw_11_56 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_18_58 = function (gate, type) {
 
-  const x = 5;
-  const y = 555;
+  const x = 30;
+  const y = 393;
 
-  const length = 160
+  const length = 130
 
   const data = {
     top_left_x:
@@ -3330,14 +3339,14 @@ DrawFormulaClass.prototype.draw_18_58 = function (gate, type) {
   if (gate === 58) data.gate = "bottom";
 
 
-  data.rotation = -49;
+  data.rotation = -46;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_28_38 = function (gate, type) {
-  const x = 20;
-  const y = 535;
+  const x = 48;
+  const y = 384;
 
-  const length = 160
+  const length = 110
 
   const data = {
     top_left_x:
@@ -3356,14 +3365,14 @@ DrawFormulaClass.prototype.draw_28_38 = function (gate, type) {
   if (gate === 28) data.gate = "top";
   if (gate === 38) data.gate = "bottom";
 
-  data.rotation = -46;
+  data.rotation = -44;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_32_54 = function (gate, type) {
-  const x = 30;
-  const y = 500;
+  const x = 56;
+  const y = 366;
 
-  const length = 160
+  const length = 100
 
   const data = {
     top_left_x:
@@ -3383,7 +3392,7 @@ DrawFormulaClass.prototype.draw_32_54 = function (gate, type) {
   if (gate === 32) data.gate = "top";
   if (gate === 54) data.gate = "bottom";
 
-  data.rotation = -42;
+  data.rotation = -44;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_50_27 = function (gate, type) {
@@ -3415,10 +3424,10 @@ DrawFormulaClass.prototype.draw_50_27 = function (gate, type) {
 };
 DrawFormulaClass.prototype.draw_30_41 = function (gate, type) {
 
-  const x = 330;
-  const y = 550;
+  const x = 300;
+  const y = 384;
 
-  const length = 170
+  const length = 136
 
 
   const data = {
@@ -3437,14 +3446,14 @@ DrawFormulaClass.prototype.draw_30_41 = function (gate, type) {
   if (gate === 30) data.gate = "top";
   if (gate === 41) data.gate = "bottom";
 
-  data.rotation = 52;
+  data.rotation = 48;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_55_39 = function (gate, type) {
-  const x = 310;
-  const y = 535;
+  const x = 282;
+  const y = 378;
 
-  const length = 150
+  const length = 114
 
 
   const data = {
@@ -3466,10 +3475,10 @@ DrawFormulaClass.prototype.draw_55_39 = function (gate, type) {
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_49_19 = function (gate, type) {
-  const x = 310;
-  const y = 505;
+  const x = 270;
+  const y = 368;
 
-  const length = 150
+  const length = 96
 
 
   const data = {
@@ -4464,19 +4473,19 @@ DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
       text: "50",
     },
     {
-      x: x + 44.4,
-      y: y + 76.5,
+      x: x + 54,
+      y: y + 72,
       text: "32",
     },
     {
-      x: x + 24,
-      y: y + 88.5,
+      x: x + 36,
+      y: y + 82,
       text: "28",
     },
 
     {
-      x: x,
-      y: y + 100.5,
+      x: x + 20,
+      y: y + 90,
       text: "18",
     },
   ];
@@ -4529,19 +4538,19 @@ DrawFormulaClass.prototype.drawEmo340 = function (fill) {
       text: "36",
     },
     {
-      x: x - 54,
-      y: y + 80,
+      x: x - 68,
+      y: y + 72,
       text: "49",
     },
     {
-      x: x - 30,
-      y: y + 95,
+      x: x - 52,
+      y: y + 80,
       text: "55",
     },
 
     {
-      x: x - 14,
-      y: y + 104,
+      x: x - 36,
+      y: y + 90,
       text: "30",
     },
   ];
