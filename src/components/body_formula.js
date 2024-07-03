@@ -3520,9 +3520,9 @@ DrawFormulaClass.prototype.draw_6_59 = function (gate, type) {
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_40_37 = function (gate, type) {
-  const x = 262
-  const y = 435
-  const length = 50;
+  const x = 258
+  const y = 315
+  const length = 30;
 
   const data = {
     top_left_x:
@@ -3543,7 +3543,7 @@ DrawFormulaClass.prototype.draw_40_37 = function (gate, type) {
   data.bottom_left_x = data.top_left_x;
   data.bottom_left_y = data.top_left_y + length;
 
-  data.rotation = -15;
+  data.rotation = -30;
   this.draw_vertical_channel_with_rotation(data);
 };
 DrawFormulaClass.prototype.draw_12_22 = function (gate, type) {
