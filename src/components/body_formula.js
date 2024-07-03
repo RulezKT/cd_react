@@ -2160,9 +2160,210 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
 //   }
 // };
 
+
+function draw_20_short(type) {
+
+  let rotation = -24;
+
+  const x = 118;
+  const y = 160;
+
+  let points = [
+    {
+      x: x,
+      y: y,
+    },
+
+    {
+      x: x - 69,
+      y: y + 49,
+    },
+
+    {
+      x: x - 63,
+      y: y + 56,
+    },
+
+    {
+      x: x,
+      y: y + 10,
+    },
+    {
+      x: x,
+      y: y,
+    },
+  ];
+
+  if (type === "both") {
+    let mixed_line = svg.append("g");
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "red");
+
+    points = [
+      {
+        x: x + 5.5,
+        y: y + 3.5,
+      },
+
+      {
+        x: x - 66,
+        y: y + 53,
+      },
+
+      {
+        x: x - 62,
+        y: y + 56,
+      },
+
+      {
+        x: x + 5,
+        y: y + 10,
+      },
+      {
+        x: x + 3.5,
+        y: y + 3.5,
+      },
+    ];
+
+
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "black");
+
+    mixed_line.attr(
+      "transform",
+      `rotate(${rotation || 0}, ${x},${y})`
+    );
+  } else {
+    svg
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", type)
+      .attr(
+        "transform",
+        `rotate(${rotation || 0}, ${x},${y})`
+      );
+  }
+};
+
+function draw_20_long(type) {
+
+  let rotation = -24;
+
+  const x = 118;
+  const y = 160;
+
+
+
+  let points = [
+    {
+      x: x,
+      y: y,
+    },
+
+    {
+      x: x - 119,
+      y: y + 85,
+    },
+
+    {
+      x: x - 112,
+      y: y + 94,
+    },
+
+    {
+      x: x,
+      y: y + 10,
+    },
+    {
+      x: x,
+      y: y,
+    },
+  ];
+
+
+  if (type === "both") {
+    let mixed_line = svg.append("g");
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "red");
+
+    points = [
+      {
+        x: x + 5,
+        y: y + 3.5,
+      },
+
+      {
+        x: x - 116,
+        y: y + 89,
+      },
+
+      {
+        x: x - 112,
+        y: y + 94,
+      },
+
+      {
+        x: x + 9,
+        y: y + 10,
+      },
+      {
+        x: x + 3.5,
+        y: y + 3.5,
+      },
+    ];
+
+
+
+
+    mixed_line
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", "black");
+
+    mixed_line.attr(
+      "transform",
+      `rotate(${rotation || 0}, ${x},${y})`
+    );
+  } else {
+    svg
+      .append("path")
+      .attr("d", lineFunction(points))
+      .attr("stroke", "black")
+      .attr("fill", type)
+      .attr(
+        "transform",
+        `rotate(${rotation || 0}, ${x},${y})`
+      );
+  }
+};
+
+
+
 //type - black, red or 'both'
 // variation - 1.drawing to 34th 2.drawing to 10th
 DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
+
+
+  if (variation === 2) {
+    draw_20_short(type)
+    return
+  }
+
+  if (variation === 1) {
+    draw_20_long(type)
+    return
+  }
 
   // console.log("inside 20 integration")
   let points = [];
@@ -2182,47 +2383,30 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
     },
   ];
 
-  let rotation = -18.5;
+  let rotation = -24;
 
 
 
-  const x = 127;
-  const y = 248;
+  const x = 118;
+  const y = 160;
 
-  const length1 = 126;
-  const length2 = 76;
+  const length1 = 65;
 
   const width = 10;
 
-  let i = variation;
+  let i = 1;
 
 
   let top_left_half_x = x + 3.5;
   let top_left_half_y = y + 3.5;
 
   //variation - 1.drawing half to 34th
-  rectangle20_var[1].bottom_right_x = x - 118;
-  rectangle20_var[1].bottom_right_y = y + length1 + 18;
-  rectangle20_var[1].bottom_left_x = x - 122;
-  rectangle20_var[1].bottom_left_y = y + length1 + 6;
+  rectangle20_var[1].bottom_right_x = x - 112;
+  rectangle20_var[1].bottom_right_y = y + length1 + 30;
+  rectangle20_var[1].bottom_left_x = x - 119;
+  rectangle20_var[1].bottom_left_y = y + length1 + 12 + 8;
   rectangle20_var[1].bottom_left_half_x = x - 120;
   rectangle20_var[1].bottom_left_half_y = y + length1 + 12;
-
-
-  //variation - 2.drawing half to 10th
-  rectangle20_var[2].bottom_right_x = x - 62;
-  rectangle20_var[2].bottom_right_y = y + length2 + 8;
-
-  rectangle20_var[2].bottom_left_half_x = x - 66
-  rectangle20_var[2].bottom_left_half_y = y + length2 + 4;
-
-
-  rectangle20_var[2].bottom_left_x = x - 70 + 1;
-  rectangle20_var[2].bottom_left_y = y + length2;
-
-
-
-
 
   points = [
     {
@@ -2237,12 +2421,12 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
 
     {
       x: rectangle20_var[i].bottom_right_x,
-      y: rectangle20_var[i].bottom_right_y,
+      y: rectangle20_var[i].bottom_right_y - 1,
     },
 
     {
-      x: x + width + 5,
-      y: y,
+      x: x + width,
+      y: y + 10,
     },
     {
       x: x,
@@ -2260,23 +2444,23 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
 
     points = [
       {
-        x: top_left_half_x,
+        x: top_left_half_x + 2,
         y: top_left_half_y,
       },
 
       {
-        x: rectangle20_var[i].bottom_left_half_x,
-        y: rectangle20_var[i].bottom_left_half_y,
+        x: rectangle20_var[i].bottom_left_half_x + 2,
+        y: rectangle20_var[i].bottom_left_half_y - 1,
       },
 
       {
         x: rectangle20_var[i].bottom_right_x,
-        y: rectangle20_var[i].bottom_right_y,
+        y: rectangle20_var[i].bottom_right_y - 1,
       },
 
       {
         x: x + 9,
-        y: y + 6,
+        y: y + 10,
       },
       {
         x: top_left_half_x,
@@ -2311,25 +2495,25 @@ DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
 function draw34short(type) {
   //variation - 1.drawing from start to the end of 34th
   let rotation = 17;
-  let x = 54
-  let y = 410
+  let x = 46
+  let y = 284
 
   let points = [
     {
-      x: x + 1,
+      x: x,
       y: y,
     },
     {
-      x: x + 139,
-      y: y + 108.5,
+      x: x + 92,
+      y: y + 31,
     },
     {
-      x: x + 144,
-      y: y + 96.5,
+      x: x + 88,
+      y: y + 22,
     },
     {
-      x: x + 2 + 1,
-      y: y - 15,
+      x: x + 2,
+      y: y - 12,
     },
     {
       x: x,
@@ -2348,24 +2532,24 @@ function draw34short(type) {
     points = [
       {
         x: x + 1 + 1,
-        y: y - 8,
+        y: y - 6,
       },
 
 
       {
-        x: x + 144,
-        y: y + 103.5,
+        x: x + 90,
+        y: y + 26,
       },
 
       {
-        x: x + 144,
-        y: y + 96.5,
+        x: x + 88,
+        y: y + 23,
       },
 
 
       {
         x: x + 2 + 1,
-        y: y - 15,
+        y: y - 11,
       },
 
       {
@@ -2402,8 +2586,8 @@ function draw34short(type) {
 function draw34long(type) {
   //variation - 1.drawing from start to the 10th
   let rotation = 17;
-  let x = 54
-  let y = 410
+  let x = 46
+  let y = 284
 
   let points = [
     {
@@ -2411,28 +2595,28 @@ function draw34long(type) {
       y: y,
     },
     {
-      x: x + 139,
-      y: y + 108.5,
+      x: x + 92,
+      y: y + 31,
     },
     {
-      x: x + 144,
-      y: y + 96.5,
+      x: x + 88,
+      y: y + 22,
     },
     {
       x: x + 12,
-      y: y - 15,
+      y: y - 11,
     },
     // long part
     {
 
-      x: x + 22,
-      y: y - 81,
+      x: x + 25,
+      y: y - 71,
 
     },
 
     {
-      x: x + 12,
-      y: y - 84,
+      x: x + 16,
+      y: y - 70,
 
     },
 
@@ -2460,33 +2644,33 @@ function draw34long(type) {
 
 
       {
-        x: x + 144,
-        y: y + 105,
+        x: x + 92,
+        y: y + 28,
       },
 
       {
-        x: x + 144,
-        y: y + 94,
+        x: x + 88,
+        y: y + 22,
       },
 
 
       {
         x: x + 12,
-        y: y - 15,
+        y: y - 11,
       },
       // long part
 
       {
 
-        x: x + 21,
-        y: y - 81,
+        x: x + 25,
+        y: y - 71,
 
       },
 
 
       {
-        x: x + 17,
-        y: y - 82,
+        x: x + 20,
+        y: y - 70,
 
       },
 
@@ -2542,15 +2726,15 @@ function draw57short(type) {
   //variation - 1.drawing to the end of 57th
 
   let points = [];
-  let rotation = 30
+  let rotation = 37
 
-  const x = 32;
-  const y = 463;
+  const x = 28;
+  const y = 316;
 
   const width = 10;
   const half_width = width / 2;
 
-  const length1 = 68;
+  const length1 = 50;
 
   points = [
     {
@@ -2560,7 +2744,7 @@ function draw57short(type) {
 
     {
       x: x - 7,
-      y: y - length1 - 2,
+      y: y - length1,
     },
 
     {
@@ -2570,7 +2754,7 @@ function draw57short(type) {
 
     {
       x: x + width + 1,
-      y: y + 6,
+      y: y,
     },
     {
       x: x,
@@ -2595,13 +2779,13 @@ function draw57short(type) {
       },
 
       {
-        x: x - 7 + 5,
-        y: y - length1 - 2,
+        x: x - 1,
+        y: y - length1 + 1,
       },
 
       {
-        x: x - 2 + 5,
-        y: y - length1,
+        x: x + 5,
+        y: y - length1 + 2,
       },
 
       {
@@ -2642,15 +2826,15 @@ function draw57long(type) {
   //variation - 2.drawing to 10th
 
   let points = [];
-  let rotation = 27
+  let rotation = 33
 
-  const x = 32;
-  const y = 463;
+  const x = 28;
+  const y = 316
 
   const width = 10;
   const half_width = width / 2;
 
-  const length1 = 141;
+  const length1 = 113;
 
   points = [
     {
@@ -2660,12 +2844,12 @@ function draw57long(type) {
 
     {
       x: x - 7,
-      y: y - length1,
+      y: y - length1 + 4,
     },
 
     {
       x: x + 3,
-      y: y - length1 + 2,
+      y: y - length1 + 1,
     },
 
     {
@@ -2695,7 +2879,7 @@ function draw57long(type) {
 
       {
         x: x - 7 + 5,
-        y: y - length1,
+        y: y - length1 + 4,
       },
 
       {
@@ -2758,13 +2942,15 @@ DrawFormulaClass.prototype.draw_57_Integration = function (type, variation) {
 // variation always drawing to 10th
 DrawFormulaClass.prototype.draw_10_Integration = function (type) {
 
-  const x = 116.5
-  const y = 357
+  const x = 116
+  const y = 238
 
   const width = 10;
   const half_width = width / 2;
-  const length = 35;
+  const length = 36;
   const rotation = 22;
+
+
 
   let points = [
     {
@@ -2773,13 +2959,13 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
     },
 
     {
-      x: x - length,
-      y: y,
+      x: x - length + 6,
+      y: y + 9,
     },
 
     {
-      x: x - length,
-      y: y - width,
+      x: x - length + 8,
+      y: y - width + 6,
     },
 
     {
@@ -2800,7 +2986,7 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
       .attr("stroke", "black")
       .attr("fill", "red");
 
-    points[2].y = y - half_width
+    points[2].y = y - half_width + 6
     points[3].y = y - half_width
 
     mixed_line
@@ -2831,6 +3017,8 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
 //type - 'both', 'red', 'black'
 DrawFormulaClass.prototype.drawIntegration = function (int_gates) {
 
+
+
   const data = {
     top_left_x: this.throatCentreCoord.text20coordinates.x,
     top_left_y: this.throatCentreCoord.text20coordinates.y,
@@ -2846,6 +3034,12 @@ DrawFormulaClass.prototype.drawIntegration = function (int_gates) {
   data.half_width = data.width / 2;
 
   //const length = Math.sqrt(Math.pow(data.temp_width,2) + Math.pow(data.temp_height,2))/3;
+
+  // console.log("Inside drawIntegration")
+  // this.draw_34_Integration("both", 2);
+  // this.draw_10_Integration("both", 1);
+  // this.draw_20_Integration("both", 1);
+  // this.draw_57_Integration("both", 2);
 
   let count = 0;
 
