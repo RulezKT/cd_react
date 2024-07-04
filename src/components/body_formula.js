@@ -2161,8 +2161,10 @@ DrawFormulaClass.prototype.drawGenerator = function (
   centre_group,
   centre_data,
   text_data,
+
   fill,
-  stroke
+  stroke,
+  contour_data,
 ) {
   //Если центр определен, сделать черную окантовку
   let tmp_stroke = fill !== "white" ? "black" : stroke;
@@ -2172,6 +2174,22 @@ DrawFormulaClass.prototype.drawGenerator = function (
     .attr("d", lineFunction(centre_data))
     .attr("stroke", tmp_stroke)
     .attr("fill", fill || stroke);
+
+  if (contour_data) {
+    console.log(contour_data)
+
+    centre_group
+      .append("g")
+      .selectAll("circle")
+      .data(contour_data)
+      .enter()
+      .append("circle")
+      .attr("cx", (d) => d[0])
+      .attr("cy", (d) => d[1])
+      .attr("r", 8)
+      .attr('stroke', 'black')
+      .attr('fill', '#09ed7f');
+  }
 
   centre_group
     .append("g")
@@ -2189,7 +2207,7 @@ DrawFormulaClass.prototype.drawGenerator = function (
     .attr("text-anchor", "start");
 };
 
-DrawFormulaClass.prototype.drawHead340 = function (fill) {
+DrawFormulaClass.prototype.drawHead340 = function (gates, fill) {
   let x = 142
   let y = 10
 
@@ -2239,7 +2257,7 @@ DrawFormulaClass.prototype.drawHead340 = function (fill) {
     "#9400D3"
   );
 };
-DrawFormulaClass.prototype.drawAjna340 = function (fill) {
+DrawFormulaClass.prototype.drawAjna340 = function (gates, fill) {
   let x = 125
   let y = 99
   const ajnaCentreData = [
@@ -2301,10 +2319,11 @@ DrawFormulaClass.prototype.drawAjna340 = function (fill) {
     ajnaCentreData,
     ajnaTextData,
     fill,
-    "#0000FF"
+    // "#0000FF"
+    "#3275a8"
   );
 };
-DrawFormulaClass.prototype.drawThroat340 = function (fill) {
+DrawFormulaClass.prototype.drawThroat340 = function (gates, fill) {
 
   let x = 119
   let y = 129
@@ -2327,36 +2346,38 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     { x: x, y: y },
   ];
 
+
+
   const throatTextData = [
     {
       x: x + 18,
-      y: y + 11,
+      y: y + 13,
       text: "62",
     },
     {
       x: x + 39,
-      y: y + 11,
+      y: y + 13,
       text: "23",
     },
     {
       x: x + 62,
-      y: y + 11,
+      y: y + 13,
       text: `56`,
     },
 
     {
       x: x + 18,
-      y: y + 51,
+      y: y + 50,
       text: "31",
     },
     {
       x: x + 43,
-      y: y + 51,
+      y: y + 50,
       text: "8",
     },
     {
       x: x + 64,
-      y: y + 51,
+      y: y + 50,
       text: "33",
     },
 
@@ -2372,7 +2393,7 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
     {
       x: x + 82,
-      y: y + 51,
+      y: y + 50,
       text: "45",
     },
 
@@ -2388,6 +2409,20 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     },
   ];
 
+  const contourData = [
+
+  ]
+  gates[62] && contourData.push([throatTextData[0].x + 6.5, throatTextData[0].y - 3])
+  gates[23] && contourData.push([throatTextData[1].x, throatTextData[1].y])
+  gates[56] && contourData.push([throatTextData[2].x, throatTextData[2]])
+  gates[31] && contourData.push([throatTextData[3].x, throatTextData[3].y])
+  gates[8] && contourData.push([throatTextData[4].x + 3.5, throatTextData[4].y - 5])
+  gates[33] && contourData.push([throatTextData[5].x, throatTextData[5].y])
+  gates[35] && contourData.push([throatTextData[6].x, throatTextData[6].y])
+  gates[12] && contourData.push([throatTextData[7].x + 6.5, throatTextData[7].y - 4])
+  gates[45] && contourData.push([throatTextData[8].x, throatTextData[8].y])
+  gates[16] && contourData.push([throatTextData[9].x, throatTextData[9].y])
+  gates[20] && contourData.push([throatTextData[10].x, throatTextData[10].y])
 
 
   let centreGroup = svg.append("g");
@@ -2395,11 +2430,13 @@ DrawFormulaClass.prototype.drawThroat340 = function (fill) {
     centreGroup,
     throatCentreData,
     throatTextData,
+
     fill,
-    "#40E0D0"
+    "#40E0D0",
+    contourData,
   );
 };
-DrawFormulaClass.prototype.drawG340 = function (fill) {
+DrawFormulaClass.prototype.drawG340 = function (gates, fill) {
 
   let x = 126
   let y = 213
@@ -2486,7 +2523,7 @@ DrawFormulaClass.prototype.drawG340 = function (fill) {
     "#64E811"
   );
 };
-DrawFormulaClass.prototype.drawSacral340 = function (fill) {
+DrawFormulaClass.prototype.drawSacral340 = function (gates, fill) {
   let x = 125
   let y = 320
   const sacralCentreData = [
@@ -2565,7 +2602,7 @@ DrawFormulaClass.prototype.drawSacral340 = function (fill) {
     "#F59713"
   );
 };
-DrawFormulaClass.prototype.drawRoot340 = function (fill) {
+DrawFormulaClass.prototype.drawRoot340 = function (gates, fill) {
   let x = 125
   let y = 410
   const rootCentreData = [
@@ -2646,7 +2683,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (fill) {
   );
 };
 
-DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
+DrawFormulaClass.prototype.drawSpleen340 = function (gates, fill) {
   const x = 5
   const y = 300
   const spleenCentreData = [
@@ -2710,7 +2747,7 @@ DrawFormulaClass.prototype.drawSpleen340 = function (fill) {
     "#F20C0C"
   );
 };
-DrawFormulaClass.prototype.drawEmo340 = function (fill) {
+DrawFormulaClass.prototype.drawEmo340 = function (gates, fill) {
   let x = 335
   let y = 300
   const emoCentreData = [
@@ -2776,7 +2813,7 @@ DrawFormulaClass.prototype.drawEmo340 = function (fill) {
     "#F59713"
   );
 };
-DrawFormulaClass.prototype.drawEgo340 = function (fill) {
+DrawFormulaClass.prototype.drawEgo340 = function (gates, fill) {
   let x = 250
   let y = 250
   const egoCentreData = [
@@ -4651,22 +4688,22 @@ DrawFormulaClass.prototype.draw_body = function (gates) {
     this.drawIntegration(int_gates);
   }
 
-  this.drawCenters(centres);
+  this.drawCenters(centres, gates);
 
 
 };
 
 
-DrawFormulaClass.prototype.drawCenters = function (centres = {}) {
+DrawFormulaClass.prototype.drawCenters = function (centres = {}, gates = {}) {
 
-  centres.head ? this.drawHead340() : this.drawHead340("white");
-  centres.ajna ? this.drawAjna340() : this.drawAjna340("white");
-  centres.throat ? this.drawThroat340() : this.drawThroat340("white");
-  centres.g ? this.drawG340() : this.drawG340("white");
-  centres.sacral ? this.drawSacral340() : this.drawSacral340("white");
-  centres.root ? this.drawRoot340() : this.drawRoot340("white");
-  centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
-  centres.ego ? this.drawEgo340() : this.drawEgo340("white");
-  centres.emo ? this.drawEmo340() : this.drawEmo340("white");
+  centres.head ? this.drawHead340(gates) : this.drawHead340(gates, "white");
+  centres.ajna ? this.drawAjna340(gates) : this.drawAjna340(gates, "white");
+  centres.throat ? this.drawThroat340(gates) : this.drawThroat340(gates, "white");
+  centres.g ? this.drawG340(gates) : this.drawG340(gates, "white");
+  centres.sacral ? this.drawSacral340(gates) : this.drawSacral340(gates, "white");
+  centres.root ? this.drawRoot340(gates) : this.drawRoot340(gates, "white");
+  centres.spleen ? this.drawSpleen340() : this.drawSpleen340(gates, "white");
+  centres.ego ? this.drawEgo340(gates) : this.drawEgo340(gates, "white");
+  centres.emo ? this.drawEmo340(gates) : this.drawEmo340(gates, "white");
 
 }
