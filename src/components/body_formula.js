@@ -2634,7 +2634,7 @@ DrawFormulaClass.prototype.drawSacral340 = function (gates, fill) {
   gates[29] && contourData.push([sacralTextData[2].x + 7, sacralTextData[2].y - 2])
   gates[42] && contourData.push([sacralTextData[3].x + 7, sacralTextData[3].y - 6])
   gates[3] && contourData.push([sacralTextData[4].x + 3.5, sacralTextData[4].y - 6])
-  gates[9] && contourData.push([sacralTextData[5].x, sacralTextData[5].y])
+  gates[9] && contourData.push([sacralTextData[5].x + 4, sacralTextData[5].y - 6])
   gates[34] && contourData.push([sacralTextData[6].x + 7, sacralTextData[6].y - 3])
   gates[27] && contourData.push([sacralTextData[7].x + 6.5, sacralTextData[7].y - 4])
   gates[59] && contourData.push([sacralTextData[8].x, sacralTextData[8].y])
@@ -2728,7 +2728,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (gates, fill) {
   gates[60] && contourData.push([rootTextData[1].x + 7, rootTextData[1].y - 2])
   gates[52] && contourData.push([rootTextData[2].x + 7, rootTextData[2].y - 2])
   gates[54] && contourData.push([rootTextData[3].x + 7, rootTextData[3].y - 4])
-  gates[38] && contourData.push([rootTextData[4].x + 7, rootTextData[4].y - 6])
+  gates[38] && contourData.push([rootTextData[4].x + 7, rootTextData[4].y - 4])
   gates[58] && contourData.push([rootTextData[5].x + 7, rootTextData[5].y - 6])
   gates[19] && contourData.push([rootTextData[6].x + 7, rootTextData[6].y - 2])
   gates[39] && contourData.push([rootTextData[7].x + 6.5, rootTextData[7].y - 4])
@@ -2797,8 +2797,8 @@ DrawFormulaClass.prototype.drawSpleen340 = function (gates, fill) {
     },
 
     {
-      x: x + 20,
-      y: y + 90,
+      x: x + 18,
+      y: y + 88,
       text: "18",
     },
   ];
@@ -2808,11 +2808,11 @@ DrawFormulaClass.prototype.drawSpleen340 = function (gates, fill) {
   ]
   gates[48] && contourData.push([spleenTextData[0].x + 8, spleenTextData[0].y - 3])
   gates[57] && contourData.push([spleenTextData[1].x + 6, spleenTextData[1].y - 3])
-  gates[44] && contourData.push([spleenTextData[2].x, spleenTextData[2].y])
+  gates[44] && contourData.push([spleenTextData[2].x + 8, spleenTextData[2].y - 2])
   gates[50] && contourData.push([spleenTextData[3].x + 7, spleenTextData[3].y - 4])
-  gates[32] && contourData.push([spleenTextData[4].x + 3.5, spleenTextData[4].y - 6])
-  gates[28] && contourData.push([spleenTextData[5].x, spleenTextData[5].y])
-  gates[18] && contourData.push([spleenTextData[6].x + 7, spleenTextData[6].y - 2])
+  gates[32] && contourData.push([spleenTextData[4].x + 6, spleenTextData[4].y - 6])
+  gates[28] && contourData.push([spleenTextData[5].x + 7, spleenTextData[5].y - 4])
+  gates[18] && contourData.push([spleenTextData[6].x + 7, spleenTextData[6].y - 4])
 
 
 
@@ -2891,7 +2891,7 @@ DrawFormulaClass.prototype.drawEmo340 = function (gates, fill) {
   gates[22] && contourData.push([emoTextData[2].x + 6, emoTextData[2].y - 4])
   gates[36] && contourData.push([emoTextData[3].x + 7, emoTextData[3].y - 4])
   gates[49] && contourData.push([emoTextData[4].x + 7, emoTextData[4].y - 6])
-  gates[50] && contourData.push([emoTextData[5].x, emoTextData[5].y])
+  gates[55] && contourData.push([emoTextData[5].x + 7, emoTextData[5].y - 3])
   gates[30] && contourData.push([emoTextData[6].x + 7, emoTextData[6].y - 2])
 
 
