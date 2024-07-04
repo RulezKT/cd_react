@@ -6,6 +6,7 @@ import { CalcTypeRadio } from "./components/CalcTypeRadio";
 import { UseCalcType, useCalcType } from "./components/calcType";
 import { FullTechInfo } from "./components/FullTechInfo";
 import { PlanetsInfo } from "./components/PlanetsInfo";
+import { PrevNextNutr } from "./components/PrevNextNutr";
 
 
 
@@ -14,7 +15,6 @@ function App() {
   const cdInfo: UseCdInfo = useCdInfo();
   const typeOfChart: UseTypeOfChart = useTypeOfChart();
   const calcType: UseCalcType = useCalcType();
-
 
   return (
     <div className="flex w-full flex-col space-y-0 mt-1 px-1 ">
@@ -35,6 +35,9 @@ function App() {
               chart={typeOfChart.typeOfChart}
               calc={calcType.calcType}
             />
+
+            <PrevNextNutr />
+
           </div>
 
           <div className="TechInfo w-80 order-2 md:order-2 lg:order-1">

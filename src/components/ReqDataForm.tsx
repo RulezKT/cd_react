@@ -24,6 +24,7 @@ import { CDinfo } from "@/lib/cd_consts";
 import { TypeOfChartRadio } from "./TypeOfChartRadio";
 
 
+import { useSavedLastCdInfo, UseSavedLastCdInfo } from "./savedLastCdInfo";
 
 type TimeZone = {
   dstOffset: number;
@@ -44,6 +45,7 @@ export function ReqDataForm() {
   const GOOGLE_MAPS_API_KEY = "AIzaSyBaHb8Qz3QFglWkTHH3Bisf1geUNdxPKys";
 
   const cdInfo: UseCdInfo = useCdInfo();
+  const savedLastCdInfo: UseSavedLastCdInfo = useSavedLastCdInfo();
   const typeOfChart: UseTypeOfChart = useTypeOfChart();
   const calcType: UseCalcType = useCalcType();
 
@@ -267,6 +269,7 @@ export function ReqDataForm() {
     const data = await fetchData(reqData);
     // console.log(data);
     cdInfo.set(data);
+    savedLastCdInfo.set(data);
   }
 
   async function onSubmit() {
@@ -316,6 +319,7 @@ export function ReqDataForm() {
     const data = await fetchData(reqData);
 
     cdInfo.set(data);
+    savedLastCdInfo.set(data);
 
     if (data.name != "Transits" && data.name != "") {
       if (last10.length < 10) {
@@ -377,6 +381,7 @@ export function ReqDataForm() {
       //     item.time.pers_time_utc === value.time.pers_time_utc
       // )
     );
+    savedLastCdInfo.set(last10[parseInt(index)]);
   }
 
 

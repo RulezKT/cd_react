@@ -2323,7 +2323,7 @@ DrawFormulaClass.prototype.drawAjna340 = function (gates, fill) {
   const contourData = [
   ]
   gates[47] && contourData.push([ajnaTextData[0].x + 7.5, ajnaTextData[0].y - 3])
-  gates[24] && contourData.push([ajnaTextData[1].x + 6, ajnaTextData[1].y - 4])
+  gates[24] && contourData.push([ajnaTextData[1].x + 7, ajnaTextData[1].y - 4])
   gates[4] && contourData.push([ajnaTextData[2].x + 4, ajnaTextData[2].y - 4])
   gates[17] && contourData.push([ajnaTextData[3].x + 7.5, ajnaTextData[3].y - 4])
   gates[43] && contourData.push([ajnaTextData[4].x + 7, ajnaTextData[4].y - 5])
@@ -2434,7 +2434,7 @@ DrawFormulaClass.prototype.drawThroat340 = function (gates, fill) {
   gates[56] && contourData.push([throatTextData[2].x, throatTextData[2].y])
   gates[31] && contourData.push([throatTextData[3].x + 7, throatTextData[3].y - 4])
   gates[8] && contourData.push([throatTextData[4].x + 3.5, throatTextData[4].y - 6])
-  gates[33] && contourData.push([throatTextData[5].x, throatTextData[5].y])
+  gates[33] && contourData.push([throatTextData[5].x + 7, throatTextData[5].y - 6])
   gates[35] && contourData.push([throatTextData[6].x + 7, throatTextData[6].y - 2])
   gates[12] && contourData.push([throatTextData[7].x + 6.5, throatTextData[7].y - 4])
   gates[45] && contourData.push([throatTextData[8].x, throatTextData[8].y])
@@ -2499,7 +2499,7 @@ DrawFormulaClass.prototype.drawG340 = function (gates, fill) {
     {
       x: x + 54,
       y: y + 12,
-      text: `13`,
+      text: "13",
     },
 
     {
@@ -2535,7 +2535,7 @@ DrawFormulaClass.prototype.drawG340 = function (gates, fill) {
   ]
   gates[7] && contourData.push([gTextData[0].x + 4.5, gTextData[0].y - 3])
   gates[1] && contourData.push([gTextData[1].x + 3, gTextData[1].y - 2])
-  gates[13] && contourData.push([gTextData[2].x + 8, gTextData[2].y - 2])
+  gates[13] && contourData.push([gTextData[2].x + 7, gTextData[2].y - 3])
   gates[10] && contourData.push([gTextData[3].x + 7, gTextData[3].y - 4])
   gates[25] && contourData.push([gTextData[4].x + 7, gTextData[4].y - 4])
   gates[15] && contourData.push([gTextData[5].x, gTextData[5].y])
@@ -2637,7 +2637,7 @@ DrawFormulaClass.prototype.drawSacral340 = function (gates, fill) {
   gates[9] && contourData.push([sacralTextData[5].x + 4, sacralTextData[5].y - 6])
   gates[34] && contourData.push([sacralTextData[6].x + 7, sacralTextData[6].y - 3])
   gates[27] && contourData.push([sacralTextData[7].x + 6.5, sacralTextData[7].y - 4])
-  gates[59] && contourData.push([sacralTextData[8].x, sacralTextData[8].y])
+  gates[59] && contourData.push([sacralTextData[8].x + 7, sacralTextData[8].y - 6])
 
 
 
@@ -2732,7 +2732,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (gates, fill) {
   gates[58] && contourData.push([rootTextData[5].x + 7, rootTextData[5].y - 6])
   gates[19] && contourData.push([rootTextData[6].x + 7, rootTextData[6].y - 2])
   gates[39] && contourData.push([rootTextData[7].x + 6.5, rootTextData[7].y - 4])
-  gates[41] && contourData.push([rootTextData[8].x, rootTextData[8].y])
+  gates[41] && contourData.push([rootTextData[8].x + 7, rootTextData[8].y - 4])
 
 
 
@@ -2892,7 +2892,7 @@ DrawFormulaClass.prototype.drawEmo340 = function (gates, fill) {
   gates[36] && contourData.push([emoTextData[3].x + 7, emoTextData[3].y - 4])
   gates[49] && contourData.push([emoTextData[4].x + 7, emoTextData[4].y - 6])
   gates[55] && contourData.push([emoTextData[5].x + 7, emoTextData[5].y - 3])
-  gates[30] && contourData.push([emoTextData[6].x + 7, emoTextData[6].y - 2])
+  gates[30] && contourData.push([emoTextData[6].x + 7, emoTextData[6].y - 4])
 
 
 
@@ -3255,7 +3255,7 @@ DrawFormulaClass.prototype.draw_Body = function () {
   let definition = defShorten(this.data_formula.hd.generalInfo.definition);
   let typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
 
-  let planet_text = `${this.data_formula.name.slice(0, 10)}: ` + loc_time_str;
+  let planet_text = `${this.data_formula.name.slice(0, 10)}: ` + loc_time_str + ` UTC`;
   appendText(svg, pers_x, pers_y, planet_text, "blue", "start", 12);
 
 
