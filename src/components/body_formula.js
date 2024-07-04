@@ -2208,40 +2208,40 @@ DrawFormulaClass.prototype.drawGenerator = function (
 };
 
 DrawFormulaClass.prototype.drawHead340 = function (gates, fill) {
-  let x = 142
-  let y = 10
+  let x = 130
+  let y = 20
 
   const headCentreData = [
     { x: x, y: y },
     {
-      x: x + 52,
+      x: x + 70,
       y: y
     },
     {
-      x: x + 73,
-      y: y + 25,
+      x: x + 70,
+      y: y + 20,
     },
     {
-      x: x - 21,
-      y: y + 25,
+      x: x,
+      y: y + 20,
     },
     { x: x, y: y },
   ];
 
   const headTextData = [
     {
-      x: x - 5,
-      y: y + 20,
+      x: x + 8,
+      y: y + 15,
       text: "64",
     },
     {
-      x: x + 17,
-      y: y + 20,
+      x: x + 29,
+      y: y + 15,
       text: "61",
     },
     {
-      x: x + 39,
-      y: y + 20,
+      x: x + 50,
+      y: y + 15,
       text: "63",
     },
   ];
@@ -2258,16 +2258,16 @@ DrawFormulaClass.prototype.drawHead340 = function (gates, fill) {
   );
 };
 DrawFormulaClass.prototype.drawAjna340 = function (gates, fill) {
-  let x = 125
+  let x = 132
   let y = 99
   const ajnaCentreData = [
     { x: x, y: y },
     {
-      x: x + 88,
+      x: x + 68,
       y: y,
     },
     {
-      x: x + 88,
+      x: x + 68,
       y: y - 40,
     },
 
@@ -2280,34 +2280,34 @@ DrawFormulaClass.prototype.drawAjna340 = function (gates, fill) {
 
   const ajnaTextData = [
     {
-      x: x + 12,
+      x: x + 6,
       y: y - 28,
       text: "47",
     },
     {
-      x: x + 34,
+      x: x + 28,
       y: y - 28,
       text: "24",
     },
     {
-      x: x + 59,
+      x: x + 52,
       y: y - 28,
       text: "4",
     },
     {
-      x: x + 12,
+      x: x + 6,
       y: y - 4,
       text: `17`,
     },
 
 
     {
-      x: x + 34,
+      x: x + 28,
       y: y - 4,
       text: "43",
     },
     {
-      x: x + 58,
+      x: x + 50,
       y: y - 4,
       text: "11",
     },
@@ -2919,27 +2919,38 @@ DrawFormulaClass.prototype.drawWhiteFormula = function () {
 DrawFormulaClass.prototype.draw_pers_text = function () {
   let planet_text = "";
 
-  let pers_x = 338;
-  let pers_y = 12;
+  let pers_x = 338 - 26;
+  let pers_y = 38;
 
   // console.log(pers_x, pers_y);
 
 
   planet_text = `${this.pers_sun_short.hex}-.${this.pers_sun_short.line} - ${this.pers_sun_short.direction}${this.pers_sun_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
-  pers_y += 20;
 
-  planet_text = `${this.pers_earth_short.hex}-.${this.pers_earth_short.line} - ${this.pers_earth_short.direction}${this.pers_earth_short.power}`;
-  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
+  planet_text = `(${this.pers_earth_short.hex})`;
+  appendTextPlanets(svg, pers_x + 26, pers_y, planet_text, "black", "end");
+
+  planet_text = `-${this.pers_sun_short.line}.${this.pers_sun_short.color}.${this.pers_sun_short.tone}`;
+  appendTextPlanets(svg, pers_x - 60, pers_y, planet_text, "black", "end");
+
+
   pers_y += 20;
 
   planet_text = `${this.pers_nnode_short.hex}-.${this.pers_nnode_short.line} - ${this.pers_nnode_short.direction}${this.pers_nnode_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
-  pers_y += 20;
 
-  planet_text = `${this.pers_snode_short.hex}-.${this.pers_snode_short.line} - ${this.pers_snode_short.direction}${this.pers_snode_short.power}`;
-  appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
-  pers_y += 20;
+  planet_text = `(${this.pers_snode_short.hex})`;
+  appendTextPlanets(svg, pers_x + 26, pers_y, planet_text, "black", "end");
+
+
+  planet_text = `-${this.pers_nnode_short.line}.${this.pers_nnode_short.color}.${this.pers_nnode_short.tone}`;
+  appendTextPlanets(svg, pers_x - 60, pers_y, planet_text, "black", "end");
+
+
+  pers_y += 30;
+
+  pers_x = 338;
 
   planet_text = `${this.pers_moon_short.hex}-.${this.pers_moon_short.line} - ${this.pers_moon_short.direction
     }${this.pers_moon_short.power}`;
@@ -2959,6 +2970,13 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
   planet_text = `${this.pers_mars_short.hex}-.${this.pers_mars_short.line} - ${this.pers_mars_short.direction
     }${this.pers_mars_short.power}`;
   appendTextPlanets(svg, pers_x, pers_y, planet_text, "black", "end");
+
+
+  planet_text = `-${this.pers_mars_short.line}.${this.pers_mars_short.color}.${this.pers_mars_short.tone}`;
+  appendTextPlanets(svg, pers_x - 50, pers_y, planet_text, "black", "end");
+
+
+
   pers_y += 20;
 
   planet_text = `${this.pers_jupiter_short.hex}-.${this.pers_jupiter_short.line} - ${this.pers_jupiter_short.direction
@@ -2990,7 +3008,7 @@ DrawFormulaClass.prototype.draw_pers_text = function () {
 DrawFormulaClass.prototype.draw_des_text = function () {
   //DESIGN
   let des_x = 39;
-  let des_y = 12;
+  let des_y = 38;
 
   // console.log(des_x, des_y)
 
@@ -2999,23 +3017,30 @@ DrawFormulaClass.prototype.draw_des_text = function () {
   let planet_text = "";
 
 
-  planet_text = `${this.des_sun_short.hex}-.${this.des_sun_short.line} - ${this.des_sun_short.direction}${this.des_sun_short.power}`;
+  planet_text = `${this.des_sun_short.hex}-.${this.des_sun_short.line} - ${this.des_sun_short.direction}${this.des_sun_short.power} `;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
-  des_y += 20;
 
+  planet_text = `(${this.des_earth_short.hex}) `;
+  appendTextPlanets(svg, des_x + 26, des_y, planet_text, "red", "end");
 
-  planet_text = `${this.des_earth_short.hex}-.${this.des_earth_short.line} - ${this.des_earth_short.direction}${this.des_earth_short.power}`;
-  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
+  planet_text = `-${this.des_sun_short.line}.${this.des_sun_short.color}.${this.des_sun_short.tone}`;
+  appendTextPlanets(svg, des_x + 60, des_y, planet_text, "red", "end");
+
   des_y += 20;
 
   planet_text = `${this.des_nnode_short.hex}-.${this.des_nnode_short.line} - ${this.des_nnode_short.direction}${this.des_nnode_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
-  des_y += 20;
 
-  planet_text = `${this.des_snode_short.hex}-.${this.des_snode_short.line
-    } - ${this.des_snode_short.direction}${this.des_snode_short.power}`;
-  appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
-  des_y += 20;
+
+  planet_text = `(${this.des_snode_short.hex})`;
+  appendTextPlanets(svg, des_x + 26, des_y, planet_text, "red", "end");
+
+
+  planet_text = `-${this.des_nnode_short.line}.${this.des_nnode_short.color}.${this.des_nnode_short.tone}`;
+  appendTextPlanets(svg, des_x + 60, des_y, planet_text, "red", "end");
+
+
+  des_y += 30;
 
   planet_text = `${this.des_moon_short.hex}-.${this.des_moon_short.line} - ${this.des_moon_short.direction}${this.des_moon_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
@@ -3035,6 +3060,12 @@ DrawFormulaClass.prototype.draw_des_text = function () {
 
   planet_text = `${this.des_mars_short.hex}-.${this.des_mars_short.line} - ${this.des_mars_short.direction}${this.des_mars_short.power}`;
   appendTextPlanets(svg, des_x, des_y, planet_text, "red", "end");
+
+
+  planet_text = `-${this.des_mars_short.line}.${this.des_mars_short.color}.${this.des_mars_short.tone}`;
+  appendTextPlanets(svg, des_x + 30, des_y, planet_text, "red", "end");
+
+
   des_y += 20;
 
   planet_text = `${this.des_jupiter_short.hex}-.${this.des_jupiter_short.line
@@ -3109,16 +3140,30 @@ DrawFormulaClass.prototype.draw_Body = function () {
   this.draw_pers_text();
   this.draw_des_text();
 
-  let pers_x = 2;
-  let pers_y = 450;
+  let pers_x = 4;
+  let pers_y = 13;
   // console.log(pers_x, pers_y);
-  let planet_text = `${this.data_formula.name.slice(0, 10)}`;
-  appendText(svg, pers_x, pers_y, planet_text, "blue", "start", 12);
 
-  pers_y = 465;
   const loc = this.data_formula.time.pers_time_utc;
   const loc_time_str = `${loc.day}.${loc.month}.${loc.year} ${loc.hours}:${loc.minutes}`
-  appendText(svg, pers_x, pers_y, loc_time_str, "blue", "start", 12);
+
+  let type_text = typeShorten(this.data_formula.hd.generalInfo.type);
+  let definition = defShorten(this.data_formula.hd.generalInfo.definition);
+  let typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
+
+  let planet_text = `${this.data_formula.name.slice(0, 10)}: ` + loc_time_str;
+  appendText(svg, pers_x, pers_y, planet_text, "blue", "start", 12);
+
+
+
+  planet_text = typeProfDef;
+  appendText(svg, pers_x + 224, pers_y, planet_text, "blue", "start", 12);
+
+  // pers_x = 100;
+  // pers_y = 10;
+  // const loc = this.data_formula.time.pers_time_utc;
+  // const loc_time_str = `${loc.day}.${loc.month}.${loc.year} ${loc.hours}:${loc.minutes}`
+  // appendText(svg, pers_x, pers_y, loc_time_str, "blue", "start", 12);
 
 
 
@@ -3133,12 +3178,12 @@ DrawFormulaClass.prototype.draw_Body = function () {
   appendText(svg, pers_x, pers_y, variable, "blue", "start", 12);
 
 
-  pers_y = 486;
-  pers_x = 2;
-  let type_text = typeShorten(this.data_formula.hd.generalInfo.type);
-  let definition = defShorten(this.data_formula.hd.generalInfo.definition);
-  let typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
-  appendText(svg, pers_x, pers_y, typeProfDef, "black", "start", 12);
+  // pers_y = 486;
+  // pers_x = 2;
+  // let type_text = typeShorten(this.data_formula.hd.generalInfo.type);
+  // let definition = defShorten(this.data_formula.hd.generalInfo.definition);
+  // let typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
+  // appendText(svg, pers_x, pers_y, typeProfDef, "black", "start", 12);
 
   let gates = [];
 
