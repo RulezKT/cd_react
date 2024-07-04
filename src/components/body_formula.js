@@ -108,513 +108,10 @@ export function DrawFormulaClass(data_formula, view_width, view_height) {
     weight: 700,
   };
 
-  //ширина 1 центра 10%
-  this.width_of_1_centre = (this.width / 100) * 10;
 
-  //высота 1 центра 10%
-  this.height_of_1_centre = (this.height / 100) * 10;
 
-  //делаем начальный промежуток между центрами 3%
-  this.gap_between_centres = (this.height / 100) * 3;
-
-  this.headCentreCoord = {};
-  this.ajnaCentreCoord = {};
-  this.throatCentreCoord = {};
-  this.gCentreCoord = {};
-  this.sacralCentreCoord = {};
-  this.rootCentreCoord = {};
-  this.egoCentreCoord = {};
-  this.spleenCentreCoord = {};
-  this.emoCentreCoord = {};
-
-  //размер, которым рисуется планета
-  this.size_of_the_planet_to_draw = 14;
-
-  this.init();
 }
 
-//Определяет начальные координаты и размеры рисунка
-// Надо сюда так-же засунуть все надписи
-DrawFormulaClass.prototype.init = function () {
-  //координаты для текста
-  this.pers_x = this.x - this.width / 2;
-  this.pers_y = this.y;
-
-  //находим координаты всех ворот, каналов и центров
-  let x = this.x;
-  let y = this.y;
-
-
-  // console.log(x, y);
-
-  this.headCentreCoord = {
-    x: x,
-    y: y,
-
-    text64coordinates: {
-      x: x - this.width_of_1_centre / 2 + this.styles.size,
-      y: y + this.height_of_1_centre - this.styles.size / 2,
-    },
-
-    text61coordinates: {
-      x: x - this.styles.size / 2,
-      y: y + this.height_of_1_centre - this.styles.size / 2,
-    },
-
-    text63coordinates: {
-      x: x + this.width_of_1_centre / 2 - this.styles.size * 2,
-      y: y + this.height_of_1_centre - this.styles.size / 2,
-    },
-  };
-
-  const vertical_x_1 = this.headCentreCoord.text64coordinates.x;
-  const vertical_x_2 = this.headCentreCoord.text61coordinates.x;
-  const vertical_x_3 = this.headCentreCoord.text63coordinates.x;
-
-  y += this.height_of_1_centre * 2 + this.gap_between_centres;
-
-
-  // console.log(x, y);
-
-  this.ajnaCentreCoord = {
-    x: x,
-    y: y,
-
-    text47coordinates: {
-      x: vertical_x_1,
-      y: y - this.height_of_1_centre + this.styles.size,
-    },
-
-    text24coordinates: {
-      x: vertical_x_2,
-      y: y - this.height_of_1_centre + this.styles.size,
-    },
-
-    text4coordinates: {
-      x: vertical_x_3,
-      y: y - this.height_of_1_centre + this.styles.size,
-    },
-
-    text17coordinates: {
-      x: vertical_x_1,
-      y: y - this.height_of_1_centre / 2 - this.styles.size / 2,
-    },
-
-    text43coordinates: {
-      x: vertical_x_2,
-      y: y - this.styles.size * 1.2,
-    },
-
-    text11coordinates: {
-      x: vertical_x_3,
-      y: y - this.height_of_1_centre / 2 - this.styles.size / 2,
-    },
-  };
-
-  x -= this.width_of_1_centre / 2;
-  y += this.gap_between_centres;
-
-  // console.log(x, y)
-
-  this.throatCentreCoord = {
-    x: x,
-    y: y,
-
-    text62coordinates: {
-      x: vertical_x_1,
-      y: y + this.styles.size,
-    },
-
-    text23coordinates: {
-      x: vertical_x_2,
-      y: y + this.styles.size,
-    },
-
-    text56coordinates: {
-      x: vertical_x_3,
-      y: y + this.styles.size,
-    },
-
-    text31coordinates: {
-      x: vertical_x_1,
-      y: y + this.height_of_1_centre + this.styles.size / 2,
-    },
-
-    text8coordinates: {
-      x: vertical_x_2,
-      y: y + this.height_of_1_centre + this.styles.size / 2,
-    },
-
-    text33coordinates: {
-      x: vertical_x_3,
-      y: y + this.height_of_1_centre + this.styles.size / 2,
-    },
-
-    text16coordinates: {
-      x: x,
-      y: y + this.styles.size * 2.5,
-    },
-
-    text20coordinates: {
-      x: x,
-      y: y + this.styles.size * 4.5,
-    },
-
-    text35coordinates: {
-      x: x + this.width_of_1_centre - this.styles.size,
-      y: y + this.styles.size * 2,
-    },
-
-    text12coordinates: {
-      x: x + this.width_of_1_centre - this.styles.size,
-      y: y + this.styles.size * 3.5,
-    },
-
-    text45coordinates: {
-      x: x + this.width_of_1_centre - this.styles.size,
-      y: y + this.height_of_1_centre - this.styles.size,
-    },
-  };
-
-  x += this.width_of_1_centre / 2;
-  y += this.height_of_1_centre + this.gap_between_centres * 1.2;
-
-  let x_for_ego = x;
-  let y_for_ego = y;
-
-  // console.log(x, y)
-
-  this.gCentreCoord = {
-    x: x,
-    y: y,
-
-    text7coordinates: {
-      x: vertical_x_1,
-      y: y + this.styles.size * 3,
-    },
-
-    text1coordinates: {
-      x: vertical_x_2,
-      y: y + this.styles.size,
-    },
-
-    text13coordinates: {
-      x: vertical_x_3,
-      y: y + this.styles.size * 3,
-    },
-
-    text10coordinates: {
-      x: x - (this.width_of_1_centre * 1.5) / 2 + this.styles.size,
-      y: y + (this.height_of_1_centre * 1.4) / 2,
-    },
-
-    text25coordinates: {
-      x: x + (this.width_of_1_centre * 1.5) / 2 - this.styles.size * 2,
-      y: y + (this.height_of_1_centre * 1.4) / 2,
-    },
-
-    text15coordinates: {
-      x: vertical_x_1,
-      y: y + this.height_of_1_centre * 1.25 - this.styles.size * 2,
-    },
-
-    text2coordinates: {
-      x: vertical_x_2,
-      y: y + this.height_of_1_centre * 1.25 - this.styles.size / 2,
-    },
-
-    text46coordinates: {
-      x: vertical_x_3,
-      y: y + this.height_of_1_centre * 1.25 - this.styles.size * 2,
-    },
-  };
-
-  x -= this.width_of_1_centre / 2;
-  y += this.height_of_1_centre * 1.25 + this.gap_between_centres * 4;
-
-  let x_for_spleen = x;
-  let y_for_spleen = y;
-
-  let x_for_emo = x;
-  let y_for_emo = y;
-
-  // console.log(x, y)
-
-  this.sacralCentreCoord = {
-    x: x,
-    y: y,
-    width: this.radius * 3,
-    height: this.radius * 3,
-
-    text5coordinates: {
-      x: vertical_x_1,
-      y: y + this.styles.size,
-    },
-
-    text14coordinates: {
-      x: vertical_x_2,
-      y: y + this.styles.size,
-    },
-
-    text29coordinates: {
-      x: vertical_x_3,
-      y: y + this.styles.size,
-    },
-
-    text42coordinates: {
-      x: vertical_x_1,
-      y: y + this.height_of_1_centre - this.styles.size / 2,
-    },
-
-    text3coordinates: {
-      x: vertical_x_2,
-      y: y + this.height_of_1_centre - this.styles.size / 2,
-    },
-
-    text9coordinates: {
-      x: vertical_x_3,
-      y: y + this.height_of_1_centre - this.styles.size / 2,
-    },
-
-    text34coordinates: {
-      x: x + this.styles.size / 4,
-      y: y + this.styles.size * 2,
-    },
-
-    text27coordinates: {
-      x: x + this.styles.size / 4,
-      y: y + this.styles.size * 4,
-    },
-
-    text59coordinates: {
-      x: x + this.width_of_1_centre - this.styles.size * 1.5,
-      y: y + this.styles.size * 4,
-    },
-  };
-
-  y += this.height_of_1_centre + this.gap_between_centres * 1.2;
-  // console.log(x, y)
-  this.rootCentreCoord = {
-    x: x,
-    y: y,
-    width: this.radius * 3,
-    height: this.radius * 3,
-
-    text53coordinates: {
-      x: vertical_x_1,
-      y: y + this.styles.size,
-    },
-
-    text60coordinates: {
-      x: vertical_x_2,
-      y: y + this.styles.size,
-    },
-
-    text52coordinates: {
-      x: vertical_x_3,
-      y: y + this.styles.size,
-    },
-
-    text54coordinates: {
-      x: x + this.styles.size / 2,
-      y: y + this.styles.size * 2.5,
-    },
-
-    text38coordinates: {
-      x: x + this.styles.size / 2,
-      y: y + this.styles.size * 4,
-    },
-
-    text58coordinates: {
-      x: x + this.styles.size / 2,
-      y: y + this.styles.size * 6,
-    },
-
-    text19coordinates: {
-      x: x + this.width_of_1_centre - this.styles.size * 1.5,
-      y: y + this.styles.size * 2.2,
-    },
-
-    text39coordinates: {
-      x: x + this.width_of_1_centre - this.styles.size * 1.5,
-      y: y + this.styles.size * 3.5,
-    },
-
-    text41coordinates: {
-      x: x + this.width_of_1_centre - this.styles.size * 1.5,
-      y: y + this.styles.size * 6,
-    },
-
-    gate53coordinates: {
-      x: x - this.radius,
-      y: y - this.radius - this.styles.size / 2,
-    },
-
-    gate60coordinates: {
-      x: x,
-      y: y - this.radius - this.styles.size / 2,
-    },
-
-    gate52coordinates: {
-      x: x + this.radius,
-      y: y - this.radius - this.styles.size / 2,
-    },
-
-    gate54coordinates: {
-      x: x - this.radius,
-      y: y - this.radius + this.styles.size,
-    },
-
-    gate58coordinates: {
-      x: x - this.radius,
-      y: y + this.radius + this.styles.size / 2,
-    },
-
-    gate38coordinates: {
-      x: x - this.radius,
-      y: y - this.radius + this.styles.size * 3,
-    },
-
-    gate19coordinates: {
-      x: x + this.radius,
-      y: y - this.radius + this.styles.size,
-    },
-
-    gate39coordinates: {
-      x: x + this.radius,
-      y: y - this.radius + this.styles.size * 3,
-    },
-
-    gate41coordinates: {
-      x: x + this.radius,
-      y: y + this.radius + this.styles.size / 2,
-    },
-  };
-
-  x = x_for_ego + this.width_of_1_centre * 1.2 + this.gap_between_centres;
-  y = y_for_ego + this.height_of_1_centre / 2 + this.gap_between_centres;
-
-  // console.log(x, y);
-  this.egoCentreCoord = {
-    x: x,
-    y: y,
-
-    text21coordinates: {
-      x: x - this.styles.size,
-      y: y + this.styles.size * 1.4,
-    },
-
-    text51coordinates: {
-      x: x - this.styles.size * 2.5,
-      y: y + this.styles.size * 2.5,
-    },
-
-    text26coordinates: {
-      x: x - this.styles.size * 4 - this.styles.size / 4,
-      y: y + this.styles.size * 4,
-    },
-
-    text40coordinates: {
-      x: x - this.styles.size / 4,
-      y: y + this.styles.size * 5,
-    },
-  };
-
-  x = x_for_spleen - this.gap_between_centres * 10;
-  y = y_for_spleen - this.height_of_1_centre / 2;
-
-  // console.log(x, y);
-
-  this.spleenCentreCoord = {
-    x: 5,
-    y: 448.25,
-
-    text48coordinates: {
-      x: x,
-      y: y + this.styles.size * 1.5,
-    },
-
-    text57coordinates: {
-      x: x + this.styles.size * 1.5,
-      y: y + this.styles.size * 2.5,
-    },
-
-    text44coordinates: {
-      x: x + this.styles.size * 4,
-      y: y + this.styles.size * 4,
-    },
-
-    text50coordinates: {
-      x: x + this.styles.size * 6,
-      y: y + this.styles.size * 5,
-    },
-
-    text32coordinates: {
-      x: x + this.styles.size * 3.7,
-      y: y + this.height_of_1_centre * 1.5 - this.styles.size * 3,
-    },
-
-    text28coordinates: {
-      x: x + this.styles.size * 2,
-      y: y + this.height_of_1_centre * 1.5 - this.styles.size * 2,
-    },
-
-    text18coordinates: {
-      x: x,
-      y: y + this.height_of_1_centre * 1.5 - this.styles.size,
-    },
-  };
-
-
-
-
-
-
-  x = x_for_emo + this.gap_between_centres * 14;
-  y = y_for_emo - this.height_of_1_centre / 2;
-
-  // console.log(x, y);
-
-  this.emoCentreCoord = {
-    x: x,
-    y: y,
-
-    text6coordinates: {
-      x: x - this.width_of_1_centre - this.styles.size,
-      y: y + this.styles.size * 5,
-    },
-
-    text37coordinates: {
-      x: x - this.styles.size * 5,
-      y: y + this.styles.size * 4,
-    },
-
-    text22coordinates: {
-      x: x - this.styles.size * 3,
-      y: y + this.styles.size * 2 + this.styles.size / 2,
-    },
-
-    text36coordinates: {
-      x: x - this.styles.size * 1.4,
-      y: y + this.styles.size + this.styles.size / 2,
-    },
-
-    text49coordinates: {
-      x: x - this.width_of_1_centre + this.styles.size,
-      y: y + this.height_of_1_centre - this.styles.size / 4,
-    },
-
-    text55coordinates: {
-      x: x - this.width_of_1_centre + this.styles.size * 3,
-      y: y + this.height_of_1_centre * 1.2 - this.styles.size / 2,
-    },
-
-    text30coordinates: {
-      x: x - this.styles.size * 1.4,
-      y: y + this.height_of_1_centre * 1.5 - this.styles.size,
-    },
-  };
-};
 
 
 DrawFormulaClass.prototype.drawWhiteIntegration = function () {
@@ -698,1467 +195,6 @@ DrawFormulaClass.prototype.drawWhiteIntegration = function () {
     .attr("stroke", "black")
     .attr("fill", "white");
 };
-
-// DrawFormulaClass.prototype.draw_20_57_Integration = function (data) {
-//   let points = [];
-//   let mixed_line = NaN;
-
-//   //drawing the whole channel
-//   if (data.gate === "both") {
-//     points = [
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//       },
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x,
-//         y: this.spleenCentreCoord.text57coordinates.y,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//       },
-
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//         y: this.throatCentreCoord.text20coordinates.y,
-//       },
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//       },
-//     ];
-
-//     if (data.type === "both") {
-//       mixed_line = svg.append("g");
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "red");
-
-//       points = [
-//         {
-//           x:
-//             this.throatCentreCoord.text20coordinates.x +
-//             this.styles.size / 2 +
-//             data.half_width * 1.4,
-//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//         },
-//         {
-//           x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-//           y: this.spleenCentreCoord.text57coordinates.y,
-//         },
-
-//         {
-//           x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//           y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//         },
-
-//         {
-//           x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//           y: this.throatCentreCoord.text20coordinates.y,
-//         },
-
-//         {
-//           x:
-//             this.throatCentreCoord.text20coordinates.x +
-//             this.styles.size / 2 +
-//             data.half_width,
-//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//         },
-//       ];
-
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "black");
-
-//       mixed_line.attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//     } else {
-//       svg
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", data.type)
-//         .attr(
-//           "transform",
-//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//         );
-//     }
-//   }
-
-//   if (data.gate === "top") {
-//     points = [
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 7.5,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 7 -
-//           data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 5,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 7 -
-//           data.width,
-//       },
-
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//         y: this.throatCentreCoord.text20coordinates.y,
-//       },
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//       },
-//     ];
-
-//     if (data.type === "both") {
-//       mixed_line = svg.append("g");
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "red");
-
-//       points = [
-//         {
-//           x:
-//             this.throatCentreCoord.text20coordinates.x +
-//             this.styles.size / 2 +
-//             data.half_width * 1.4,
-//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 +
-//             data.temp_height / 7.5 +
-//             data.half_width * 1.4,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width -
-//             (data.temp_height * 2) / 7 -
-//             data.width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 +
-//             data.temp_height / 5,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width -
-//             (data.temp_height * 2) / 7 -
-//             data.width,
-//         },
-
-//         {
-//           x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//           y: this.throatCentreCoord.text20coordinates.y,
-//         },
-//         {
-//           x:
-//             this.throatCentreCoord.text20coordinates.x +
-//             this.styles.size / 2 +
-//             data.half_width * 1.4,
-//           y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//         },
-//       ];
-
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "black");
-
-//       mixed_line.attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//     } else {
-//       svg
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", data.type)
-//         .attr(
-//           "transform",
-//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//         );
-//     }
-//   }
-
-//   if (data.gate === "bottom") {
-//     points = [
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x,
-//         y: this.spleenCentreCoord.text57coordinates.y,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.width +
-//           data.temp_height / 3.7,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 4,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x,
-//         y: this.spleenCentreCoord.text57coordinates.y,
-//       },
-//     ];
-
-//     if (data.type === "both") {
-//       mixed_line = svg.append("g");
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "red");
-
-//       points = [
-//         {
-//           x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-//           y: this.spleenCentreCoord.text57coordinates.y,
-//         },
-
-//         {
-//           x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//           y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.width +
-//             data.temp_height / 3.7,
-//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 4 +
-//             data.half_width * 1.4,
-//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3.5,
-//         },
-
-//         {
-//           x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-//           y: this.spleenCentreCoord.text57coordinates.y,
-//         },
-//       ];
-
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "black");
-
-//       mixed_line.attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//     } else {
-//       svg
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", data.type)
-//         .attr(
-//           "transform",
-//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//         );
-//     }
-//   }
-// };
-
-// DrawFormulaClass.prototype.draw_57_34_Integration = function (data) {
-//   let points = [];
-//   let mixed_line = NaN;
-
-//   //drawing the whole channel
-
-//   points = [
-//     {
-//       x: this.sacralCentreCoord.text34coordinates.x,
-//       y: this.sacralCentreCoord.text34coordinates.y,
-//     },
-//     {
-//       x: this.sacralCentreCoord.text34coordinates.x + data.width,
-//       y: this.sacralCentreCoord.text34coordinates.y - data.width,
-//     },
-
-//     {
-//       x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 3.2 +
-//         data.width,
-//       y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 2.7 -
-//         data.width,
-//     },
-
-//     {
-//       x: this.spleenCentreCoord.text57coordinates.x,
-//       y: this.spleenCentreCoord.text57coordinates.y,
-//     },
-//     {
-//       x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//       y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//     },
-//     {
-//       x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.width +
-//         data.temp_height / 3.2,
-//       y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-//     },
-
-//     {
-//       x: this.sacralCentreCoord.text34coordinates.x,
-//       y: this.sacralCentreCoord.text34coordinates.y,
-//     },
-//   ];
-
-//   if (data.type === "both") {
-//     mixed_line = svg.append("g");
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "red");
-
-//     points = [
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
-//         y: this.sacralCentreCoord.text34coordinates.y - data.half_width * 0.8,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 3.2 +
-//           data.width,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 2.7 -
-//           data.half_width * 0.8,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-//         y: this.spleenCentreCoord.text57coordinates.y,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//       },
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.width +
-//           data.temp_height / 3.2,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-//       },
-
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//     ];
-
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "black");
-
-//     mixed_line.attr(
-//       "transform",
-//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//     );
-//   } else {
-//     svg
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", data.type)
-//       .attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//   }
-// };
-
-// DrawFormulaClass.prototype.draw_57_10_Integration = function (data) {
-//   let points = [];
-//   let mixed_line = NaN;
-
-//   //drawing the whole channel
-
-//   points = [
-//     {
-//       x: this.gCentreCoord.text10coordinates.x,
-//       y: this.gCentreCoord.text10coordinates.y,
-//     },
-//     {
-//       x: this.gCentreCoord.text10coordinates.x,
-//       y: this.gCentreCoord.text10coordinates.y - data.width,
-//     },
-
-//     {
-//       x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 2 +
-//         data.temp_height / 8 -
-//         data.width * 1.6,
-//       y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 3 -
-//         data.width -
-//         (data.temp_height * 2) / 10 -
-//         data.width,
-//     },
-
-//     {
-//       x: this.spleenCentreCoord.text57coordinates.x,
-//       y: this.spleenCentreCoord.text57coordinates.y,
-//     },
-//     {
-//       x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//       y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//     },
-
-//     {
-//       x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 2 +
-//         data.temp_height / 12,
-//       y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 3 -
-//         data.width -
-//         (data.temp_height * 2) / 10,
-//     },
-
-//     {
-//       x: this.gCentreCoord.text10coordinates.x,
-//       y: this.gCentreCoord.text10coordinates.y,
-//     },
-//   ];
-
-//   if (data.type === "both") {
-//     mixed_line = svg.append("g");
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "red");
-
-//     points = [
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y,
-//       },
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y - data.half_width * 0.8,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 8 -
-//           data.width * 1.6,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10 -
-//           data.half_width * 0.8,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.half_width * 1.4,
-//         y: this.spleenCentreCoord.text57coordinates.y,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.width,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.width / 1.7,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 12,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10,
-//       },
-
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y,
-//       },
-//     ];
-
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "black");
-
-//     mixed_line.attr(
-//       "transform",
-//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//     );
-//   } else {
-//     svg
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", data.type)
-//       .attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//   }
-// };
-
-// DrawFormulaClass.prototype.draw_10_34_Integration = function (data) {
-//   let points = [];
-//   let mixed_line = NaN;
-
-//   //drawing the whole channel
-//   if (data.gate === "both") {
-//     points = [
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
-//         y: this.sacralCentreCoord.text34coordinates.y - data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 -
-//           data.width * 2.3,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 12,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10,
-//       },
-
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y,
-//       },
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y - data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 18,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10 -
-//           data.width,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 3.2,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-//       },
-
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//     ];
-
-//     if (data.type === "both") {
-//       mixed_line = svg.append("g");
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "red");
-
-//       points = [
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-//         },
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x + data.width,
-//           y: this.sacralCentreCoord.text34coordinates.y - data.width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 -
-//             data.width * 2.3,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 +
-//             data.temp_height / 12,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width -
-//             (data.temp_height * 2) / 10,
-//         },
-
-//         {
-//           x: this.gCentreCoord.text10coordinates.x,
-//           y: this.gCentreCoord.text10coordinates.y,
-//         },
-//         {
-//           x: this.gCentreCoord.text10coordinates.x,
-//           y:
-//             this.gCentreCoord.text10coordinates.y -
-//             data.width +
-//             data.half_width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 +
-//             data.temp_height / 18 +
-//             data.half_width,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width -
-//             (data.temp_height * 2) / 10 -
-//             data.width +
-//             data.half_width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 3.2 +
-//             data.half_width * 2,
-//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-//         },
-
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-//         },
-//       ];
-
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "black");
-
-//       mixed_line.attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//     } else {
-//       svg
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", data.type)
-//         .attr(
-//           "transform",
-//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//         );
-//     }
-//   }
-
-//   if (data.gate === "top") {
-//     points = [
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y,
-//       },
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y - data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 5,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10 -
-//           data.width,
-//       },
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 5,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10,
-//       },
-
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y,
-//       },
-//     ];
-
-//     if (data.type === "both") {
-//       mixed_line = svg.append("g");
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "red");
-
-//       points = [
-//         {
-//           x: this.gCentreCoord.text10coordinates.x,
-//           y: this.gCentreCoord.text10coordinates.y,
-//         },
-//         {
-//           x: this.gCentreCoord.text10coordinates.x,
-//           y:
-//             this.gCentreCoord.text10coordinates.y -
-//             data.width +
-//             data.half_width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 +
-//             data.temp_height / 5,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width -
-//             (data.temp_height * 2) / 10 -
-//             data.width +
-//             data.half_width,
-//         },
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 +
-//             data.temp_height / 5,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width -
-//             (data.temp_height * 2) / 10,
-//         },
-
-//         {
-//           x: this.gCentreCoord.text10coordinates.x,
-//           y: this.gCentreCoord.text10coordinates.y,
-//         },
-//       ];
-
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "black");
-
-//       mixed_line.attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//     } else {
-//       svg
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", data.type)
-//         .attr(
-//           "transform",
-//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//         );
-//     }
-//   }
-
-//   if (data.gate === "bottom") {
-//     points = [
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
-//         y: this.sacralCentreCoord.text34coordinates.y - data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 -
-//           data.width * 2.3,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.width +
-//           data.temp_height / 3.2,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-//       },
-
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//     ];
-
-//     if (data.type === "both") {
-//       mixed_line = svg.append("g");
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "red");
-
-//       points = [
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x,
-//           y: this.sacralCentreCoord.text34coordinates.y,
-//         },
-//         {
-//           x:
-//             this.sacralCentreCoord.text34coordinates.x +
-//             data.width -
-//             data.half_width,
-//           y:
-//             this.sacralCentreCoord.text34coordinates.y -
-//             data.width +
-//             data.half_width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 -
-//             data.width * 2.3 -
-//             data.half_width,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width +
-//             data.half_width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.width +
-//             data.temp_height / 3.2,
-//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 3,
-//         },
-
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x,
-//           y: this.sacralCentreCoord.text34coordinates.y,
-//         },
-//       ];
-
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "black");
-
-//       mixed_line.attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//     } else {
-//       svg
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", data.type)
-//         .attr(
-//           "transform",
-//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//         );
-//     }
-//   }
-// };
-
-// DrawFormulaClass.prototype.draw_20_34_Integration = function (data) {
-//   let points = [];
-//   let mixed_line = NaN;
-
-//   // console.log("inside")
-
-//   //drawing the whole channel
-//   if (data.gate === "both") {
-//     points = [
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x + data.width,
-//         y: this.sacralCentreCoord.text34coordinates.y - data.width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 -
-//           data.width * 2.3,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width,
-//       },
-
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//         y: this.throatCentreCoord.text20coordinates.y,
-//       },
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//       },
-
-//       {
-//         x: this.spleenCentreCoord.text57coordinates.x + data.temp_height / 3.2,
-//         y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-//       },
-
-//       {
-//         x: this.sacralCentreCoord.text34coordinates.x,
-//         y: this.sacralCentreCoord.text34coordinates.y,
-//       },
-//     ];
-
-//     // console.log(points)
-//     if (data.type === "both") {
-//       mixed_line = svg.append("g");
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "red");
-
-//       points = [
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-//         },
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x + data.width,
-//           y: this.sacralCentreCoord.text34coordinates.y - data.width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 2 -
-//             data.width * 2.3,
-//           y:
-//             this.spleenCentreCoord.text57coordinates.y +
-//             data.temp_width / 3 -
-//             data.width,
-//         },
-
-//         {
-//           x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//           y: this.throatCentreCoord.text20coordinates.y,
-//         },
-//         {
-//           x:
-//             this.throatCentreCoord.text20coordinates.x +
-//             this.styles.size / 2 +
-//             data.half_width / 2,
-//           y:
-//             this.throatCentreCoord.text20coordinates.y -
-//             this.styles.size / 2 +
-//             data.half_width,
-//         },
-
-//         {
-//           x:
-//             this.spleenCentreCoord.text57coordinates.x +
-//             data.temp_height / 3.2 +
-//             data.half_width * 2,
-//           y: this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-//         },
-
-//         {
-//           x: this.sacralCentreCoord.text34coordinates.x + data.half_width,
-//           y: this.sacralCentreCoord.text34coordinates.y - data.half_width,
-//         },
-//       ];
-
-//       mixed_line
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", "black");
-
-//       mixed_line.attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//     } else {
-//       svg
-//         .append("path")
-//         .attr("d", lineFunction(points))
-//         .attr("stroke", "black")
-//         .attr("fill", data.type)
-//         .attr(
-//           "transform",
-//           `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//         );
-//     }
-//   }
-// };
-
-// DrawFormulaClass.prototype.draw_20_10_Integration = function (data) {
-//   let points = [];
-//   let mixed_line = NaN;
-
-//   //drawing the whole channel
-
-//   points = [
-//     {
-//       x: this.gCentreCoord.text10coordinates.x,
-//       y: this.gCentreCoord.text10coordinates.y,
-//     },
-//     {
-//       x: this.gCentreCoord.text10coordinates.x,
-//       y: this.gCentreCoord.text10coordinates.y - data.width,
-//     },
-
-//     {
-//       x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 2 +
-//         data.temp_height / 8,
-//       y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 3 -
-//         data.width -
-//         (data.temp_height * 2) / 10 -
-//         data.width,
-//     },
-
-//     {
-//       x: this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//       y: this.throatCentreCoord.text20coordinates.y,
-//     },
-//     {
-//       x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//       y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//     },
-
-//     {
-//       x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 2 +
-//         data.temp_height / 12 -
-//         data.width * 1.6,
-//       y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 3 -
-//         data.width -
-//         (data.temp_height * 2) / 10,
-//     },
-
-//     {
-//       x: this.gCentreCoord.text10coordinates.x,
-//       y: this.gCentreCoord.text10coordinates.y,
-//     },
-//   ];
-
-//   if (data.type === "both") {
-//     mixed_line = svg.append("g");
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "red");
-
-//     points = [
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y,
-//       },
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y - data.half_width,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 8 -
-//           data.width * 1.4,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10 -
-//           data.half_width,
-//       },
-
-//       {
-//         x:
-//           this.throatCentreCoord.text20coordinates.x +
-//           data.width * 1.5 -
-//           data.half_width * 0.8,
-//         y: this.throatCentreCoord.text20coordinates.y - data.half_width * 0.8,
-//       },
-//       {
-//         x: this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//         y: this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-//       },
-
-//       {
-//         x:
-//           this.spleenCentreCoord.text57coordinates.x +
-//           data.temp_height / 2 +
-//           data.temp_height / 12 -
-//           data.width * 1.6,
-//         y:
-//           this.spleenCentreCoord.text57coordinates.y +
-//           data.temp_width / 3 -
-//           data.width -
-//           (data.temp_height * 2) / 10,
-//       },
-
-//       {
-//         x: this.gCentreCoord.text10coordinates.x,
-//         y: this.gCentreCoord.text10coordinates.y,
-//       },
-//     ];
-
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "black");
-
-//     mixed_line.attr(
-//       "transform",
-//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//     );
-//   } else {
-//     svg
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", data.type)
-//       .attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//   }
-// };
-
-// DrawFormulaClass.prototype.draw_20_Integration = function (type, variation) {
-
-//   // console.log("inside 20 integration")
-//   let points = [];
-//   let mixed_line = NaN;
-
-//   const data = {
-//     top_left_x: this.throatCentreCoord.text20coordinates.x,
-//     top_left_y: this.throatCentreCoord.text20coordinates.y,
-
-//     bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-//     bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-//     width: 10,
-//   };
-//   data.temp_width = data.bottom_left_x - data.top_left_x;
-//   data.temp_height = data.bottom_left_y - data.top_left_y;
-
-//   data.half_width = data.width / 2;
-
-//   data.type = type;
-
-//   let i = variation;
-
-//   let rectangle20_var = [
-//     //empty for the future
-//     {},
-//     //variation - 1.drawing to 34th
-//     {
-//       top_left_x:
-//         this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//       top_left_y:
-//         this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-
-//       bottom_left_x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 3.2 +
-//         this.styles.size / 12,
-//       bottom_left_y:
-//         this.spleenCentreCoord.text57coordinates.y + data.temp_width / 2.7,
-
-//       bottom_right_x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 3.2 +
-//         data.width +
-//         this.styles.size / 20,
-//       bottom_right_y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 2.7 +
-//         data.width * 0.7 +
-//         this.styles.size / 20,
-
-//       top_right_x:
-//         this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//       top_right_y: this.throatCentreCoord.text20coordinates.y,
-//     },
-
-//     //variation - 2.drawing to 10th
-//     {
-//       top_left_x:
-//         this.throatCentreCoord.text20coordinates.x + this.styles.size / 2,
-//       top_left_y:
-//         this.throatCentreCoord.text20coordinates.y - this.styles.size / 2,
-
-//       bottom_left_x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 2 +
-//         data.temp_height / 8 -
-//         data.width * 2.6,
-//       bottom_left_y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 3 -
-//         data.width -
-//         (data.temp_height * 2) / 10,
-
-//       bottom_right_x:
-//         this.spleenCentreCoord.text57coordinates.x +
-//         data.temp_height / 2 +
-//         data.temp_height / 12,
-//       bottom_right_y:
-//         this.spleenCentreCoord.text57coordinates.y +
-//         data.temp_width / 3 -
-//         data.width -
-//         (data.temp_height * 2) / 10,
-
-//       top_right_x:
-//         this.throatCentreCoord.text20coordinates.x + data.width * 1.5,
-//       top_right_y: this.throatCentreCoord.text20coordinates.y,
-//     },
-//   ];
-
-//   //variation - 1.drawing half to 34th
-//   rectangle20_var[1].top_left_half_x =
-//     rectangle20_var[1].top_left_x + data.half_width * 0.7;
-//   rectangle20_var[1].top_left_half_y =
-//     rectangle20_var[1].top_left_y + data.half_width * 0.7;
-//   rectangle20_var[1].bottom_left_half_x =
-//     rectangle20_var[1].bottom_left_x + data.half_width * 0.7;
-//   rectangle20_var[1].bottom_left_half_y =
-//     rectangle20_var[1].bottom_left_y + data.half_width * 0.5;
-//   rectangle20_var[1].bottom_right_half_x = rectangle20_var[1].bottom_right_x;
-//   rectangle20_var[1].bottom_right_half_y = rectangle20_var[1].bottom_right_y;
-//   rectangle20_var[1].top_right_half_x = rectangle20_var[1].top_right_x;
-//   rectangle20_var[1].top_right_half_y = rectangle20_var[1].top_right_y;
-
-//   //variation - 2.drawing half to 10th
-//   rectangle20_var[2].top_left_half_x =
-//     rectangle20_var[2].top_left_x + data.half_width * 0.7;
-//   rectangle20_var[2].top_left_half_y =
-//     rectangle20_var[2].top_left_y + data.half_width * 0.7;
-//   rectangle20_var[2].bottom_left_half_x =
-//     rectangle20_var[2].bottom_left_x + data.half_width * 1.2;
-//   rectangle20_var[2].bottom_left_half_y = rectangle20_var[2].bottom_left_y;
-//   rectangle20_var[2].bottom_right_half_x = rectangle20_var[2].bottom_right_x;
-//   rectangle20_var[2].bottom_right_half_y = rectangle20_var[2].bottom_right_y;
-//   rectangle20_var[2].top_right_half_x = rectangle20_var[2].top_right_x;
-//   rectangle20_var[2].top_right_half_y = rectangle20_var[2].top_right_y;
-
-
-//   console.log(rectangle20_var)
-
-
-//   points = [
-//     {
-//       x: rectangle20_var[i].top_left_x,
-//       y: rectangle20_var[i].top_left_y,
-//     },
-
-//     {
-//       x: rectangle20_var[i].bottom_left_x,
-//       y: rectangle20_var[i].bottom_left_y,
-//     },
-
-//     {
-//       x: rectangle20_var[i].bottom_right_x,
-//       y: rectangle20_var[i].bottom_right_y,
-//     },
-
-//     {
-//       x: rectangle20_var[i].top_right_x,
-//       y: rectangle20_var[i].top_right_y,
-//     },
-//     {
-//       x: rectangle20_var[i].top_left_x,
-//       y: rectangle20_var[i].top_left_y,
-//     },
-//   ];
-
-//   if (data.type === "both") {
-//     mixed_line = svg.append("g");
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "red");
-
-//     points = [
-//       {
-//         x: rectangle20_var[i].top_left_half_x,
-//         y: rectangle20_var[i].top_left_half_y,
-//       },
-
-//       {
-//         x: rectangle20_var[i].bottom_left_half_x,
-//         y: rectangle20_var[i].bottom_left_half_y,
-//       },
-
-//       {
-//         x: rectangle20_var[i].bottom_right_half_x,
-//         y: rectangle20_var[i].bottom_right_half_y,
-//       },
-
-//       {
-//         x: rectangle20_var[i].top_right_half_x,
-//         y: rectangle20_var[i].top_right_half_y,
-//       },
-//       {
-//         x: rectangle20_var[i].top_left_half_x,
-//         y: rectangle20_var[i].top_left_half_y,
-//       },
-//     ];
-
-//     mixed_line
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", "black");
-
-//     mixed_line.attr(
-//       "transform",
-//       `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//     );
-//   } else {
-//     svg
-//       .append("path")
-//       .attr("d", lineFunction(points))
-//       .attr("stroke", "black")
-//       .attr("fill", data.type)
-//       .attr(
-//         "transform",
-//         `rotate(${data.rotation || 0}, ${data.top_left_x},${data.top_left_y})`
-//       );
-//   }
-// };
 
 
 function draw_20_short(type) {
@@ -3016,25 +1052,6 @@ DrawFormulaClass.prototype.draw_10_Integration = function (type) {
 //Если в контуре интеграции активизировано больше чем 1 ворота, то там будут только каналы, ворота рисовать не надо
 //type - 'both', 'red', 'black'
 DrawFormulaClass.prototype.drawIntegration = function (int_gates) {
-
-
-
-  const data = {
-    top_left_x: this.throatCentreCoord.text20coordinates.x,
-    top_left_y: this.throatCentreCoord.text20coordinates.y,
-
-    bottom_left_x: this.spleenCentreCoord.text57coordinates.x,
-    bottom_left_y: this.spleenCentreCoord.text57coordinates.y,
-
-    width: 10,
-  };
-  data.temp_width = data.bottom_left_x - data.top_left_x;
-  data.temp_height = data.bottom_left_y - data.top_left_y;
-
-  data.half_width = data.width / 2;
-
-  //const length = Math.sqrt(Math.pow(data.temp_width,2) + Math.pow(data.temp_height,2))/3;
-
   // console.log("Inside drawIntegration")
   // this.draw_34_Integration("both", 2);
   // this.draw_10_Integration("both", 1);
@@ -4811,6 +2828,8 @@ DrawFormulaClass.prototype.drawEgo340 = function (fill) {
   );
 };
 
+
+
 DrawFormulaClass.prototype.drawWhiteFormula = function () {
   this.draw_64_47(0, "white");
   this.draw_61_24(0, "white");
@@ -4856,15 +2875,7 @@ DrawFormulaClass.prototype.drawWhiteFormula = function () {
 
   this.drawWhiteIntegration();
 
-  this.drawHead340("white");
-  this.drawAjna340("white");
-  this.drawThroat340("white");
-  this.drawG340("white");
-  this.drawSacral340("white");
-  this.drawRoot340("white");
-  this.drawSpleen340("white");
-  this.drawEmo340("white");
-  this.drawEgo340("white");
+  this.drawCenters();
 };
 
 //PERSONALITY texts on screen
@@ -5025,7 +3036,7 @@ DrawFormulaClass.prototype.draw_des_text = function () {
 
 //V2 2024
 DrawFormulaClass.prototype.drawFormulaV2 = function (graph_type) {
-  this.init();
+  // this.init();
   this.drawWhiteFormula();
 
   this.x = this.width / 2;
@@ -5092,43 +3103,8 @@ DrawFormulaClass.prototype.draw_Body = function () {
   let typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
   appendText(svg, pers_x, pers_y, typeProfDef, "black", "start", 12);
 
-
-  // let typeProfDef = "";
-  // let type_text = ""
-  // let definition = ""
-  // if (calc === "full") {
-  //   type_text = typeShorten(this.data_formula.hd.generalInfo.type);
-  //   definition = defShorten(this.data_formula.hd.generalInfo.definition);
-  //   typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.generalInfo.authority}.${definition}`;
-  // } else if (calc === "personality") {
-  //   type_text = typeShorten(this.data_formula.hd.personality.generalInfo.type);
-  //   definition = defShorten(this.data_formula.hd.personality.generalInfo.definition);
-  //   typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.personality.generalInfo.authority}.${definition}`;
-  // } else if (calc === "design") {
-
-  //   type_text = typeShorten(this.data_formula.hd.design.generalInfo.type);
-  //   definition = defShorten(this.data_formula.hd.design.generalInfo.definition);
-  //   typeProfDef = `${type_text}.${this.data_formula.hd.specialInfo.profile}.${this.data_formula.hd.design.generalInfo.authority}.${definition}`
-
-  // }
-
-
-
-
   let gates = [];
 
-  //инициализируем центры
-  let centres = {
-    head: false,
-    ajna: false,
-    throat: false,
-    g: false,
-    sacral: false,
-    root: false,
-    ego: false,
-    spleen: false,
-    emo: false,
-  };
 
   //инициализируем ворота, отсчет от 1
   for (let i = 1; i <= 64; i++) {
@@ -5149,6 +3125,23 @@ DrawFormulaClass.prototype.draw_Body = function () {
       gates[this.pers_short[key].hex] = "black";
     }
   }
+
+
+  this.draw_body(gates);
+  return;
+  //инициализируем центры
+  let centres = {
+    head: false,
+    ajna: false,
+    throat: false,
+    g: false,
+    sacral: false,
+    root: false,
+    ego: false,
+    spleen: false,
+    emo: false,
+  };
+
 
   //console.log(gates);
 
@@ -5508,7 +3501,6 @@ DrawFormulaClass.prototype.draw_Body = function () {
   centres.ego ? this.drawEgo340() : this.drawEgo340("white");
   centres.emo ? this.drawEmo340() : this.drawEmo340("white");
 
-  //document.getElementById("img_button").disabled = false;
 };
 
 DrawFormulaClass.prototype.draw_Pers = function () {
@@ -5516,6 +3508,22 @@ DrawFormulaClass.prototype.draw_Pers = function () {
   this.draw_pers_text();
 
   let gates = [];
+
+
+
+  //инициализируем ворота, отсчет от 1
+  for (let i = 1; i <= 64; i++) {
+    gates[i] = NaN;
+  }
+
+  for (let key in this.pers_short) {
+    gates[this.pers_short[key].hex] = "black";
+  }
+
+
+  this.draw_body(gates);
+  return;
+
 
   //инициализируем центры
   let centres = {
@@ -5530,14 +3538,7 @@ DrawFormulaClass.prototype.draw_Pers = function () {
     emo: false,
   };
 
-  //инициализируем ворота, отсчет от 1
-  for (let i = 1; i <= 64; i++) {
-    gates[i] = NaN;
-  }
 
-  for (let key in this.pers_short) {
-    gates[this.pers_short[key].hex] = "black";
-  }
 
   //HEAD && AJNA
   if (gates[64] || gates[47]) {
@@ -5902,6 +3903,20 @@ DrawFormulaClass.prototype.draw_Des = function () {
 
   let gates = [];
 
+
+  //инициализируем ворота, отсчет от 1
+  for (let i = 1; i <= 64; i++) {
+    gates[i] = NaN;
+  }
+
+  for (let key in this.design_short) {
+    gates[this.design_short[key].hex] = "red";
+  }
+
+
+  this.draw_body(gates);
+  return;
+
   //инициализируем центры
   let centres = {
     head: false,
@@ -5914,15 +3929,6 @@ DrawFormulaClass.prototype.draw_Des = function () {
     spleen: false,
     emo: false,
   };
-
-  //инициализируем ворота, отсчет от 1
-  for (let i = 1; i <= 64; i++) {
-    gates[i] = NaN;
-  }
-
-  for (let key in this.design_short) {
-    gates[this.design_short[key].hex] = "red";
-  }
 
   //HEAD && AJNA
   if (gates[64] || gates[47]) {
@@ -6280,3 +4286,387 @@ DrawFormulaClass.prototype.draw_Des = function () {
 
   //document.getElementById("img_button").disabled = false;
 };
+
+
+DrawFormulaClass.prototype.draw_body = function (gates) {
+
+  //инициализируем центры
+  let centres = {
+    head: false,
+    ajna: false,
+    throat: false,
+    g: false,
+    sacral: false,
+    root: false,
+    ego: false,
+    spleen: false,
+    emo: false,
+  };
+
+  //console.log(gates);
+
+  //пока рисуем воротами, каналами пока не рисуем
+
+  //HEAD && AJNA
+  if (gates[64] || gates[47]) {
+    if (gates[64] && gates[47]) {
+      centres.head = true;
+      centres.ajna = true;
+    }
+    if (gates[64]) this.draw_64_47(64, gates[64]);
+    if (gates[47]) this.draw_64_47(47, gates[47]);
+  }
+
+  if (gates[61] || gates[24]) {
+    if (gates[61] && gates[24]) {
+      centres.head = true;
+      centres.ajna = true;
+    }
+
+    if (gates[61]) this.draw_61_24(61, gates[61]);
+    if (gates[24]) this.draw_61_24(24, gates[24]);
+  }
+
+  if (gates[63] || gates[4]) {
+    if (gates[63] && gates[4]) {
+      centres.head = true;
+      centres.ajna = true;
+    }
+
+    if (gates[63]) this.draw_63_4(63, gates[63]);
+    if (gates[4]) this.draw_63_4(4, gates[4]);
+  }
+
+  //AJNA && THROAT
+
+  if (gates[17] || gates[62]) {
+    if (gates[17] && gates[62]) {
+      centres.throat = true;
+      centres.ajna = true;
+    }
+    if (gates[17]) this.draw_17_62(17, gates[17]);
+    if (gates[62]) this.draw_17_62(62, gates[62]);
+  }
+
+  if (gates[43] || gates[23]) {
+    if (gates[43] && gates[23]) {
+      centres.throat = true;
+      centres.ajna = true;
+    }
+
+    if (gates[43]) this.draw_43_23(43, gates[43]);
+    if (gates[23]) this.draw_43_23(23, gates[23]);
+  }
+
+  if (gates[11] || gates[56]) {
+    if (gates[11] && gates[56]) {
+      centres.throat = true;
+      centres.ajna = true;
+    }
+
+    if (gates[11]) this.draw_11_56(11, gates[11]);
+    if (gates[56]) this.draw_11_56(56, gates[56]);
+  }
+
+  //THROAT && G
+
+  if (gates[31] || gates[7]) {
+    if (gates[31] && gates[7]) {
+      centres.throat = true;
+      centres.g = true;
+    }
+    if (gates[31]) this.draw_31_7(31, gates[31]);
+    if (gates[7]) this.draw_31_7(7, gates[7]);
+  }
+
+  if (gates[8] || gates[1]) {
+    if (gates[8] && gates[1]) {
+      centres.throat = true;
+      centres.g = true;
+    }
+
+    if (gates[8]) this.draw_8_1(8, gates[8]);
+    if (gates[1]) this.draw_8_1(1, gates[1]);
+  }
+
+  if (gates[33] || gates[13]) {
+    if (gates[33] && gates[13]) {
+      centres.throat = true;
+      centres.g = true;
+    }
+
+    if (gates[33]) this.draw_33_13(33, gates[33]);
+    if (gates[13]) this.draw_33_13(13, gates[13]);
+  }
+
+  //G && SACRAL
+
+  if (gates[15] || gates[5]) {
+    if (gates[15] && gates[5]) {
+      centres.g = true;
+      centres.sacral = true;
+    }
+    if (gates[15]) this.draw_15_5(15, gates[15]);
+    if (gates[5]) this.draw_15_5(5, gates[5]);
+  }
+
+  if (gates[2] || gates[14]) {
+    if (gates[2] && gates[14]) {
+      centres.g = true;
+      centres.sacral = true;
+    }
+
+    if (gates[2]) this.draw_2_14(2, gates[2]);
+    if (gates[14]) this.draw_2_14(14, gates[14]);
+  }
+
+  if (gates[46] || gates[29]) {
+    if (gates[46] && gates[29]) {
+      centres.g = true;
+      centres.sacral = true;
+    }
+
+    if (gates[46]) this.draw_46_29(46, gates[46]);
+    if (gates[29]) this.draw_46_29(29, gates[29]);
+  }
+
+  //SACRAL && ROOT
+  if (gates[42] || gates[53]) {
+    if (gates[42] && gates[53]) {
+      centres.sacral = true;
+      centres.root = true;
+    }
+    if (gates[42]) this.draw_42_53(42, gates[42]);
+    if (gates[53]) this.draw_42_53(53, gates[53]);
+  }
+
+  if (gates[3] || gates[60]) {
+    if (gates[3] && gates[60]) {
+      centres.sacral = true;
+      centres.root = true;
+    }
+
+    if (gates[3]) this.draw_3_60(3, gates[3]);
+    if (gates[60]) this.draw_3_60(60, gates[60]);
+  }
+
+  if (gates[9] || gates[52]) {
+    if (gates[9] && gates[52]) {
+      centres.sacral = true;
+      centres.root = true;
+    }
+
+    if (gates[9]) this.draw_9_52(9, gates[9]);
+    if (gates[52]) this.draw_9_52(52, gates[52]);
+  }
+
+  //ROOT && EMO
+  if (gates[19] || gates[49]) {
+    if (gates[19] && gates[49]) {
+      centres.root = true;
+      centres.emo = true;
+    }
+    if (gates[19]) this.draw_49_19(19, gates[19]);
+    if (gates[49]) this.draw_49_19(49, gates[49]);
+  }
+
+  if (gates[39] || gates[55]) {
+    if (gates[39] && gates[55]) {
+      centres.root = true;
+      centres.emo = true;
+    }
+
+    if (gates[39]) this.draw_55_39(39, gates[39]);
+    if (gates[55]) this.draw_55_39(55, gates[55]);
+  }
+
+  if (gates[41] || gates[30]) {
+    if (gates[41] && gates[30]) {
+      centres.root = true;
+      centres.emo = true;
+    }
+
+    if (gates[41]) this.draw_30_41(41, gates[41]);
+    if (gates[30]) this.draw_30_41(30, gates[30]);
+  }
+
+  //ROOT && SPLEEN
+  if (gates[18] || gates[58]) {
+    if (gates[18] && gates[58]) {
+      centres.root = true;
+      centres.spleen = true;
+    }
+    if (gates[18]) this.draw_18_58(18, gates[18]);
+    if (gates[58]) this.draw_18_58(58, gates[58]);
+  }
+
+  if (gates[28] || gates[38]) {
+    if (gates[28] && gates[38]) {
+      centres.root = true;
+      centres.spleen = true;
+    }
+
+    if (gates[28]) this.draw_28_38(28, gates[28]);
+    if (gates[38]) this.draw_28_38(38, gates[38]);
+  }
+
+  if (gates[32] || gates[54]) {
+    if (gates[32] && gates[54]) {
+      centres.root = true;
+      centres.spleen = true;
+    }
+
+    if (gates[32]) this.draw_32_54(32, gates[32]);
+    if (gates[54]) this.draw_32_54(54, gates[54]);
+  }
+
+  //EMO && SACRAL, EGO, THROAT
+  if (gates[59] || gates[6]) {
+    if (gates[59] && gates[6]) {
+      centres.emo = true;
+      centres.sacral = true;
+    }
+    if (gates[59]) this.draw_6_59(59, gates[59]);
+    if (gates[6]) this.draw_6_59(6, gates[6]);
+  }
+
+  if (gates[37] || gates[40]) {
+    if (gates[37] && gates[40]) {
+      centres.emo = true;
+      centres.ego = true;
+    }
+
+    if (gates[37]) this.draw_40_37(37, gates[37]);
+    if (gates[40]) this.draw_40_37(40, gates[40]);
+  }
+
+  if (gates[22] || gates[12]) {
+    if (gates[22] && gates[12]) {
+      centres.emo = true;
+      centres.throat = true;
+    }
+
+    if (gates[22]) this.draw_12_22(22, gates[22]);
+    if (gates[12]) this.draw_12_22(12, gates[12]);
+  }
+
+  if (gates[35] || gates[36]) {
+    if (gates[35] && gates[36]) {
+      centres.emo = true;
+      centres.throat = true;
+    }
+
+    if (gates[35]) this.draw_35_36(35, gates[35]);
+    if (gates[36]) this.draw_35_36(36, gates[36]);
+  }
+
+  //EGO && SPLEEN, G, THROAT
+  if (gates[44] || gates[26]) {
+    if (gates[44] && gates[26]) {
+      centres.ego = true;
+      centres.spleen = true;
+    }
+    if (gates[44]) this.draw_26_44(44, gates[44]);
+    if (gates[26]) this.draw_26_44(26, gates[26]);
+  }
+
+  if (gates[51] || gates[25]) {
+    if (gates[51] && gates[25]) {
+      centres.ego = true;
+      centres.g = true;
+    }
+
+    if (gates[51]) this.draw_25_51(51, gates[51]);
+    if (gates[25]) this.draw_25_51(25, gates[25]);
+  }
+
+  if (gates[21] || gates[45]) {
+    if (gates[21] && gates[45]) {
+      centres.ego = true;
+      centres.throat = true;
+    }
+
+    if (gates[21]) this.draw_45_21(21, gates[21]);
+    if (gates[45]) this.draw_45_21(45, gates[45]);
+  }
+
+  //SACRAL && SPLEEN
+  if (gates[27] || gates[50]) {
+    if (gates[27] && gates[50]) {
+      centres.spleen = true;
+      centres.sacral = true;
+    }
+    if (gates[27]) this.draw_50_27(27, gates[27]);
+    if (gates[50]) this.draw_50_27(50, gates[50]);
+  }
+
+  //THROAT && SPLEEN
+  if (gates[48] || gates[16]) {
+    if (gates[48] && gates[16]) {
+      centres.spleen = true;
+      centres.throat = true;
+    }
+    if (gates[48]) this.draw_16_48(48, gates[48]);
+    if (gates[16]) this.draw_16_48(16, gates[16]);
+  }
+
+  //INTEGRATION
+  if (gates[20] || gates[57] || gates[10] || gates[34]) {
+    if (gates[20] && gates[57]) {
+      centres.spleen = true;
+      centres.throat = true;
+    }
+
+    if (gates[20] && gates[10]) {
+      centres.g = true;
+      centres.throat = true;
+    }
+
+    if (gates[20] && gates[34]) {
+      centres.sacral = true;
+      centres.throat = true;
+    }
+
+    if (gates[10] && gates[57]) {
+      centres.spleen = true;
+      centres.g = true;
+    }
+
+    if (gates[34] && gates[57]) {
+      centres.spleen = true;
+      centres.sacral = true;
+    }
+
+    if (gates[34] && gates[10]) {
+      centres.g = true;
+      centres.sacral = true;
+    }
+
+    let int_gates = {};
+    gates[20] ? (int_gates["20"] = gates[20]) : (int_gates["20"] = NaN);
+    gates[57] ? (int_gates["57"] = gates[57]) : (int_gates["57"] = NaN);
+    gates[10] ? (int_gates["10"] = gates[10]) : (int_gates["10"] = NaN);
+    gates[34] ? (int_gates["34"] = gates[34]) : (int_gates["34"] = NaN);
+
+    this.drawIntegration(int_gates);
+  }
+
+  this.drawCenters(centres);
+
+
+};
+
+
+DrawFormulaClass.prototype.drawCenters = function (centres = {}) {
+
+  centres.head ? this.drawHead340() : this.drawHead340("white");
+  centres.ajna ? this.drawAjna340() : this.drawAjna340("white");
+  centres.throat ? this.drawThroat340() : this.drawThroat340("white");
+  centres.g ? this.drawG340() : this.drawG340("white");
+  centres.sacral ? this.drawSacral340() : this.drawSacral340("white");
+  centres.root ? this.drawRoot340() : this.drawRoot340("white");
+  centres.spleen ? this.drawSpleen340() : this.drawSpleen340("white");
+  centres.ego ? this.drawEgo340() : this.drawEgo340("white");
+  centres.emo ? this.drawEmo340() : this.drawEmo340("white");
+
+}
