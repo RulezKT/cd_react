@@ -23,7 +23,7 @@ export function PrevNextNutr() {
         // console.log(direction)
 
         const data = await fetchPrevNextNutr(cdInfo.cdInfo, direction);
-        console.log(data)
+        // console.log(data)
 
         cdInfo.set(data);
 

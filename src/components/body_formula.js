@@ -2379,7 +2379,7 @@ DrawFormulaClass.prototype.drawThroat340 = function (gates, fill) {
     {
       x: x + 62,
       y: y + 13,
-      text: `56`,
+      text: "56",
     },
 
     {
@@ -2431,13 +2431,13 @@ DrawFormulaClass.prototype.drawThroat340 = function (gates, fill) {
   ]
   gates[62] && contourData.push([throatTextData[0].x + 7.5, throatTextData[0].y - 3])
   gates[23] && contourData.push([throatTextData[1].x + 7, throatTextData[1].y - 2])
-  gates[56] && contourData.push([throatTextData[2].x, throatTextData[2].y])
+  gates[56] && contourData.push([throatTextData[2].x + 7, throatTextData[2].y - 4])
   gates[31] && contourData.push([throatTextData[3].x + 7, throatTextData[3].y - 4])
   gates[8] && contourData.push([throatTextData[4].x + 3.5, throatTextData[4].y - 6])
   gates[33] && contourData.push([throatTextData[5].x + 7, throatTextData[5].y - 6])
   gates[35] && contourData.push([throatTextData[6].x + 7, throatTextData[6].y - 2])
   gates[12] && contourData.push([throatTextData[7].x + 6.5, throatTextData[7].y - 4])
-  gates[45] && contourData.push([throatTextData[8].x, throatTextData[8].y])
+  gates[45] && contourData.push([throatTextData[8].x + 7, throatTextData[8].y - 6])
   gates[16] && contourData.push([throatTextData[9].x + 8, throatTextData[9].y - 4])
   gates[20] && contourData.push([throatTextData[10].x + 7, throatTextData[10].y - 3])
 
@@ -2538,7 +2538,7 @@ DrawFormulaClass.prototype.drawG340 = function (gates, fill) {
   gates[13] && contourData.push([gTextData[2].x + 7, gTextData[2].y - 3])
   gates[10] && contourData.push([gTextData[3].x + 7, gTextData[3].y - 4])
   gates[25] && contourData.push([gTextData[4].x + 7, gTextData[4].y - 4])
-  gates[15] && contourData.push([gTextData[5].x, gTextData[5].y])
+  gates[15] && contourData.push([gTextData[5].x + 7, gTextData[5].y - 6])
   gates[46] && contourData.push([gTextData[6].x + 7, gTextData[6].y - 6])
   gates[2] && contourData.push([gTextData[7].x + 3, gTextData[7].y - 6])
 

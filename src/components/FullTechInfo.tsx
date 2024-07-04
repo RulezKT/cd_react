@@ -60,6 +60,7 @@ export const FullTechInfo = (props) => {
     return (
 
         <div className="TechInfo flex-col w-80 justify-start items-start m-1 md:m-5">
+            <p className="text-blue-800"> {nutrStringShort}</p>
             <div className="ShortInfo flex flex-row w-full">
                 <p className="font-extrabold mr-1">{cdInfo.name.slice(0, 10)}</p>
                 <p className="mr-1">{loc_time_str}</p>
@@ -67,7 +68,7 @@ export const FullTechInfo = (props) => {
             </div >
             <p className=" font-extrabold  text-fuchsia-700"> {typeProfDef}</p>
             <p>  {varCrossString}</p>
-            <p className="text-blue-800"> {nutrStringShort}</p>
+
             <p> {motivString}</p >
             <p className="font-extrabold mr-1"> Nutr./Env. Transference:</p >
             <p className="text-red-600"> {nutrTransf}</p >
