@@ -2176,7 +2176,7 @@ DrawFormulaClass.prototype.drawGenerator = function (
     .attr("fill", fill || stroke);
 
   if (contour_data && contour_data.length > 0) {
-    console.log(contour_data)
+    // console.log(contour_data)
 
     centre_group
       .append("g")
@@ -2685,7 +2685,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (gates, fill) {
     {
       x: x + 56,
       y: y + 12.5,
-      text: `52`,
+      text: "52",
     },
 
     {
@@ -2695,7 +2695,7 @@ DrawFormulaClass.prototype.drawRoot340 = function (gates, fill) {
     },
     {
       x: x + 6,
-      y: y + 54.5,
+      y: y + 50,
       text: "38",
     },
     {
@@ -2726,10 +2726,10 @@ DrawFormulaClass.prototype.drawRoot340 = function (gates, fill) {
   ]
   gates[53] && contourData.push([rootTextData[0].x + 7.5, rootTextData[0].y - 3])
   gates[60] && contourData.push([rootTextData[1].x + 7, rootTextData[1].y - 2])
-  gates[52] && contourData.push([rootTextData[2].x, rootTextData[2].y])
+  gates[52] && contourData.push([rootTextData[2].x + 7, rootTextData[2].y - 2])
   gates[54] && contourData.push([rootTextData[3].x + 7, rootTextData[3].y - 4])
-  gates[38] && contourData.push([rootTextData[4].x + 3.5, rootTextData[4].y - 6])
-  gates[58] && contourData.push([rootTextData[5].x, rootTextData[5].y])
+  gates[38] && contourData.push([rootTextData[4].x + 7, rootTextData[4].y - 6])
+  gates[58] && contourData.push([rootTextData[5].x + 7, rootTextData[5].y - 6])
   gates[19] && contourData.push([rootTextData[6].x + 7, rootTextData[6].y - 2])
   gates[39] && contourData.push([rootTextData[7].x + 6.5, rootTextData[7].y - 4])
   gates[41] && contourData.push([rootTextData[8].x, rootTextData[8].y])
@@ -2803,13 +2803,28 @@ DrawFormulaClass.prototype.drawSpleen340 = function (gates, fill) {
     },
   ];
 
+  const contourData = [
+
+  ]
+  gates[48] && contourData.push([spleenTextData[0].x + 8, spleenTextData[0].y - 3])
+  gates[57] && contourData.push([spleenTextData[1].x + 6, spleenTextData[1].y - 3])
+  gates[44] && contourData.push([spleenTextData[2].x, spleenTextData[2].y])
+  gates[50] && contourData.push([spleenTextData[3].x + 7, spleenTextData[3].y - 4])
+  gates[32] && contourData.push([spleenTextData[4].x + 3.5, spleenTextData[4].y - 6])
+  gates[28] && contourData.push([spleenTextData[5].x, spleenTextData[5].y])
+  gates[18] && contourData.push([spleenTextData[6].x + 7, spleenTextData[6].y - 2])
+
+
+
+
   let centreGroup = svg.append("g");
   this.drawGenerator(
     centreGroup,
     spleenCentreData,
     spleenTextData,
     fill,
-    "#F20C0C"
+    "#F20C0C",
+    contourData
   );
 };
 DrawFormulaClass.prototype.drawEmo340 = function (gates, fill) {
@@ -2868,6 +2883,18 @@ DrawFormulaClass.prototype.drawEmo340 = function (gates, fill) {
     },
   ];
 
+  const contourData = [
+
+  ]
+  gates[6] && contourData.push([emoTextData[0].x + 7.5, emoTextData[0].y - 3])
+  gates[37] && contourData.push([emoTextData[1].x + 7, emoTextData[1].y - 4])
+  gates[22] && contourData.push([emoTextData[2].x + 6, emoTextData[2].y - 4])
+  gates[36] && contourData.push([emoTextData[3].x + 7, emoTextData[3].y - 4])
+  gates[49] && contourData.push([emoTextData[4].x + 7, emoTextData[4].y - 6])
+  gates[50] && contourData.push([emoTextData[5].x, emoTextData[5].y])
+  gates[30] && contourData.push([emoTextData[6].x + 7, emoTextData[6].y - 2])
+
+
 
   let centreGroup = svg.append("g");
   this.drawGenerator(
@@ -2875,7 +2902,8 @@ DrawFormulaClass.prototype.drawEmo340 = function (gates, fill) {
     emoCentreData,
     emoTextData,
     fill,
-    "#F59713"
+    "#F59713",
+    contourData
   );
 };
 DrawFormulaClass.prototype.drawEgo340 = function (gates, fill) {
@@ -2920,13 +2948,24 @@ DrawFormulaClass.prototype.drawEgo340 = function (gates, fill) {
     },
   ];
 
+  const contourData = [
+
+  ]
+  gates[21] && contourData.push([egoTextData[0].x + 7.5, egoTextData[0].y - 3])
+  gates[51] && contourData.push([egoTextData[1].x + 7, egoTextData[1].y - 2])
+  gates[26] && contourData.push([egoTextData[2].x + 7, egoTextData[2].y - 4])
+  gates[40] && contourData.push([egoTextData[3].x + 7, egoTextData[3].y - 4])
+
+
+
   let centreGroup = svg.append("g");
   this.drawGenerator(
     centreGroup,
     egoCentreData,
     egoTextData,
     fill,
-    "#F2F477"
+    "#F2F477",
+    contourData
   );
 };
 
@@ -4812,7 +4851,7 @@ DrawFormulaClass.prototype.drawCenters = function (centres = {}, gates = {}) {
   centres.g ? this.drawG340(gates) : this.drawG340(gates, "white");
   centres.sacral ? this.drawSacral340(gates) : this.drawSacral340(gates, "white");
   centres.root ? this.drawRoot340(gates) : this.drawRoot340(gates, "white");
-  centres.spleen ? this.drawSpleen340() : this.drawSpleen340(gates, "white");
+  centres.spleen ? this.drawSpleen340(gates) : this.drawSpleen340(gates, "white");
   centres.ego ? this.drawEgo340(gates) : this.drawEgo340(gates, "white");
   centres.emo ? this.drawEmo340(gates) : this.drawEmo340(gates, "white");
 
