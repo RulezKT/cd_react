@@ -32,9 +32,12 @@ export function PrevNextNutr() {
 
 
 
+
+
+
     return (
 
-        <>
+        <div>
             <Button type="primary" htmlType="submit" value="previous" onClick={() => onSubmitPrevNext("previous")}>
                 Prev.Nutr.
             </Button>
@@ -45,7 +48,7 @@ export function PrevNextNutr() {
                 Next.Nutr.
             </Button>
 
-        </>
+        </div>
 
     );
 

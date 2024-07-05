@@ -1720,13 +1720,6 @@ export const useCdInfo = create<UseCdInfo>((set) => ({
     fdInfo: {},
     numerologyInfo: {},
     astroInfo: {
-      zodiac: {
-        degrees: 0,
-        minutes: 0,
-        seconds: 0,
-        zodiac: "",
-        fmtString: "",
-      },
     },
   },
 

@@ -7,6 +7,31 @@ export const PlanetsInfo = (props) => {
     const shortDesPlanets = cdInfo.hd.design.planets_data;
     const shortPersPlanets = cdInfo.hd.personality.planets_data;
 
+
+    // type UranusOpp struct {
+    // UranusOppStartSec int64`json:"uranusOppStartSec"`
+    // UranusOppEndSec   int64`json:"uranusOppEndSec"`
+    // UranusOppStartUTC GregDate`json:"uranusOppStartUTC"`
+    // UranusOppEndUTC   GregDate`json:"uranusOppEndUTC"`
+
+
+
+
+
+
+    const shortU = cdInfo.astroInfo.uranusOpp;
+
+    console.log(shortU);
+
+    const uranusOpp = shortU ? `UranusOpp` : "";
+    const uranusOpp2 = shortU ? `Start:${shortU.uranusOppStartSec} End: ${shortU.uranusOppEndSec}` : "";
+
+    const shortS = shortU ? shortU.uranusOppStartUTC : 0
+    const shortE = shortU ? shortU.uranusOppEndUTC : 0
+    const uranusOpp3 = shortU ? `StartUTC: ${shortS.day}.${shortS.month}.${shortS.year} ${shortS.hours}: ${shortS.minutes}` : "";
+    const uranusOpp4 = shortU ? `EndUTC: ${shortE.day}.${shortE.month}.${shortE.year} ${shortE.hours}: ${shortE.minutes}` : "";
+
+
     const sunStr: string = `☀️ Sun: ${shortDesPlanets[SUN].hex}.${shortDesPlanets[SUN].line
         }.${shortDesPlanets[SUN].color}.${shortDesPlanets[SUN].tone
         }.${shortDesPlanets[SUN].base}-${shortDesPlanets[SUN].direction}${shortDesPlanets[SUN].power
@@ -106,6 +131,11 @@ export const PlanetsInfo = (props) => {
     return (
 
         <div className="TechInfo flex-col w-80 justify-start items-start m-1 md:m-5">
+
+            <p> {uranusOpp}</p >
+            <p> {uranusOpp2}</p >
+            <p> {uranusOpp3}</p >
+            <p> {uranusOpp4}</p >
 
             <div className="">
                 <p> {sunStr}</p >

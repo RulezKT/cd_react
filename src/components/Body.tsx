@@ -1,4 +1,4 @@
-import { DrawFormulaClass } from "./body_formula.js";
+import { DrawFormulaClass } from "./body_formula.jsx";
 
 import { useEffect } from "react";
 

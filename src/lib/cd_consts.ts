@@ -590,7 +590,19 @@ export type Fd = {
   des: { plfData: PlFdData[]; centersArr: string[][] };
 };
 
-export type Astro = {};
+
+export type Astro = {
+  uranusOpp: UranusOpp
+};
+
+
+export type UranusOpp = {
+  uranusOppStartSec: number
+  uranusOppEndSec: number
+  uranusOppStartUTC: UTCTime
+  uranusOppEndUTC: UTCTime
+};
+
 
 export type Numerology = {
   karmicTask: string;
